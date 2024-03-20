@@ -6,13 +6,13 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 14:34:14 by emuminov          #+#    #+#             */
-/*   Updated: 2024/03/20 14:46:51 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/03/20 14:55:07 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft/libft.h"
 
-enum	e_token_type
+enum	e_token
 {
 	WORD,
 	OPERATOR,
@@ -25,7 +25,7 @@ enum	e_token_type
  * OUT_REDIR_APPEND = >>
  * PIPE             = |
  * */
-enum	e_operator_type
+enum	e_operator
 {
 	NOT_OPERATOR,
 	IN_REDIR,        
@@ -37,9 +37,8 @@ enum	e_operator_type
 
 typedef struct	s_token
 {
-	struct s_token			*next;
-	char					*content;
-	enum e_token_type		type;
-	enum e_operator_type	op_type;
+	struct s_token	*next;
+	char			*content;
+	enum e_token	type;
+	enum e_operator	op_type;
 }				t_token;
-
