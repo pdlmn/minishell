@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 13:09:12 by emuminov          #+#    #+#             */
-/*   Updated: 2024/03/19 17:20:36 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/03/20 12:59:44 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,5 +87,5 @@ void	lexer(char *input)
 
 int	main()
 {
-	lexer("echo \"hello\"    ' \"\"\"''\"'hello'\"''\"\"\"  asdasda zxc qw a \"QUOTED AGAIN A\" 'small quote'");
+	lexer("echo \"hello\"    \"\"\"''\"'hello'\"''\"\"\"  asdasda zxc qw a \"QUOTED AGAIN A\" 'small quote'");
 }
