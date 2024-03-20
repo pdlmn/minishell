@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 14:34:14 by emuminov          #+#    #+#             */
-/*   Updated: 2024/03/19 14:39:47 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/03/20 14:46:51 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,21 @@ enum	e_token_type
 	OPERATOR,
 };
 
+/* 
+ * IN_REDIR         = <
+ * OUT_REDIR        = >
+ * HEREDOC          = <<
+ * OUT_REDIR_APPEND = >>
+ * PIPE             = |
+ * */
 enum	e_operator_type
 {
 	NOT_OPERATOR,
-	INPUT_REDIRECTION,
-	OUTPUT_REDIRECTION,
-	DELIMITER_READ,
-	OUTPUT_APPEND,
-	PIPE,
+	IN_REDIR,        
+	OUT_REDIR,       
+	HEREDOC,         
+	OUT_REDIR_APPEND,
+	PIPE,            
 };
 
 typedef struct	s_token
