@@ -16,32 +16,19 @@ cat example.txt > example2.txt | wc -l   -> 0
 There should not be spaces around `=`.
 Variable names can contain uppercase, lowercase letters, numbers, underscores, and digits.
 
-ls -a | grep minishell.c > output.txt
+## Parens
+Single parens are interpreted as `execute in different process`.
+Double parens are interpreted as `ariphmetic expression`.
 
-{
-    "ls", "-a", "grep", "minishell.c", "output.txt"
+pwd && (cd .. && pwd && (cd .. && pwd)) && pwd     -> {
+    /home/emuminov/projects                                                         
+    /home/emuminov                                                                  
+    /home                                                                           
+    /home/emuminov/projects
 }
 
-
-
-enum
-DEFAULT
-FILE
-PIPE
-
-{
-    {"cat", "example.txt", ">" "wc" "-e"}
-}
-
-cat -e example.txt 1
-> wc               2
-
-
-
-{
-    {"ls", "-a"}
-    {"|"},
-    {"grep", "minishell.c"},
-    {">"},
-    {"output.txt"}
+pwd && ((cd .. && pwd && (cd .. && pwd))) && pwd   -> {
+    /home/emuminov/projects                                                         
+    bash: ((: cd .. && pwd && (cd .. && pwd): syntax error: invalid arithmetic opera
+    tor (error token is ".. && pwd && (cd .. && pwd)")
 }
