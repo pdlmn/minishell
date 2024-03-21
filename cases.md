@@ -51,3 +51,9 @@ pwd && ((cd .. && pwd && (cd .. && pwd))) && pwd   -> {
     /home/emuminov/projects                                                         
     bash: ((: cd .. && pwd && (cd .. && pwd): syntax error: invalid arithmetic opera
     tor (error token is ".. && pwd && (cd .. && pwd)")
+
+## Signals
+<Ctrl-C>           -> ^C
+asd<Ctrl-C>        -> asd^C
+<Ctrl-D>           -> exit {quits the shell}
+asd<Ctrl-D>        -> {nothing}
