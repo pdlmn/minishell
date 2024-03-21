@@ -2,7 +2,7 @@ SRCS=lexer.c _tests.c token.c utils.c
 LIBFT=../libft/libft.a
 NAME=lexer_test
 
-$(NAME):
+$(NAME): $(SRCS)
 	gcc $(SRCS) $(LIBFT) -g -o lexer_test
 
 test: $(NAME)
