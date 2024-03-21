@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 13:36:25 by emuminov          #+#    #+#             */
-/*   Updated: 2024/03/21 13:37:34 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/03/21 17:59:26 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,12 @@ t_token	*token_create(enum e_token type, enum e_operator op, char *content,
 	res->content = content;
 	res->space_after = space_after;
 	return (res);
+}
+
+void	token_free(t_token *token)
+{
+	free(token->content);
+	free(token);
 }
 
 void	token_list_append(t_tlist *lst, t_token *token)
@@ -50,8 +56,7 @@ void	token_list_free(t_token *lst)
 	while (curr)
 	{
 		tmp = curr->next;
-		free(curr->content);
-		free(curr);
+		token_free(curr);
 		curr = tmp;
 	}
 }
