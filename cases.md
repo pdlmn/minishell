@@ -12,36 +12,21 @@ cat example.txt | wc -l                  -> 1
 cat example.txt > wc -e                  -> {nothing}
 cat example.txt > example2.txt | wc -l   -> 0
 
+## Builtins
+Some builtins are not executable and we need to implement it ourselves:
+`cd`
+`export`
+`unset`
+`exit`
+
+Unsure about `env`, because it's executable, but it will not use our variables.
+
+## Signals
+<Ctrl-C>           -> ^C
+asd<Ctrl-C>        -> asd^C
+<Ctrl-D>           -> exit {quits the shell}
+asd<Ctrl-D>        -> {nothing}
+
 ## Export
 There should not be spaces around `=`.
 Variable names can contain uppercase, lowercase letters, numbers, underscores, and digits.
-
-ls -a | grep minishell.c > output.txt
-
-{
-    "ls", "-a", "grep", "minishell.c", "output.txt"
-}
-
-
-
-enum
-DEFAULT
-FILE
-PIPE
-
-{
-    {"cat", "example.txt", ">" "wc" "-e"}
-}
-
-cat -e example.txt 1
-> wc               2
-
-
-
-{
-    {"ls", "-a"}
-    {"|"},
-    {"grep", "minishell.c"},
-    {">"},
-    {"output.txt"}
-}
