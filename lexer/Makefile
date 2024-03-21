@@ -5,10 +5,6 @@ NAME=lexer_test
 $(NAME): $(SRCS)
 	gcc $(SRCS) $(LIBFT) -g -o lexer_test
 
-test: $(NAME)
-	valgrind ./lexer_test
-	rm $(NAME)
-
 clean:
 	rm lexer_test
 
