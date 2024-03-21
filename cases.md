@@ -12,6 +12,7 @@ cat example.txt | wc -l                  -> 1
 cat example.txt > wc -e                  -> {nothing}
 cat example.txt > example2.txt | wc -l   -> 0
 
+<<<<<<< HEAD
 ## Builtins
 Some builtins are not executable and we need to implement it ourselves:
 `cd`
