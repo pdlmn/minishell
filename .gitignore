@@ -3,3 +3,4 @@
 *.a
 *.txt
 minishell
+lexer_test
