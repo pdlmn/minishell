@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "../include/lexer.h"
+#include <stdio.h>
 
 t_token	*token_create(enum e_token type, enum e_operator op, char *content,
 		int space_after)

@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 13:34:37 by emuminov          #+#    #+#             */
-/*   Updated: 2024/03/21 13:35:55 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/03/21 16:08:07 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ char	*dup_until_next_space(int *i, char *input)
 	char	*res;
 
 	j = 1;
-	// TODO: add operators as well to the list
 	while (input[*i + j] && input[*i + j] != ' ' && input[*i + j] != '\''
 		&& input[*i + j] != '"' && !ft_strchr("><|", input[*i + j]))
 		j++;
@@ -74,4 +73,3 @@ char	*dup_operator(int *i, char *input)
 	*i += j;
 	return (res);
 }
-
