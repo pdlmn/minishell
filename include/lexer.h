@@ -6,10 +6,11 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 11:38:46 by emuminov          #+#    #+#             */
-/*   Updated: 2024/03/21 18:00:37 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/03/22 15:02:08 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include "minishell.h"
 
 typedef struct s_tlist
@@ -18,8 +19,8 @@ typedef struct s_tlist
 	t_token		*tail;
 }				t_tlist;
 
-enum e_operator	determine_operator(char *str);
-enum e_operator	determine_operator(char *str);
+enum e_operator	get_operator(char *str);
+enum e_token	get_type(char *str);
 char			*dup_quoted(char quote, int *i, char *input);
 char			*dup_until_next_space(int *i, char *input);
 char			*dup_operator(int *i, char *input);

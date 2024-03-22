@@ -6,14 +6,14 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 13:34:37 by emuminov          #+#    #+#             */
-/*   Updated: 2024/03/21 16:08:07 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/03/22 15:53:35 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/lexer.h"
 
 /* Determine if the first 1 or 2 characters of the string are operators */
-enum e_operator	determine_operator(char *str)
+enum e_operator	get_operator(char *str)
 {
 	if (ft_strncmp(">>", str, 2) == 0)
 		return (OUT_REDIR_APPEND);
@@ -26,6 +26,13 @@ enum e_operator	determine_operator(char *str)
 	else if (ft_strncmp("|", str, 1) == 0)
 		return (PIPE);
 	return (NOT_OPERATOR);
+}
+
+enum e_token	get_type(char *str)
+{
+	if (get_operator(str) == NOT_OPERATOR)
+		return (WORD);
+	return (OPERATOR);
 }
 
 char	*dup_quoted(char quote, int *i, char *input)
@@ -64,7 +71,7 @@ char	*dup_operator(int *i, char *input)
 	enum e_operator	op;
 	char			*res;
 
-	op = determine_operator(&input[*i]);
+	op = get_operator(&input[*i]);
 	if (op == IN_REDIR || op == OUT_REDIR || op == PIPE)
 		j = 1;
 	else
