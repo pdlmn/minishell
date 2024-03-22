@@ -57,3 +57,17 @@ pwd && ((cd .. && pwd && (cd .. && pwd))) && pwd   -> {
 asd<Ctrl-C>        -> asd^C
 <Ctrl-D>           -> exit {quits the shell}
 asd<Ctrl-D>        -> {nothing}
+
+## Export
+There should not be spaces around `=`.
+Variable names can contain uppercase, lowercase letters, numbers, underscores, and digits.
+
+## HEREDOC
+omougel@z4r3p7:~$ cat << test
+> $USER
+> test
+omougel
+omougel@z4r3p7:~$ cat << "test"
+> $USER
+> test
+$USER
