@@ -12,6 +12,12 @@ cat example.txt | wc -l                  -> 1
 cat example.txt > wc -e                  -> {nothing}
 cat example.txt > example2.txt | wc -l   -> 0
 
+## Signals
+<Ctrl-C>           -> ^C
+asd<Ctrl-C>        -> asd^C
+<Ctrl-D>           -> exit {quits the shell}
+asd<Ctrl-D>        -> {nothing}
+
 ## Builtins
 We don't need to implement builtins for them, except `-n` option for `echo`
 
@@ -58,15 +64,13 @@ asd<Ctrl-C>        -> asd^C
 <Ctrl-D>           -> exit {quits the shell}
 asd<Ctrl-D>        -> {nothing}
 
-## Export
-There should not be spaces around `=`.
-Variable names can contain uppercase, lowercase letters, numbers, underscores, and digits.
-
-## HEREDOC
+## Operators
+### Heredoc
 omougel@z4r3p7:~$ cat << test
 > $USER
 > test
 omougel
+
 omougel@z4r3p7:~$ cat << "test"
 > $USER
 > test
