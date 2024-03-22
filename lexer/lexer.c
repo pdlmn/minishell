@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 13:09:12 by emuminov          #+#    #+#             */
-/*   Updated: 2024/03/22 15:39:17 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/03/22 17:15:24 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	terminate(t_tlist *lst, char *str_to_free, char *message)
 	exit(EXIT_FAILURE);
 }
 
-void	concat_adjacent(t_tlist *lst)
+static void	concat_adjacent(t_tlist *lst)
 {
 	t_token	*curr;
 	t_token	*tmp;
@@ -50,6 +50,8 @@ void	concat_adjacent(t_tlist *lst)
 	}
 }
 
+/* Copies words and operators at a certain index of input as tokens,
+while skipping empty quotes */
 static inline t_token	*token_create_from_input(int *i, char *input,
 		t_tlist *lst)
 {

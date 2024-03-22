@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 13:34:37 by emuminov          #+#    #+#             */
-/*   Updated: 2024/03/22 15:53:35 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/03/22 17:14:15 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,7 @@ char	*dup_until_next_space(int *i, char *input)
 	char	*res;
 
 	j = 1;
-	while (input[*i + j] && input[*i + j] != ' ' && input[*i + j] != '\''
-		&& input[*i + j] != '"' && !ft_strchr("><|", input[*i + j]))
+	while (input[*i + j] && !ft_strchr("><|'\" ", input[*i + j]))
 		j++;
 	res = ft_substr(input, *i, j);
 	*i += j;

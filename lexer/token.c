@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 13:36:25 by emuminov          #+#    #+#             */
-/*   Updated: 2024/03/22 16:07:46 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/03/22 17:10:58 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,32 +61,30 @@ void	token_list_free(t_token *token)
 	}
 }
 
-void	token_list_print(t_token *token)
+void	token_list_print(t_token *t)
 {
-	t_token	*curr;
 	char	*op;
 	char	*type;
 
-	curr = token;
-	while (curr)
+	while (t)
 	{
-		if (curr->type == WORD)
+		if (t->type == WORD)
 			type = "WORD";
 		else
 			type = "OPERATOR";
-		if (curr->op_type == PIPE)
+		if (t->op_type == PIPE)
 			op = "PIPE";
-		else if (curr->op_type == IN_REDIR)
+		else if (t->op_type == IN_REDIR)
 			op = "IN_REDIR";
-		else if (curr->op_type == OUT_REDIR)
+		else if (t->op_type == OUT_REDIR)
 			op = "OUT_REDIR";
-		else if (curr->op_type == OUT_REDIR_APPEND)
+		else if (t->op_type == OUT_REDIR_APPEND)
 			op = "OUT_REDIR_APPEND";
-		else if (curr->op_type == HEREDOC)
+		else if (t->op_type == HEREDOC)
 			op = "HEREDOC";
 		else
 			op = "NOT_OPERATOR";
-		printf("{%s, %s, %s, %d}\n", curr->content, type, op, curr->space_after);
-		curr = curr->next;
+		printf("{%s, %s, %s, %d}\n", t->content, type, op, t->space_after);
+		t = t->next;
 	}
 }
