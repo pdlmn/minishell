@@ -6,12 +6,11 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 12:23:17 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/01 03:40:10 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/01 03:55:36 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/hash_table.h"
-#include <stdio.h>
 
 int	main(void)
 {
@@ -47,10 +46,10 @@ int	main(void)
 	ht_set(ht, "COLORTERM", "truecolor");
 	ht_delete(ht, "COLORTERM");
 	ht_table_print(ht);
-	ft_printf("\nLANG is %s\n\n", ht_get(ht, "LANG"));
-	ft_printf("\nZELLIJ is %s\n\n", ht_get(ht, "ZELLIJ"));
-	ft_printf("\nCOLORTERM is %s\n\n", ht_get(ht, "COLORTERM"));
-	ft_printf("\nUSER is %s\n\n", ht_get(ht, "USER"));
-	ft_printf("\nHOME is %s\n\n", ht_get(ht, "HOME"));
+	printf("\nLANG is %s\n\n", ht_get(ht, "LANG"));
+	printf("\nZELLIJ is %s\n\n", ht_get(ht, "ZELLIJ"));
+	printf("\nCOLORTERM is %s\n\n", ht_get(ht, "COLORTERM"));
+	printf("\nUSER is %s\n\n", ht_get(ht, "USER"));
+	printf("\nHOME is %s\n\n", ht_get(ht, "HOME"));
 	ht_table_free(ht);
 }

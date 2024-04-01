@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 14:34:14 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/01 03:41:02 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/01 04:03:53 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,28 @@ typedef struct s_token
 	int				space_after;
 }					t_token;
 
+typedef struct s_ht_item
+{
+	char			*key;
+	char			*value;
+	int				is_deleted;
+}					t_ht_item;
+
+typedef struct s_ht_table
+{
+	int				base_size;
+	int				size;
+	int				count;
+	t_ht_item		**items;
+}					t_ht_table;
+
 t_token				*lexer(char *input);
 void				token_list_free(t_token *token);
 void				token_list_print(t_token *token);
+
+t_ht_table			*ht_new(int base_size);
+void				ht_table_free(t_ht_table *ht);
+t_ht_item			*ht_set(t_ht_table *ht, const char *key, const char *value);
+void				ht_delete(t_ht_table *ht, const char *key);
+char				*ht_get(t_ht_table *ht, const char *key);
+void				ht_table_print(t_ht_table *ht);
