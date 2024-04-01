@@ -36,12 +36,16 @@ in which directory we are right now.
 ### echo
 `echo -e` enables interpretation of characters like "\t" or "\n". We don't need
 to deal with it.
-echo $USER          -> emuminov
-echo $USER -n       -> emuminov -n
 echo -n $USER       -> emuminov{no new line}
 echo -n -n $USER    -> emuminov{no new line}
 echo -n -nn $USER   -> emuminov{no new line}
 echo -n-n $USER     -> -n-n emuminov
+echo $USER -n       -> emuminov -n
+
+## Expansion
+echo $USER                     -> emuminov
+echo $123a                     -> 23a
+export ASD=echo; $ASD heh      -> heh
 
 ## Parens
 Single parens are interpreted as `execute in different process`.
