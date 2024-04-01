@@ -1,4 +1,4 @@
-SRCS=hash_table.c utils.c _tests.c
+SRCS=ht1.c ht2.c h3.c utils.c _tests.c
 LIBFT=../libft/libft.a
 NAME=hash_table_test
 
