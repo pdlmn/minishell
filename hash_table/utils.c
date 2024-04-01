@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 11:58:08 by emuminov          #+#    #+#             */
-/*   Updated: 2024/03/27 12:40:17 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/01 03:41:29 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,18 +41,4 @@ int	next_prime(int n)
 	while (!is_prime(n))
 		n += 2;
 	return (n);
-}
-
-long	ft_pow(long nb, long power)
-{
-	int	result;
-
-	result = 1;
-	if (nb == 0 && power == 0)
-		return (1);
-	if (power < 0)
-		return (0);
-	while (power--)
-		result = result * nb;
-	return (result);
 }

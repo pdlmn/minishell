@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 12:23:17 by emuminov          #+#    #+#             */
-/*   Updated: 2024/03/29 17:40:00 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/01 03:40:10 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,40 @@ int	main(void)
 {
 	t_ht_table	*ht;
 
-	ht = ht_new();
+	ht = ht_new(100);
 	ht_set(ht, "USER", "emuminov");
 	ht_set(ht, "LANG", "en_US.UTF-8");
+	ht_set(ht, "LESS", "-R");
+	ht_set(ht, "LESS", "-R");
+	ht_set(ht, "LESS", "-R");
 	ht_set(ht, "LESS", "-R");
 	ht_set(ht, "XDG_SESSION_TYPE", "x11");
 	ht_set(ht, "VTE_VERSION", "6003");
 	ht_set(ht, "ZELLIJ", "0");
 	ht_set(ht, "SHLVL", "2");
 	ht_set(ht, "PAGER", "less");
+	ht_delete(ht, "PAGER");
 	ht_set(ht, "OLDPWD", "/home/emuminov/projects/");
+	ht_set(ht, "OLDPWD", "/home/emuminov/projects/");
+	ht_set(ht, "OLDPWD", "/home/emuminov/projects/");
+	ht_set(ht, "OLDPWD", "/home/emuminov/projects/");
+	ht_delete(ht, "OLDPWD");
 	ht_set(ht, "PWD", "/home/emuminov/projects/minishell/");
+	ht_delete(ht, "PWD");
 	ht_set(ht, "HOME", "/home/emuminov/");
+	ht_delete(ht, "HOME");
+	ht_delete(ht, "HOME");
+	ht_delete(ht, "HOME");
+	ht_delete(ht, "HOME");
 	ht_set(ht, "DISPLAY", ":0");
+	ht_delete(ht, "DISPLAY");
 	ht_set(ht, "COLORTERM", "truecolor");
+	ht_delete(ht, "COLORTERM");
 	ht_table_print(ht);
+	ft_printf("\nLANG is %s\n\n", ht_get(ht, "LANG"));
+	ft_printf("\nZELLIJ is %s\n\n", ht_get(ht, "ZELLIJ"));
+	ft_printf("\nCOLORTERM is %s\n\n", ht_get(ht, "COLORTERM"));
+	ft_printf("\nUSER is %s\n\n", ht_get(ht, "USER"));
+	ft_printf("\nHOME is %s\n\n", ht_get(ht, "HOME"));
 	ht_table_free(ht);
 }

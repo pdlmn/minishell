@@ -6,11 +6,12 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 14:34:14 by emuminov          #+#    #+#             */
-/*   Updated: 2024/03/22 17:23:29 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/01 03:41:02 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft/libft.h"
+#include <stdio.h>
 
 enum				e_token
 {

@@ -6,11 +6,10 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 11:38:46 by emuminov          #+#    #+#             */
-/*   Updated: 2024/03/22 15:02:08 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/01 03:46:25 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "minishell.h"
 
 typedef struct s_tlist
