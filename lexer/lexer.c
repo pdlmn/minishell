@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 13:09:12 by emuminov          #+#    #+#             */
-/*   Updated: 2024/03/22 17:15:24 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/03/22 17:30:47 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static inline t_token	*token_create_from_input(int *i, char *input,
 	if (ft_strchr("\"'", input[*i]))
 	{
 		c = dup_quoted(input[*i], i, input);
-		if (ft_strlen(c) == 2)
+		if (c && ft_strlen(c) == 2)
 		{
 			free(c);
 			return (NULL);

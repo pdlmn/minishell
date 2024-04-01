@@ -26,7 +26,8 @@ There should not be spaces around `=`.
 Variable names can contain uppercase, lowercase letters, numbers, underscores, and digits.
 They can't start with digits.
 
-export TEST+=123                    -> {concats 123 to TEST}
+export TEST+=123                    -> {concats 123 to TEST or creates variable TEST}
+export ASD=asd=                     -> asd=
 
 ### cd
 `chdir` is for the process. We need to implement our own variables that track
