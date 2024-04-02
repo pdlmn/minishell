@@ -6,7 +6,7 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 09:49:14 by omougel           #+#    #+#             */
-/*   Updated: 2024/04/02 11:33:10 by omougel          ###   ########.fr       */
+/*   Updated: 2024/04/02 11:37:26 by omougel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,13 +105,13 @@ int	append_output(char *outfile)
 	return (open(outfile, O_WRONLY | O_CREAT | O_APPEND, 0644));
 }
 
-void	ft_exit(void)
+void  ft_exit(void)
 {
 	perror(NULL); //try to put the correct error message
 	exit(errno);
 }
 
-char	**replacefront(char **cmd, char *path)
+char  **replacefront(char **cmd, char *path)
 {
 	free(cmd[0]);
 	cmd[0] = path;
@@ -249,4 +249,3 @@ char	***fork_and_execute(char ***cmd_tab, int *fd_in, char **envp)
 		return (NULL);
 	return (&cmd_tab[i + 1]);
 }
-
