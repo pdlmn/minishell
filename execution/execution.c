@@ -6,7 +6,7 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 09:49:14 by omougel           #+#    #+#             */
-/*   Updated: 2024/04/02 11:37:26 by omougel          ###   ########.fr       */
+/*   Updated: 2024/04/02 11:41:36 by omougel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -248,4 +248,59 @@ char	***fork_and_execute(char ***cmd_tab, int *fd_in, char **envp)
 	if (!cmd_tab || !cmd_tab[i])
 		return (NULL);
 	return (&cmd_tab[i + 1]);
+}
+
+char  ***execution(char ***cmd_tab, int *fd_in)
+{
+	int	fd[2];
+	//int	pid;
+	size_t	i;
+	int	fd_out;
+
+	fd[0] = -1;
+	fd[1] = -1;
+	i = 0;
+	fd_out = 1;
+	if (is_there_pipe(cmd_tab))
+		if (pipe(fd) == -1)
+			return ERROR; //TODO
+	while (cmd_tab[i] && ft_strcmp(cmd_tab[i][0], "|"))
+	{
+		if (is_input(cmd_tab[i][0]))
+		{
+			if (*fd_in != 0)
+				close(*fd_in);
+			if (!ft_strcmp(cmd_tab[i][0], "<"))
+				*fd_in = redir_input(cmd_tab[i][1]);
+			else
+				*fd_in = here_doc(cmd_tab[i][1]);
+		}
+		else if (is_output(cmd_tab[i][0]))
+		{
+			if (fd_out != 1)
+				close(fd_out);
+			if (!ft_strcmp(cmd_tab[i][0], ">"))
+				fd_out = redir_output(cmd_tab[i][1]);
+			else
+				fd_out = append_output(cmd_tab[i][1]);
+		}
+		else
+		{
+			if (fd_in >= 0 && fd_out > 0)
+				exec_cmd(); // get the pid of the last cmd to deal with return value and also we have to stock it into our new ENVIRONEMENT
+			else(ERROR); //TODO
+		}
+		i++;
+	}
+	if (fd_in != 0)
+		close(fd_in);
+	if (fd_out != 1)
+		close(fd_out);
+	if (fd[1] > 0)
+		close(fd[1]);
+	if (fd[0] > 0)
+		*fd_in = fd[0];
+	if (!cmd_tab || !cmd_tab[i])
+		return (NULL);
+	return (&cmd_tab[i + 1]); 
 }
