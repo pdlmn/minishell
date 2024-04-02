@@ -6,8 +6,10 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 05:17:12 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/01 05:17:13 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/02 19:39:53 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../include/minishell.h"
 
+char	*expand_word(t_ht_table *ht, char *word);
