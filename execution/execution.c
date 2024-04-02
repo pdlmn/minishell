@@ -6,11 +6,13 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 09:49:14 by omougel           #+#    #+#             */
-/*   Updated: 2024/03/29 12:33:34 by omougel          ###   ########.fr       */
+/*   Updated: 2024/04/01 13:34:50 by omougel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/lexer.h"
+#include <errno.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
@@ -79,7 +81,7 @@ int	here_doc(char *lim)
 
 	buffer = get_next_line(STDIN_FILENO);
 	if (pipe(fd) == -1)
-		return (ERROR); //TODO
+		return (EXIT_FAILURE); //TODO ERROR
 	while(buffer && ft_strcmp(buffer, lim))
 	{
 		write(fd[1], buffer, ft_strlen(buffer)); //deal with error case maybe
@@ -105,7 +107,132 @@ int	append_output(char *outfile)
 	return (open(outfile, O_WRONLY | O_CREAT | O_APPEND, 0644));
 }
 
-void	execution(char ***cmd_tab)
+void  ft_exit(void)
 {
-
+	perror(NULL); //try to put the correct error message
+	exit(errno);
 }
+
+char  **replacefront(char **cmd, char *path)
+{
+	free(cmd[0]);
+	cmd[0] = path;
+	return (cmd);
+}
+
+char  **find_command(char **cmd, env)
+{
+	size_t	i;
+
+	i = 0;
+	if (is_builtin(cmd[0]))
+		return (cmd[0]);//do builtins
+	if (!access(cmd[0], X_OK))
+		return (cmd);
+	while (env[i])
+	{
+		tmp = ft_strjoin(env[i], cmd[0]);
+		if (!tmp)
+			return (MALLOCERROR); //TODO
+		if (!access(tmp, X_OK))
+			return (replacefront(cmd, tmp));
+		free(tmp);
+		i++;
+	}
+	return (ERROR); //TODO
+}
+
+void  exec_cmd(char **cmd_tab, int fd_in, int fd_out) //ADD ENVIRONEMENT
+{
+	cmd = find_command(cmd, envp);  //ADD ENVIRONEMENT
+	if (cmd && *cmd)
+	{
+		if (dup2(fd_in, STDIN_FILENO) < 0)
+			ft_exit();
+		if (dup2(fd_out, STDOUT_FILENO) < 0)
+			ft_exit();
+		close(fd_in);
+		close(fd_out);
+		execve(cmd[0], cmd, envp); //ADD ENVIRONEMENT
+	}
+	else
+	{
+		close(fd_in);
+		close(fd_out);
+	}
+	ft_free_split(cmd); // do i need to free here in the child so that there are no leaks ??
+	exit(errno);
+}
+
+void  fork_and_execute(char **cmd_tab, int fd_in, int fd_out, int fd[2])
+{
+	int	pid;
+
+	pid = fork();
+	if (fd_out == 1 && fd[1] > 0)
+		fd_out = fd[1];
+	else if (fd[1] > 0)
+		close(fd[1]);
+	if (pid == 0)
+	{
+		close(fd[0]);
+		exec_comman(cmd_tab, fd_in, fd_out)
+	}
+}
+
+char  ***execution(char ***cmd_tab, int *fd_in)
+{
+	int	fd[2];
+	//int	pid;
+	size_t	i;
+	int	fd_out;
+
+	fd[0] = -1;
+	fd[1] = -1;
+	i = 0;
+	fd_out = 1;
+	if (is_there_pipe(cmd_tab))
+		if (pipe(fd) == -1)
+			return ERROR; //TODO
+	while (cmd_tab[i] && ft_strcmp(cmd_tab[i][0], "|"))
+	{
+		if (is_input(cmd_tab[i][0]))
+		{
+			if (*fd_in != 0)
+				close(*fd_in);
+			if (!ft_strcmp(cmd_tab[i][0], "<"))
+				*fd_in = redir_input(cmd_tab[i][1]);
+			else
+				*fd_in = here_doc(cmd_tab[i][1]);
+		}
+		else if (is_output(cmd_tab[i][0]))
+		{
+			if (fd_out != 1)
+				close(fd_out);
+			if (!ft_strcmp(cmd_tab[i][0], ">"))
+				fd_out = redir_output(cmd_tab[i][1]);
+			else
+				fd_out = append_output(cmd_tab[i][1]);
+		}
+		else
+		{
+			if (fd_in >= 0 && fd_out > 0)
+				exec_cmd(); // get the pid of the last cmd to deal with return value and also we have to stock it into our new ENVIRONEMENT
+			else(ERROR); //TODO
+		}
+		i++;
+	}
+	if (fd_in != 0)
+		close(fd_in);
+	if (fd_out != 1)
+		close(fd_out);
+	if (fd[1] > 0)
+		close(fd[1]);
+	if (fd[0] > 0)
+		*fd_in = fd[0];
+	if (!cmd_tab || !cmd_tab[i])
+		return (NULL);
+	return (&cmd_tab[i + 1]); 
+}
+
+
