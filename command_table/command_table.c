@@ -6,7 +6,7 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 10:41:59 by omougel           #+#    #+#             */
-/*   Updated: 2024/03/25 16:20:45 by omougel          ###   ########.fr       */
+/*   Updated: 2024/04/03 02:30:58 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,25 +184,4 @@ void	print_arr(char **arr)
 	while (arr && arr[i])
 		ft_printf("%s ", arr[i++]);
 	ft_printf("\n");
-}
-
-int	main(void)
-{
-	t_token	*lst;
-	char	***cmd_tab;
-	size_t	i;
-
-	i = 0;
-	lst = lexer("echo <\"hello\"  >>>| \"\"\"''\"'hello'\"''\"\"\" | asdasda \
-zxc <<qw|a \"QUOTED AGAIN A\" 'small quote'");
-	token_list_print(lst);
-	ft_printf("\n\n\n\n");
-	cmd_tab = command_table(lst);
-	if (!cmd_tab)
-		return (EXIT_FAILURE);
-	while (cmd_tab && cmd_tab[i])
-		print_arr(cmd_tab[i++]);
-	ft_free_table(cmd_tab);
-	token_list_free(lst);
-	return (EXIT_SUCCESS);
 }
