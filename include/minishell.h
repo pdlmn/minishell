@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 14:34:14 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/01 04:03:53 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/03 00:42:18 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ typedef struct s_ht_table
 t_token				*lexer(char *input);
 void				token_list_free(t_token *token);
 void				token_list_print(t_token *token);
+
+void				ft_free_table(char ***tab);
 
 t_ht_table			*ht_new(int base_size);
 void				ht_table_free(t_ht_table *ht);
