@@ -6,3 +6,4 @@ minishell
 lexer_test
 command_table_test
 hash_table_test
+expansion_test
