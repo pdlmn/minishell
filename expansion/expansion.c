@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 05:16:56 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/03 02:23:42 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/03 02:28:18 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ char	*expand_digit_variable(char **vars, int i)
 
 	expanded = ft_strdup(&vars[i][1]);
 	if (!expanded)
-		return (ft_free_split(vars), NULL);
+		return (NULL);
 	return (free(vars[i]), expanded);
 }
 
@@ -88,7 +88,7 @@ char	*expand_to_value(char **vars, char *val, int i)
 
 	expanded = ft_strdup(val);
 	if (!expanded)
-		return (ft_free_split(vars), NULL);
+		return (NULL);
 	return (free(vars[i]), expanded);
 }
 
@@ -114,6 +114,8 @@ char	*expand_variable(t_ht_table *ht, char *word)
 			else
 				vars[i] = expand_to_value(vars, val, i);
 		}
+		if (!vars[i])
+			return (ft_free_split(vars), NULL);
 		i++;
 	}
 	return (join_expanded_variables(vars, word));
@@ -160,10 +162,7 @@ char	***expansion(t_ht_table *ht, char ***cmd_tab)
 				free(cmd_tab[i][j]);
 				cmd_tab[i][j] = expand_word(ht, cmd_tab[i][j]);
 				if (!cmd_tab[i][j])
-				{
-					ft_free_table(cmd_tab);
-					return (NULL);
-				}
+					return (ft_free_table(cmd_tab), NULL);
 			}
 			j++;
 		}
