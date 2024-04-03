@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 05:16:56 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/03 02:28:18 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/03 02:58:08 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ char	*unquote(char *word, int quote)
 	int			j;
 
 	res = malloc(sizeof(char) * (l + 1));
+	if (!res)
+		return (NULL);
 	i = 0;
 	j = 0;
 	while (word[i])
@@ -47,6 +49,7 @@ char	*unquote(char *word, int quote)
 		}
 		i++;
 	}
+	res[l] = '\0';
 	return (res);
 }
 
@@ -95,6 +98,7 @@ char	*expand_to_value(char **vars, char *val, int i)
 char	*expand_variable(t_ht_table *ht, char *word)
 {
 	char	**vars;
+	char	*res;
 	char	*val;
 	int		i;
 
@@ -118,7 +122,9 @@ char	*expand_variable(t_ht_table *ht, char *word)
 			return (ft_free_split(vars), NULL);
 		i++;
 	}
-	return (join_expanded_variables(vars, word));
+	res = join_expanded_variables(vars, word);
+	ft_free_split(vars);
+	return (res);
 }
 
 char	*expand_word(t_ht_table *ht, char *word)
@@ -126,16 +132,17 @@ char	*expand_word(t_ht_table *ht, char *word)
 	char	*res;
 	char	*tmp;
 
-	res = NULL;
 	if (word[0] == '\'' || word[0] == '"')
 	{
 		res = unquote(word, word[0]);
 		if (!res)
 			return (NULL);
 	}
+	else
+		res = ft_strdup(word);
 	if (word[0] == '\'')
 		return (res);
-	else if (word[0] == '"')
+	else
 	{
 		tmp = res;
 		res = expand_variable(ht, res);
@@ -159,6 +166,7 @@ char	***expansion(t_ht_table *ht, char ***cmd_tab)
 		{
 			if (ft_strchr(cmd_tab[i][j], '$'))
 			{
+				// FREEING BEFORE lajsdlkajs
 				free(cmd_tab[i][j]);
 				cmd_tab[i][j] = expand_word(ht, cmd_tab[i][j]);
 				if (!cmd_tab[i][j])
