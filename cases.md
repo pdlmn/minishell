@@ -33,6 +33,9 @@ export ASD=asd=                     -> asd=
 `chdir` is for the process. We need to implement our own variables that track
 in which directory we are right now.
 
+cd -                -> {goes to OLDPWD}
+ls -                -> 'No such file or directory'
+
 ### echo
 `echo -e` enables interpretation of characters like "\t" or "\n". We don't need
 to deal with it.
@@ -49,6 +52,7 @@ export ASD=echo; $ASD heh      -> heh
 export ASD=; echo $ASD         -> {just new line}
 echo ..                        -> ..
 echo ~                         -> /home/emuminov
+echo ~a                        -> ~a
 
 ## Parens
 Single parens are interpreted as `execute in different process`.

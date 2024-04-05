@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 12:23:17 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/04 12:36:00 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/05 19:03:10 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,14 @@ int	main(void)
 
 	ht = ht_new(100);
 	ht_set(ht, "ASD", "123");
-	test_expansion(ht, "$ASD");      // 123
-	test_expansion(ht, "Hello$ASD"); // Hello123
-	test_expansion(ht, "$ASDHello"); // {empty}
-	test_expansion(ht, "$ASD$ASD");  // 123123
-	test_expansion(ht, "$1");        // {empty}
+	test_expansion(ht, "$ASD");       // 123
+	test_expansion(ht, "Hello$ASD");  // Hello123
+	test_expansion(ht, "$ASDHello");  // {empty}
+	test_expansion(ht, "$ASD$ASD");   // 123123
+	test_expansion(ht, "$1");         // {empty}
 	test_expansion(ht, "$123a");      // 23a
-	test_expansion(ht, "\"$ASD\"");  // 123
-	ht_table_free(ht);
+	test_expansion(ht, "\"$ASD\"");   // 123
+	test_expansion(ht, "'$ASD'$ASD"); // $ASD123
+	test_expansion(ht, "$\"A\"SD");   // $ASD
+	ht_free_table(ht);
 }
