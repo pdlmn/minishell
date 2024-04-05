@@ -46,6 +46,9 @@ echo $USER -n       -> emuminov -n
 echo $USER                     -> emuminov
 echo $123a                     -> 23a
 export ASD=echo; $ASD heh      -> heh
+export ASD=; echo $ASD         -> {just new line}
+echo ..                        -> ..
+echo ~                         -> /home/emuminov
 
 ## Parens
 Single parens are interpreted as `execute in different process`.
