@@ -32,7 +32,7 @@ char	*ft_strjoin_delim(char *s1, char *s2, char delim)
 	return (str);
 }
 
-t_ht_item *env_row_to_ht_item(t_ht_table *ht, char *env_row)
+t_ht_item	*env_row_to_ht_item(t_ht_table *ht, char *env_row)
 {
 	char		*env_row_c;
 	char		*delimeter;
@@ -89,7 +89,7 @@ char	**env_ht_to_arr(t_ht_table *ht)
 	char	**res;
 	int		i;
 	int		j;
-	
+
 	res = ft_calloc(ht->count + 1, sizeof(char *));
 	if (!res)
 		return (NULL);
@@ -99,7 +99,8 @@ char	**env_ht_to_arr(t_ht_table *ht)
 	{
 		if (ht->items[i] && !ht->items[i]->is_deleted)
 		{
-			res[j] = ft_strjoin_delim(ht->items[i]->key, ht->items[i]->value, '=');
+			res[j] = ft_strjoin_delim(ht->items[i]->key, ht->items[i]->value,
+					'=');
 			if (!res[j++])
 				return (ft_free_split(res), NULL);
 		}
