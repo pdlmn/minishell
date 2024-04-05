@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 03:56:43 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/01 04:00:08 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/05 18:05:02 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,41 @@ int	ht_find_index(t_ht_table *ht, const char *key)
 		item = ht->items[index];
 	}
 	return (index);
+}
+
+void	ht_print_buckets(t_ht_table *ht)
+{
+	int	i;
+
+	printf("{\n");
+	i = 0;
+	while (i < ht->size)
+	{
+		if (!ht->items[i])
+			printf("\t%d NULL\n", i);
+		else if (ht->items[i]->is_deleted)
+			printf("\t%d DELETED\n", i);
+		else
+			printf("\t%d %s=%s\n", i, ht->items[i]->key,
+				ht->items[i]->value);
+		i++;
+	}
+	printf("}\n");
+	printf("Count: %d\n", ht->count);
+}
+
+void	ht_print_table(t_ht_table *ht)
+{
+	int	i;
+
+	printf("{\n");
+	i = 0;
+	while (i < ht->size)
+	{
+		if (ht->items[i])
+			printf("\t%s=%s\n", ht->items[i]->key, ht->items[i]->value);
+		i++;
+	}
+	printf("}\n");
+	printf("Count: %d\n", ht->count);
 }

@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 14:34:14 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/03 00:42:18 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/05 18:17:09 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,12 @@ void				token_list_print(t_token *token);
 void				ft_free_table(char ***tab);
 
 t_ht_table			*ht_new(int base_size);
-void				ht_table_free(t_ht_table *ht);
+void				ht_free_table(t_ht_table *ht);
 t_ht_item			*ht_set(t_ht_table *ht, const char *key, const char *value);
 void				ht_delete(t_ht_table *ht, const char *key);
 char				*ht_get(t_ht_table *ht, const char *key);
-void				ht_table_print(t_ht_table *ht);
+void				ht_print_buckets(t_ht_table *ht);
+void				ht_print_table(t_ht_table *ht);
+
+t_ht_table			*env_init(char **env);
+char				**env_ht_to_arr(t_ht_table *ht);

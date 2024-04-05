@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 03:28:10 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/01 04:02:47 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/05 17:07:55 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ t_ht_item	*ht_set(t_ht_table *ht, const char *key, const char *value)
 	if (!ht->items[index])
 		return (NULL);
 	ht->count++;
-	return (item);
+	return (ht->items[index]);
 }
 
 void	ht_delete(t_ht_table *ht, const char *key)
@@ -63,7 +63,7 @@ void	ht_delete(t_ht_table *ht, const char *key)
 	item->is_deleted = 1;
 }
 
-void	ht_table_free(t_ht_table *ht)
+void	ht_free_table(t_ht_table *ht)
 {
 	int	i;
 

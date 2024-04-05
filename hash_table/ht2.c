@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 03:55:58 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/01 04:00:44 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/05 17:07:58 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	ht_resize(t_ht_table *ht, int base_size)
 		i++;
 	}
 	ht_transfer_stats(ht, tmp_ht, base_size);
-	ht_table_free(tmp_ht);
+	ht_free_table(tmp_ht);
 }
 
 t_ht_item	*ht_new_item(const char *k, const char *v)
@@ -79,26 +79,4 @@ inline void	ht_item_free(t_ht_item *i)
 	free(i->key);
 	free(i->value);
 	free(i);
-}
-
-void	ht_table_print(t_ht_table *ht)
-{
-	int	i;
-
-	printf("{\n");
-	i = 0;
-	while (i < ht->size)
-	{
-		printf("\t");
-		if (!ht->items[i])
-			printf("%d NULL\n", i);
-		else if (ht->items[i]->is_deleted)
-			printf("%d DELETED\n", i);
-		else
-			printf("%d KEY: %s, VALUE: %s\n", i, ht->items[i]->key,
-				ht->items[i]->value);
-		i++;
-	}
-	printf("}\n");
-	printf("Count: %d\n", ht->count);
 }
