@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 13:34:37 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/09 15:06:13 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/09 17:41:59 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,3 @@ void	terminate(t_tlist *lst, char *str_to_free, char *message)
 		ft_putstr_fd(message, STDERR_FILENO);
 	exit(EXIT_FAILURE);
 }
-
