@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 14:34:14 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/05 18:17:09 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/09 14:59:08 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,10 @@ enum				e_token
 {
 	WORD,
 	OPERATOR,
+	QUOTE,
+	DQUOTE,
+	TILDE,
+	SIGIL,
 };
 
 /*
@@ -36,10 +40,19 @@ enum				e_operator
 	PIPE,
 };
 
+enum				e_quotes
+{
+	NOT_QUOTED,
+	SQUOTED,
+	DQUOTED,
+};
+
 typedef struct s_token
 {
 	struct s_token	*next;
 	char			*content;
+	int				len;
+	enum e_quotes	is_quoted;
 	enum e_token	type;
 	enum e_operator	op_type;
 	int				space_after;

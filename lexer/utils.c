@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 13:34:37 by emuminov          #+#    #+#             */
-/*   Updated: 2024/03/22 17:14:15 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/09 15:06:13 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,52 +30,43 @@ enum e_operator	get_operator(char *str)
 
 enum e_token	get_type(char *str)
 {
-	if (get_operator(str) == NOT_OPERATOR)
-		return (WORD);
-	return (OPERATOR);
+	if (str[0] == '\'')
+		return (QUOTE);
+	else if (str[0] == '\"')
+		return (DQUOTE);
+	else if (str[0] == '~')
+		return (TILDE);
+	else if (str[0] == '$')
+		return (SIGIL);
+	else if (get_operator(str) != NOT_OPERATOR)
+		return (OPERATOR);
+	return (WORD);
 }
 
-char	*dup_quoted(char quote, int *i, char *input)
+/* Returns a pointer to a character in s that is present in set, or a pointer
+to the last character. */
+char	*ft_strset(char *s, char *set)
 {
-	int		j;
-	char	*res;
+	size_t	i;
 
-	j = 1;
-	while (input[*i + j])
+	i = 0;
+	while (s[i])
 	{
-		if (input[*i + j++] == quote)
-			break ;
+		if (ft_strchr(set, s[i]))
+			return ((char *) &s[i]);
+		i++;
 	}
-	res = ft_substr(input, *i, j);
-	*i += j;
-	return (res);
+	return (&s[i]);
 }
 
-char	*dup_until_next_space(int *i, char *input)
+void	terminate(t_tlist *lst, char *str_to_free, char *message)
 {
-	int		j;
-	char	*res;
-
-	j = 1;
-	while (input[*i + j] && !ft_strchr("><|'\" ", input[*i + j]))
-		j++;
-	res = ft_substr(input, *i, j);
-	*i += j;
-	return (res);
+	if (str_to_free)
+		free(str_to_free);
+	if (lst)
+		token_list_free(lst->head);
+	if (message)
+		ft_putstr_fd(message, STDERR_FILENO);
+	exit(EXIT_FAILURE);
 }
 
-char	*dup_operator(int *i, char *input)
-{
-	int				j;
-	enum e_operator	op;
-	char			*res;
-
-	op = get_operator(&input[*i]);
-	if (op == IN_REDIR || op == OUT_REDIR || op == PIPE)
-		j = 1;
-	else
-		j = 2;
-	res = ft_substr(input, *i, j);
-	*i += j;
-	return (res);
-}
