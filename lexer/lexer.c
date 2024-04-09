@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 13:09:12 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/09 17:40:55 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/09 19:12:33 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ t_token	*lexer(char *input)
 		}
 		t = token_create_from_input(&input[i], is_quoted);
 		if (!t)
-			return (NULL);
+			return (token_list_free(lst.head), NULL);
 		token_list_append(&lst, t);
 		i += lst.tail->len;
 		set_is_quoted(&lst, &is_quoted);
