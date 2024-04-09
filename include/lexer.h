@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 11:38:46 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/09 17:45:56 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/09 17:46:29 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ typedef struct s_tlist
 	t_token		*head;
 	t_token		*tail;
 }				t_tlist;
-
 
 // utils.c
 enum e_operator	get_operator(char *str);

@@ -3,7 +3,7 @@ LIBFT=../libft/libft.a
 NAME=lexer_test
 
 $(NAME): $(SRCS)
-	gcc $(SRCS) $(LIBFT) -g -o lexer_test
+	gcc $(SRCS) $(LIBFT) -g -o lexer_test -fsanitize=address
 
 clean:
 	rm lexer_test

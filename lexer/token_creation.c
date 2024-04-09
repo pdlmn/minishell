@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 17:35:02 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/09 17:41:40 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/09 17:48:07 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,11 @@ static t_token	*create_single_char_token(char *input, enum e_quotes is_quoted)
 	char	*s;
 
 	s = ft_substr(input, 0, 1);
+	if (!s)
+		return (NULL);
 	t = token_create(s, 1, input[1] == ' ', is_quoted);
+	if (!t)
+		return (free(s), NULL);
 	return (t);
 }
 
@@ -43,7 +47,11 @@ static t_token	*create_operator_token(char *input, enum e_quotes is_quoted)
 	else
 		len = 2;
 	s = ft_substr(input, 0, len);
+	if (!s)
+		return (NULL);
 	t = token_create(s, len, input[len] == ' ', is_quoted);
+	if (!t)
+		return (free(s), NULL);
 	return (t);
 }
 
@@ -55,7 +63,11 @@ static t_token	*create_word_token(char *input, enum e_quotes is_quoted)
 
 	i = find_end_of_word(input, is_quoted);
 	s = ft_substr(input, 0, i);
+	if (!s)
+		return (NULL);
 	t = token_create(s, i, input[i] == ' ', is_quoted);
+	if (!t)
+		return (free(s), NULL);
 	return (t);
 }
 
