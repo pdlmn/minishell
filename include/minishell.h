@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 14:34:14 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/10 18:00:22 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/10 18:22:12 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ t_token				*lexer(char *input);
 void				token_list_free(t_token *token);
 void				token_list_print(t_token *token);
 
+t_token				*token_create(char *content, int len, int space_after, enum e_quotes is_quoted);
 void				token_free(t_token *token);
 
 void				ft_free_table(char ***tab);

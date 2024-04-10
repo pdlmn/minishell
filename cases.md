@@ -28,6 +28,9 @@ They can't start with digits.
 
 export TEST+=123                    -> {concats 123 to TEST or creates variable TEST}
 export ASD=asd=                     -> asd=
+export ASD=echo; $ASD heh           -> heh
+export ASD=; echo $ASD              -> {just new line}
+export ASD                          -> {does nothing}
 
 ### cd
 `chdir` is for the process. We need to implement our own variables that track
@@ -48,8 +51,6 @@ echo $USER -n       -> emuminov -n
 ## Expansion
 echo $USER                     -> emuminov
 echo $123a                     -> 23a
-export ASD=echo; $ASD heh      -> heh
-export ASD=; echo $ASD         -> {just new line}
 echo ..                        -> ..
 echo ~                         -> /home/emuminov
 echo ~a                        -> ~a

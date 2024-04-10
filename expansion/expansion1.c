@@ -6,241 +6,212 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 05:16:56 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/08 19:56:08 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/10 20:17:38 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/expansion.h"
 
-char	*expand_to_value(t_ht_table *ht, char *var)
+/* 1. Replace non singly-quoted $ values.
+ * 2. Join all strings.
+ * 3. Remove empty quotes.
+ * 4.
+ * 5. */
+
+t_token	*token_find_prev(t_token *lst, t_token *t)
 {
-	char	*expanded;
+	t_token	*curr;
+	t_token	*prev;
+
+	curr = lst;
+	prev = NULL;
+	while (curr)
+	{
+		if (curr == t)
+			return (prev);
+		prev = curr;
+		curr = curr->next;
+	}
+	return (prev);
+}
+
+t_token	*expand_sigil(t_ht_table *ht, t_token **lst, t_token *sigil_token)
+{
+	t_token	*prev;
 	char	*val;
+	char	*copied_val;
+	t_token	*res;
 
-	val = ht_get(ht, var);
-	if (!val)
+	if (!sigil_token->space_after && sigil_token->next
+		&& sigil_token->next->op_type == NOT_OPERATOR)
 	{
-		var[0] = '\0';
-		return (var);
+		prev = token_find_prev(*lst, sigil_token);
+		if (sigil_token->next->type == WORD)
+		{
+			// delete SIGIL, replace contents of the next word with cloned ht value
+			val = ht_get(ht, sigil_token->next->content);
+			copied_val = ft_strdup(val);
+			if (!copied_val)
+				return (NULL);
+			free(sigil_token->next->content);
+			sigil_token->next->content = copied_val;
+			sigil_token->next->len = ft_strlen(copied_val);
+			if (prev)
+				prev->next = sigil_token->next;
+			else
+				*lst = sigil_token->next;
+			res = sigil_token->next;
+			token_free(sigil_token);
+			return (res);
+		}
+		else if ((sigil_token->next->type == QUOTE || sigil_token->next->type == DQUOTE)
+				&& sigil_token->is_quoted == NOT_QUOTED)
+		{
+			// delete SIGIL
+			if (prev)
+				prev->next = sigil_token->next;
+			else
+				*lst = sigil_token->next;
+			res = sigil_token->next;
+			token_free(sigil_token);
+			return (res);
+		}
+		else if (sigil_token->next->type == DQUOTE && sigil_token->is_quoted == DQUOTED)
+		{
+			// convert SIGIL to word
+			sigil_token->type = WORD;
+			sigil_token->space_after = 0;
+			return (sigil_token);
+		}
 	}
-	expanded = ft_strdup(val);
-	if (!expanded)
-		return (NULL);
-	return (free(var), expanded);
-}
-
-// char	*expand_variable(t_ht_table *ht, char *word)
-// {
-// 	char	**vars;
-// 	char	*res;
-// 	int		i;
-//
-// 	vars = ft_split(ft_strchr(word, '$'), '$');
-// 	if (!vars)
-// 		return (NULL);
-// 	i = 0;
-// 	while (vars[i])
-// 	{
-// 		if (ft_isdigit(vars[i][0]))
-// 			vars[i] = expand_digit_variable(vars[i]);
-// 		else
-// 			vars[i] = expand_to_value(ht, vars[i]);
-// 		if (!vars[i])
-// 			return (ft_free_split(vars), NULL);
-// 		i++;
-// 	}
-// 	res = join_expanded_variables(vars, word);
-// 	return (ft_free_split(vars), res);
-// }
-
-// char	*expand_word(t_ht_table *ht, char *word)
-// {
-// 	char	*res;
-// 	char	*tmp;
-//
-// 	if (word[0] == '\'' || word[0] == '"')
-// 	{
-// 		res = unquote(word, word[0]);
-// 		if (!res)
-// 			return (NULL);
-// 	}
-// 	else
-// 		res = ft_strdup(word);
-// 	if (word[0] == '\'')
-// 		return (res);
-// 	else
-// 	{
-// 		tmp = res;
-// 		res = expand_variable(ht, res);
-// 		if (!res)
-// 			return (free(tmp), NULL);
-// 		free(tmp);
-// 	}
-// 	return (res);
-// }
-
-// i
-// "$ASD"$ASD
-//      j
-
-t_strlist	strlist_init()
-{
-	t_strlist	lst;
-
-	lst.head = NULL;
-	lst.tail = NULL;
-	return (lst);
-}
-
-t_strnode	*strlist_append(t_strlist *lst, char *str)
-{
-	t_strnode	*node;
-
-	node = ft_calloc(1, sizeof(t_strnode));
-	node->str = str;
-	node->len = ft_strlen(str);
-	if (!node)
-		return (NULL);
-	if (!lst->head)
+	else if (sigil_token->space_after || !sigil_token->next)
 	{
-		lst->head = node;
-		lst->tail = node;
-		return (node);
+		// convert SIGIL to word
+		sigil_token->type = WORD;
+		sigil_token->space_after = 0;
+		return (sigil_token);
 	}
-	lst->tail->next = node;
-	lst->tail = node;
-	return (node);
+	return (sigil_token);
 }
 
-// hel"lo$ASD"$ASD -> hello123123
-// "lo$ASD" -> lo123
-
-// char	*expand(char *s)
-// {
-// 	t_strlist	lst;
-// 	char		*content_before_sigil;
-// 	char		*sigil_var;
-// 	char		*next_sigil_var;
-// 	char		*key;
-//
-// 	lst = strlist_init();
-// 	sigil_var = ft_strchr(s, '$');
-// 	if (!sigil_var)
-// 		return (ft_strdup(s));
-// 	while (sigil_var)
-// 	{
-// 		content_before_sigil = ft_substr(s, 0, sigil_var - s);
-// 		strlist_append(&lst, content_before_sigil);
-// 		next_sigil_var = ft_strchr(sigil_var + 1, '$');
-// 		if (next_sigil_var)
-// 			key = ft_substr(sigil_var + 1, 0, next_sigil_var - sigil_var - 1);
-// 		else
-// 			key = ft_strdup(sigil_var + 1);
-// 		
-// 	}
-// }
-
-char	*get_key(char **sigil_var)
+t_token	*merge_word_tokens(t_token *t1, t_token *t2)
 {
-	const char	*next_sigil_var = ft_strchr(*sigil_var + 1, '$');
-	char		*key;
+	char	*s;
+	int		len;
 
-	if (next_sigil_var)
-		key = ft_substr(*sigil_var + 1, 0, next_sigil_var - *sigil_var - 1);
-	else
-		key = ft_strdup(*sigil_var + 1);
-	*sigil_var = (char *)next_sigil_var;
-	if (!key)
+	len = t1->len + t2->len;
+	s = malloc(sizeof(char) * (len + 1));
+	if (!s)
 		return (NULL);
-	return (key);
+	ft_memcpy(s, t1->content, sizeof(char) * t1->len);
+	ft_memcpy(&s[t1->len], t2->content, sizeof(char) * t2->len);
+	s[t2->len] = '\0';
+	free(t1->content);
+	t1->content = s;
+	t1->len = len;
+	t1->next = t2->next;
+	return (token_free(t2), t1);
 }
 
-char	*expand_key(t_ht_table *ht, char *key, char *str_before_sigil)
+t_token	*join_quotes_content(t_token *quote_token)
 {
-	char	*expanded_var;
-	char	*res;
+	t_token	*curr;
 
-	expanded_var = ht_get(ht, key);
-	if (expanded_var)
+	curr = quote_token->next;
+	while (curr)
 	{
-		res = ft_strjoin(str_before_sigil, expanded_var);
-		return (res);
+		if (curr->is_quoted == END_QUOTE)
+			return (curr->next);
+		else if (curr->type == WORD && curr->next && curr->next->type == WORD)
+		{
+			curr = merge_word_tokens(curr, curr->next);
+			if (!curr)
+				return (NULL);
+		}
+		else
+			curr = curr->next;
 	}
-	return (ft_strdup(str_before_sigil));
+	return (curr);
 }
 
-char	*expand_keys(t_ht_table *ht, char *s, char *sigil)
+t_token	*expand_sigils(t_ht_table *ht, t_token **lst)
 {
-	char	*key;
-	char	*res;
-	char	*tmp;
+	t_token	*curr;
 
-	res = ft_substr(s, 0, sigil - s);
-	if (!res)
-		return (NULL);
-	while (sigil)
+	curr = *lst;
+	while (curr)
 	{
-		key = get_key(&sigil);
-		if (!key)
-			return (free(s), free(res), NULL);
-		tmp = res;
-		res = expand_key(ht, key, res);
-		if (!res)
-			return (free(s), free(res), free(key), NULL);
-		free(key);
-		free(tmp);
+		if (curr->type == SIGIL)
+		{
+			curr = expand_sigil(ht, lst, curr);
+			if (!curr)
+				return (NULL);
+		}
+		else
+			curr = curr->next;
 	}
-	return (res);
+	return (curr);
 }
 
-char	*expand_dquoted(t_ht_table *ht, const char *s)
+t_token	*expand_quotes(t_token *lst)
 {
-	char	*quotes_content;
-	char	*sigil;
-	char	*res;
+	t_token	*curr;
 
-	quotes_content = ft_substr(s, 1, ft_strchr(s + 1, s[0]) - s - 1);
-	if (!quotes_content)
-		return (NULL);
-	sigil = ft_strchr(quotes_content, '$');
-	if (!sigil)
-		return (quotes_content);
-	res = expand_keys(ht, quotes_content, sigil);
-	if (!res)
-		return (free(quotes_content), NULL);
-	return (free(quotes_content), res);
+	curr = lst;
+	while (curr)
+	{
+		if (curr->is_quoted == START_QUOTE)
+		{
+			curr = join_quotes_content(curr);
+			if (!curr)
+				return (NULL);
+		}
+		curr = curr->next;
+	}
+	return (curr);
 }
 
-// expand_word
-// while word[i]
-//   if word[i] == ' || word[i] == "
-//     add_quotes_content_to_strlist(&word[i])
-//   else if (ft_isalpha(word[i]))
-//     add_word_to_strlist(&word[i])
+t_token	*remove_quotes(t_token **lst)
+{
+	t_token	*curr;
+	t_token	*prev;
 
-// char	***expansion(t_ht_table *ht, char ***cmd_tab)
-// {
-// 	char	*expanded;
-// 	int		i;
-// 	int		j;
-//
-// 	i = 0;
-// 	while (cmd_tab[i])
-// 	{
-// 		j = 0;
-// 		while (cmd_tab[j])
-// 		{
-// 			if (ft_strchr(cmd_tab[i][j], '$'))
-// 			{
-// 				expanded = expand_word(ht, cmd_tab[i][j]);
-// 				free(cmd_tab[i][j]);
-// 				cmd_tab[i][j] = expanded;
-// 				if (!cmd_tab[i][j])
-// 					return (ft_free_table(cmd_tab), NULL);
-// 			}
-// 			j++;
-// 		}
-// 		i++;
-// 	}
-// 	return (cmd_tab);
-// }
+	curr = *lst;
+	while (curr)
+	{
+		if (curr->type == QUOTE || curr->type == DQUOTE)
+		{
+			prev = token_find_prev(*lst, curr);
+			if (prev)
+				prev->next = curr->next;
+			else
+				*lst = curr->next;
+			token_free(curr);
+		}
+		curr = curr->next;
+	}
+	return (curr);
+}
+
+t_token	*join_unspaced_words(t_token *t)
+{
+	t_token	*curr;
+
+	curr = t;
+	while (curr)
+	{
+		if (curr->type == WORD && !curr->space_after
+			&& curr->next && curr->next->type == WORD)
+			merge_word_tokens(curr, curr->next);
+		curr = curr->next;
+	}
+}
+
+t_token	*expansion(t_ht_table *ht, t_token **lst)
+{
+	expand_sigils(ht, lst);
+	expand_quotes(*lst);
+	remove_quotes(lst);
+	// join_unspaced_words
+	return (*lst);
+}

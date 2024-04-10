@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 11:38:46 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/09 17:46:29 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/10 18:22:03 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ enum e_token	get_type(char *str);
 char			*ft_strset(char *s, char *set);
 
 // token_operations.c
-t_token			*token_create(char *content, int len, int space_after, enum e_quotes is_quoted);
 void			token_list_append(t_tlist *lst, t_token *token);
 void			token_list_free(t_token *lst);
 void			token_free(t_token *lst);
