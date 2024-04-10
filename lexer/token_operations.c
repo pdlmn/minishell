@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 13:36:25 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/09 17:28:35 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/10 18:03:18 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,8 @@ void	token_list_print(t_token *t)
 			"SIGIL"};
 	const char	*op[] = {"NOT_OPERATOR", "IN_REDIR", "OUT_REDIR", "HEREDOC",
 			"OUT_REDIR_APPEND", "PIPE"};
-	const char	*is_quoted[] = {"NOT_QUOTED", "SQUOTED", "DQUOTED"};
+	const char	*is_quoted[] = {"NOT_QUOTED", "SQUOTED", "DQUOTED",
+		"START_QUITE", "END_QUOTE"};
 
 	while (t)
 	{
