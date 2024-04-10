@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 13:09:12 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/09 19:12:33 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/09 20:06:53 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ t_token	*lexer(char *input)
 	i = 0;
 	while (input[i])
 	{
-		if (input[i] == ' ')
+		if (input[i] == ' ' && is_quoted == NOT_QUOTED)
 		{
 			i++;
 			continue ;

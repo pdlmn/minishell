@@ -65,22 +65,16 @@ void	token_list_free(t_token *token)
 
 void	token_list_print(t_token *t)
 {
-	const char	*type[] = { 
-		"WORD", "OPERATOR", "QUOTE", "DQUOTE", "TILDE", "SIGIL"
-	};
-	const char	*op[] = {
-		"NOT_OPERATOR", "IN_REDIR", "OUT_REDIR",
-		"HEREDOC", "OUT_REDIR_APPEND", "PIPE"
-	};
+	const char	*type[] = {"WORD", "OPERATOR", "QUOTE", "DQUOTE", "TILDE",
+			"SIGIL"};
+	const char	*op[] = {"NOT_OPERATOR", "IN_REDIR", "OUT_REDIR", "HEREDOC",
+			"OUT_REDIR_APPEND", "PIPE"};
 	const char	*is_quoted[] = {"NOT_QUOTED", "SQUOTED", "DQUOTED"};
 
 	while (t)
 	{
-		printf(
-			"{%s, %s, %s, %s, %d}\n",
-			t->content, type[t->type], op[t->op_type],
-			is_quoted[t->is_quoted], t->space_after
-			);
+		printf("{%s, %s, %s, %s, %d}\n", t->content, type[t->type],
+			op[t->op_type], is_quoted[t->is_quoted], t->space_after);
 		t = t->next;
 	}
 }

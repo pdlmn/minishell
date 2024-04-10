@@ -53,7 +53,7 @@ char	*ft_strset(char *s, char *set)
 	while (s[i])
 	{
 		if (ft_strchr(set, s[i]))
-			return ((char *) &s[i]);
+			return ((char *)&s[i]);
 		i++;
 	}
 	return (&s[i]);
