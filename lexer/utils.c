@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 13:34:37 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/11 16:15:09 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/11 20:14:25 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,17 @@ enum e_operator	get_operator(char *str)
 	return (NOT_OPERATOR);
 }
 
-enum e_token	get_type(char *str)
+enum e_token	get_type(char *str, enum e_quotes is_quoted)
 {
-	if (str[0] == '\'')
+	if (str[0] == '\'' && is_quoted != DQUOTED)
 		return (SQUOTE);
-	else if (str[0] == '\"')
+	else if (str[0] == '\"' && is_quoted != SQUOTED)
 		return (DQUOTE);
-	else if (str[0] == '~')
+	else if (str[0] == '~' && is_quoted == NOT_QUOTED)
 		return (TILDE);
-	else if (str[0] == '$')
+	else if (str[0] == '$' && is_quoted == NOT_QUOTED)
 		return (SIGIL);
-	else if (get_operator(str) != NOT_OPERATOR)
+	else if (get_operator(str) != NOT_OPERATOR && is_quoted == NOT_QUOTED)
 		return (OPERATOR);
 	return (WORD);
 }

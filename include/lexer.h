@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 11:38:46 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/11 16:13:31 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/11 20:13:30 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 // utils.c
 enum e_operator	get_operator(char *str);
-enum e_token	get_type(char *str);
+enum e_token	get_type(char *str, enum e_quotes is_quoted);
 char			*ft_strset(char *s, char *set);
 
 // token_operations.c

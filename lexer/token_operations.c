@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 13:36:25 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/11 16:21:47 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/11 20:13:39 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,19 @@ t_token	*token_create(char *content, int len, int space_after,
 	res = malloc(sizeof(t_token));
 	if (!res)
 		return (NULL);
-	res->next = NULL;
-	res->prev = NULL;
-	res->type = get_type(content);
-	res->op_type = get_operator(content);
-	res->content = content;
-	res->len = len;
-	res->space_after = space_after;
 	if ((res->type == SQUOTE || res->type == DQUOTE) && is_quoted == NOT_QUOTED)
 		is_quoted = START_QUOTE;
 	else if ((res->type == SQUOTE || res->type == DQUOTE)
 		&& (is_quoted == SQUOTED || is_quoted == DQUOTED))
 		is_quoted = END_QUOTE;
+	res->type = get_type(content, is_quoted);
 	res->is_quoted = is_quoted;
+	res->next = NULL;
+	res->prev = NULL;
+	res->op_type = get_operator(content);
+	res->content = content;
+	res->len = len;
+	res->space_after = space_after;
 	return (res);
 }
 
