@@ -6,7 +6,7 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 09:49:14 by omougel           #+#    #+#             */
-/*   Updated: 2024/04/18 17:08:18 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/18 17:10:14 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -333,28 +333,28 @@ void  new_token_list_free(t_token *token)
 	}
 }*/
 
-// int main(int argc, char **argv, char **envp)
-// {
-// 	t_token	*lst;
-// 	char	***cmd_tab;
-// 	int		status;
-// //	int		i;
-//
-// 	if (argc != 2)
-// 		return (0);
-// /*	lst = lexer("echo <\"hello\"  >>>| \"\"\"''\"'hello'\"''\"\"\" | asdasda \
-// zxc <<qw|a \"QUOTED AGAIN A\" 'small quote'");*/
-// //	i = 0;
-// 	lst = lexer(argv[1]);
-// //	token_list_print(lst);
-// //	ft_printf("\n\n\n\n");
-// 	cmd_tab = command_table(lst);
-// 	if (!cmd_tab)
-// 		return (EXIT_FAILURE); // don't return yet deal with previous malloc fail and free if necesary
-// //	while (cmd_tab && cmd_tab[i])
-// //		print_arr(cmd_tab[i++]);
-// 	status = execute(cmd_tab, envp);
-// 	token_list_free(lst);
-// 	ft_free_table(cmd_tab);
-// 	return (status);
-// }
+int main(int argc, char **argv, char **envp)
+{
+	t_token	*lst;
+	char	***cmd_tab;
+	int		status;
+//	int		i;
+
+	if (argc != 2)
+		return (0);
+/*	lst = lexer("echo <\"hello\"  >>>| \"\"\"''\"'hello'\"''\"\"\" | asdasda \
+zxc <<qw|a \"QUOTED AGAIN A\" 'small quote'");*/
+//	i = 0;
+	lst = lexer(argv[1]);
+//	token_list_print(lst);
+//	ft_printf("\n\n\n\n");
+	cmd_tab = command_table(lst);
+	if (!cmd_tab)
+		return (EXIT_FAILURE); // don't return yet deal with previous malloc fail and free if necesary
+//	while (cmd_tab && cmd_tab[i])
+//		print_arr(cmd_tab[i++]);
+	status = execute(cmd_tab, envp);
+	token_list_free(lst);
+	ft_free_table(cmd_tab);
+	return (status);
+}
