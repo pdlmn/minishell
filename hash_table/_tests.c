@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 12:23:17 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/01 03:55:36 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/11 17:55:55 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,12 @@ int	main(void)
 	ht_delete(ht, "DISPLAY");
 	ht_set(ht, "COLORTERM", "truecolor");
 	ht_delete(ht, "COLORTERM");
-	ht_table_print(ht);
+	ht_print_table(ht);
+	ht_print_buckets(ht);
 	printf("\nLANG is %s\n\n", ht_get(ht, "LANG"));
 	printf("\nZELLIJ is %s\n\n", ht_get(ht, "ZELLIJ"));
 	printf("\nCOLORTERM is %s\n\n", ht_get(ht, "COLORTERM"));
 	printf("\nUSER is %s\n\n", ht_get(ht, "USER"));
 	printf("\nHOME is %s\n\n", ht_get(ht, "HOME"));
-	ht_table_free(ht);
+	ht_free_table(ht);
 }
