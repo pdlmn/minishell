@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 14:34:14 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/11 16:13:24 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/11 16:39:27 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,4 +102,4 @@ void				ht_print_table(t_ht_table *ht);
 t_ht_table			*env_init(char **env);
 char				**env_ht_to_arr(t_ht_table *ht);
 
-t_token				*expansion(t_ht_table *ht, t_token **lst);
+t_tlist				*expansion(t_tlist *lst, t_ht_table *ht);

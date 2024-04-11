@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 03:56:43 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/05 18:05:02 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/11 17:48:47 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	ht_print_table(t_ht_table *ht)
 	i = 0;
 	while (i < ht->size)
 	{
-		if (ht->items[i])
+		if (ht->items[i] && !ht->items[i]->is_deleted)
 			printf("\t%s=%s\n", ht->items[i]->key, ht->items[i]->value);
 		i++;
 	}
