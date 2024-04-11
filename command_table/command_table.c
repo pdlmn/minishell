@@ -6,7 +6,7 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 10:41:59 by omougel           #+#    #+#             */
-/*   Updated: 2024/03/25 16:20:45 by omougel          ###   ########.fr       */
+/*   Updated: 2024/04/03 14:46:08 by omougel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,7 +175,7 @@ char	***command_table(t_token *lst)
 	}
 	return (cmd_tab);
 }
-
+/*
 void	print_arr(char **arr)
 {
 	size_t	i;
@@ -205,4 +205,4 @@ zxc <<qw|a \"QUOTED AGAIN A\" 'small quote'");
 	ft_free_table(cmd_tab);
 	token_list_free(lst);
 	return (EXIT_SUCCESS);
-}
+}*/

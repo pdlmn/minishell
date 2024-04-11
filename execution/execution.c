@@ -6,7 +6,7 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 09:49:14 by omougel           #+#    #+#             */
-/*   Updated: 2024/04/02 11:41:36 by omougel          ###   ########.fr       */
+/*   Updated: 2024/04/11 10:07:18 by omougel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,27 @@
 #include <string.h>
 #include <unistd.h>
 #include <fcntl.h>
+#include <sys/wait.h>
 #define MALLOC_ERROR 
+
+char ***command_table(t_token *lst);
+void  ft_free_table(char ***tab);
+
+size_t	ft_count_child(char ***cmd_tab)
+{
+	size_t	i;
+	size_t	count;
+
+	i = 0;
+	count = 0;
+	while (cmd_tab && cmd_tab[i] && cmd_tab[i][0])
+	{
+		if (!ft_strcmp(cmd_tab[i][0], "|"))
+			count++;
+		i++;
+	}
+	return (count);
+}
 
 int	is_input(char *redir)
 {
@@ -35,8 +55,9 @@ int	is_output(char *redir)
 
 char	**creat_builtins(void)
 {
-	char	*builtins[8];
+	char	**builtins;
 
+	builtins = malloc(8 * sizeof(char *));
 	builtins[0] = "echo";
 	builtins[1] = "cd";
 	builtins[2] = "pwd";
@@ -56,8 +77,14 @@ int	is_builtin(char *cmd)
 	builtins = creat_builtins();
 	i = 0;
 	while (builtins[i])
+	{
 		if (!ft_strcmp(cmd, builtins[i++]))
+		{
+			free(builtins);
 			return (1);
+		}
+	}
+	free(builtins);
 	return (0);
 }
 
@@ -66,9 +93,17 @@ int	is_there_pipe(char ***cmd_tab)
 	size_t	i;
 
 	i = 0;
-	while (cmd_tab && cmd_tab[i])
+	while (cmd_tab && cmd_tab[i] && cmd_tab[i][0])
 		if (!ft_strcmp("|", cmd_tab[i++][0]))
 			return (1);
+	return (0);
+}
+
+int	is_lim(char *buffer, char *lim)
+{
+	buffer[ft_strlen(buffer) - 1] = '\0';
+	if (!ft_strcmp(buffer, lim))
+		return (1);
 	return (0);
 }
 
@@ -80,12 +115,13 @@ int	here_doc(char *lim)
 	buffer = get_next_line(STDIN_FILENO);
 	if (pipe(fd) == -1)
 		return (EXIT_FAILURE); //TODO ERROR
-	while (buffer && ft_strcmp(buffer, lim))
+	while (buffer && !is_lim(buffer, lim))
 	{
 		write(fd[1], buffer, ft_strlen(buffer)); //deal with error case maybe
 		free(buffer);
 		buffer = get_next_line(STDIN_FILENO);
 	}
+	free(buffer);
 	close(fd[1]);
 	return (fd[0]);
 }
@@ -113,7 +149,6 @@ void  ft_exit(void)
 
 char  **replacefront(char **cmd, char *path)
 {
-	free(cmd[0]);
 	cmd[0] = path;
 	return (cmd);
 }
@@ -140,6 +175,7 @@ char	**find_command(char **cmd, char **envp)
 {
 	size_t	i;
 	char	*tmp;
+	char	*buff;
 	char	**env;
 
 	i = 0;
@@ -150,54 +186,54 @@ char	**find_command(char **cmd, char **envp)
 	env = split_envp(envp);
 	while (env && env[i])
 	{
-		tmp = ft_strjoin(env[i], cmd[0]);
+		buff = ft_strjoin(env[i], "/");//this
+		tmp = ft_strjoin(buff, cmd[0]);//or modify ft_strjoin
+		free(buff);
 		if (!tmp)
 			return (NULL); //TODO MALLOC_ERROR
 		if (!access(tmp, X_OK))
+		{
+			ft_free_split(env);
 			return (replacefront(cmd, tmp));
+		}
 		free(tmp);
 		i++;
 	}
-	return (NULL); //TODO ERROR CMD NOT FOUND
+	ft_free_split(env); //add some other free env in the upper code to deal with error cases 
+	return (ft_putstr_fd("command not found", 2), NULL); //TODO ERROR CMD NOT FOUND
 }
 
 void	exec_cmd(char **cmd, int fd_in, int fd_out, char **envp)
 {
-	cmd = find_command(cmd, envp);
-	if (cmd && *cmd)
-	{
-		if (dup2(fd_in, STDIN_FILENO) < 0)
-			ft_exit();
-		if (dup2(fd_out, STDOUT_FILENO) < 0)
-			ft_exit();
+	if (dup2(fd_in, STDIN_FILENO) < 0)
+		ft_exit();
+	if (dup2(fd_out, STDOUT_FILENO) < 0)
+		ft_exit();
+	if (fd_in != 0)
 		close(fd_in);
+	if (fd_out != 1)
 		close(fd_out);
-		execve(cmd[0], cmd, envp);
-	}
-	else
-	{
-		close(fd_in);
-		close(fd_out);
-	}
-	ft_free_split(cmd); // do i need to free here in the child so that there are no leaks ??
+	execve(cmd[0], cmd, envp);
+	ft_free_split(cmd); // IN CASE OF ERROR OR COMMAND NOT FOUND THE CHILD NEED TO FREE EVERYTHING INCLUDING LEXER AND COMMAND TABLE 3 STAR
 	exit(errno);
 }
 
-char	***fork_and_execute(char ***cmd_tab, int *fd_in, char **envp)
+char	***fork_and_execute(char ***cmd_tab, int *fd_in, char **envp, int *pid)
 {
 	int		fd[2];
-	int		pid;
 	size_t	i;
 	int		fd_out;
+	char	**cmd;
 
 	fd[0] = -1;
 	fd[1] = -1;
 	i = 0;
 	fd_out = 1;
+	*pid = -1;
 	if (is_there_pipe(cmd_tab))
 		if (pipe(fd) == -1)
 			return (NULL); //TODO error
-	while (cmd_tab[i] && ft_strcmp(cmd_tab[i][0], "|"))
+	while (cmd_tab[i] && cmd_tab[i][0] && ft_strcmp(cmd_tab[i][0], "|"))
 	{
 		if (is_input(cmd_tab[i][0]))
 		{
@@ -219,17 +255,24 @@ char	***fork_and_execute(char ***cmd_tab, int *fd_in, char **envp)
 		}
 		else
 		{
-			if (fd_in >= 0 && fd_out > 0)
+			if (*fd_in >= 0 && fd_out > 0)
 			{
 				if (fd_out == 1 && fd[1] > 0)
 					fd_out = fd[1];
 				else if (fd[1] > 0)
 					close(fd[1]);
-				pid = fork(); //TODO error case of fork
-				if (pid == 0)
+				cmd = find_command(cmd_tab[i], envp);
+				if (cmd && *cmd)
 				{
-					close(fd[0]);
-					exec_cmd(cmd_tab[i], *fd_in, fd_out, envp);
+					*pid = fork(); //TODO error case of fork check -1
+					if (*pid == 0)
+					{
+						if (fd[0] > 0)
+							close(fd[0]);
+						exec_cmd(cmd_tab[i], *fd_in, fd_out, envp);
+					}
+					if (cmd[0] != cmd_tab[i][0])
+						free(cmd[0]);
 				}
 			}
 			else
@@ -237,7 +280,7 @@ char	***fork_and_execute(char ***cmd_tab, int *fd_in, char **envp)
 		}
 		i++;
 	}
-	if (fd_in > 0)
+	if (*fd_in > 0)
 		close(*fd_in);
 	if (fd_out > 1)
 		close(fd_out);
@@ -250,57 +293,69 @@ char	***fork_and_execute(char ***cmd_tab, int *fd_in, char **envp)
 	return (&cmd_tab[i + 1]);
 }
 
-char  ***execution(char ***cmd_tab, int *fd_in)
+int  execute(char ***cmd_tab, char **envp)
 {
-	int	fd[2];
-	//int	pid;
-	size_t	i;
-	int	fd_out;
+	int	fd_in;
+	int	pid;
+	int status;
+	int	num_of_child;
 
-	fd[0] = -1;
-	fd[1] = -1;
+	fd_in = 0;
+	status = -1;
+	num_of_child = ft_count_child(cmd_tab);
+	while (cmd_tab && *cmd_tab)
+		cmd_tab = fork_and_execute(cmd_tab, &fd_in, envp, &pid);
+	if (pid > 0)
+		waitpid(pid, &status, 0);
+	while (num_of_child-- > 0)
+		wait(NULL);
+	return (WEXITSTATUS(status));
+}
+
+void	print_arr(char **arr)
+{
+	size_t	i;
+
 	i = 0;
-	fd_out = 1;
-	if (is_there_pipe(cmd_tab))
-		if (pipe(fd) == -1)
-			return ERROR; //TODO
-	while (cmd_tab[i] && ft_strcmp(cmd_tab[i][0], "|"))
+	while (arr && arr[i])
+		ft_printf("%s ", arr[i++]);
+	ft_printf("\n");
+}
+/*
+void  new_token_list_free(t_token *token)
+{
+	t_token *curr;
+	t_token *tmp;
+
+	curr = token;
+	while (curr)
 	{
-		if (is_input(cmd_tab[i][0]))
-		{
-			if (*fd_in != 0)
-				close(*fd_in);
-			if (!ft_strcmp(cmd_tab[i][0], "<"))
-				*fd_in = redir_input(cmd_tab[i][1]);
-			else
-				*fd_in = here_doc(cmd_tab[i][1]);
-		}
-		else if (is_output(cmd_tab[i][0]))
-		{
-			if (fd_out != 1)
-				close(fd_out);
-			if (!ft_strcmp(cmd_tab[i][0], ">"))
-				fd_out = redir_output(cmd_tab[i][1]);
-			else
-				fd_out = append_output(cmd_tab[i][1]);
-		}
-		else
-		{
-			if (fd_in >= 0 && fd_out > 0)
-				exec_cmd(); // get the pid of the last cmd to deal with return value and also we have to stock it into our new ENVIRONEMENT
-			else(ERROR); //TODO
-		}
-		i++;
+		tmp = curr->next;
+		free(curr);
+		curr = tmp;
 	}
-	if (fd_in != 0)
-		close(fd_in);
-	if (fd_out != 1)
-		close(fd_out);
-	if (fd[1] > 0)
-		close(fd[1]);
-	if (fd[0] > 0)
-		*fd_in = fd[0];
-	if (!cmd_tab || !cmd_tab[i])
-		return (NULL);
-	return (&cmd_tab[i + 1]); 
+}*/
+
+int main(int argc, char **argv, char **envp)
+{
+	t_token	*lst;
+	char	***cmd_tab;
+	int		status;
+
+	if (argc != 2)
+		return (0);
+/*	lst = lexer("echo <\"hello\"  >>>| \"\"\"''\"'hello'\"''\"\"\" | asdasda \
+zxc <<qw|a \"QUOTED AGAIN A\" 'small quote'");*/
+	lst = lexer(argv[1]);
+//	token_list_print(lst);
+//	ft_printf("\n\n\n\n");
+	cmd_tab = command_table(lst);
+	if (!cmd_tab)
+		return (EXIT_FAILURE); // don't return yet deal with previous malloc fail and free if necesary
+//	while (cmd_tab && cmd_tab[i])
+//		print_arr(cmd_tab[i++]);
+	status = execute(cmd_tab, envp);
+	token_list_free(lst);
+	ft_free_table(cmd_tab);
+	return (status);
 }
