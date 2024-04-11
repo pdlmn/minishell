@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 12:23:17 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/10 16:03:56 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/11 17:00:43 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 
 void test_expansion(t_ht_table *ht, char *str, char *should_be)
 {
-	t_token *lst = lexer(str);
-	expansion(ht, &lst);
-	printf("%s\n", lst->content);
-	assert(ft_strcmp(lst->content, should_be) == 0);
+	t_tlist *lst = lexer(str);
+	expansion(lst, ht);
+	printf("%s\n", lst->head->content);
+	assert(ft_strcmp(lst->head->content, should_be) == 0);
 	token_list_free(lst);
 }
 
@@ -30,8 +30,8 @@ int	main(void)
 	ht_set(ht, "ASD", "123");
 	test_expansion(ht, "$ASD", "123");
 	test_expansion(ht, "Hello$ASD", "Hello123");
-	// test_expansion(ht, "$\"\"", "");
-	// test_expansion(ht, "$\"\"\"\"ASD", "ASD");
+	test_expansion(ht, "$\"\"", "");
+	test_expansion(ht, "$\"\"\"\"ASD", "ASD");
 	// test_expansion(ht, "$\"\"\"ASD\"", "ASD");
 	// test_expansion(ht, "Hello$", "Hello$");
 	// test_expansion(ht, "\"Hello$\"", "Hello$");
