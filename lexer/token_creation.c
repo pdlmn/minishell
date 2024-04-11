@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 17:35:02 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/11 15:54:36 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/11 16:18:15 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static t_token	*create_operator_token(char *input, enum e_quotes is_quoted)
 	return (t);
 }
 
-static t_token	*create_word_token(t_token *prev_token, char *input, enum e_quotes is_quoted)
+static t_token	*create_word_token(t_token *last_t, char *input, enum e_quotes is_quoted)
 {
 	int		end_of_word;
 	char	*s;
@@ -55,9 +55,9 @@ static t_token	*create_word_token(t_token *prev_token, char *input, enum e_quote
 	if (is_quoted == SQUOTED)
 		end_of_word = ft_strset(input, "'") - input;
 	else if (is_quoted == DQUOTED &&
-			(!prev_token || (prev_token && prev_token->type != SIGIL)))
+			(!last_t || (last_t && last_t->type != SIGIL)))
 		end_of_word = ft_strset(input, "\"$") - input;
-	else if (is_quoted == DQUOTED && prev_token && prev_token->type == SIGIL)
+	else if (is_quoted == DQUOTED && last_t && last_t->type == SIGIL)
 		end_of_word = ft_strset(input, "\"$ ") - input;
 	else
 		end_of_word = ft_strset(input, "\"'$><| ") - input;
@@ -70,7 +70,7 @@ static t_token	*create_word_token(t_token *prev_token, char *input, enum e_quote
 	return (t);
 }
 
-t_token	*token_create_from_input(t_token *prev_token, char *input, enum e_quotes is_quoted)
+t_token	*token_create_from_input(t_token *last_t, char *input, enum e_quotes is_quoted)
 {
 	t_token	*t;
 
@@ -82,7 +82,7 @@ t_token	*token_create_from_input(t_token *prev_token, char *input, enum e_quotes
 	else if (is_quoted == NOT_QUOTED && ft_strchr("><|", *input))
 		t = create_operator_token(input, is_quoted);
 	else
-		t = create_word_token(prev_token, input, is_quoted);
+		t = create_word_token(last_t, input, is_quoted);
 	if (!t)
 		return (NULL);
 	return (t);

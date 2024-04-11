@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 13:29:46 by emuminov          #+#    #+#             */
-/*   Updated: 2024/03/21 17:51:30 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/11 16:15:24 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 int	main(int argc, char **argv)
 {
-	t_token	*lst;
+	t_tlist	*lst;
 
 	if (argc != 2)
 	{

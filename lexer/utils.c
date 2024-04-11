@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 13:34:37 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/11 15:33:46 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/11 16:15:09 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	terminate(t_tlist *lst, char *str_to_free, char *message)
 	if (str_to_free)
 		free(str_to_free);
 	if (lst)
-		token_list_free(lst->head);
+		token_list_free(lst);
 	if (message)
 		ft_putstr_fd(message, STDERR_FILENO);
 	exit(EXIT_FAILURE);

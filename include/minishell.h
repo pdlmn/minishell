@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 14:34:14 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/11 15:22:00 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/11 16:13:24 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,12 @@ typedef struct s_token
 	int				space_after;
 }					t_token;
 
+typedef struct s_tlist
+{
+	t_token		*head;
+	t_token		*tail;
+}				t_tlist;
+
 typedef struct s_ht_item
 {
 	char			*key;
@@ -76,9 +82,9 @@ typedef struct s_ht_table
 	t_ht_item		**items;
 }					t_ht_table;
 
-t_token				*lexer(char *input);
-void				token_list_free(t_token *token);
-void				token_list_print(t_token *token);
+t_tlist				*lexer(char *input);
+void				token_list_free(t_tlist *token);
+void				token_list_print(t_tlist *token);
 
 t_token				*token_create(char *content, int len, int space_after, enum e_quotes is_quoted);
 void				token_free(t_token *token);

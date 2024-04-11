@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 13:36:25 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/11 15:56:21 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/11 16:18:27 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,40 +37,41 @@ t_token	*token_create(char *content, int len, int space_after,
 	return (res);
 }
 
-void	token_free(t_token *token)
+void	token_free(t_token *t)
 {
-	free(token->content);
-	free(token);
+	free(t->content);
+	free(t);
 }
 
-void	token_list_append(t_tlist *lst, t_token *token)
+void	token_list_append(t_tlist *lst, t_token *t)
 {
 	if (lst->head == NULL)
 	{
-		lst->head = token;
-		lst->tail = token;
+		lst->head = t;
+		lst->tail = t;
 		return ;
 	}
-	token->prev = lst->tail;
-	lst->tail->next = token;
-	lst->tail = token;
+	t->prev = lst->tail;
+	lst->tail->next = t;
+	lst->tail = t;
 }
 
-void	token_list_free(t_token *token)
+void	token_list_free(t_tlist *lst)
 {
 	t_token	*curr;
 	t_token	*tmp;
 
-	curr = token;
+	curr = lst->head;
 	while (curr)
 	{
 		tmp = curr->next;
 		token_free(curr);
 		curr = tmp;
 	}
+	free(lst);
 }
 
-void	token_list_print(t_token *t)
+void	token_list_print(t_tlist *lst)
 {
 	const char	*type[] = {"WORD", "OPERATOR", "QUOTE", "DQUOTE", "TILDE",
 			"SIGIL"};
@@ -78,7 +79,9 @@ void	token_list_print(t_token *t)
 			"OUT_REDIR_APPEND", "PIPE"};
 	const char	*is_quoted[] = {"NOT_QUOTED", "SQUOTED", "DQUOTED",
 		"START_QUOTE", "END_QUOTE"};
+	t_token	*t;
 
+	t = lst->head;
 	while (t)
 	{
 		printf("{%s, %s, %s, %s, %d}\n", t->content, type[t->type],
