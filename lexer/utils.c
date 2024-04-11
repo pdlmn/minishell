@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 13:34:37 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/09 17:41:59 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/11 15:33:46 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ enum e_operator	get_operator(char *str)
 enum e_token	get_type(char *str)
 {
 	if (str[0] == '\'')
-		return (QUOTE);
+		return (SQUOTE);
 	else if (str[0] == '\"')
 		return (DQUOTE);
 	else if (str[0] == '~')

@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 13:36:25 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/10 18:03:18 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/11 15:22:59 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ t_token	*token_create(char *content, int len, int space_after,
 	if (!res)
 		return (NULL);
 	res->next = NULL;
+	res->prev = NULL;
 	res->type = get_type(content);
 	res->op_type = get_operator(content);
 	res->content = content;
@@ -45,6 +46,7 @@ void	token_list_append(t_tlist *lst, t_token *token)
 		lst->tail = token;
 		return ;
 	}
+	token->prev = lst->tail;
 	lst->tail->next = token;
 	lst->tail = token;
 }
@@ -70,7 +72,7 @@ void	token_list_print(t_token *t)
 	const char	*op[] = {"NOT_OPERATOR", "IN_REDIR", "OUT_REDIR", "HEREDOC",
 			"OUT_REDIR_APPEND", "PIPE"};
 	const char	*is_quoted[] = {"NOT_QUOTED", "SQUOTED", "DQUOTED",
-		"START_QUITE", "END_QUOTE"};
+		"START_QUOTE", "END_QUOTE"};
 
 	while (t)
 	{

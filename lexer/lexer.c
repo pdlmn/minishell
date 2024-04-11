@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 13:09:12 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/09 20:06:53 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/11 15:33:23 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	set_is_quoted(t_tlist *lst, enum e_quotes *is_quoted)
 {
-	if (lst->tail->type == QUOTE && *is_quoted == NOT_QUOTED)
+	if (lst->tail->type == SQUOTE && *is_quoted == NOT_QUOTED)
 		*is_quoted = SQUOTED;
-	else if (lst->tail->type == QUOTE && *is_quoted == SQUOTED)
+	else if (lst->tail->type == SQUOTE && *is_quoted == SQUOTED)
 		*is_quoted = NOT_QUOTED;
 	if (lst->tail->type == DQUOTE && *is_quoted == NOT_QUOTED)
 		*is_quoted = DQUOTED;
@@ -34,15 +34,16 @@ t_token	*lexer(char *input)
 	is_quoted = NOT_QUOTED;
 	lst.head = NULL;
 	lst.tail = NULL;
+	t = NULL;
 	i = 0;
 	while (input[i])
 	{
-		if (input[i] == ' ' && is_quoted == NOT_QUOTED)
+		if (input[i] == ' ')
 		{
 			i++;
 			continue ;
 		}
-		t = token_create_from_input(&input[i], is_quoted);
+		t = token_create_from_input(t, &input[i], is_quoted);
 		if (!t)
 			return (token_list_free(lst.head), NULL);
 		token_list_append(&lst, t);
