@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 13:09:12 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/11 16:14:22 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/11 16:32:58 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	set_is_quoted(t_token *t, enum e_quotes *is_quoted)
 		*is_quoted = NOT_QUOTED;
 }
 
-t_tlist	*token_list_init()
+t_tlist	*token_list_init(void)
 {
 	t_tlist	*lst;
 
@@ -36,18 +36,29 @@ t_tlist	*token_list_init()
 	return (lst);
 }
 
+t_token	*add_input_to_token_list(t_token *t, t_tlist *lst, char *current_char,
+		enum e_quotes *is_quoted)
+{
+	t = token_create_from_input(t, current_char, *is_quoted);
+	if (!t)
+		return (NULL);
+	token_list_append(lst, t);
+	set_is_quoted(t, is_quoted);
+	return (t);
+}
+
 t_tlist	*lexer(char *input)
 {
 	t_tlist			*lst;
 	t_token			*t;
-	int				i;
 	enum e_quotes	is_quoted;
+	int				i;
 
-	is_quoted = NOT_QUOTED;
 	lst = token_list_init();
 	if (!lst)
 		return (NULL);
 	t = NULL;
+	is_quoted = NOT_QUOTED;
 	i = 0;
 	while (input[i])
 	{
@@ -56,12 +67,10 @@ t_tlist	*lexer(char *input)
 			i++;
 			continue ;
 		}
-		t = token_create_from_input(t, &input[i], is_quoted);
+		t = add_input_to_token_list(t, lst, &input[i], &is_quoted);
 		if (!t)
 			return (token_list_free(lst), NULL);
-		token_list_append(lst, t);
-		i += lst->tail->len;
-		set_is_quoted(t, &is_quoted);
+		i += t->len;
 	}
 	return (lst);
 }
