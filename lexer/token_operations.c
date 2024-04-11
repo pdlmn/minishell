@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 13:36:25 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/11 15:22:59 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/11 15:56:21 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,11 @@ t_token	*token_create(char *content, int len, int space_after,
 	res->content = content;
 	res->len = len;
 	res->space_after = space_after;
+	if ((res->type == SQUOTE || res->type == DQUOTE) && is_quoted == NOT_QUOTED)
+		is_quoted = START_QUOTE;
+	else if ((res->type == SQUOTE || res->type == DQUOTE)
+			&& (is_quoted == SQUOTED || is_quoted == DQUOTED))
+		is_quoted = END_QUOTE;
 	res->is_quoted = is_quoted;
 	return (res);
 }

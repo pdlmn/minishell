@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 17:35:02 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/11 15:43:34 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/11 15:54:36 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,10 @@ static t_token	*create_single_char_token(char *input, enum e_quotes is_quoted)
 {
 	t_token				*t;
 	char				*s;
-	const enum e_token	type = get_type(input);
 
 	s = ft_substr(input, 0, 1);
 	if (!s)
 		return (NULL);
-	if ((type == SQUOTE || type == DQUOTE) && is_quoted == NOT_QUOTED)
-		is_quoted = START_QUOTE;
-	else if ((type == SQUOTE || type == DQUOTE)
-			&& (is_quoted == SQUOTED || is_quoted == DQUOTED))
-		is_quoted = END_QUOTE;
 	t = token_create(s, 1, input[1] == ' ', is_quoted);
 	if (!t)
 		return (free(s), NULL);
