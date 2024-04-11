@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 05:16:56 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/11 19:46:38 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/11 20:18:00 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
  * 4.
  * 5. */
 
-t_token	*expand_sigil(t_tlist *lst, t_ht_table *ht, t_token *sigil_t)
+t_token	*expand_after_sigil(t_tlist *lst, t_ht_table *ht, t_token *sigil_t)
 {
 	char	*val;
 	char	*copied_val;
@@ -89,7 +89,7 @@ t_token	*expand_sigil(t_tlist *lst, t_ht_table *ht, t_token *sigil_t)
 	return (sigil_t);
 }
 
-t_tlist	*expand_sigils(t_tlist *lst, t_ht_table *ht)
+t_tlist	*expand_variables(t_tlist *lst, t_ht_table *ht)
 {
 	t_token	*curr;
 
@@ -98,7 +98,7 @@ t_tlist	*expand_sigils(t_tlist *lst, t_ht_table *ht)
 	{
 		if (curr->type == SIGIL)
 		{
-			curr = expand_sigil(lst, ht, curr);
+			curr = expand_after_sigil(lst, ht, curr);
 			if (!curr)
 				return (NULL);
 		}
@@ -149,9 +149,10 @@ t_token	*join_quotes_content(t_token *quote_token)
 		else
 			curr = curr->next;
 	}
-	return (quote_token);
+	return (quote_token->next);
 }
 
+/* Join everything inside the quotes. */
 t_tlist	*expand_quotes(t_tlist *lst)
 {
 	t_token	*curr;
@@ -223,7 +224,8 @@ t_tlist	*join_unspaced_words(t_tlist *lst)
 	return (lst);
 }
 
-t_tlist	*check_if_non_empty(t_tlist *lst)
+/* If a token list is empty, add one empty symbolic token. */
+t_tlist	*handle_empty_token_list(t_tlist *lst)
 {
 	t_token *empty_t;
 	char	 *s;
@@ -240,7 +242,7 @@ t_tlist	*check_if_non_empty(t_tlist *lst)
 
 t_tlist	*expansion(t_tlist *lst, t_ht_table *ht)
 {
-	if (!expand_sigils(lst, ht))
+	if (!expand_variables(lst, ht))
 		return (NULL);
 	if (!expand_quotes(lst))
 		return (NULL);
@@ -248,7 +250,7 @@ t_tlist	*expansion(t_tlist *lst, t_ht_table *ht)
 		return (NULL);
 	if (!join_unspaced_words(lst))
 		return (NULL);
-	if (!check_if_non_empty(lst))
+	if (!handle_empty_token_list(lst))
 		return (NULL);
 	return (lst);
 }
