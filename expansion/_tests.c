@@ -39,6 +39,7 @@ int	main(void)
 	test_expansion(ht, "$ASD$ASD", "123123");
 	test_expansion(ht, "$", "$");
 	// test_expansion(ht, "$ ", "$ ");
+	// test_expansion(ht, "$ a", "$ ");
 	// test_expansion(ht, "$        a", "$ ");
 	// test_expansion(ht, "$ asd", "$ asd");
 	// test_expansion(ht, "$ASDHello", "");
