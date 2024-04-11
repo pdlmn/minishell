@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 05:16:56 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/11 17:04:59 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/11 19:46:38 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,23 +19,6 @@
  * 3. Remove empty quotes.
  * 4.
  * 5. */
-
-t_token	*token_find_prev(t_token *lst, t_token *t)
-{
-	t_token	*curr;
-	t_token	*prev;
-
-	curr = lst;
-	prev = NULL;
-	while (curr)
-	{
-		if (curr == t)
-			return (prev);
-		prev = curr;
-		curr = curr->next;
-	}
-	return (prev);
-}
 
 t_token	*expand_sigil(t_tlist *lst, t_ht_table *ht, t_token *sigil_t)
 {
@@ -54,13 +37,19 @@ t_token	*expand_sigil(t_tlist *lst, t_ht_table *ht, t_token *sigil_t)
 			if (!copied_val)
 				return (NULL);
 			free(sigil_t->next->content);
-			sigil_t->next->content = copied_val;
-			sigil_t->next->len = ft_strlen(copied_val);
-			if (sigil_t->prev)
-				sigil_t->prev->next = sigil_t->next;
-			else
-				lst->head = sigil_t->next;
 			res = sigil_t->next;
+			res->content = copied_val;
+			res->len = ft_strlen(copied_val);
+			if (sigil_t->prev)
+			{
+				sigil_t->prev->next = res;
+				res->prev = sigil_t->prev;
+			}
+			else
+			{
+				lst->head = sigil_t->next;
+				res->prev = NULL;
+			}
 			token_free(sigil_t);
 			return (res);
 		}
@@ -68,11 +57,17 @@ t_token	*expand_sigil(t_tlist *lst, t_ht_table *ht, t_token *sigil_t)
 				&& sigil_t->is_quoted == NOT_QUOTED)
 		{
 			// delete SIGIL
-			if (sigil_t->prev)
-				sigil_t->prev->next = sigil_t->next;
-			else
-				lst->head = sigil_t->next;
 			res = sigil_t->next;
+			if (sigil_t->prev)
+			{
+				sigil_t->prev->next = res;
+				res->prev = sigil_t->prev;
+			}
+			else
+			{
+				lst->head = sigil_t->next;
+				res->prev = NULL;
+			}
 			token_free(sigil_t);
 			return (res);
 		}
@@ -131,6 +126,8 @@ t_token	*merge_word_tokens(t_token *t1, t_token *t2)
 	t1->content = s;
 	t1->len = len;
 	t1->next = t2->next;
+	if (t2->next)
+		t2->next->prev = t1;
 	return (token_free(t2), t1);
 }
 
@@ -176,6 +173,7 @@ t_tlist	*expand_quotes(t_tlist *lst)
 t_tlist	*remove_quotes(t_tlist *lst)
 {
 	t_token	*curr;
+	t_token	*tmp;
 
 	curr = lst->head;
 	while (curr)
@@ -183,13 +181,26 @@ t_tlist	*remove_quotes(t_tlist *lst)
 		if (curr->type == SQUOTE || curr->type == DQUOTE)
 		{
 			if (curr->prev)
+			{
 				curr->prev->next = curr->next;
+				if (curr->next)
+					curr->next->prev = curr->prev;
+			}
 			else
+			{
 				lst->head = curr->next;
+				if (curr->next)
+					curr->next->prev = NULL;
+			}
+			tmp = curr->next;
 			token_free(curr);
+			curr = tmp;
 		}
-		curr = curr->next;
+		else
+			curr = curr->next;
 	}
+	if (tmp == NULL)
+		lst->tail = NULL;
 	return (lst);
 }
 
@@ -212,6 +223,21 @@ t_tlist	*join_unspaced_words(t_tlist *lst)
 	return (lst);
 }
 
+t_tlist	*check_if_non_empty(t_tlist *lst)
+{
+	t_token *empty_t;
+	char	 *s;
+
+	if (lst->head != NULL)
+		return (lst);
+	s = ft_calloc(sizeof(char), 1);
+	if (!s)
+		return (NULL);
+	empty_t = token_create(s, 0, 0, NOT_QUOTED);
+	token_list_append(lst, empty_t);
+	return (lst);
+}
+
 t_tlist	*expansion(t_tlist *lst, t_ht_table *ht)
 {
 	if (!expand_sigils(lst, ht))
@@ -221,6 +247,8 @@ t_tlist	*expansion(t_tlist *lst, t_ht_table *ht)
 	if (!remove_quotes(lst))
 		return (NULL);
 	if (!join_unspaced_words(lst))
+		return (NULL);
+	if (!check_if_non_empty(lst))
 		return (NULL);
 	return (lst);
 }

@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 14:34:14 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/11 16:39:27 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/11 19:45:41 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ typedef struct s_ht_table
 }					t_ht_table;
 
 t_tlist				*lexer(char *input);
+void				token_list_append(t_tlist *lst, t_token *t);
 void				token_list_free(t_tlist *token);
 void				token_list_print(t_tlist *token);
 
