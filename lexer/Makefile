@@ -6,6 +6,6 @@ $(NAME): $(SRCS)
 	gcc $(SRCS) $(LIBFT) -g -o lexer_test -fsanitize=address
 
 clean:
-	rm lexer_test
+	rm -f lexer_test
 
-re: clean test
+re: clean $(NAME)
