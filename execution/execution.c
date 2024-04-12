@@ -6,7 +6,7 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 09:49:14 by omougel           #+#    #+#             */
-/*   Updated: 2024/04/11 10:07:18 by omougel          ###   ########.fr       */
+/*   Updated: 2024/04/12 10:46:58 by omougel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,7 +175,6 @@ char	**find_command(char **cmd, char **envp)
 {
 	size_t	i;
 	char	*tmp;
-	char	*buff;
 	char	**env;
 
 	i = 0;
@@ -186,9 +185,7 @@ char	**find_command(char **cmd, char **envp)
 	env = split_envp(envp);
 	while (env && env[i])
 	{
-		buff = ft_strjoin(env[i], "/");//this
-		tmp = ft_strjoin(buff, cmd[0]);//or modify ft_strjoin
-		free(buff);
+		tmp = ft_strjoin(env[i], cmd[0]);
 		if (!tmp)
 			return (NULL); //TODO MALLOC_ERROR
 		if (!access(tmp, X_OK))
@@ -271,8 +268,7 @@ char	***fork_and_execute(char ***cmd_tab, int *fd_in, char **envp, int *pid)
 							close(fd[0]);
 						exec_cmd(cmd_tab[i], *fd_in, fd_out, envp);
 					}
-					if (cmd[0] != cmd_tab[i][0])
-						free(cmd[0]);
+					free(cmd[0]);
 				}
 			}
 			else
@@ -340,20 +336,22 @@ int main(int argc, char **argv, char **envp)
 {
 	t_token	*lst;
 	char	***cmd_tab;
+	int		i;
 	int		status;
 
 	if (argc != 2)
 		return (0);
 /*	lst = lexer("echo <\"hello\"  >>>| \"\"\"''\"'hello'\"''\"\"\" | asdasda \
 zxc <<qw|a \"QUOTED AGAIN A\" 'small quote'");*/
+	i = 0;
 	lst = lexer(argv[1]);
-//	token_list_print(lst);
-//	ft_printf("\n\n\n\n");
+	token_list_print(lst);
+	ft_printf("\n\n\n\n");
 	cmd_tab = command_table(lst);
 	if (!cmd_tab)
 		return (EXIT_FAILURE); // don't return yet deal with previous malloc fail and free if necesary
-//	while (cmd_tab && cmd_tab[i])
-//		print_arr(cmd_tab[i++]);
+	while (cmd_tab && cmd_tab[i])
+		print_arr(cmd_tab[i++]);
 	status = execute(cmd_tab, envp);
 	token_list_free(lst);
 	ft_free_table(cmd_tab);

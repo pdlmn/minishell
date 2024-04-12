@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 13:36:25 by emuminov          #+#    #+#             */
-/*   Updated: 2024/03/22 17:10:58 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/12 10:47:51 by omougel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ t_token	*token_create(enum e_token type, enum e_operator op, char *content,
 
 void	token_free(t_token *token)
 {
-	free(token->content);
+	if (token->content)
+		free(token->content);
 	free(token);
 }
 
