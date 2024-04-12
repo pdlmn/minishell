@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 05:16:56 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/11 20:18:00 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/12 20:11:19 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,25 @@
  * 4.
  * 5. */
 
+t_token	*token_delete_and_free(t_tlist *lst, t_token *t)
+{
+	t_token	*res;
+
+	if (!t)
+		return (NULL);
+	res = t->next;
+	if (t->prev)
+		t->prev->next = res;
+	else
+		lst->head = t->next;
+	if (!res)
+		lst->tail = t->prev;
+	else if (res)
+		res->prev = t->prev;
+	token_free(t);
+	return (res);
+}
+
 t_token	*expand_after_sigil(t_tlist *lst, t_ht_table *ht, t_token *sigil_t)
 {
 	char	*val;
@@ -29,10 +48,38 @@ t_token	*expand_after_sigil(t_tlist *lst, t_ht_table *ht, t_token *sigil_t)
 	if (!sigil_t->space_after && sigil_t->next
 		&& sigil_t->next->op_type == NOT_OPERATOR)
 	{
+		if (sigil_t->next->type == DIGIT)
+		{
+			// delete SIGIL and the next word
+			if (sigil_t->next)
+			{
+				res = token_delete_and_free(lst, sigil_t);
+				res->type = WORD;
+				res->content[0] = '\0';
+				res->len = 0;
+			}
+			else
+			{
+				res = sigil_t;
+				res->type = WORD;
+				res->content[0] = '\0';
+				res->len = 0;
+			}
+			return (res);
+		}
 		if (sigil_t->next->type == WORD)
 		{
-			// delete SIGIL, replace contents of the next word with cloned ht value
 			val = ht_get(ht, sigil_t->next->content);
+			if (!val)
+			{
+				// delete SIGIL and the next word
+				res = token_delete_and_free(lst, sigil_t);
+				res->type = WORD;
+				res->content[0] = '\0';
+				res->len = 0;
+				return (res);
+			}
+			// delete SIGIL, replace contents of the next word with cloned ht value
 			copied_val = ft_strdup(val);
 			if (!copied_val)
 				return (NULL);
@@ -71,19 +118,18 @@ t_token	*expand_after_sigil(t_tlist *lst, t_ht_table *ht, t_token *sigil_t)
 			token_free(sigil_t);
 			return (res);
 		}
-		else if (sigil_t->next->type == DQUOTE && sigil_t->is_quoted == DQUOTED)
+		else if ((sigil_t->next->type == DQUOTE && sigil_t->is_quoted == DQUOTED)
+				|| sigil_t->next->type == OTHER)
 		{
 			// convert SIGIL to word
 			sigil_t->type = WORD;
-			sigil_t->space_after = 0;
 			return (sigil_t);
 		}
 	}
-	else if (sigil_t->space_after || !sigil_t->next)
+	else
 	{
 		// convert SIGIL to word
 		sigil_t->type = WORD;
-		sigil_t->space_after = 0;
 		return (sigil_t);
 	}
 	return (sigil_t);
@@ -118,14 +164,15 @@ t_token	*merge_word_tokens(t_token *t1, t_token *t2)
 	if (!s)
 		return (NULL);
 	ft_memcpy(s, t1->content, sizeof(char) * t1->len);
-	if (t1->space_after)
+	if (t1->space_after && t1->is_quoted == NOT_QUOTED)
 		s[t1->len] = ' ';
-	ft_memcpy(&s[t1->len + t1->space_after], t2->content, sizeof(char) * t2->len);
+	ft_memcpy(&s[t1->len + (t1->space_after * (t1->is_quoted == NOT_QUOTED))], t2->content, sizeof(char) * t2->len);
 	s[len] = '\0';
 	free(t1->content);
 	t1->content = s;
 	t1->len = len;
 	t1->next = t2->next;
+	t1->type = WORD;
 	if (t2->next)
 		t2->next->prev = t1;
 	return (token_free(t2), t1);
@@ -140,7 +187,9 @@ t_token	*join_quotes_content(t_token *quote_token)
 	{
 		if (curr->is_quoted == END_QUOTE)
 			return (curr);
-		else if (curr->type == WORD && curr->next && curr->next->type == WORD)
+		else if ((curr->type == WORD || curr->type == OTHER)
+				&& curr->next
+				&& (curr->next->type == WORD || curr->next->type == OTHER))
 		{
 			curr = merge_word_tokens(curr, curr->next);
 			if (!curr)

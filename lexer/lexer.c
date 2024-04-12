@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 13:09:12 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/11 20:21:09 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/12 17:50:50 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,7 @@ t_token	*add_input_to_token_list(t_token *t, t_tlist *lst, char *current_char,
 	if (!t)
 		return (NULL);
 	token_list_append(lst, t);
-	set_is_quoted(t, is_quoted);
-	return (t);
+	set_is_quoted(t, is_quoted); return (t);
 }
 
 t_tlist	*lexer(char *input)

@@ -47,6 +47,7 @@ echo -n -n $USER    -> emuminov{no new line}
 echo -n -nn $USER   -> emuminov{no new line}
 echo -n-n $USER     -> -n-n emuminov
 echo $USER -n       -> emuminov -n
+echo $       a      -> $ a
 
 ## Expansion
 echo $USER                     -> emuminov

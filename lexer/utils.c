@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 13:34:37 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/12 17:33:46 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/12 18:03:22 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ enum e_token	get_type(char *str, enum e_quotes is_quoted, enum e_operator op)
 		return (OPERATOR);
 	else if (ft_isdigit(str[0]))
 		return (DIGIT);
-	else if (!ft_isalpha(str[0]) && str[0] != ' ')
+	else if (!is_valid_variable_char(str[0]))
 		return (OTHER);
 	return (WORD);
 }
@@ -66,19 +66,19 @@ char	*ft_strset(char *s, char *set)
 	return (&s[i]);
 }
 
-inline int	is_valid_variable_char(int c)
+int	is_valid_variable_char(int c)
 {
-	return (!ft_isalnum(c) && c != '_');
+	return (ft_isalnum(c) || c == '_');
 }
 
-int 	find_end_of_variable_name(char *s)
+int find_end_of_variable_name(char *s)
 {
 	int	i;
 
 	i = 0;
 	while (s[i])
 	{
-		if (is_valid_variable_char(s[i]))
+		if (!is_valid_variable_char(s[i]))
 			return (&s[i] - s);
 		i++;
 	}
