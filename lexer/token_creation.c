@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 17:35:02 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/12 20:06:28 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/15 14:49:56 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,15 +77,15 @@ t_token	*token_create_from_input(t_token *last_t, char *input,
 {
 	t_token	*t;
 
-	if ((is_quoted == NOT_QUOTED && ft_strchr("\"'~$", *input))
+	if ((is_quoted == NOT_QUOTED && ft_strchr("><|", *input)))
+		t = create_operator_token(input, is_quoted);
+	else if ((is_quoted == NOT_QUOTED && ft_strchr("\"'~$", *input))
 		|| (is_quoted == DQUOTED && input[0] == '"')
 		|| (is_quoted == SQUOTED && input[0] == '\'')
 		|| (is_quoted != SQUOTED && input[0] == '$')
 		|| (is_quoted != SQUOTED && ft_isdigit(input[0]) && last_t && last_t->type == SIGIL)
 		|| ((is_quoted == NOT_QUOTED || is_quoted == DQUOTED) && !is_valid_variable_char(*input) && *input != ' '))
 		t = create_single_char_token(input, is_quoted);
-	else if ((is_quoted == NOT_QUOTED && ft_strchr("><|", *input)))
-		t = create_operator_token(input, is_quoted);
 	else
 		t = create_word_token(last_t, input, is_quoted);
 	if (!t)
