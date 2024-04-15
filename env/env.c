@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 14:20:14 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/05 18:21:25 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/15 20:10:46 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,20 +67,38 @@ t_ht_table	*env_arr_to_ht(char **env)
 	return (ht);
 }
 
+t_ht_table	*env_increment_shlvl(t_ht_table *ht)
+{
+	char	*shlvl;
+	int		int_shlvl;
+	char	*new_shlvl;
+
+	shlvl = ht_get(ht, "SHLVL");
+	if (!shlvl)
+	{
+		new_shlvl = "1";
+		if (!ht_set(ht, "SHLVL", new_shlvl))
+			return (NULL);
+		return (ht);
+	}
+	int_shlvl = ft_atoi(shlvl);
+	new_shlvl = ft_itoa(int_shlvl + 1);
+	if (!new_shlvl)
+		return (NULL);
+	if (!ht_set(ht, "SHLVL", new_shlvl))
+		return (free(new_shlvl), NULL);
+	return (free(new_shlvl), ht);
+}
+
 t_ht_table	*env_init(char **env)
 {
 	t_ht_table	*ht;
-	char		*new_shlvl;
 
 	ht = env_arr_to_ht(env);
 	if (!ht)
 		return (NULL);
-	new_shlvl = ft_itoa(ft_atoi(ht_get(ht, "SHLVL")) + 1);
-	if (!new_shlvl)
+	if (!env_increment_shlvl(ht))
 		return (ht_free_table(ht), NULL);
-	if (!ht_set(ht, "SHLVL", new_shlvl))
-		return (free(new_shlvl), ht_free_table(ht), NULL);
-	free(new_shlvl);
 	return (ht);
 }
 

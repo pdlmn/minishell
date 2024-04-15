@@ -6,19 +6,24 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 05:16:56 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/12 20:11:19 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/15 20:26:38 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/expansion.h"
 
-// input -> tokenization -> checking for errors -> expansion -> command_table
-
-/* 1. Replace non singly-quoted $ values.
- * 2. Join all strings.
- * 3. Remove empty quotes.
- * 4.
- * 5. */
+t_token	*token_delete(t_tlist *lst, t_token *t)
+{
+	if (t->next)
+		t->next->prev = t->prev;
+	if (t->prev)
+		t->prev->next = t->next;
+	if (t == lst->head)
+		lst->head = t->next;
+	if (t == lst->tail)
+		lst->tail = t->prev;
+	return (t);
+}
 
 t_token	*token_delete_and_free(t_tlist *lst, t_token *t)
 {
@@ -27,112 +32,96 @@ t_token	*token_delete_and_free(t_tlist *lst, t_token *t)
 	if (!t)
 		return (NULL);
 	res = t->next;
-	if (t->prev)
-		t->prev->next = res;
-	else
-		lst->head = t->next;
-	if (!res)
-		lst->tail = t->prev;
-	else if (res)
-		res->prev = t->prev;
+	token_delete(lst, t);
 	token_free(t);
 	return (res);
 }
 
-t_token	*expand_after_sigil(t_tlist *lst, t_ht_table *ht, t_token *sigil_t)
+t_token	*token_convert_to_empty_word(t_token *t)
 {
-	char	*val;
+	t->type = WORD;
+	t->content[0] = '\0';
+	t->len = 0;
+	return (t);
+}
+
+t_token	*delete_sigil_and_the_next_word(t_tlist *lst, t_token *sigil)
+{
+	t_token	*res;
+
+	res = token_delete_and_free(lst, sigil);
+	if (res->next)
+		res = token_delete_and_free(lst, res);
+	else
+		token_convert_to_empty_word(res);
+	return (res);
+}
+
+t_token	*replace_variable_with_value(t_tlist *lst,  t_token *sigil, char *val)
+{
 	char	*copied_val;
 	t_token	*res;
 
-	if (!sigil_t->space_after && sigil_t->next
-		&& sigil_t->next->op_type == NOT_OPERATOR)
+	copied_val = ft_strdup(val);
+	if (!copied_val)
+		return (NULL);
+	free(sigil->next->content);
+	res = sigil->next;
+	res->content = copied_val;
+	res->len = ft_strlen(copied_val);
+	token_delete(lst, sigil);
+	token_free(sigil);
+	return (res);
+}
+
+t_token	*token_convert_to_word(t_token *t)
+{
+	t->type = WORD;
+	return (t);
+}
+
+t_token	*expand_after_sigil(t_tlist *lst, t_ht_table *ht, t_token *sigil)
+{
+	char	*val;
+
+	if (!sigil->space_after && sigil->next
+		&& sigil->next->op_type == NOT_OPERATOR)
 	{
-		if (sigil_t->next->type == DIGIT)
+		if (sigil->next->type == DIGIT)
+			return (delete_sigil_and_the_next_word(lst, sigil));
+		if (sigil->next->type == WORD)
 		{
-			// delete SIGIL and the next word
-			if (sigil_t->next)
-			{
-				res = token_delete_and_free(lst, sigil_t);
-				res->type = WORD;
-				res->content[0] = '\0';
-				res->len = 0;
-			}
-			else
-			{
-				res = sigil_t;
-				res->type = WORD;
-				res->content[0] = '\0';
-				res->len = 0;
-			}
-			return (res);
-		}
-		if (sigil_t->next->type == WORD)
-		{
-			val = ht_get(ht, sigil_t->next->content);
+			val = ht_get(ht, sigil->next->content);
 			if (!val)
-			{
-				// delete SIGIL and the next word
-				res = token_delete_and_free(lst, sigil_t);
-				res->type = WORD;
-				res->content[0] = '\0';
-				res->len = 0;
-				return (res);
-			}
-			// delete SIGIL, replace contents of the next word with cloned ht value
-			copied_val = ft_strdup(val);
-			if (!copied_val)
-				return (NULL);
-			free(sigil_t->next->content);
-			res = sigil_t->next;
-			res->content = copied_val;
-			res->len = ft_strlen(copied_val);
-			if (sigil_t->prev)
-			{
-				sigil_t->prev->next = res;
-				res->prev = sigil_t->prev;
-			}
-			else
-			{
-				lst->head = sigil_t->next;
-				res->prev = NULL;
-			}
-			token_free(sigil_t);
-			return (res);
+				return (delete_sigil_and_the_next_word(lst, sigil));
+			return (replace_variable_with_value(lst, sigil, val));
 		}
-		else if ((sigil_t->next->type == SQUOTE || sigil_t->next->type == DQUOTE)
-				&& sigil_t->is_quoted == NOT_QUOTED)
-		{
-			// delete SIGIL
-			res = sigil_t->next;
-			if (sigil_t->prev)
-			{
-				sigil_t->prev->next = res;
-				res->prev = sigil_t->prev;
-			}
-			else
-			{
-				lst->head = sigil_t->next;
-				res->prev = NULL;
-			}
-			token_free(sigil_t);
-			return (res);
-		}
-		else if ((sigil_t->next->type == DQUOTE && sigil_t->is_quoted == DQUOTED)
-				|| sigil_t->next->type == OTHER)
-		{
-			// convert SIGIL to word
-			sigil_t->type = WORD;
-			return (sigil_t);
-		}
+		else if ((sigil->next->type == SQUOTE || sigil->next->type == DQUOTE)
+				&& sigil->is_quoted == NOT_QUOTED)
+			return (token_delete_and_free(lst, sigil));
+		else if ((sigil->next->type == DQUOTE && sigil->is_quoted == DQUOTED)
+				|| sigil->next->type == OTHER)
+			return (token_convert_to_word(sigil));
 	}
-	else
-	{
-		// convert SIGIL to word
-		sigil_t->type = WORD;
-		return (sigil_t);
-	}
-	return (sigil_t);
+	return (token_convert_to_word(sigil));
+}
+
+t_token	*expand_tilde(t_ht_table *ht, t_token *tilde)
+{
+	char	*home_path;
+	char	*cloned_home_path;
+
+	home_path = ht_get(ht, "HOME");
+	if (!home_path)
+		return (token_convert_to_empty_word(tilde));
+	cloned_home_path = ft_strdup(home_path);
+	if (!cloned_home_path)
+		return (NULL);
+	free(tilde->content);
+	tilde->type = WORD;
+	tilde->content = cloned_home_path;
+	tilde->len = ft_strlen(cloned_home_path);
+	return (tilde);
 }
 
 t_tlist	*expand_variables(t_tlist *lst, t_ht_table *ht)
@@ -143,17 +132,18 @@ t_tlist	*expand_variables(t_tlist *lst, t_ht_table *ht)
 	while (curr)
 	{
 		if (curr->type == SIGIL)
-		{
 			curr = expand_after_sigil(lst, ht, curr);
-			if (!curr)
-				return (NULL);
-		}
+		else if (curr->type == TILDE)
+			curr = expand_tilde(ht, curr);
+		if (!curr)
+			return (NULL);
 		else
 			curr = curr->next;
 	}
 	return (lst);
 }
 
+// TODO: evaluate if I need to put a space after
 t_token	*merge_word_tokens(t_token *t1, t_token *t2)
 {
 	char	*s;
@@ -273,22 +263,6 @@ t_tlist	*join_unspaced_words(t_tlist *lst)
 	return (lst);
 }
 
-/* If a token list is empty, add one empty symbolic token. */
-t_tlist	*handle_empty_token_list(t_tlist *lst)
-{
-	t_token *empty_t;
-	char	 *s;
-
-	if (lst->head != NULL)
-		return (lst);
-	s = ft_calloc(sizeof(char), 1);
-	if (!s)
-		return (NULL);
-	empty_t = token_create(s, 0, 0, NOT_QUOTED);
-	token_list_append(lst, empty_t);
-	return (lst);
-}
-
 t_tlist	*expansion(t_tlist *lst, t_ht_table *ht)
 {
 	if (!expand_variables(lst, ht))
@@ -298,8 +272,6 @@ t_tlist	*expansion(t_tlist *lst, t_ht_table *ht)
 	if (!remove_quotes(lst))
 		return (NULL);
 	if (!join_unspaced_words(lst))
-		return (NULL);
-	if (!handle_empty_token_list(lst))
 		return (NULL);
 	return (lst);
 }

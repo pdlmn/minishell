@@ -1,4 +1,4 @@
-SRCS=expansion1.c expansion2.c _tests.c ../hash_table/ht1.c ../hash_table/ht2.c ../hash_table/ht3.c  ../hash_table/utils.c ../command_table/command_table.c ../lexer/lexer.c ../lexer/token_creation.c ../lexer/token_operations.c ../lexer/utils.c
+SRCS=expansion1.c expansion2.c _tests.c ../hash_table/ht1.c ../hash_table/ht2.c ../hash_table/ht3.c  ../hash_table/utils.c ../command_table/command_table.c ../lexer/lexer.c ../lexer/token_creation.c ../lexer/token_operations.c ../lexer/utils.c ../env/env.c
 LIBFT=../libft/libft.a
 NAME=expansion_test
 

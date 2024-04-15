@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 12:23:17 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/15 15:43:34 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/15 20:29:09 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,13 +71,16 @@ void	test_expansion(t_ht_table *ht, char *str, char *should_be)
 	free(joined_tokens);
 }
 
-int	main(void)
+int	main(int argc, char **argv, char **env)
 {
 	t_ht_table	*ht;
 
-	ht = ht_new(100);
+	(void)argc;
+	(void)argv;
+	ht = env_init(env);
 	ht_set(ht, "ASD", "123");
 	ht_set(ht, "__", "heh");
+	ht_set(ht, "HOME", "/home/emuminov");
 	test_expansion(ht, "$ASD", "123");
 	test_expansion(ht, "Hello$ASD", "Hello123");
 	test_expansion(ht, "$ASDHello", "");
@@ -108,6 +111,7 @@ int	main(void)
 	test_expansion(ht, "$ asd", "$ asd");
 	test_expansion(ht, "$        asd", "$ asd");
 	test_expansion(ht, "\"$        asd\"", "$        asd");
+	test_expansion(ht, "~/projects", "/home/emuminov/projects");
 	// test_expansion(ht, "\"$?'$a'1>\"", "0''1>");
 	ht_free_table(ht);
 }
