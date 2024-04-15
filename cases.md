@@ -49,6 +49,14 @@ echo -n-n $USER     -> -n-n emuminov
 echo $USER -n       -> emuminov -n
 echo $       a      -> $ a
 
+## Error handling
+echo | > a                     -> {valid}
+echo > | a                     -> syntax error near unexpected token `|`
+echo > > a                     -> syntax error near unexpected token `>`
+echo >                         -> syntax error near unexpected token `newline`
+echo "ASD                      -> {error, unclosed quote}
+>>>>>>>>>>>>>>>>>
+
 ## Expansion
 echo $USER                     -> emuminov
 echo $123a                     -> 23a
@@ -80,12 +88,27 @@ asd<Ctrl-D>        -> {nothing}
 
 ## Operators
 ### Heredoc
-omougel@z4r3p7:~$ cat << test
+minishell ->  cat << test
 > $USER
 > test
 omougel
 
-omougel@z4r3p7:~$ cat << "test"
+minishell ->  cat << "test"
 > $USER
 > test
 $USER
+
+minishell -> cat << $HOME
+> haha$HOME
+> $HOME                                         
+haha/home/emuminov
+
+minishell -> cat << "$HOME"
+> haha$HOME
+> $HOME
+haha$HOME
+
+minishell -> cat << ""$HOME
+> haha$HOME
+> $HOME
+haha$HOME

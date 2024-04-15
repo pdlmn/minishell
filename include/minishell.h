@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 14:34:14 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/12 17:20:00 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/15 16:07:58 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,16 @@ typedef struct s_ht_table
 	t_ht_item		**items;
 }					t_ht_table;
 
+typedef struct	s_minishell
+{
+	t_tlist		*lst;
+	char		***cmd_table;
+	t_ht_table	*env;
+	int			last_status;
+	int			fdin;
+	int			fdout;
+}				t_minishell;
+
 t_tlist				*lexer(char *input);
 void				token_list_append(t_tlist *lst, t_token *t);
 void				token_list_free(t_tlist *token);
@@ -91,6 +101,8 @@ void				token_list_print(t_tlist *token);
 
 t_token				*token_create(char *content, int len, int space_after, enum e_quotes is_quoted);
 void				token_free(t_token *token);
+
+t_tlist				*expansion(t_tlist *lst, t_ht_table *ht);
 
 void				ft_free_table(char ***tab);
 
@@ -105,4 +117,3 @@ void				ht_print_table(t_ht_table *ht);
 t_ht_table			*env_init(char **env);
 char				**env_ht_to_arr(t_ht_table *ht);
 
-t_tlist				*expansion(t_tlist *lst, t_ht_table *ht);
