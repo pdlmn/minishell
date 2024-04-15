@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 12:23:17 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/12 19:51:57 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/15 15:43:34 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,11 @@ void	test_expansion(t_ht_table *ht, char *str, char *should_be)
 	t_tlist *lst = lexer(str);
 	expansion(lst, ht);
 	joined_tokens = join_expanded_strings(lst);
-	printf("%s\n", joined_tokens);
+	printf("Input:     %s\n", str);
+	printf("Should be: %s\n", should_be);
+	printf("Result:    %s\n", joined_tokens);
+	token_list_print(lst);
+	printf("\n");
 	assert(ft_strcmp(joined_tokens, should_be) == 0);
 	token_list_free(lst);
 	free(joined_tokens);
