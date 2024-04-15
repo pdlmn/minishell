@@ -6,7 +6,7 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 09:49:14 by omougel           #+#    #+#             */
-/*   Updated: 2024/04/12 10:46:58 by omougel          ###   ########.fr       */
+/*   Updated: 2024/04/15 11:28:50 by omougel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 #include <sys/wait.h>
 #define MALLOC_ERROR 
 
-char ***command_table(t_token *lst);
-void  ft_free_table(char ***tab);
+char	***command_table(t_token *lst);
+void	ft_free_table(char ***tab);
 
 size_t	ft_count_child(char ***cmd_tab)
 {
@@ -52,7 +52,7 @@ int	is_output(char *redir)
 		return (1);
 	return (0);
 }
-
+/*
 char	**creat_builtins(void)
 {
 	char	**builtins;
@@ -67,24 +67,15 @@ char	**creat_builtins(void)
 	builtins[6] = "exit";
 	builtins[7] = NULL;
 	return (builtins);
-}
+}*/
 
 int	is_builtin(char *cmd)
 {
-	char	**builtins;
-	int		i;
-
-	builtins = creat_builtins();
-	i = 0;
-	while (builtins[i])
-	{
-		if (!ft_strcmp(cmd, builtins[i++]))
-		{
-			free(builtins);
-			return (1);
-		}
-	}
-	free(builtins);
+	if (!ft_strcmp(cmd, "echo") || !ft_strcmp(cmd, "cd")
+		|| !ft_strcmp(cmd, "pwd") || !ft_strcmp(cmd, "export")
+		|| !ft_strcmp(cmd, "unset") || !ft_strcmp(cmd, "env")
+		|| !ft_strcmp(cmd, "exit"))
+		return (1);
 	return (0);
 }
 
@@ -141,13 +132,13 @@ int	append_output(char *outfile)
 	return (open(outfile, O_WRONLY | O_CREAT | O_APPEND, 0644));
 }
 
-void  ft_exit(void)
+void	ft_exit(void)
 {
 	perror(NULL); //try to put the correct error message
 	exit(errno);
 }
 
-char  **replacefront(char **cmd, char *path)
+char	**replacefront(char **cmd, char *path)
 {
 	cmd[0] = path;
 	return (cmd);
@@ -197,7 +188,7 @@ char	**find_command(char **cmd, char **envp)
 		i++;
 	}
 	ft_free_split(env); //add some other free env in the upper code to deal with error cases 
-	return (ft_putstr_fd("command not found", 2), NULL); //TODO ERROR CMD NOT FOUND
+	return (ft_putstr_fd(cmd[0], 2), ft_putstr_fd(": command not found\n", 2), NULL); //TODO ERROR CMD NOT FOUND
 }
 
 void	exec_cmd(char **cmd, int fd_in, int fd_out, char **envp)
@@ -215,7 +206,69 @@ void	exec_cmd(char **cmd, int fd_in, int fd_out, char **envp)
 	exit(errno);
 }
 
-char	***fork_and_execute(char ***cmd_tab, int *fd_in, char **envp, int *pid)
+int	check_input(char **input_redir, int fd_in)
+{
+	if (is_input(input_redir[0]))
+	{
+		if (fd_in != 0)
+			close(fd_in);
+		if (!ft_strcmp(input_redir[0], "<"))
+			fd_in = redir_input(input_redir[1]); // what if wrong redir -1 or error message idk but does it crash ?
+		else
+			fd_in = here_doc(input_redir[1]);
+	}
+	return (fd_in);
+}
+
+int	check_output(char **output_redir, int fd_out)
+{
+	if (is_output(output_redir[0]))
+	{
+		if (fd_out != 1)
+			close(fd_out);
+		if (!ft_strcmp(output_redir[0], ">"))
+			fd_out = redir_output(output_redir[1]);
+		else
+			fd_out = append_output(output_redir[1]);
+	}
+	return (fd_out);
+}
+
+char	**jump_redir(char ***cmd_tab)
+{
+	size_t	i;
+
+	i = 0;
+	while (cmd_tab && cmd_tab[i] && cmd_tab[i][0] && ft_strcmp(cmd_tab[i][0], "|"))
+		i++;
+	return (cmd_tab[i - 1]);
+}
+
+void	exec(int fd_in, int fd_out, int *fd, char **cmd, char **envp)
+{
+	if (fd_out == 1 && fd[1] > 0)
+		fd_out = fd[1];
+	else if (fd[1] > 0)
+		close(fd[1]);
+	if (fd[0] > 0)
+		close(fd[0]);
+	exec_cmd(cmd, fd_in, fd_out, envp);
+	free(cmd[0]);
+}
+
+void	secure_close(int *fd_out, int *fd_in, int *pipe_out, int *pipe_in)
+{
+	if (*fd_in > 0)
+		close(*fd_in);
+	if (*fd_out > 1)
+		close(*fd_out);
+	if (*pipe_in > 0)
+		close(*pipe_in);
+	if (*pipe_out > 0)
+		*fd_in = *pipe_out;
+}
+
+char	***fork_and_execute(char ***cmd_tab, int *fd_in, char **envp, int *pid) //maybe put the fd_in and the fd_out in an array of 2 int or do a struct of find a way to free lst from the main ??
 {
 	int		fd[2];
 	size_t	i;
@@ -229,71 +282,35 @@ char	***fork_and_execute(char ***cmd_tab, int *fd_in, char **envp, int *pid)
 	*pid = -1;
 	if (is_there_pipe(cmd_tab))
 		if (pipe(fd) == -1)
-			return (NULL); //TODO error
-	while (cmd_tab[i] && cmd_tab[i][0] && ft_strcmp(cmd_tab[i][0], "|"))
+			return (NULL); //TODO malloc_error
+	cmd = find_command(jump_redir(cmd_tab), envp);
+	if (cmd && *cmd)
 	{
-		if (is_input(cmd_tab[i][0]))
+		*pid = fork(); //TODO error case of fork check -1
+		if (*pid == 0)
 		{
-			if (*fd_in != 0)
-				close(*fd_in);
-			if (!ft_strcmp(cmd_tab[i][0], "<"))
-				*fd_in = redir_input(cmd_tab[i][1]);
-			else
-				*fd_in = here_doc(cmd_tab[i][1]);
-		}
-		else if (is_output(cmd_tab[i][0]))
-		{
-			if (fd_out != 1)
-				close(fd_out);
-			if (!ft_strcmp(cmd_tab[i][0], ">"))
-				fd_out = redir_output(cmd_tab[i][1]);
-			else
-				fd_out = append_output(cmd_tab[i][1]);
-		}
-		else
-		{
-			if (*fd_in >= 0 && fd_out > 0)
+			while (cmd_tab[i] && cmd_tab[i][0] && ft_strcmp(cmd_tab[i][0], "|"))
 			{
-				if (fd_out == 1 && fd[1] > 0)
-					fd_out = fd[1];
-				else if (fd[1] > 0)
-					close(fd[1]);
-				cmd = find_command(cmd_tab[i], envp);
-				if (cmd && *cmd)
-				{
-					*pid = fork(); //TODO error case of fork check -1
-					if (*pid == 0)
-					{
-						if (fd[0] > 0)
-							close(fd[0]);
-						exec_cmd(cmd_tab[i], *fd_in, fd_out, envp);
-					}
-					free(cmd[0]);
-				}
+				*fd_in = check_input(cmd_tab[i], *fd_in);
+				fd_out = check_output(cmd_tab[i], fd_out);
+				i++;
 			}
-			else
-				return (&cmd_tab[i + 1]); //TODO ERROR INVALID FILE DESCRIPTOR
+			if (fd_in >= 0 && fd_out > 0)
+				exec(*fd_in, fd_out, fd, cmd, envp);
+			//else TODO ERROR INVALID FILE DESCRIPTOR
 		}
-		i++;
 	}
-	if (*fd_in > 0)
-		close(*fd_in);
-	if (fd_out > 1)
-		close(fd_out);
-	if (fd[1] > 0)
-		close(fd[1]);
-	if (fd[0] > 0)
-		*fd_in = fd[0];
+	secure_close(&fd_out, fd_in, &fd[0], &fd[1]);
 	if (!cmd_tab || !cmd_tab[i])
 		return (NULL);
 	return (&cmd_tab[i + 1]);
 }
 
-int  execute(char ***cmd_tab, char **envp)
+int	execute(char ***cmd_tab, char **envp)
 {
 	int	fd_in;
 	int	pid;
-	int status;
+	int	status;
 	int	num_of_child;
 
 	fd_in = 0;
@@ -336,22 +353,22 @@ int main(int argc, char **argv, char **envp)
 {
 	t_token	*lst;
 	char	***cmd_tab;
-	int		i;
 	int		status;
+//	int		i;
 
 	if (argc != 2)
 		return (0);
 /*	lst = lexer("echo <\"hello\"  >>>| \"\"\"''\"'hello'\"''\"\"\" | asdasda \
 zxc <<qw|a \"QUOTED AGAIN A\" 'small quote'");*/
-	i = 0;
+//	i = 0;
 	lst = lexer(argv[1]);
-	token_list_print(lst);
-	ft_printf("\n\n\n\n");
+//	token_list_print(lst);
+//	ft_printf("\n\n\n\n");
 	cmd_tab = command_table(lst);
 	if (!cmd_tab)
 		return (EXIT_FAILURE); // don't return yet deal with previous malloc fail and free if necesary
-	while (cmd_tab && cmd_tab[i])
-		print_arr(cmd_tab[i++]);
+//	while (cmd_tab && cmd_tab[i])
+//		print_arr(cmd_tab[i++]);
 	status = execute(cmd_tab, envp);
 	token_list_free(lst);
 	ft_free_table(cmd_tab);
