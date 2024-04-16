@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 05:16:56 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/16 14:08:36 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/16 14:22:36 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,18 @@ t_token	*token_delete_and_free(t_tlist *lst, t_token *t)
 	return (res);
 }
 
-t_token	*token_convert_to_empty_word(t_token *t)
+t_token	*token_convert_to_word(t_token *t)
 {
 	t->type = WORD;
+	t->op_type = NOT_OPERATOR;
+	if (t->is_quoted == START_QUOTE || t->is_quoted == END_QUOTE)
+		t->is_quoted = NOT_QUOTED;
+	return (t);
+}
+
+t_token	*token_convert_to_empty_word(t_token *t)
+{
+	token_convert_to_word(t);
 	t->content[0] = '\0';
 	t->len = 0;
 	return (t);
@@ -72,12 +81,6 @@ t_token	*replace_variable_with_value(t_tlist *lst,  t_token *sigil, char *val)
 	token_delete(lst, sigil);
 	token_free(sigil);
 	return (res);
-}
-
-t_token	*token_convert_to_word(t_token *t)
-{
-	t->type = WORD;
-	return (t);
 }
 
 t_token	*expand_after_sigil(t_tlist *lst, t_ht_table *ht, t_token *sigil)
@@ -211,34 +214,19 @@ t_tlist	*expand_quotes(t_tlist *lst)
 t_tlist	*remove_quotes(t_tlist *lst)
 {
 	t_token	*curr;
-	t_token	*tmp;
 
 	curr = lst->head;
 	while (curr)
 	{
-		if (curr->type == SQUOTE || curr->type == DQUOTE)
+		if ((curr->type == SQUOTE || curr->type == DQUOTE) && curr->next)
 		{
-			if (curr->prev)
-			{
-				curr->prev->next = curr->next;
-				if (curr->next)
-					curr->next->prev = curr->prev;
-			}
-			else
-			{
-				lst->head = curr->next;
-				if (curr->next)
-					curr->next->prev = NULL;
-			}
-			tmp = curr->next;
-			token_free(curr);
-			curr = tmp;
+			curr = token_delete_and_free(lst, curr);
+			continue ;
 		}
-		else
-			curr = curr->next;
+		if ((curr->type == SQUOTE || curr->type == DQUOTE) && !curr->next)
+			token_convert_to_empty_word(curr);
+		curr = curr->next;
 	}
-	if (tmp == NULL)
-		lst->tail = NULL;
 	return (lst);
 }
 
