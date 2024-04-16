@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 14:34:14 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/16 19:41:25 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/16 19:46:16 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ enum				e_token
 	DQUOTE,
 	TILDE,
 	SIGIL,
-	DIGIT, OTHER,
+	DIGIT,
+	OTHER,
 };
 
 /*
