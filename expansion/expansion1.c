@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 05:16:56 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/15 20:26:38 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/16 14:08:36 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,13 +150,11 @@ t_token	*merge_word_tokens(t_token *t1, t_token *t2)
 	int		len;
 
 	len = t1->len + t2->len;
-	s = malloc(sizeof(char) * (len + t1->space_after + 1));
+	s = malloc(sizeof(char) * (len /*+ t1->space_after*/ + 1));
 	if (!s)
 		return (NULL);
 	ft_memcpy(s, t1->content, sizeof(char) * t1->len);
-	if (t1->space_after && t1->is_quoted == NOT_QUOTED)
-		s[t1->len] = ' ';
-	ft_memcpy(&s[t1->len + (t1->space_after * (t1->is_quoted == NOT_QUOTED))], t2->content, sizeof(char) * t2->len);
+	ft_memcpy(&s[t1->len], t2->content, sizeof(char) * t2->len);
 	s[len] = '\0';
 	free(t1->content);
 	t1->content = s;
