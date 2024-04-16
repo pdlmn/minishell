@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 12:23:17 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/15 20:29:09 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/16 20:36:19 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,65 +54,64 @@ char	*join_expanded_strings(t_tlist *lst)
 	return (res);
 }
 
-void	test_expansion(t_ht_table *ht, char *str, char *should_be)
+void	test_expansion(t_minishell *sh, char *str, char *should_be)
 {
 	char	*joined_tokens;
-	t_tlist	*lst;
 
-	lst = lexer(str);
-	expansion(lst, ht);
-	joined_tokens = join_expanded_strings(lst);
+	lexer(str, sh);
+	expansion(sh);
+	joined_tokens = join_expanded_strings(&sh->lst);
 	printf("Input:     %s\n", str);
 	printf("Should be: %s\n", should_be);
 	printf("Result:    %s\n", joined_tokens);
-	token_list_print(lst);
+	token_list_print(&sh->lst);
 	printf("\n");
 	assert(ft_strcmp(joined_tokens, should_be) == 0);
-	token_list_free(lst);
+	token_list_free(&sh->lst);
 	free(joined_tokens);
 }
 
 int	main(int argc, char **argv, char **env)
 {
-	t_ht_table	*ht;
+	static t_minishell sh;
 
 	(void)argc;
 	(void)argv;
-	ht = env_init(env);
-	ht_set(ht, "ASD", "123");
-	ht_set(ht, "__", "heh");
-	ht_set(ht, "HOME", "/home/emuminov");
-	test_expansion(ht, "$ASD", "123");
-	test_expansion(ht, "Hello$ASD", "Hello123");
-	test_expansion(ht, "$ASDHello", "");
-	test_expansion(ht, "$\"\"", "");
-	test_expansion(ht, "$\"\"\"\"ASD", "ASD");
-	test_expansion(ht, "$\"\"\"ASD\"", "ASD");
-	test_expansion(ht, "Hello$", "Hello$");
-	test_expansion(ht, "\"Hello$\"", "Hello$");
-	test_expansion(ht, "\"$ASD\"", "123");
-	test_expansion(ht, "$ASD$ASD", "123123");
-	test_expansion(ht, "$", "$");
-	test_expansion(ht, "\"$ \"", "$ ");
-	test_expansion(ht, "\"$' '\"", "$' '");
-	test_expansion(ht, "\"$>\"", "$>");
-	test_expansion(ht, "\"$a>\"", ">");
-	test_expansion(ht, "\"$asd123$%     $  >\"", "$%     $  >");
-	test_expansion(ht, "\"$__>\"", "heh>");
-	test_expansion(ht, "\"$a1>\"", ">");
-	test_expansion(ht, "\"$'$a'1>\"", "$''1>");
-	test_expansion(ht, "\"$+''1$>\"", "$+''1$>");
-	test_expansion(ht, "\"$^''1$>\"", "$^''1$>");
-	test_expansion(ht, "'$ASD'$ASD", "$ASD123");
-	test_expansion(ht, "$\"A\"SD", "ASD");
-	test_expansion(ht, "$\"ASD\"", "ASD");
-	test_expansion(ht, "\"$A\"SD", "SD");
-	test_expansion(ht, "$1", "");
-	test_expansion(ht, "$123a", "23a");
-	test_expansion(ht, "$ asd", "$ asd");
-	test_expansion(ht, "$        asd", "$ asd");
-	test_expansion(ht, "\"$        asd\"", "$        asd");
-	test_expansion(ht, "~/projects", "/home/emuminov/projects");
-	// test_expansion(ht, "\"$?'$a'1>\"", "0''1>");
-	ht_free_table(ht);
+	sh.env = env_init(env);
+	ht_set(sh.env, "ASD", "123");
+	ht_set(sh.env, "__", "heh");
+	ht_set(sh.env, "HOME", "/home/emuminov");
+	test_expansion(&sh, "$ASD", "123");
+	test_expansion(&sh, "Hello$ASD", "Hello123");
+	test_expansion(&sh, "$ASDHello", "");
+	test_expansion(&sh, "$\"\"", "");
+	test_expansion(&sh, "$\"\"\"\"ASD", "ASD");
+	test_expansion(&sh, "$\"\"\"ASD\"", "ASD");
+	test_expansion(&sh, "Hello$", "Hello$");
+	test_expansion(&sh, "\"Hello$\"", "Hello$");
+	test_expansion(&sh, "\"$ASD\"", "123");
+	test_expansion(&sh, "$ASD$ASD", "123123");
+	test_expansion(&sh, "$", "$");
+	test_expansion(&sh, "\"$ \"", "$ ");
+	test_expansion(&sh, "\"$' '\"", "$' '");
+	test_expansion(&sh, "\"$>\"", "$>");
+	test_expansion(&sh, "\"$a>\"", ">");
+	test_expansion(&sh, "\"$asd123$%     $  >\"", "$%     $  >");
+	test_expansion(&sh, "\"$__>\"", "heh>");
+	test_expansion(&sh, "\"$a1>\"", ">");
+	test_expansion(&sh, "\"$'$a'1>\"", "$''1>");
+	test_expansion(&sh, "\"$+''1$>\"", "$+''1$>");
+	test_expansion(&sh, "\"$^''1$>\"", "$^''1$>");
+	test_expansion(&sh, "'$ASD'$ASD", "$ASD123");
+	test_expansion(&sh, "$\"A\"SD", "ASD");
+	test_expansion(&sh, "$\"ASD\"", "ASD");
+	test_expansion(&sh, "\"$A\"SD", "SD");
+	test_expansion(&sh, "$1", "");
+	test_expansion(&sh, "$123a", "23a");
+	test_expansion(&sh, "$ asd", "$ asd");
+	test_expansion(&sh, "$        asd", "$ asd");
+	test_expansion(&sh, "\"$        asd\"", "$        asd");
+	test_expansion(&sh, "\"$?'$a'1>\"", "0''1>");
+	test_expansion(&sh, "~/projects", "/home/emuminov/projects");
+	ht_free_table(sh.env);
 }

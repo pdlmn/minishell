@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 13:29:46 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/11 16:15:24 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/16 20:35:27 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,14 @@
 
 int	main(int argc, char **argv)
 {
-	t_tlist	*lst;
+	static t_minishell	sh;
 
 	if (argc != 2)
 	{
 		printf("Enter proper command\n");
 		return (EXIT_FAILURE);
 	}
-	lst = lexer(argv[1]);
-	token_list_print(lst);
-	token_list_free(lst);
+	lexer(argv[1], &sh);
+	token_list_print(&sh.lst);
+	token_list_free(&sh.lst);
 }

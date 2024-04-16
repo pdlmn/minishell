@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 18:09:54 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/16 18:12:58 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/16 20:41:05 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,6 @@ void	token_list_free(t_tlist *lst)
 		token_free(curr);
 		curr = tmp;
 	}
-	free(lst);
+	lst->head = NULL;
+	lst->tail = NULL;
 }

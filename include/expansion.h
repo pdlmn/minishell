@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 05:17:12 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/16 17:58:34 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/16 20:23:34 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_tlist	*expand_quotes(t_tlist *lst);
 t_tlist	*remove_quotes(t_tlist *lst);
 
 // expand_variables.c
-t_tlist	*expand_variables(t_tlist *lst, t_ht_table *ht);
+t_tlist	*expand_variables(t_minishell *sh);
 
 // utils.c
 t_tlist	*join_unspaced_words(t_tlist *lst);

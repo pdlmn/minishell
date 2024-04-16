@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 14:34:14 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/16 20:11:51 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/16 20:34:49 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ typedef struct s_ht_table
 
 typedef struct	s_minishell
 {
-	t_tlist		*lst;
+	t_tlist		lst;
 	t_ht_table	*env;
 	char		***cmd_table;
 	int			last_status;
@@ -94,10 +94,10 @@ typedef struct	s_minishell
 	int			fdout;
 }				t_minishell;
 
-t_tlist				*lexer(char *input);
+t_tlist				*lexer(char *input, t_minishell *sh);
 
-enum e_operator		get_operator(char *str, enum e_quotes is_quoted);
-enum e_token		get_type(char *str, enum e_quotes is_quoted,
+enum e_operator		get_operator(char *s, enum e_quotes is_quoted);
+enum e_token		get_type(char *s, enum e_quotes is_quoted,
 						enum e_operator op);
 
 void				token_list_append(t_tlist *lst, t_token *t);
@@ -108,7 +108,7 @@ t_token				*token_create(char *content, int len, int space_after,
 		enum e_quotes is_quoted);
 void				token_free(t_token *t);
 
-t_tlist				*expansion(t_tlist *lst, t_ht_table *ht);
+t_tlist				*expansion(t_minishell *st);
 
 void				ft_free_table(char ***tab);
 

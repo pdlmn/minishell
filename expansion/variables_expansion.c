@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 14:53:09 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/16 18:16:05 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/16 20:35:48 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static t_token	*expand_after_sigil(t_tlist *lst, t_ht_table *ht,
 	{
 		if (sigil->next->type == DIGIT)
 			return (delete_sigil_and_the_next_word(lst, sigil));
-		if (sigil->next->type == WORD)
+		else if (sigil->next->type == WORD)
 		{
 			val = ht_get(ht, sigil->next->content);
 			if (!val)
@@ -87,21 +87,21 @@ static t_token	*expand_tilde(t_ht_table *ht, t_token *tilde)
 	return (tilde);
 }
 
-t_tlist	*expand_variables(t_tlist *lst, t_ht_table *ht)
+t_tlist	*expand_variables(t_minishell *sh)
 {
 	t_token	*curr;
 
-	curr = lst->head;
+	curr = sh->lst.head;
 	while (curr)
 	{
 		if (curr->type == SIGIL)
-			curr = expand_after_sigil(lst, ht, curr);
+			curr = expand_after_sigil(&sh->lst, sh->env, curr);
 		else if (curr->type == TILDE)
-			curr = expand_tilde(ht, curr);
+			curr = expand_tilde(sh->env, curr);
 		if (!curr)
 			return (NULL);
 		else
 			curr = curr->next;
 	}
-	return (lst);
+	return (&sh->lst);
 }
