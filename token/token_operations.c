@@ -6,12 +6,11 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 13:36:25 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/12 16:57:58 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/16 18:44:33 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/lexer.h"
-#include <stdio.h>
+#include "../include/minishell.h"
 
 t_token	*token_create(char *content, int len, int space_after,
 		enum e_quotes is_quoted)
@@ -37,12 +36,6 @@ t_token	*token_create(char *content, int len, int space_after,
 	return (res);
 }
 
-void	token_free(t_token *t)
-{
-	free(t->content);
-	free(t);
-}
-
 void	token_list_append(t_tlist *lst, t_token *t)
 {
 	if (lst->head == NULL)
@@ -54,21 +47,6 @@ void	token_list_append(t_tlist *lst, t_token *t)
 	t->prev = lst->tail;
 	lst->tail->next = t;
 	lst->tail = t;
-}
-
-void	token_list_free(t_tlist *lst)
-{
-	t_token	*curr;
-	t_token	*tmp;
-
-	curr = lst->head;
-	while (curr)
-	{
-		tmp = curr->next;
-		token_free(curr);
-		curr = tmp;
-	}
-	free(lst);
 }
 
 void	token_list_print(t_tlist *lst)

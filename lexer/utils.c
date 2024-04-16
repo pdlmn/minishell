@@ -71,7 +71,7 @@ int	is_valid_variable_char(int c)
 	return (ft_isalnum(c) || c == '_');
 }
 
-int find_end_of_variable_name(char *s)
+int	find_end_of_variable_name(char *s)
 {
 	int	i;
 
@@ -84,4 +84,3 @@ int find_end_of_variable_name(char *s)
 	}
 	return (&s[i] - s);
 }
-

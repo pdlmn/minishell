@@ -6,15 +6,13 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 11:38:46 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/12 17:39:15 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/16 18:14:40 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 // utils.c
-enum e_operator	get_operator(char *str, enum e_quotes is_quoted);
-enum e_token	get_type(char *str, enum e_quotes is_quoted, enum e_operator op);
 char			*ft_strset(char *s, char *set);
 int				is_valid_variable_char(int c);
 int		 		find_end_of_variable_name(char *s);

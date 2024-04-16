@@ -6,33 +6,23 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 05:17:12 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/08 18:27:20 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/16 17:58:34 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-typedef struct	s_strnode
-{
-	char				*str;
-	size_t				len;
-	struct s_strnode	*next;
-}				t_strnode;
+// expand_quotes.c
+t_tlist	*expand_quotes(t_tlist *lst);
+t_tlist	*remove_quotes(t_tlist *lst);
 
-typedef struct	s_strlist
-{
-	t_strnode	*head;
-	t_strnode	*tail;
-}				t_strlist;
+// expand_variables.c
+t_tlist	*expand_variables(t_tlist *lst, t_ht_table *ht);
 
-char	*unquote(char *word, int quote);
-int		srtrlen_excluding_symbol(char *str, int c);
-char	*expand_word(t_ht_table *ht, char *word);
-char	*join_expanded_variables(char **vars, char *word);
-char	*expand_digit_variable(char *var);
-
-
-
-
-char	*expand_dquoted(t_ht_table *ht, const char *s);
-
+// utils.c
+t_tlist	*join_unspaced_words(t_tlist *lst);
+t_token	*merge_word_tokens(t_token *t1, t_token *t2);
+t_token	*token_delete_and_free(t_tlist *lst, t_token *t);
+t_token	*token_delete(t_tlist *lst, t_token *t);
+t_token	*token_convert_to_empty_word(t_token *t);
+t_token	*token_convert_to_word(t_token *t);

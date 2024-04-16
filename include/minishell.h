@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 14:34:14 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/15 16:07:58 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/16 19:41:25 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,7 @@ enum				e_token
 	DQUOTE,
 	TILDE,
 	SIGIL,
-	DIGIT,
-	OTHER,
+	DIGIT, OTHER,
 };
 
 /*
@@ -87,14 +86,18 @@ typedef struct s_ht_table
 typedef struct	s_minishell
 {
 	t_tlist		*lst;
-	char		***cmd_table;
 	t_ht_table	*env;
+	char		***cmd_table;
 	int			last_status;
 	int			fdin;
 	int			fdout;
 }				t_minishell;
 
 t_tlist				*lexer(char *input);
+
+enum e_operator		get_operator(char *str, enum e_quotes is_quoted);
+enum e_token		get_type(char *str, enum e_quotes is_quoted,
+						enum e_operator op);
 void				token_list_append(t_tlist *lst, t_token *t);
 void				token_list_free(t_tlist *token);
 void				token_list_print(t_tlist *token);

@@ -57,8 +57,9 @@ char	*join_expanded_strings(t_tlist *lst)
 void	test_expansion(t_ht_table *ht, char *str, char *should_be)
 {
 	char	*joined_tokens;
+	t_tlist	*lst;
 
-	t_tlist *lst = lexer(str);
+	lst = lexer(str);
 	expansion(lst, ht);
 	joined_tokens = join_expanded_strings(lst);
 	printf("Input:     %s\n", str);

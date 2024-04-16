@@ -43,7 +43,8 @@ t_token	*add_input_to_token_list(t_token *t, t_tlist *lst, char *current_char,
 	if (!t)
 		return (NULL);
 	token_list_append(lst, t);
-	set_is_quoted(t, is_quoted); return (t);
+	set_is_quoted(t, is_quoted);
+	return (t);
 }
 
 t_tlist	*lexer(char *input)
