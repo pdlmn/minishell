@@ -88,6 +88,9 @@ asd<Ctrl-D>        -> {nothing}
 
 ## Operators
 ### Heredoc
+Rules for the heredoc expansion are here:
+`https://pubs.opengroup.org/onlinepubs/009695399/utilities/xcu_chap02.html#tag_02_07_04`
+
 minishell ->  cat << test
 > $USER
 > test
