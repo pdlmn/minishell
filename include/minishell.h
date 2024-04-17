@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 14:34:14 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/17 18:56:35 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/17 19:39:46 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,12 @@
 #include <stdio.h>
 #include <readline/history.h>
 #include <readline/readline.h>
+#include <signal.h>
 #define PROMPT_COLOR "\x1B[33m"
-#define RESET_COLOR "\x1B[0m"
 #define ARROW_COLOR "\x1B[32m"
-#define PROMPT PROMPT_COLOR"mishell "RESET_COLOR ARROW_COLOR"~> "RESET_COLOR
+#define RESET_COLOR "\x1B[0m"
+#define ARROW ARROW_COLOR"~> "RESET_COLOR
+#define PROMPT PROMPT_COLOR"mishell "RESET_COLOR ARROW
 
 enum				e_token
 {
