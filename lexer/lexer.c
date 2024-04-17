@@ -24,8 +24,8 @@ static void	set_is_quoted(t_token *t, enum e_quotes *is_quoted)
 		*is_quoted = NOT_QUOTED;
 }
 
-static t_token	*add_input_to_token_list(t_token *t, t_tlist *lst, char *current_char,
-		enum e_quotes *is_quoted)
+static t_token	*add_input_to_token_list(t_token *t, t_tlist *lst,
+		char *current_char, enum e_quotes *is_quoted)
 {
 	t = token_create_from_input(t, current_char, *is_quoted);
 	if (!t)

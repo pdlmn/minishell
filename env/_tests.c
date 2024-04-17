@@ -14,14 +14,18 @@
 
 int	main(int argc, char **argv, char **env)
 {
+	t_ht_table	*ht;
+	char		**env_arr;
+	int			i;
+
 	(void)argc;
 	(void)argv;
-	t_ht_table *ht = env_init(env);
+	ht = env_init(env);
 	printf("===ht_print_table:===\n");
 	ht_print_table(ht);
-	char **env_arr = env_ht_to_arr(ht);
+	env_arr = env_ht_to_arr(ht);
 	printf("\n\n===env_arr:===\n");
-	int i = 0;
+	i = 0;
 	while (env_arr[i])
 		printf("%s\n", env_arr[i++]);
 	ft_free_split(env_arr);
