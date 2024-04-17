@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 14:45:20 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/17 16:49:30 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/17 18:56:09 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	main(int argc, char **argv, char **env)
 	env_init(env, &sh);
 	while (1)
 	{
-		input = read_command("-> ");
+		input = read_command(PROMPT);
 		if (input == NULL)
 			return (EXIT_FAILURE);
 		if (!lexer(input, &sh))

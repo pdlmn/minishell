@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 14:54:55 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/16 18:44:06 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/17 19:08:18 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,14 +58,16 @@ t_tlist	*join_unspaced_words(t_tlist *lst)
 	curr = lst->head;
 	while (curr)
 	{
-		if (curr->type == WORD && !curr->space_after && curr->next
-			&& curr->next->type == WORD)
+		if ((curr->type == WORD || curr->type == OTHER)
+			&& !curr->space_after && curr->next
+			&& (curr->next->type == WORD || curr->next->type == OTHER))
 		{
 			curr = merge_word_tokens(curr, curr->next);
 			if (!curr)
 				return (NULL);
 		}
-		curr = curr->next;
+		else
+			curr = curr->next;
 	}
 	return (lst);
 }
