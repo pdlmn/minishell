@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 12:23:17 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/16 20:36:19 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/17 16:56:05 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int	main(int argc, char **argv, char **env)
 
 	(void)argc;
 	(void)argv;
-	sh.env = env_init(env);
+	env_init(env, &sh);
 	ht_set(sh.env, "ASD", "123");
 	ht_set(sh.env, "__", "heh");
 	ht_set(sh.env, "HOME", "/home/emuminov");

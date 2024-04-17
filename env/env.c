@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 14:20:14 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/17 14:37:01 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/17 16:46:11 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,16 +70,14 @@ t_ht_table	*env_increment_shlvl(t_ht_table *ht)
 	return (free(new_shlvl), ht);
 }
 
-t_ht_table	*env_init(char **env)
+t_ht_table	*env_init(char **env, t_minishell *sh)
 {
-	t_ht_table	*ht;
-
-	ht = env_arr_to_ht(env);
-	if (!ht)
+	sh->env = env_arr_to_ht(env);
+	if (!sh->env)
 		return (NULL);
-	if (!env_increment_shlvl(ht))
-		return (ht_free_table(ht), NULL);
-	return (ht);
+	if (!env_increment_shlvl(sh->env))
+		return (ht_free_table(sh->env), NULL);
+	return (sh->env);
 }
 
 char	**env_ht_to_arr(t_ht_table *ht)

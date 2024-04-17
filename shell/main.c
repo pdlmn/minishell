@@ -1,20 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   prompt.c                                           :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/18 18:04:19 by emuminov          #+#    #+#             */
-/*   Updated: 2024/03/19 13:07:47 by emuminov         ###   ########.fr       */
+/*   Created: 2024/04/17 14:45:20 by emuminov          #+#    #+#             */
+/*   Updated: 2024/04/17 16:49:30 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <readline/history.h>
-#include <readline/readline.h>
+#include "../include/minishell.h"
 
-char	*prompt(char *prompt)
+char	*read_command(char *prompt)
 {
 	char	*command;
 
@@ -25,18 +23,25 @@ char	*prompt(char *prompt)
 	return (command);
 }
 
-/////////////
-// TESTING //
-/////////////
-int	main()
+int	main(int argc, char **argv, char **env)
 {
-	char	*command;
+	static t_minishell	sh;
+	char				*input;
 
-	command = prompt("-> ");
-	while (command != NULL)
+	(void)argc;
+	(void)argv;
+	env_init(env, &sh);
+	while (1)
 	{
-		command = prompt("-> ");
-		free(command);
+		input = read_command("-> ");
+		if (input == NULL)
+			return (EXIT_FAILURE);
+		if (!lexer(input, &sh))
+			return (free(input), EXIT_FAILURE);
+		expansion(&sh);
+		token_list_print(&sh.lst);
+		token_list_free(&sh.lst);
+		free(input);
 	}
 	rl_clear_history();
 }

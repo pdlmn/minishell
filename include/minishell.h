@@ -6,12 +6,14 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 14:34:14 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/17 14:00:25 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/17 16:46:50 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft/libft.h"
 #include <stdio.h>
+#include <readline/history.h>
+#include <readline/readline.h>
 
 enum				e_token
 {
@@ -102,14 +104,14 @@ enum e_token		get_type(char *s, enum e_quotes is_quoted,
 						enum e_operator op);
 
 void				token_list_append(t_tlist *lst, t_token *t);
-void				token_list_free(t_tlist *t);
-void				token_list_print(t_tlist *t);
+void				token_list_free(t_tlist *lst);
+void				token_list_print(t_tlist *lst);
 
 t_token				*token_create(char *content, int len, int space_after,
 		enum e_quotes is_quoted);
 void				token_free(t_token *t);
 
-t_tlist				*expansion(t_minishell *st);
+t_tlist				*expansion(t_minishell *sh);
 
 void				ft_free_table(char ***tab);
 
@@ -121,5 +123,5 @@ char				*ht_get(t_ht_table *ht, const char *key);
 void				ht_print_buckets(t_ht_table *ht);
 void				ht_print_table(t_ht_table *ht);
 
-t_ht_table			*env_init(char **env);
+t_ht_table			*env_init(char **env, t_minishell *sh);
 char				**env_ht_to_arr(t_ht_table *ht);

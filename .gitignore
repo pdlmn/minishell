@@ -2,6 +2,7 @@
 *.o
 *.a
 *.txt
+objs/
 minishell
 lexer_test
 command_table_test
