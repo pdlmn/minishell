@@ -112,6 +112,7 @@ int	main(int argc, char **argv, char **env)
 	test_expansion(&sh, "$        asd", "$ asd");
 	test_expansion(&sh, "\"$        asd\"", "$        asd");
 	test_expansion(&sh, "\"$?'$a'1>\"", "0''1>");
+	test_expansion(&sh, "asd%$%%", "asd%$%%");
 	test_expansion(&sh, "~/projects", "/home/emuminov/projects");
 	ht_free_table(sh.env);
 }
