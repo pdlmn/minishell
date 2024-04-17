@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 14:53:09 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/16 20:35:48 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/17 14:15:00 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,25 @@ static t_token	*delete_sigil_and_the_next_word(t_tlist *lst, t_token *sigil)
 	return (res);
 }
 
-static t_token	*expand_after_sigil(t_tlist *lst, t_ht_table *ht,
+static t_token	*replace_variable_with_status(t_minishell *sh, t_tlist *lst,
 		t_token *sigil)
+{
+	t_token	*res;
+	char	*status;
+
+	res = token_delete_and_free(lst, sigil);
+	status = ft_itoa(sh->last_status);
+	if (!status)
+		return (NULL);
+	free(res->content);
+	res->content = status;
+	res->len = ft_strlen(status);
+	token_convert_to_word(res);
+	return (res);
+}
+
+static t_token	*expand_after_sigil(t_minishell *sh, t_tlist *lst,
+		t_ht_table *ht, t_token *sigil)
 {
 	char	*val;
 
@@ -52,6 +69,8 @@ static t_token	*expand_after_sigil(t_tlist *lst, t_ht_table *ht,
 	{
 		if (sigil->next->type == DIGIT)
 			return (delete_sigil_and_the_next_word(lst, sigil));
+		if (sigil->next->type == QMARK)
+			return (replace_variable_with_status(sh, lst, sigil));
 		else if (sigil->next->type == WORD)
 		{
 			val = ht_get(ht, sigil->next->content);
@@ -95,7 +114,7 @@ t_tlist	*expand_variables(t_minishell *sh)
 	while (curr)
 	{
 		if (curr->type == SIGIL)
-			curr = expand_after_sigil(&sh->lst, sh->env, curr);
+			curr = expand_after_sigil(sh, &sh->lst, sh->env, curr);
 		else if (curr->type == TILDE)
 			curr = expand_tilde(sh->env, curr);
 		if (!curr)

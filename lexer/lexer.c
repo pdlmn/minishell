@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 13:09:12 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/16 20:35:18 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/17 13:48:21 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,6 @@ static void	set_is_quoted(t_token *t, enum e_quotes *is_quoted)
 		*is_quoted = NOT_QUOTED;
 }
 
-// static t_tlist	*token_list_init(void)
-// {
-// 	t_tlist	*lst;
-//
-// 	lst = malloc(sizeof(t_tlist));
-// 	if (!lst)
-// 		return (NULL);
-// 	lst->head = NULL;
-// 	lst->tail = NULL;
-// 	return (lst);
-// }
-//
 static t_token	*add_input_to_token_list(t_token *t, t_tlist *lst, char *current_char,
 		enum e_quotes *is_quoted)
 {

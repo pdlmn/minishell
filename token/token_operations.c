@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 13:36:25 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/16 18:44:33 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/17 14:01:28 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	token_list_append(t_tlist *lst, t_token *t)
 void	token_list_print(t_tlist *lst)
 {
 	const char	*type[] = {"WORD", "OPERATOR", "QUOTE", "DQUOTE", "TILDE",
-		"SIGIL", "DIGIT", "OTHER"};
+		"SIGIL", "DIGIT", "QMARK", "OTHER"};
 	const char	*op[] = {"NOT_OPERATOR", "IN_REDIR", "OUT_REDIR", "HEREDOC",
 		"OUT_REDIR_APPEND", "PIPE"};
 	const char	*is_quoted[] = {"NOT_QUOTED", "SQUOTED", "DQUOTED",
