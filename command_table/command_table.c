@@ -6,7 +6,7 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 10:41:59 by omougel           #+#    #+#             */
-/*   Updated: 2024/04/18 17:47:37 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/18 17:56:57 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,6 +195,8 @@ void	command_table_print(char ***cmd_tab)
 				printf("%s", cmd_tab[i][j]);
 			else
 				printf(" %s", cmd_tab[i][j]);
+			if (cmd_tab[i][j + 1])
+				printf(", ");
 			j++;
 		}
 		printf(" }\n");
