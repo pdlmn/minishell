@@ -6,21 +6,33 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 17:35:02 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/17 14:35:13 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/18 20:09:55 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/lexer.h"
 
-static t_token	*create_single_char_token(char *input, enum e_quotes is_quoted)
+static t_token	*create_single_char_token(t_token *last_t, char *input,
+		enum e_quotes is_quoted)
 {
-	t_token	*t;
-	char	*s;
+	t_token				*t;
+	char				*s;
+	const enum e_token	type = get_type(input, is_quoted, NOT_OPERATOR);
 
-	s = ft_substr(input, 0, 1);
+	(void)last_t;
+	if ((type == SQUOTE || type == DQUOTE) && is_quoted == NOT_QUOTED)
+		is_quoted = START_QUOTE;
+	else if ((type == SQUOTE && is_quoted == SQUOTED)
+		|| (type == DQUOTE && is_quoted == DQUOTED))
+		is_quoted = END_QUOTE;
+	if (is_quoted == END_QUOTE
+		&& last_t && last_t->is_quoted == START_QUOTE)
+		s = ft_calloc(1, sizeof(char));
+	else
+		s = ft_substr(input, 0, 1);
 	if (!s)
 		return (NULL);
-	t = token_create(s, 1, input[1] == ' ', is_quoted);
+	t = token_create(s, ft_strlen(s), input[1] == ' ', is_quoted);
 	if (!t)
 		return (free(s), NULL);
 	return (t);
@@ -87,7 +99,7 @@ t_token	*token_create_from_input(t_token *last_t, char *input,
 				|| input[0] == '?') && last_t && last_t->type == SIGIL)
 		|| ((is_quoted == NOT_QUOTED || is_quoted == DQUOTED)
 			&& !is_valid_variable_char(input[0]) && input[0] != ' '))
-		t = create_single_char_token(input, is_quoted);
+		t = create_single_char_token(last_t, input, is_quoted);
 	else
 		t = create_word_token(last_t, input, is_quoted);
 	if (!t)

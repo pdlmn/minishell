@@ -6,7 +6,11 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 13:36:25 by emuminov          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2024/04/23 14:55:08 by omougel          ###   ########.fr       */
+=======
+/*   Updated: 2024/04/18 20:03:58 by emuminov         ###   ########.fr       */
+>>>>>>> af6fc90 (feat: empty quotes now always contain an empty word)
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +26,6 @@ t_token	*token_create(char *content, int len, int space_after,
 		return (NULL);
 	res->op_type = get_operator(content, is_quoted);
 	res->type = get_type(content, is_quoted, res->op_type);
-	if ((res->type == SQUOTE || res->type == DQUOTE) && is_quoted == NOT_QUOTED)
-		is_quoted = START_QUOTE;
-	else if ((res->type == SQUOTE || res->type == DQUOTE)
-		&& (is_quoted == SQUOTED || is_quoted == DQUOTED))
-		is_quoted = END_QUOTE;
 	res->is_quoted = is_quoted;
 	res->next = NULL;
 	res->prev = NULL;
@@ -52,7 +51,7 @@ void	token_list_append(t_tlist *lst, t_token *t)
 void	token_list_print(t_tlist *lst)
 {
 	const char	*type[] = {"WORD", "OPERATOR", "QUOTE", "DQUOTE", "TILDE",
-		"SIGIL", "DIGIT", "QMARK", "DELIM", "QDELIM","OTHER"};
+		"SIGIL", "DIGIT", "QMARK", "DELIM", "QDELIM", "OTHER"};
 	const char	*op[] = {"NOT_OPERATOR", "IN_REDIR", "OUT_REDIR", "HEREDOC",
 		"OUT_REDIR_APPEND", "PIPE"};
 	const char	*is_quoted[] = {"NOT_QUOTED", "SQUOTED", "DQUOTED",
