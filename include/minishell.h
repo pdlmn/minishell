@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 14:34:14 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/17 19:39:46 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/18 13:37:31 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,12 @@ enum				e_quotes
 	DQUOTED,
 	START_QUOTE,
 	END_QUOTE,
+};
+
+enum e_access_flag
+{
+	SET,
+	GET,
 };
 
 typedef struct s_token
@@ -131,3 +137,7 @@ void				ht_print_table(t_ht_table *ht);
 
 t_ht_table			*env_init(char **env, t_minishell *sh);
 char				**env_ht_to_arr(t_ht_table *ht);
+
+int					set_or_get_exit_status(enum e_access_flag flag,
+		int new_status);
+void				attach_signal_handlers();

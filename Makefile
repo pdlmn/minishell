@@ -32,9 +32,11 @@ SRCS=lexer.c \
 	 expansion_utils.c \
      env.c \
      env_utils.c \
+	 handle_signal.c \
+	 command_table.c \
 	 main.c
 OBJS=$(SRCS:%.c=$(OBJS_DIR)%.o)
-VPATH=lexer:token:hash_table:expansion:env:shell
+VPATH=lexer:token:hash_table:expansion:env:shell:command_table
 
 #rules---------------------------------------------
 all: $(NAME)

@@ -115,3 +115,8 @@ minishell -> cat << ""$HOME
 > haha$HOME
 > $HOME
 haha$HOME
+
+minishell -> cat << ""$HOME > example.txt
+> haha$HOME
+> $HOME
+{haha$HOME in example.txt, nothing is printed in the termina}
