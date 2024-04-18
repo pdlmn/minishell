@@ -6,7 +6,7 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 10:41:59 by omougel           #+#    #+#             */
-/*   Updated: 2024/04/03 02:30:58 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/18 17:47:37 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,33 +155,49 @@ t_token	*fill_line(t_token *lst, char ***cmd_tab, size_t *i)
 	return (fill_cmd(lst, &cmd_tab[*i]));
 }
 
-char	***command_table(t_token *lst)
+char	***command_table(t_minishell *sh)
 {
 	char	***cmd_tab;
+	t_token	*curr;
 	size_t	tab_size;
 	size_t	i;
 	
 	i = 0;
-	tab_size = malloc_size(lst);
+	curr = sh->lst.head;
+	tab_size = malloc_size(curr);
 	cmd_tab = ft_calloc(tab_size + 1, sizeof(char **));
 	if (!cmd_tab)
 		return (NULL);
 	while (i < tab_size)
 	{
-		lst = fill_line(lst, cmd_tab, &i);
+		curr = fill_line(curr, cmd_tab, &i);
 		if (!cmd_tab[i])
 			return (ft_free_table(cmd_tab), NULL);
 		i++;
 	}
+	sh->cmd_tab = cmd_tab;
 	return (cmd_tab);
 }
 
-void	print_arr(char **arr)
+void	command_table_print(char ***cmd_tab)
 {
 	size_t	i;
+	size_t	j;
 
 	i = 0;
-	while (arr && arr[i])
-		ft_printf("%s ", arr[i++]);
-	ft_printf("\n");
+	while (cmd_tab[i])
+	{
+		j = 0;
+		printf("{ ");
+		while (cmd_tab[i][j])
+		{
+			if (j == 0)
+				printf("%s", cmd_tab[i][j]);
+			else
+				printf(" %s", cmd_tab[i][j]);
+			j++;
+		}
+		printf(" }\n");
+		i++;
+	}
 }

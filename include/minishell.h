@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 14:34:14 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/18 17:04:59 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/18 17:46:38 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ typedef struct	s_minishell
 {
 	t_tlist		lst;
 	t_ht_table	*env;
-	char		***cmd_table;
+	char		***cmd_tab;
 	int			last_status;
 	int			fdin;
 	int			fdout;
@@ -140,6 +140,10 @@ void				ht_print_table(t_ht_table *ht);
 
 t_ht_table			*env_init(char **env, t_minishell *sh);
 char				**env_ht_to_arr(t_ht_table *ht);
+
+char				***command_table(t_minishell *sh);
+void				command_table_print(char ***cmd_tab);
+void				ft_free_table(char ***tab);
 
 int					set_or_get_exit_status(enum e_access_flag flag,
 		int new_status);
