@@ -6,7 +6,7 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 09:49:14 by omougel           #+#    #+#             */
-/*   Updated: 2024/04/15 11:28:50 by omougel          ###   ########.fr       */
+/*   Updated: 2024/04/18 06:54:01 by omougel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,22 +52,6 @@ int	is_output(char *redir)
 		return (1);
 	return (0);
 }
-/*
-char	**creat_builtins(void)
-{
-	char	**builtins;
-
-	builtins = malloc(8 * sizeof(char *));
-	builtins[0] = "echo";
-	builtins[1] = "cd";
-	builtins[2] = "pwd";
-	builtins[3] = "export";
-	builtins[4] = "unset";
-	builtins[5] = "env";
-	builtins[6] = "exit";
-	builtins[7] = NULL;
-	return (builtins);
-}*/
 
 int	is_builtin(char *cmd)
 {
@@ -234,7 +218,7 @@ int	check_output(char **output_redir, int fd_out)
 	return (fd_out);
 }
 
-char	**jump_redir(char ***cmd_tab)
+char	**go_to_cmd(char ***cmd_tab)
 {
 	size_t	i;
 
@@ -283,7 +267,7 @@ char	***fork_and_execute(char ***cmd_tab, int *fd_in, char **envp, int *pid) //m
 	if (is_there_pipe(cmd_tab))
 		if (pipe(fd) == -1)
 			return (NULL); //TODO malloc_error
-	cmd = find_command(jump_redir(cmd_tab), envp);
+	cmd = find_command(go_to_cmd(cmd_tab), envp);
 	if (cmd && *cmd)
 	{
 		*pid = fork(); //TODO error case of fork check -1
