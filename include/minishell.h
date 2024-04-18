@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 14:34:14 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/18 13:37:31 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/18 17:04:59 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ enum				e_token
 	SIGIL,
 	DIGIT,
 	QMARK,
+	DELIM,
+	QDELIM,
 	OTHER,
 };
 
@@ -107,6 +109,7 @@ typedef struct	s_minishell
 	int			last_status;
 	int			fdin;
 	int			fdout;
+	int			is_delimiter_quoted;
 }				t_minishell;
 
 t_tlist				*lexer(char *input, t_minishell *sh);

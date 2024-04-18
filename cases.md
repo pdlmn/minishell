@@ -31,6 +31,7 @@ export ASD=asd=                     -> asd=
 export ASD=echo; $ASD heh           -> heh
 export ASD=; echo $ASD              -> {just new line}
 export ASD                          -> {does nothing}
+export 1ASD=1                       -> {error: export: 1ASD=1: not a valid identifier}
 
 ### cd
 `chdir` is for the process. We need to implement our own variables that track
