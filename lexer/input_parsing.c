@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 17:35:02 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/18 20:09:55 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/18 20:44:06 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ static t_token	*create_single_char_token(t_token *last_t, char *input,
 	t_token				*t;
 	char				*s;
 	const enum e_token	type = get_type(input, is_quoted, NOT_OPERATOR);
+	const enum e_quotes	old_is_quoted = is_quoted;
 
-	(void)last_t;
 	if ((type == SQUOTE || type == DQUOTE) && is_quoted == NOT_QUOTED)
 		is_quoted = START_QUOTE;
 	else if ((type == SQUOTE && is_quoted == SQUOTED)
@@ -27,7 +27,10 @@ static t_token	*create_single_char_token(t_token *last_t, char *input,
 		is_quoted = END_QUOTE;
 	if (is_quoted == END_QUOTE
 		&& last_t && last_t->is_quoted == START_QUOTE)
+	{
 		s = ft_calloc(1, sizeof(char));
+		is_quoted = old_is_quoted;
+	}
 	else
 		s = ft_substr(input, 0, 1);
 	if (!s)

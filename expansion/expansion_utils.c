@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 14:54:55 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/17 19:08:18 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/18 20:55:46 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,11 @@ t_token	*merge_word_tokens(t_token *t1, t_token *t2)
 	t1->content = s;
 	t1->len = len;
 	t1->next = t2->next;
-	t1->type = WORD;
+	t1->space_after = t2->space_after;
+	if (t1->type != DELIM && t1->type != QDELIM)
+		t1->type = WORD;
+	if (t2->type == DELIM || t2->type == QDELIM)
+		t1->type = t2->type;
 	if (t2->next)
 		t2->next->prev = t1;
 	return (token_free(t2), t1);
@@ -58,9 +62,11 @@ t_tlist	*join_unspaced_words(t_tlist *lst)
 	curr = lst->head;
 	while (curr)
 	{
-		if ((curr->type == WORD || curr->type == OTHER)
+		if ((curr->type == WORD || curr->type == OTHER
+			|| curr->type == DELIM || curr->type == QDELIM)
 			&& !curr->space_after && curr->next
-			&& (curr->next->type == WORD || curr->next->type == OTHER))
+			&& (curr->next->type == WORD || curr->next->type == OTHER
+			|| curr->type == DELIM || curr->type == QDELIM))
 		{
 			curr = merge_word_tokens(curr, curr->next);
 			if (!curr)
