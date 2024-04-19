@@ -29,6 +29,7 @@ SRCS=lexer.c \
 	 expansion.c \
 	 quotes_expansion.c \
 	 variables_expansion.c \
+	 heredoc_find_delimeters.c \
 	 expansion_utils.c \
      env.c \
      env_utils.c \
