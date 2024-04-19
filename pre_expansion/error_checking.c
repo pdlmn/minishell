@@ -6,11 +6,11 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 15:46:40 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/16 19:47:29 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/18 18:02:44 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "error_checking.h"
+#include "../include/minishell.h"
 
 void	error_checking(t_tlist *lst)
 {

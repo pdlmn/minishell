@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 12:23:17 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/19 15:02:01 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/19 15:21:57 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ int	main(int argc, char **argv, char **env)
 	test_expansion(&sh, "$ASD", "123");
 	test_expansion(&sh, "Hello$ASD", "Hello123");
 	test_expansion(&sh, "$ASDHello", "");
+	test_expansion(&sh, "\"$ASD\" $ASD", "123 123");
 	test_expansion(&sh, "$\"\"", "");
 	test_expansion(&sh, "$\"\"\"\"ASD", "ASD");
 	test_expansion(&sh, "$\"\"\"ASD\"", "ASD");
@@ -114,7 +115,6 @@ int	main(int argc, char **argv, char **env)
 	test_expansion(&sh, "\"$?'$a'1>\"", "0''1>");
 	test_expansion(&sh, "asd%$%%", "asd%$%%");
 	test_expansion(&sh, "~/projects", "/home/emuminov/projects");
-
 	test_expansion(&sh, "cat << $HOME", "cat << $HOME");
 	test_expansion(&sh, "cat << $HOME\"\"", "cat << $HOME");
 	test_expansion(&sh, "cat << \"\"", "cat << ");

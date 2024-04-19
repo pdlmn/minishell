@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 13:09:12 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/18 19:56:58 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/19 15:26:28 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,6 @@ t_tlist	*lexer(char *input, t_minishell *sh)
 			return (token_list_free(&sh->lst), NULL);
 		i += t->len;
 	}
+	heredoc_find_delimeters(sh);
 	return (&sh->lst);
 }
