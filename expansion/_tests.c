@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 12:23:17 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/19 15:21:57 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/19 20:46:14 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,26 @@ char	*join_expanded_strings(t_tlist *lst)
 	return (res);
 }
 
+t_token	*find_delim(t_tlist *lst)
+{
+	t_token	*curr;
+
+	curr = lst->head;
+	while (curr)
+	{
+		if (curr->type == QDELIM || curr->type == DELIM)
+			return (curr);
+		curr = curr->next;
+	}
+	return (curr);
+}
+
 void	test_expansion(t_minishell *sh, char *str, char *should_be)
 {
 	char	*joined_tokens;
 
-	lexer(str, sh);
-	expansion(sh);
+	lex_input(str, sh);
+	expand_tokens(sh, &sh->lst);
 	joined_tokens = join_expanded_strings(&sh->lst);
 	printf("Input:     %s\n", str);
 	printf("Should be: %s\n", should_be);
@@ -67,6 +81,46 @@ void	test_expansion(t_minishell *sh, char *str, char *should_be)
 	token_list_print(&sh->lst);
 	printf("\n");
 	assert(ft_strcmp(joined_tokens, should_be) == 0);
+	token_list_free(&sh->lst);
+	free(joined_tokens);
+}
+
+void	test_heredoc_expansion(t_minishell *sh, char *str, char *should_be, enum e_token type)
+{
+	char	*joined_tokens;
+
+	lex_input(str, sh);
+	expand_heredoc(sh, &sh->lst, type);
+	joined_tokens = join_expanded_strings(&sh->lst);
+	printf("Input:     %s\n", str);
+	printf("Should be: %s\n", should_be);
+	printf("Result:    %s\n", joined_tokens);
+	token_list_print(&sh->lst);
+	printf("\n");
+	assert(ft_strcmp(joined_tokens, should_be) == 0);
+	token_list_free(&sh->lst);
+	free(joined_tokens);
+}
+
+void	test_heredoc_delim(t_minishell *sh, char *str,
+		char *str_should_be, char *delim_should_be)
+{
+	char	*joined_tokens;
+	t_token	*delim;
+
+	lex_input(str, sh);
+	expand_tokens(sh, &sh->lst);
+	delim = find_delim(&sh->lst);
+	joined_tokens = join_expanded_strings(&sh->lst);
+	printf("Input:           %s\n", str);
+	printf("Str should be:   %s\n", str_should_be);
+	printf("Result str:      %s\n", joined_tokens);
+	printf("Delim should be: %s\n", delim_should_be);
+	printf("Result delim:    %s\n", delim->content);
+	token_list_print(&sh->lst);
+	printf("\n");
+	assert(ft_strcmp(joined_tokens, str_should_be) == 0);
+	assert(ft_strcmp(delim->content, delim_should_be) == 0);
 	token_list_free(&sh->lst);
 	free(joined_tokens);
 }
@@ -115,13 +169,21 @@ int	main(int argc, char **argv, char **env)
 	test_expansion(&sh, "\"$?'$a'1>\"", "0''1>");
 	test_expansion(&sh, "asd%$%%", "asd%$%%");
 	test_expansion(&sh, "~/projects", "/home/emuminov/projects");
-	test_expansion(&sh, "cat << $HOME", "cat << $HOME");
-	test_expansion(&sh, "cat << $HOME\"\"", "cat << $HOME");
-	test_expansion(&sh, "cat << \"\"", "cat << ");
-	test_expansion(&sh, "<< $HOME cat", "<< $HOME cat");
-	test_expansion(&sh, "<< \"\"$HOME cat", "<< $HOME cat");
-	test_expansion(&sh, "<< \"\"HOME cat", "<< HOME cat");
-	test_expansion(&sh, "<< \"$HOME\" cat", "<< $HOME cat");
-	test_expansion(&sh, "<< \"Spaced delim\" cat", "<< Spaced delim cat");
+
+	test_heredoc_delim(&sh, "cat << $HOME", "cat << $HOME", "$HOME");
+	test_heredoc_delim(&sh, "cat << $HOME\"\"", "cat << $HOME", "$HOME");
+	test_heredoc_delim(&sh, "cat << \"\"", "cat << ", "");
+	test_heredoc_delim(&sh, "<< $HOME cat", "<< $HOME cat", "$HOME");
+	test_heredoc_delim(&sh, "<< \"\"$HOME cat", "<< $HOME cat", "$HOME");
+	test_heredoc_delim(&sh, "<< \"\"HOME cat", "<< HOME cat", "HOME");
+	test_heredoc_delim(&sh, "<< \"$HOME\" cat", "<< $HOME cat", "$HOME");
+	test_heredoc_delim(&sh, "<< \"Spaced delim\" cat", "<< Spaced delim cat", "Spaced delim");
+	test_heredoc_delim(&sh, "<< a\"\"b cat", "<< ab cat", "ab");
+	test_heredoc_delim(&sh, "<< 'a\"\"b' cat", "<< a\"\"b cat", "a\"\"b");
+
+	test_heredoc_expansion(&sh, "Hello", "Hello", DELIM);
+	test_heredoc_expansion(&sh, "$ASD", "123", DELIM);
+	test_heredoc_expansion(&sh, "\"$ASD\"", "\"123\"", DELIM);
+	test_heredoc_expansion(&sh, "\'$ASD\'", "\'123\'", DELIM);
 	ht_free_table(sh.env);
 }

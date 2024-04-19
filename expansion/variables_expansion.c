@@ -6,19 +6,19 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 14:53:09 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/17 14:33:44 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/19 18:50:09 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/expansion.h"
 
 static t_token	*replace_variable_with_value(t_token *sigil, t_minishell *sh,
-		char *val)
+		t_tlist *lst, char *val)
 {
 	t_token	*res;
 	char	*copied_val;
 
-	res = token_delete_and_free(&sh->lst, sigil);
+	res = token_delete_and_free(lst, sigil);
 	if (val)
 		copied_val = ft_strdup(val);
 	else
@@ -45,8 +45,7 @@ static t_token	*delete_sigil_and_the_next_word(t_tlist *lst, t_token *sigil)
 	return (res);
 }
 
-static t_token	*expand_after_sigil(t_minishell *sh, t_tlist *lst,
-		t_ht_table *ht, t_token *sigil)
+static t_token	*expand_after_sigil(t_minishell *sh, t_tlist *lst, t_token *sigil)
 {
 	char	*val;
 
@@ -56,13 +55,13 @@ static t_token	*expand_after_sigil(t_minishell *sh, t_tlist *lst,
 		if (sigil->next->type == DIGIT)
 			return (delete_sigil_and_the_next_word(lst, sigil));
 		if (sigil->next->type == QMARK)
-			return (replace_variable_with_value(sigil, sh, NULL));
+			return (replace_variable_with_value(sigil, sh, lst, NULL));
 		else if (sigil->next->type == WORD)
 		{
-			val = ht_get(ht, sigil->next->content);
+			val = ht_get(sh->env, sigil->next->content);
 			if (!val)
 				return (delete_sigil_and_the_next_word(lst, sigil));
-			return (replace_variable_with_value(sigil, sh, val));
+			return (replace_variable_with_value(sigil, sh, lst, val));
 		}
 		else if ((sigil->next->type == SQUOTE || sigil->next->type == DQUOTE)
 			&& sigil->is_quoted == NOT_QUOTED)
@@ -92,15 +91,15 @@ static t_token	*expand_tilde(t_ht_table *ht, t_token *tilde)
 	return (tilde);
 }
 
-t_tlist	*expand_variables(t_minishell *sh)
+t_tlist	*expand_variables(t_minishell *sh, t_tlist *lst)
 {
 	t_token	*curr;
 
-	curr = sh->lst.head;
+	curr = lst->head;
 	while (curr)
 	{
 		if (curr->type == SIGIL)
-			curr = expand_after_sigil(sh, &sh->lst, sh->env, curr);
+			curr = expand_after_sigil(sh, lst, curr);
 		else if (curr->type == TILDE)
 			curr = expand_tilde(sh->env, curr);
 		if (!curr)
@@ -108,5 +107,5 @@ t_tlist	*expand_variables(t_minishell *sh)
 		else
 			curr = curr->next;
 	}
-	return (&sh->lst);
+	return (lst);
 }

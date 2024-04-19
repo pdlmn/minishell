@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 14:45:20 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/18 20:57:52 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/19 19:27:44 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,12 @@ int	main(int argc, char **argv, char **env)
 			ft_putstr_fd("exit\n", STDOUT_FILENO);
 			return (EXIT_SUCCESS);
 		}
-		if (!lexer(input, &sh))
+		if (!lex_input(input, &sh))
 			return (free(input), EXIT_FAILURE);
 		sh.last_status = set_or_get_exit_status(GET, -1);
 		printf("Pre-expanded tokens:\n");
 		token_list_print(&sh.lst);
-		if (!expansion(&sh))
+		if (!expand_tokens(&sh, &sh.lst))
 			return (free(input), token_list_free(&sh.lst), EXIT_FAILURE);
 		// if (!command_table(&sh))
 		// 	return (free(input), token_list_free(&sh.lst), EXIT_FAILURE);

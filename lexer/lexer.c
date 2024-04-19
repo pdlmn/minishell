@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 13:09:12 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/19 15:26:28 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/19 20:12:45 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static t_token	*add_input_to_token_list(t_token *t, t_tlist *lst,
 	return (t);
 }
 
-t_tlist	*lexer(char *input, t_minishell *sh)
+t_tlist	*lex_input(char *input, t_minishell *sh)
 {
 	t_token			*t;
 	enum e_quotes	is_quoted;
