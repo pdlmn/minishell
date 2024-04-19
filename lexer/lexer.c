@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 13:09:12 by emuminov          #+#    #+#             */
-/*   Updated: 2024/06/04 17:01:48 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/04 17:07:55 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_tlist	*lex_input(char *input, t_tlist *lst)
 	i = 0;
 	while (input[i])
 	{
-		if (input[i] == ' ' && is_quoted == NOT_QUOTED)
+		if (ft_isspace(input[i]) && is_quoted == NOT_QUOTED)
 		{
 			i++;
 			continue ;
