@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 14:54:55 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/18 20:55:46 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/19 15:15:03 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,18 @@ t_token	*token_convert_to_empty_word(t_token *t)
 	return (t);
 }
 
+void	inherit_props(t_token *t1, t_token *t2)
+{
+	t1->next = t2->next;
+	t1->space_after = t2->space_after;
+	if (t1->type != DELIM && t1->type != QDELIM)
+		t1->type = WORD;
+	if (t2->type == DELIM || t2->type == QDELIM)
+		t1->type = t2->type;
+	if (t2->next)
+		t2->next->prev = t1;
+}
+
 t_token	*merge_word_tokens(t_token *t1, t_token *t2)
 {
 	char	*s;
@@ -44,14 +56,7 @@ t_token	*merge_word_tokens(t_token *t1, t_token *t2)
 	free(t1->content);
 	t1->content = s;
 	t1->len = len;
-	t1->next = t2->next;
-	t1->space_after = t2->space_after;
-	if (t1->type != DELIM && t1->type != QDELIM)
-		t1->type = WORD;
-	if (t2->type == DELIM || t2->type == QDELIM)
-		t1->type = t2->type;
-	if (t2->next)
-		t2->next->prev = t1;
+	inherit_props(t1, t2);
 	return (token_free(t2), t1);
 }
 
@@ -73,7 +78,10 @@ t_tlist	*join_unspaced_words(t_tlist *lst)
 				return (NULL);
 		}
 		else
+		{
+			curr->is_quoted = NOT_QUOTED;
 			curr = curr->next;
+		}
 	}
 	return (lst);
 }

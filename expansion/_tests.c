@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 12:23:17 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/18 20:56:45 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/19 15:02:01 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ char	*join_expanded_strings(t_tlist *lst)
 		j = 0;
 		while (curr->content[j])
 			res[i++] = curr->content[j++];
-		if (curr->space_after && curr->is_quoted == NOT_QUOTED)
+		if (curr->space_after)
 			res[i++] = ' ';
 		curr = curr->next;
 	}
@@ -120,5 +120,8 @@ int	main(int argc, char **argv, char **env)
 	test_expansion(&sh, "cat << \"\"", "cat << ");
 	test_expansion(&sh, "<< $HOME cat", "<< $HOME cat");
 	test_expansion(&sh, "<< \"\"$HOME cat", "<< $HOME cat");
+	test_expansion(&sh, "<< \"\"HOME cat", "<< HOME cat");
+	test_expansion(&sh, "<< \"$HOME\" cat", "<< $HOME cat");
+	test_expansion(&sh, "<< \"Spaced delim\" cat", "<< Spaced delim cat");
 	ht_free_table(sh.env);
 }
