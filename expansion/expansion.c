@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 05:16:56 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/18 20:22:45 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/19 15:24:30 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 t_tlist	*expansion(t_minishell *sh)
 {
-	heredoc_find_delimeters(sh);
 	if (!expand_variables(sh))
 		return (NULL);
 	if (!expand_quotes(&sh->lst))

@@ -1,4 +1,4 @@
-SRCS=lexer.c _tests.c ../token/token_operations.c ../token/token_deletion.c input_parsing.c lexer_utils.c
+SRCS=lexer.c input_parsing.c heredoc_find_delimeters.c lexer_utils.c _tests.c ../token/token_operations.c ../token/token_deletion.c
 LIBFT=../libft/libft.a
 NAME=lexer_test
 
