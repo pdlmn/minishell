@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 14:34:14 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/23 15:27:56 by omougel          ###   ########.fr       */
+/*   Updated: 2024/04/23 15:28:18 by omougel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 #define RESET_COLOR "\x1B[0m"
 #define ARROW ARROW_COLOR"~> "RESET_COLOR
 #define PROMPT PROMPT_COLOR"mishell "RESET_COLOR ARROW
+#define RED "\033[0;31m"
 
 enum				e_token
 {
@@ -62,6 +63,14 @@ enum				e_quotes
 	END_QUOTE,
 };
 
+enum e_err_code
+{
+	NO_ERRORS,
+	NO_OPERAND,
+	BAD_OPERAND,
+	UNCLOSED_QUOTE,
+};
+
 enum e_access_flag
 {
 	SET,
@@ -85,6 +94,12 @@ typedef struct s_tlist
 	t_token		*head;
 	t_token		*tail;
 }				t_tlist;
+
+typedef struct	s_err_src
+{
+	t_token			*t;
+	enum e_err_code	code;
+}				t_err_src;
 
 typedef struct s_ht_item
 {
@@ -130,6 +145,8 @@ void				token_free(t_token *t);
 t_token				*token_delete(t_tlist *lst, t_token *t);
 t_token				*token_delete_and_free(t_tlist *lst, t_token *t);
 
+void				print_error_message(t_err_src *err);
+t_err_src			check_errors(t_tlist *lst);
 
 t_tlist				*expand_tokens(t_minishell *sh, t_tlist *lst);
 t_tlist				*expand_heredoc(t_minishell *sh, t_tlist *lst,

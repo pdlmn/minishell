@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 18:04:44 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/20 13:52:51 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/20 17:11:49 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static t_token	*convert_to_delimeter(t_token *t)
 	curr = t;
 	while (curr)
 	{
-		if (curr->type != DQUOTE && curr->type != SQUOTE)
+		if (curr->type != DQUOTE && curr->type != SQUOTE && curr->type != OPERATOR)
 			curr->type = type;
 		if (curr->space_after && (curr->type != DQUOTE && curr->type != SQUOTE))
 			break ;
