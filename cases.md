@@ -131,3 +131,9 @@ minishell -> cat << ""$HOME > example.txt
 > haha$HOME
 > $HOME
 {haha$HOME in example.txt, nothing is printed in the terminal}
+
+## Existing problems
+cat << EOF hello                  -> heap overflow
+cat Makefile >> example.txt       -> segfault
+rev < Makefile                    -> segfault
+cat example.txt | rev > hello     -> segfault
