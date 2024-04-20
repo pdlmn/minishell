@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 14:53:09 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/19 18:50:09 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/20 13:53:09 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ static t_token	*delete_sigil_and_the_next_word(t_tlist *lst, t_token *sigil)
 	return (res);
 }
 
-static t_token	*expand_after_sigil(t_minishell *sh, t_tlist *lst, t_token *sigil)
+static t_token	*expand_after_sigil(t_minishell *sh, t_tlist *lst,
+		t_token *sigil)
 {
 	char	*val;
 

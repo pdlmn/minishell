@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 14:34:14 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/23 15:27:27 by omougel          ###   ########.fr       */
+/*   Updated: 2024/04/23 15:27:56 by omougel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,9 @@ typedef struct	s_minishell
 	int			is_delimiter_quoted;
 }				t_minishell;
 
-t_tlist				*lex_input(char *input, t_minishell *sh);
+t_tlist				*lex_input(char *input, t_tlist *lst);
+t_tlist				*lex_heredoc_input(char *input, t_tlist *lst,
+		enum e_token delim_type);
 
 enum e_operator		get_operator(char *s, enum e_quotes is_quoted);
 enum e_token		get_type(char *s, enum e_quotes is_quoted,
@@ -125,6 +127,9 @@ void				token_list_print(t_tlist *lst);
 t_token				*token_create(char *content, int len, int space_after,
 		enum e_quotes is_quoted);
 void				token_free(t_token *t);
+t_token				*token_delete(t_tlist *lst, t_token *t);
+t_token				*token_delete_and_free(t_tlist *lst, t_token *t);
+
 
 t_tlist				*expand_tokens(t_minishell *sh, t_tlist *lst);
 t_tlist				*expand_heredoc(t_minishell *sh, t_tlist *lst,

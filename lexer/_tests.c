@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 13:29:46 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/16 20:35:27 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/20 13:30:12 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	main(int argc, char **argv)
 		printf("Enter proper command\n");
 		return (EXIT_FAILURE);
 	}
-	lexer(argv[1], &sh);
+	lex_input(argv[1], &sh.lst);
 	token_list_print(&sh.lst);
 	token_list_free(&sh.lst);
 }

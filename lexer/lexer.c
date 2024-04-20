@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 13:09:12 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/19 20:12:45 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/20 13:29:24 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,7 @@ static void	set_is_quoted(t_token *t, enum e_quotes *is_quoted)
 		*is_quoted = NOT_QUOTED;
 }
 
-static t_token	*add_input_to_token_list(t_token *t, t_tlist *lst,
-		char *current_char, enum e_quotes *is_quoted)
-{
-	t = token_create_from_input(t, current_char, *is_quoted);
-	if (!t)
-		return (NULL);
-	token_list_append(lst, t);
-	set_is_quoted(t, is_quoted);
-	return (t);
-}
-
-t_tlist	*lex_input(char *input, t_minishell *sh)
+t_tlist	*lex_input(char *input, t_tlist *lst)
 {
 	t_token			*t;
 	enum e_quotes	is_quoted;
@@ -51,11 +40,36 @@ t_tlist	*lex_input(char *input, t_minishell *sh)
 			i++;
 			continue ;
 		}
-		t = add_input_to_token_list(t, &sh->lst, &input[i], &is_quoted);
+		t = token_create_from_input(t, &input[i], is_quoted);
 		if (!t)
-			return (token_list_free(&sh->lst), NULL);
+			return (token_list_free(lst), NULL);
+		token_list_append(lst, t);
+		set_is_quoted(t, &is_quoted);
 		i += t->len;
 	}
-	heredoc_find_delimeters(sh);
-	return (&sh->lst);
+	heredoc_find_delimeters(lst);
+	return (lst);
+}
+
+t_tlist	*lex_heredoc_input(char *input, t_tlist *lst, enum e_token delim_type)
+{
+	t_token			*t;
+	enum e_quotes	is_quoted;
+	int				i;
+
+	t = NULL;
+	if (delim_type == DELIM)
+		is_quoted = DQUOTED;
+	else
+		is_quoted = SQUOTED;
+	i = 0;
+	while (input[i])
+	{
+		t = token_create_from_input(t, &input[i], is_quoted);
+		if (!t)
+			return (token_list_free(lst), NULL);
+		token_list_append(lst, t);
+		i += t->len;
+	}
+	return (lst);
 }

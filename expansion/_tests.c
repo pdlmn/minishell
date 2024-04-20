@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 12:23:17 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/19 20:46:14 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/20 13:31:51 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	test_expansion(t_minishell *sh, char *str, char *should_be)
 {
 	char	*joined_tokens;
 
-	lex_input(str, sh);
+	lex_input(str, &sh->lst);
 	expand_tokens(sh, &sh->lst);
 	joined_tokens = join_expanded_strings(&sh->lst);
 	printf("Input:     %s\n", str);
@@ -89,7 +89,7 @@ void	test_heredoc_expansion(t_minishell *sh, char *str, char *should_be, enum e_
 {
 	char	*joined_tokens;
 
-	lex_input(str, sh);
+	lex_heredoc_input(str, &sh->lst, type);
 	expand_heredoc(sh, &sh->lst, type);
 	joined_tokens = join_expanded_strings(&sh->lst);
 	printf("Input:     %s\n", str);
@@ -108,7 +108,7 @@ void	test_heredoc_delim(t_minishell *sh, char *str,
 	char	*joined_tokens;
 	t_token	*delim;
 
-	lex_input(str, sh);
+	lex_input(str, &sh->lst);
 	expand_tokens(sh, &sh->lst);
 	delim = find_delim(&sh->lst);
 	joined_tokens = join_expanded_strings(&sh->lst);
@@ -146,8 +146,11 @@ int	main(int argc, char **argv, char **env)
 	test_expansion(&sh, "\"Hello$\"", "Hello$");
 	test_expansion(&sh, "\"$ASD\"", "123");
 	test_expansion(&sh, "$ASD$ASD", "123123");
+	test_expansion(&sh, "\"$ASD\"\"$ASD\"", "123123");
 	test_expansion(&sh, "$", "$");
 	test_expansion(&sh, "\"$ \"", "$ ");
+	test_expansion(&sh, "$$", "$$");
+	test_expansion(&sh, "'$$'", "$$");
 	test_expansion(&sh, "\"$' '\"", "$' '");
 	test_expansion(&sh, "\"$>\"", "$>");
 	test_expansion(&sh, "\"$a>\"", ">");
@@ -157,6 +160,7 @@ int	main(int argc, char **argv, char **env)
 	test_expansion(&sh, "\"$'$a'1>\"", "$''1>");
 	test_expansion(&sh, "\"$+''1$>\"", "$+''1$>");
 	test_expansion(&sh, "\"$^''1$>\"", "$^''1$>");
+	test_expansion(&sh, "'$ASD'", "$ASD");
 	test_expansion(&sh, "'$ASD'$ASD", "$ASD123");
 	test_expansion(&sh, "$\"A\"SD", "ASD");
 	test_expansion(&sh, "$\"ASD\"", "ASD");
@@ -184,6 +188,9 @@ int	main(int argc, char **argv, char **env)
 	test_heredoc_expansion(&sh, "Hello", "Hello", DELIM);
 	test_heredoc_expansion(&sh, "$ASD", "123", DELIM);
 	test_heredoc_expansion(&sh, "\"$ASD\"", "\"123\"", DELIM);
-	test_heredoc_expansion(&sh, "\'$ASD\'", "\'123\'", DELIM);
+	test_heredoc_expansion(&sh, "'$ASD'", "'123'", DELIM);
+	test_heredoc_expansion(&sh, "'$$'", "'$$'", DELIM);
+	test_heredoc_expansion(&sh, "'$ASD'", "'$ASD'", QDELIM);
+	test_heredoc_expansion(&sh, "'$ASD'\"hoho\"   ", "'123'\"hoho\"   ", DELIM);
 	ht_free_table(sh.env);
 }
