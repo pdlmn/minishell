@@ -51,12 +51,22 @@ echo $USER -n       -> emuminov -n
 echo $       a      -> $ a
 
 ## Error handling
-echo | > a                     -> {valid}
-echo > | a                     -> syntax error near unexpected token `|`
-echo > > a                     -> syntax error near unexpected token `>`
-echo >                         -> syntax error near unexpected token `newline`
-echo "ASD                      -> {error, unclosed quote}
->>>>>>>>>>>>>>>>>
+`echo | > Makefile`                     -> {valid}
+`echo | < Makefile`                     -> {valid}
+`echo | << Makefile`                    -> {valid}
+`echo | >> Makefile`                    -> {valid}
+`< Makefile`                            -> {valid}
+`> Makefile`                            -> {valid}
+`> Makefile`                            -> {valid}
+`> Makefile`                            -> {valid}
+`echo > | Makefile`                     -> syntax error near unexpected token `|`
+`echo > > Makefile`                     -> syntax error near unexpected token `>`
+`echo | | Makefile`                     -> syntax error near unexpected token `|`
+`|`                                     -> syntax error near unexpected token `|`
+`echo < | Makefile`                     -> syntax error near unexpected token `|`
+`echo >`                                -> syntax error near unexpected token `newline`
+`cat << | EOF`                          -> syntax error near unexpected token `|`
+`echo "ASD`                             -> {error, unclosed quote}
 
 ## Expansion
 echo $USER                     -> emuminov
@@ -120,4 +130,4 @@ haha$HOME
 minishell -> cat << ""$HOME > example.txt
 > haha$HOME
 > $HOME
-{haha$HOME in example.txt, nothing is printed in the termina}
+{haha$HOME in example.txt, nothing is printed in the terminal}
