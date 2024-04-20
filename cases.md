@@ -92,7 +92,7 @@ pwd && ((cd .. && pwd && (cd .. && pwd))) && pwd   -> {
     tor (error token is ".. && pwd && (cd .. && pwd)")
 
 ## Signals
-<Ctrl-C>           -> ^C
+
 asd<Ctrl-C>        -> asd^C
 <Ctrl-D>           -> exit {quits the shell}
 asd<Ctrl-D>        -> {nothing}
