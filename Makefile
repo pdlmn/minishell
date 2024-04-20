@@ -22,6 +22,7 @@ SRCS=lexer.c \
 	 lexer_utils.c \
 	 token_deletion.c \
 	 token_operations.c \
+	 error_checking.c \
 	 ht1.c \
 	 ht2.c \
 	 ht3.c \
@@ -37,7 +38,7 @@ SRCS=lexer.c \
 	 command_table.c \
 	 main.c
 OBJS=$(SRCS:%.c=$(OBJS_DIR)%.o)
-VPATH=lexer:token:hash_table:expansion:env:shell:command_table
+VPATH=lexer:token:error_handling:hash_table:expansion:env:shell:command_table
 
 #rules---------------------------------------------
 all: $(NAME)
