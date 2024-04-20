@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 12:23:17 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/20 13:31:51 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/20 14:23:15 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,6 +173,7 @@ int	main(int argc, char **argv, char **env)
 	test_expansion(&sh, "\"$?'$a'1>\"", "0''1>");
 	test_expansion(&sh, "asd%$%%", "asd%$%%");
 	test_expansion(&sh, "~/projects", "/home/emuminov/projects");
+	test_expansion(&sh, "~a", "~a");
 
 	test_heredoc_delim(&sh, "cat << $HOME", "cat << $HOME", "$HOME");
 	test_heredoc_delim(&sh, "cat << $HOME\"\"", "cat << $HOME", "$HOME");
