@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 18:04:44 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/19 14:47:34 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/20 13:52:51 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,17 +42,17 @@ static t_token	*convert_to_delimeter(t_token *t)
 		if (curr->type != DQUOTE && curr->type != SQUOTE)
 			curr->type = type;
 		if (curr->space_after && (curr->type != DQUOTE && curr->type != SQUOTE))
-			break;
+			break ;
 		curr = curr->next;
 	}
 	return (curr);
 }
 
-t_tlist	*heredoc_find_delimeters(t_minishell *sh)
+void	heredoc_find_delimeters(t_tlist *lst)
 {
 	t_token	*curr;
 
-	curr = sh->lst.head;
+	curr = lst->head;
 	while (curr)
 	{
 		if (curr->op_type == HEREDOC && curr->next)
@@ -60,5 +60,4 @@ t_tlist	*heredoc_find_delimeters(t_minishell *sh)
 		else
 			curr = curr->next;
 	}
-	return (&sh->lst);
 }

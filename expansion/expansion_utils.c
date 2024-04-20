@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 14:54:55 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/19 15:15:03 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/20 13:53:34 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ t_token	*merge_word_tokens(t_token *t1, t_token *t2)
 	return (token_free(t2), t1);
 }
 
-t_tlist	*join_unspaced_words(t_tlist *lst)
+t_tlist	*join_unspaced_words(t_tlist *lst, int is_in_heredoc)
 {
 	t_token	*curr;
 
@@ -68,10 +68,10 @@ t_tlist	*join_unspaced_words(t_tlist *lst)
 	while (curr)
 	{
 		if ((curr->type == WORD || curr->type == OTHER
-			|| curr->type == DELIM || curr->type == QDELIM)
-			&& !curr->space_after && curr->next
+				|| curr->type == DELIM || curr->type == QDELIM)
+			&& (!curr->space_after || is_in_heredoc) && curr->next
 			&& (curr->next->type == WORD || curr->next->type == OTHER
-			|| curr->type == DELIM || curr->type == QDELIM))
+				|| curr->next->type == DELIM || curr->next->type == QDELIM))
 		{
 			curr = merge_word_tokens(curr, curr->next);
 			if (!curr)

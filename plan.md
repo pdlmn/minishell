@@ -1,8 +1,8 @@
 For Eldar:
-- Do pre-expansion
-  - Analysis for heredoc
-  - Syntax error checking
-- Expansion specifically for heredoc
+- [ ] Do pre-expansion
+  - [x] Analysis for heredoc
+  - [ ] Syntax error checking
+- [x] Expansion specifically for heredoc
 
 For Ophelia:
 - Execution

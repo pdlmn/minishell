@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 17:35:02 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/18 20:44:06 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/20 12:31:27 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,11 @@ static t_token	*create_word_token(t_token *last_t, char *input,
 	char	*s;
 	t_token	*t;
 
-	if (is_quoted == SQUOTED)
-		end_of_word = ft_strset(input, "'") - input;
+	if (is_quoted == SQUOTED && (!last_t || (last_t
+				&& last_t->type != SIGIL)))
+		end_of_word = ft_strset(input, "'$") - input;
+	else if (is_quoted == SQUOTED && last_t && last_t->type == SIGIL)
+		end_of_word = find_end_of_variable_name(input);
 	else if (is_quoted == DQUOTED && (!last_t || (last_t
 				&& last_t->type != SIGIL)))
 		end_of_word = ft_strset(input, "\"$") - input;
@@ -97,11 +100,10 @@ t_token	*token_create_from_input(t_token *last_t, char *input,
 	else if ((is_quoted == NOT_QUOTED && ft_strchr("\"'~$", input[0]))
 		|| (is_quoted == DQUOTED && input[0] == '"')
 		|| (is_quoted == SQUOTED && input[0] == '\'')
-		|| (is_quoted != SQUOTED && input[0] == '$')
-		|| (is_quoted != SQUOTED && (ft_isdigit(input[0])
-				|| input[0] == '?') && last_t && last_t->type == SIGIL)
-		|| ((is_quoted == NOT_QUOTED || is_quoted == DQUOTED)
-			&& !is_valid_variable_char(input[0]) && input[0] != ' '))
+		|| input[0] == '$'
+		|| ((ft_isdigit(input[0]) || input[0] == '?')
+			&& last_t && last_t->type == SIGIL)
+		|| (!is_valid_variable_char(input[0]) && input[0] != ' '))
 		t = create_single_char_token(last_t, input, is_quoted);
 	else
 		t = create_word_token(last_t, input, is_quoted);
