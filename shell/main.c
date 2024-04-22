@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 14:45:20 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/20 13:30:19 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/20 18:28:37 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int	set_or_get_exit_status(enum e_access_flag flag, int new_status)
 int	main(int argc, char **argv, char **env)
 {
 	static t_minishell	sh;
+	t_err_src			e;
 	char				*input;
 
 	(void)argc;
@@ -51,18 +52,26 @@ int	main(int argc, char **argv, char **env)
 		}
 		if (!lex_input(input, &sh.lst))
 			return (free(input), EXIT_FAILURE);
-		sh.last_status = set_or_get_exit_status(GET, -1);
 		printf("Pre-expanded tokens:\n");
 		token_list_print(&sh.lst);
+		e = check_errors(&sh.lst);
+		if (e.code != NO_ERRORS)
+		{
+			print_error_message(&e);
+			token_list_free(&sh.lst);
+			free(input);
+			continue ;
+		}
+		sh.last_status = set_or_get_exit_status(GET, -1);
 		if (!expand_tokens(&sh, &sh.lst))
 			return (free(input), token_list_free(&sh.lst), EXIT_FAILURE);
-		// if (!command_table(&sh))
-		// 	return (free(input), token_list_free(&sh.lst), EXIT_FAILURE);
+		if (!command_table(&sh))
+			return (free(input), token_list_free(&sh.lst), EXIT_FAILURE);
 		printf("Expanded tokens:\n");
 		token_list_print(&sh.lst);
-		// printf("\nCommand table:\n");
-		// command_table_print(sh.cmd_tab);
-		// ft_free_table(sh.cmd_tab);
+		printf("\nCommand table:\n");
+		command_table_print(sh.cmd_tab);
+		ft_free_table(sh.cmd_tab);
 		token_list_free(&sh.lst);
 		free(input);
 	}
