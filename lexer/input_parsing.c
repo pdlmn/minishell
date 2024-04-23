@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 17:35:02 by emuminov          #+#    #+#             */
-/*   Updated: 2024/06/04 17:13:30 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/04 17:20:25 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static t_token	*create_single_char_token(t_token *last_t, char *input,
 		s = ft_substr(input, 0, 1);
 	if (!s)
 		return (NULL);
-	t = token_create(s, ft_strlen(s), input[1] == ' ', is_quoted);
+	t = token_create(s, ft_strlen(s), ft_isspace(input[1]), is_quoted);
 	if (!t)
 		return (free(s), NULL);
 	return (t);
@@ -55,7 +55,7 @@ static t_token	*create_operator_token(char *input, enum e_quotes is_quoted)
 	s = ft_substr(input, 0, len);
 	if (!s)
 		return (NULL);
-	t = token_create(s, len, input[len] == ' ', is_quoted);
+	t = token_create(s, len, ft_isspace(input[len]), is_quoted);
 	if (!t)
 		return (free(s), NULL);
 	return (t);
@@ -83,7 +83,7 @@ static t_token	*create_word_token(t_token *last_t, char *input,
 	s = ft_substr(input, 0, end_of_word);
 	if (!s)
 		return (NULL);
-	t = token_create(s, end_of_word, input[end_of_word] == ' ', is_quoted);
+	t = token_create(s, end_of_word, ft_isspace(input[end_of_word]), is_quoted);
 	if (!t)
 		return (free(s), NULL);
 	t->type = WORD;

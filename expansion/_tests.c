@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 12:23:17 by emuminov          #+#    #+#             */
-/*   Updated: 2024/06/04 17:15:07 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/04 17:20:12 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,6 +149,7 @@ int	main(int argc, char **argv, char **env)
 	test_expansion(&sh, "\"$ASD\"\"$ASD\"", "123123");
 	test_expansion(&sh, "$", "$");
 	test_expansion(&sh, "\"$ \"", "$ ");
+	test_expansion(&sh, "\"$\t\"", "$\t");
 	test_expansion(&sh, "$$", "$$");
 	test_expansion(&sh, "'$$'", "$$");
 	test_expansion(&sh, "\"$' '\"", "$' '");
@@ -169,7 +170,9 @@ int	main(int argc, char **argv, char **env)
 	test_expansion(&sh, "$123a", "23a");
 	test_expansion(&sh, "$ asd", "$ asd");
 	test_expansion(&sh, "$        asd", "$ asd");
+	test_expansion(&sh, "$\t\t\tasd", "$ asd");
 	test_expansion(&sh, "\"$        asd\"", "$        asd");
+	test_expansion(&sh, "\"$\t\t\tasd\"", "$\t\t\tasd");
 	test_expansion(&sh, "\"$?'$a'1>\"", "0''1>");
 	test_expansion(&sh, "asd%$%%", "asd%$%%");
 	test_expansion(&sh, "~/projects", "/home/emuminov/projects");
@@ -186,6 +189,7 @@ int	main(int argc, char **argv, char **env)
 	test_heredoc_delim(&sh, "<< a\"\"b cat", "<< ab cat", "ab");
 	test_heredoc_delim(&sh, "<< 'a\"\"b' cat", "<< a\"\"b cat", "a\"\"b");
 
+	// input -> lex_input -> expansion -> lex_heredoc_input -> expand_heredoc
 	test_heredoc_expansion(&sh, "Hello", "Hello", DELIM);
 	test_heredoc_expansion(&sh, "$ASD", "123", DELIM);
 	test_heredoc_expansion(&sh, "\"$ASD\"", "\"123\"", DELIM);
