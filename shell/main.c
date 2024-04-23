@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 14:45:20 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/20 18:28:37 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/04/22 16:03:03 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,12 @@ int	main(int argc, char **argv, char **env)
 		sh.last_status = set_or_get_exit_status(GET, -1);
 		if (!expand_tokens(&sh, &sh.lst))
 			return (free(input), token_list_free(&sh.lst), EXIT_FAILURE);
-		if (!command_table(&sh))
-			return (free(input), token_list_free(&sh.lst), EXIT_FAILURE);
+		// if (!command_table(&sh))
+		// 	return (free(input), token_list_free(&sh.lst), EXIT_FAILURE);
 		printf("Expanded tokens:\n");
 		token_list_print(&sh.lst);
 		printf("\nCommand table:\n");
-		command_table_print(sh.cmd_tab);
+		// command_table_print(sh.cmd_tab);
 		ft_free_table(sh.cmd_tab);
 		token_list_free(&sh.lst);
 		free(input);
