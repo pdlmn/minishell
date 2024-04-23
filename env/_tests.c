@@ -5,24 +5,30 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/21 13:29:46 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/16 20:35:27 by emuminov         ###   ########.fr       */
+/*   Created: 2024/04/04 14:05:18 by emuminov          #+#    #+#             */
+/*   Updated: 2024/04/17 16:55:31 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/lexer.h"
-#include <stdio.h>
+#include "../include/env.h"
 
-int	main(int argc, char **argv)
+int	main(int argc, char **argv, char **env)
 {
 	static t_minishell	sh;
+	t_ht_table			*ht;
+	char				**env_arr;
+	int					i;
 
-	if (argc != 2)
-	{
-		printf("Enter proper command\n");
-		return (EXIT_FAILURE);
-	}
-	lexer(argv[1], &sh);
-	token_list_print(&sh.lst);
-	token_list_free(&sh.lst);
+	(void)argc;
+	(void)argv;
+	ht = env_init(env, &sh);
+	printf("===ht_print_table:===\n");
+	ht_print_table(ht);
+	env_arr = env_ht_to_arr(ht);
+	printf("\n\n===env_arr:===\n");
+	i = 0;
+	while (env_arr[i])
+		printf("%s\n", env_arr[i++]);
+	ft_free_split(env_arr);
+	ht_free_table(ht);
 }

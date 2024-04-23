@@ -1,25 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer.h                                            :+:      :+:    :+:   */
+/*   ht_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/21 11:38:46 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/16 18:14:40 by emuminov         ###   ########.fr       */
+/*   Created: 2024/03/27 11:58:08 by emuminov          #+#    #+#             */
+/*   Updated: 2024/04/01 03:41:29 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../include/minishell.h"
 
-// utils.c
-char			*ft_strset(char *s, char *set);
-int				is_valid_variable_char(int c);
-int		 		find_end_of_variable_name(char *s);
+static int	is_prime(int n)
+{
+	long	i;
 
-// token_operations.c
-void			token_list_append(t_tlist *lst, t_token *token);
-void			token_free(t_token *lst);
+	if (n < 2)
+		return (0);
+	if (n == 2 || n == 3)
+		return (1);
+	if (n % 2 == 0)
+		return (0);
+	i = 3;
+	while (i * i <= n)
+	{
+		if (n % i == 0)
+			return (0);
+		i += 2;
+	}
+	return (1);
+}
 
-// token_creation.c
-t_token			*token_create_from_input(t_token *prev_token, char *input, enum e_quotes is_quoted);
+int	next_prime(int n)
+{
+	if (n <= 2)
+		return (2);
+	if (n % 2 == 0)
+		n++;
+	while (!is_prime(n))
+		n += 2;
+	return (n);
+}

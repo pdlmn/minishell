@@ -1,15 +1,11 @@
-SRCS=command_table.c ../lexer/lexer.c ../lexer/token.c ../lexer/utils.c
+SRCS=../lexer/lexer.c command_table.c ../token/token_operations.c ../token/token_deletion.c ../lexer/input_parsing.c ../lexer/lexer_utils.c
 LIBFT=../libft/libft.a
-NAME=command_table_test
+NAME=lexer_test
 
-$(NAME): $(SRCS) Makefile
-	gcc $(SRCS) $(LIBFT) -g -o $(NAME)
-
-test: $(NAME)
-	valgrind ./$(NAME)
-	rm $(NAME)
+$(NAME): $(SRCS)
+	gcc $(SRCS) $(LIBFT) -g -o lexer_test #-fsanitize=address
 
 clean:
-	rm $(NAME)
+	rm -f lexer_test
 
-re: clean test
+re: clean $(NAME)

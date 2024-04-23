@@ -6,7 +6,7 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 10:41:59 by omougel           #+#    #+#             */
-/*   Updated: 2024/04/11 14:05:03 by omougel          ###   ########.fr       */
+/*   Updated: 2024/04/23 14:40:00 by omougel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,7 @@ t_token	*find_redir(t_token **lst)
 
 t_token	*jump_redir(t_token *lst)
 {
-	lst = lst->next;
-	if (lst->type == WORD)
-		return (lst->next);
-	return (lst);
+	return (lst->next->next);
 }
 
 size_t	cmd_size(t_token *lst)
@@ -178,7 +175,7 @@ char	***command_table(t_token *lst)
 	cmd_tab[i] = NULL;
 	return (cmd_tab);
 }
-/*
+
 void	print_arr(char **arr)
 {
 	size_t	i;
@@ -188,24 +185,26 @@ void	print_arr(char **arr)
 		ft_printf("%s ", arr[i++]);
 	ft_printf("\n");
 }
-
-int	main(void)
+/*
+int	main(int argc, char **argv)
 {
-	t_token	*lst;
+	static t_minishell	sh;
 	char	***cmd_tab;
 	size_t	i;
 
 	i = 0;
-	lst = lexer("echo <\"hello\"  >>>| \"\"\"''\"'hello'\"''\"\"\" | asdasda \
-zxc <<qw|a \"QUOTED AGAIN A\" 'small quote'");
-	token_list_print(lst);
-	ft_printf("\n\n\n\n");
-	cmd_tab = command_table(lst);
+	if (argc != 2)
+	{
+		printf("Enter proper command\n");
+		return (EXIT_FAILURE);
+	}
+	lexer(argv[1], &sh);
+	token_list_print(&sh.lst);
+	cmd_tab = command_table(sh.lst.head);
 	if (!cmd_tab)
 		return (EXIT_FAILURE);
 	while (cmd_tab && cmd_tab[i])
 		print_arr(cmd_tab[i++]);
 	ft_free_table(cmd_tab);
-	token_list_free(lst);
-	return (EXIT_SUCCESS);
+	token_list_free(&sh.lst);
 }*/

@@ -26,21 +26,44 @@ There should not be spaces around `=`.
 Variable names can contain uppercase, lowercase letters, numbers, underscores, and digits.
 They can't start with digits.
 
-export TEST+=123                    -> {concats 123 to TEST}
+export TEST+=123                    -> {concats 123 to TEST or creates variable TEST}
+export ASD=asd=                     -> asd=
+export ASD=echo; $ASD heh           -> heh
+export ASD=; echo $ASD              -> {just new line}
+export ASD                          -> {does nothing}
+export 1ASD=1                       -> {error: export: 1ASD=1: not a valid identifier}
 
 ### cd
 `chdir` is for the process. We need to implement our own variables that track
 in which directory we are right now.
 
+cd -                -> {goes to OLDPWD}
+ls -                -> 'No such file or directory'
+
 ### echo
 `echo -e` enables interpretation of characters like "\t" or "\n". We don't need
 to deal with it.
-echo $USER          -> emuminov
-echo $USER -n       -> emuminov -n
 echo -n $USER       -> emuminov{no new line}
 echo -n -n $USER    -> emuminov{no new line}
 echo -n -nn $USER   -> emuminov{no new line}
 echo -n-n $USER     -> -n-n emuminov
+echo $USER -n       -> emuminov -n
+echo $       a      -> $ a
+
+## Error handling
+echo | > a                     -> {valid}
+echo > | a                     -> syntax error near unexpected token `|`
+echo > > a                     -> syntax error near unexpected token `>`
+echo >                         -> syntax error near unexpected token `newline`
+echo "ASD                      -> {error, unclosed quote}
+>>>>>>>>>>>>>>>>>
+
+## Expansion
+echo $USER                     -> emuminov
+echo $123a                     -> 23a
+echo ..                        -> ..
+echo ~                         -> /home/emuminov
+echo ~a                        -> ~a
 
 ## Parens
 Single parens are interpreted as `execute in different process`.
@@ -66,12 +89,35 @@ asd<Ctrl-D>        -> {nothing}
 
 ## Operators
 ### Heredoc
-omougel@z4r3p7:~$ cat << test
+Rules for the heredoc expansion are here:
+`https://pubs.opengroup.org/onlinepubs/009695399/utilities/xcu_chap02.html#tag_02_07_04`
+
+minishell ->  cat << test
 > $USER
 > test
 omougel
 
-omougel@z4r3p7:~$ cat << "test"
+minishell ->  cat << "test"
 > $USER
 > test
 $USER
+
+minishell -> cat << $HOME
+> haha$HOME
+> $HOME                                         
+haha/home/emuminov
+
+minishell -> cat << "$HOME"
+> haha$HOME
+> $HOME
+haha$HOME
+
+minishell -> cat << ""$HOME
+> haha$HOME
+> $HOME
+haha$HOME
+
+minishell -> cat << ""$HOME > example.txt
+> haha$HOME
+> $HOME
+{haha$HOME in example.txt, nothing is printed in the termina}

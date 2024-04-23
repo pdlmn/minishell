@@ -1,25 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer.h                                            :+:      :+:    :+:   */
+/*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/21 11:38:46 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/16 18:14:40 by emuminov         ###   ########.fr       */
+/*   Created: 2024/04/17 14:36:24 by emuminov          #+#    #+#             */
+/*   Updated: 2024/04/17 14:37:19 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../include/env.h"
 
-// utils.c
-char			*ft_strset(char *s, char *set);
-int				is_valid_variable_char(int c);
-int		 		find_end_of_variable_name(char *s);
+char	*ft_strjoin_delim(char *s1, char *s2, char delim)
+{
+	size_t	l1;
+	size_t	l2;
+	char	*str;
 
-// token_operations.c
-void			token_list_append(t_tlist *lst, t_token *token);
-void			token_free(t_token *lst);
-
-// token_creation.c
-t_token			*token_create_from_input(t_token *prev_token, char *input, enum e_quotes is_quoted);
+	if (!s1 || !s2)
+		return (0);
+	l1 = ft_strlen(s1);
+	l2 = ft_strlen(s2);
+	str = malloc(sizeof(char) * (l1 + l2 + 2));
+	if (!str)
+		return (0);
+	ft_memcpy(str, s1, l1);
+	str[l1++] = delim;
+	ft_memcpy(&str[l1], s2, l2);
+	str[l1 + l2] = '\0';
+	return (str);
+}
