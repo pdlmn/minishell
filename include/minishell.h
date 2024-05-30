@@ -6,11 +6,14 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 14:34:14 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/23 15:28:18 by omougel          ###   ########.fr       */
+/*   Updated: 2024/05/12 11:52:39 by omougel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft/libft.h"
+#include <sys/wait.h>
+#include <errno.h>
+#include <fcntl.h>
 #include <stdio.h>
 #include <readline/history.h>
 #include <readline/readline.h>
@@ -122,8 +125,9 @@ typedef struct	s_minishell
 	t_ht_table	*env;
 	char		***cmd_tab;
 	int			last_status;
-	int			fdin;
-	int			fdout;
+	int			fd_in;
+	int			fd_out;
+	int			pid;
 	int			is_delimiter_quoted;
 }				t_minishell;
 
@@ -168,7 +172,10 @@ char				**env_ht_to_arr(t_ht_table *ht);
 char				***command_table(t_minishell *sh);
 void				command_table_print(char ***cmd_tab);
 void				ft_free_table(char ***tab);
+size_t	count_pipe(t_token *lst);
 
 int					set_or_get_exit_status(enum e_access_flag flag,
 		int new_status);
 void				attach_signal_handlers();
+
+int  execute(t_minishell msh);

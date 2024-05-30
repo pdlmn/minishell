@@ -6,11 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 13:36:25 by emuminov          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2024/04/23 14:55:08 by omougel          ###   ########.fr       */
-=======
-/*   Updated: 2024/04/18 20:03:58 by emuminov         ###   ########.fr       */
->>>>>>> af6fc90 (feat: empty quotes now always contain an empty word)
+/*   Updated: 2024/04/24 10:11:31 by omougel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

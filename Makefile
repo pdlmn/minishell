@@ -36,15 +36,16 @@ SRCS=lexer.c \
      env_utils.c \
 	 handle_signal.c \
 	 command_table.c \
+	 execution.c \
 	 main.c
 OBJS=$(SRCS:%.c=$(OBJS_DIR)%.o)
-VPATH=lexer:token:error_handling:hash_table:expansion:env:shell:command_table
+VPATH=lexer:token:error_handling:hash_table:expansion:env:shell:command_table:execution
 
 #rules---------------------------------------------
 all: $(NAME)
 
 $(NAME): $(LIB) $(HEADER) $(OBJS)
-	$(CC) $(CFLAGS) $(RLFLAGS) $(OBJS) $(LIB) -o $@
+	$(CC) $(CFLAGS) $(RLFLAGS) $(OBJS) $(LIB) -o $@ #-lreadline
 
 $(OBJS_DIR)%.o: %.c $(HEADERS)
 	@mkdir -p $(OBJS_DIR)

@@ -6,11 +6,12 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 14:05:18 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/17 16:55:31 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/05/10 14:39:31 by omougel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/env.h"
+#include <stdio.h>
 
 int	main(int argc, char **argv, char **env)
 {
@@ -29,6 +30,7 @@ int	main(int argc, char **argv, char **env)
 	i = 0;
 	while (env_arr[i])
 		printf("%s\n", env_arr[i++]);
+	printf("%s", ht_get(ht, "PATH"));
 	ft_free_split(env_arr);
 	ht_free_table(ht);
 }
