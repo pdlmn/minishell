@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 14:34:14 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/23 17:11:45 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/05/31 12:46:36 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 #define PROMPT_COLOR "\x1B[33m"
 #define ARROW_COLOR "\x1B[32m"
 #define RESET_COLOR "\x1B[0m"
-#define ARROW ARROW_COLOR"~> "RESET_COLOR
-#define PROMPT PROMPT_COLOR"mishell "RESET_COLOR ARROW
+#define ARROW ARROW_COLOR "~> " RESET_COLOR
+#define PROMPT PROMPT_COLOR "mishell " RESET_COLOR ARROW
 #define RED "\033[0;31m"
 #define SPACES " \t\r\v\n\f"
 

@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 14:20:14 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/17 16:46:11 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/05/31 12:45:46 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,10 +72,17 @@ t_ht_table	*env_increment_shlvl(t_ht_table *ht)
 
 t_ht_table	*env_init(char **env, t_minishell *sh)
 {
+	const char	*default_path = "/usr/local/sbin:/usr/local/bin:"
+			"/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:"
+			"/usr/local/games:/snap/bin";
+	if (!default_path)
+		return (NULL);
 	sh->env = env_arr_to_ht(env);
 	if (!sh->env)
 		return (NULL);
 	if (!env_increment_shlvl(sh->env))
+		return (ht_free_table(sh->env), NULL);
+	if (!ht_get(sh->env, "PATH") && !ht_set(sh->env, "PATH", default_path))
 		return (ht_free_table(sh->env), NULL);
 	return (sh->env);
 }
