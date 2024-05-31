@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 00:06:35 by emuminov          #+#    #+#             */
-/*   Updated: 2024/06/02 23:12:28 by omougel          ###   ########.fr       */
+/*   Updated: 2024/06/04 17:23:18 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,14 +69,4 @@ typedef struct s_list
 	void			*content;
 	struct s_list	*next;
 }	t_list;
-
-void	ft_lstadd_back(t_list **lst, t_list *newlst);
-void	ft_lstadd_front(t_list **lst, t_list *newlst);
-void	ft_lstclear(t_list **lst, void (*del)(void*));
-void	ft_lstdelone(t_list *lst, void (*del)(void*));
-void	ft_lstiter(t_list *lst, void (*f)(void *));
-t_list	*ft_lstlast(t_list *lst);
-t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
-t_list	*ft_lstnew(void *content);
-int		ft_lstsize(t_list *lst);
 #endif
