@@ -37,11 +37,10 @@ char	*ft_strjoin_cmd(char const *s1, char const *s2)
 	return (dest);
 }
 
-void  ft_exit(t_minishell *msh)
+void	ft_exit(t_minishell *msh)
 {
 	token_list_free(&msh->lst);
 	ht_free_table(msh->env);
 	ft_free_table(msh->cmd_tab);
-//	perror(NULL); //try to put the correct error message
 	exit(errno);
 }

@@ -6,7 +6,7 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 00:54:42 by omougel           #+#    #+#             */
-/*   Updated: 2024/06/02 00:55:56 by omougel          ###   ########.fr       */
+/*   Updated: 2024/06/02 22:23:53 by omougel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,25 +38,34 @@ size_t	valuelen(char *str)
 	return (i + 1);
 }
 
-int export(char **cmd, t_ht_table *env)
+char  *strvalue(char *envval, char *newval, char plus)
 {
-	int	i;
-	char *key;
-	char *value;
+	if (!plus || !envval)
+		return (newval);
+	return (ft_strjoin(envval, newval));
+}
+
+int	export(char **cmd, t_ht_table *env)
+{
+	int		i;
+	char	*key;
+	char	*value;
 
 	i = 0;
 	if (cmd[1] && cmd[1][0] == '-')
 		return (ft_putstr_fd("mishell: export: invalid option\n", 2), 2);
 	while (cmd[++i])
 	{
+		if (!ft_strchr(cmd[1], '='))
+			continue ;
 		key = ft_substr(cmd[i], 0, keylen(cmd[i]));
-		value = ft_strjoin(ht_get(env, key), &cmd[i][valuelen(cmd[i])]);
+		value = strvalue(ht_get(env, key), &cmd[i][valuelen(cmd[i])], cmd[i][keylen(cmd[i])]);
 		ht_set(env, key, value);
 	}
 	return (0);
 }
 
-int unset(char **cmd, t_ht_table *env)
+int	unset(char **cmd, t_ht_table *env)
 {
 	int	i;
 
@@ -68,20 +77,20 @@ int unset(char **cmd, t_ht_table *env)
 	return (0);
 }
 
-int	do_builtins(char **cmd, t_ht_table *env, t_minishell *sh) //ameliorer en s'inspirant du printf
+int	do_builtins(char **cmd, t_ht_table *env, t_minishell *sh)
 {
 	if (!ft_strcmp(cmd[0], "echo"))
-		return (echo(cmd, env));
+		return (echo(cmd, sh->fd_out));
 	if (!ft_strcmp(cmd[0], "cd"))
 		return (cd(cmd, env));
 	if (!ft_strcmp(cmd[0], "pwd"))
-		return (pwd(cmd, env));
+		return (pwd(cmd, env, sh->fd_out));
 	if (!ft_strcmp(cmd[0], "export"))
 		return (export(cmd, env));
 	if (!ft_strcmp(cmd[0], "unset"))
 		return (unset(cmd, env));
 	if (!ft_strcmp(cmd[0], "env"))
-		return (bt_env(cmd, env));
+		return (bt_env(cmd, env, sh->fd_out));
 	if (!ft_strcmp(cmd[0], "exit"))
 		bt_exit(sh);
 	return (1);

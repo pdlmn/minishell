@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 00:06:35 by emuminov          #+#    #+#             */
-/*   Updated: 2024/06/02 00:50:31 by omougel          ###   ########.fr       */
+/*   Updated: 2024/06/02 23:12:28 by omougel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	ft_striteri(char *s, void (*f)(unsigned int, char*));
 char	*ft_strjoin(char const *s1, char const *s2);
 size_t	ft_strlcat(char *dst, const char *src, size_t size);
 size_t	ft_strlcpy(char *dst, const char *src, size_t size);
+char	*ft_strcpy(char *dst, char *src);
 size_t	ft_strlen(const char *s);
 size_t	ft_strlen_till_c(char *str, char c);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));

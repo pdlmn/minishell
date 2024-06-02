@@ -6,7 +6,7 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 00:47:00 by omougel           #+#    #+#             */
-/*   Updated: 2024/06/02 00:51:38 by omougel          ###   ########.fr       */
+/*   Updated: 2024/06/03 00:23:20 by omougel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,27 +24,36 @@ int	last_occ(char *str, char c)
 			last = i;
 		i++;
 	}
+	if (last == 0)
+		return (1);
 	return (last);
 }
 
 int	prev(char **newpwd)
 {
-	if (last_occ(*newpwd, '/') != 0)
-		*newpwd[last_occ(*newpwd, '/')] = '\0';
-	return(2);
+	char *tmp;
+
+	if (last_occ(*newpwd, '/') != 1 || newpwd[0][1] != '\0')
+	{
+		tmp = ft_substr(*newpwd, 0, last_occ(*newpwd, '/'));
+		free(*newpwd);
+		*newpwd	= tmp;
+	}
+	return (2);
 }
 
-int next(char *path, char **newpwd)
+int	next(char *path, char **newpwd)
 {
-	char *tmp;
-	int	i;
-	int	t;
+	char	*tmp;
+	int		i;
+	int		t;
 
 	i = 0;
 	tmp = malloc(ft_strlen(*newpwd) + ft_strlen_till_c(path, '/') + 2);
-	ft_strlcpy(tmp, *newpwd, ft_strlen(*newpwd));
+	ft_strcpy(tmp, *newpwd);
 	t = ft_strlen(tmp);
-	tmp[t++] = '/';
+	if (tmp[t - 1] != '/')
+		tmp[t++] = '/';
 	while (path[i] && path[i] != '/')
 		tmp[t++] = path[i++];
 	tmp[t] = '\0';
@@ -53,21 +62,23 @@ int next(char *path, char **newpwd)
 	return (i);
 }
 
-char  *find_newpwd(char *path, t_ht_table *env)
+char	*find_newpwd(char *path, t_ht_table *env)
 {
-	char  *newpwd;
-	int	  i;
+	char	*newpwd;
+	int		i;
 
 	i = 0;
 	if (path[0] == '/')
 		return (path);
-	newpwd = ht_get(env, "PWD");
+	newpwd = ft_strdup(ht_get(env, "PWD"));
 	while (path[i])
 	{
 		if (path[i] == '/')
 			i++;
-		else if (!ft_strncmp(&path[i], "../", 3) || !ft_strncmp(&path[i], "..", 2))
+		else if (!ft_strncmp(&path[i], "..", 2))
 			i += prev(&newpwd);
+		else if (path[i] == '.')
+			i++;
 		else
 			i += next(&path[i], &newpwd);
 	}
@@ -76,7 +87,7 @@ char  *find_newpwd(char *path, t_ht_table *env)
 
 int	cd(char **cmd, t_ht_table *env)
 {
-	char  *newpwd;
+	char	*newpwd;
 
 	if (cmd[1] && cmd[1][0] == '-' && cmd[1][1] != '\0')
 		return (ft_putstr_fd("mishell: cd: invalid option\n", 2), 2);
@@ -84,7 +95,7 @@ int	cd(char **cmd, t_ht_table *env)
 		return (ft_putstr_fd("mishell: cd: too many arguments\n", 2), 1);
 	if (!ft_strcmp(cmd[1], "-"))
 	{
-		newpwd = ht_get(env, "OLDPWD");
+		newpwd = ft_strdup(ht_get(env, "OLDPWD"));
 		if (!newpwd)
 			return (ft_putstr_fd("mishell: cd: OLDPWD not set\n", 2), 1);
 	}
@@ -95,5 +106,6 @@ int	cd(char **cmd, t_ht_table *env)
 	ht_set(env, "OLDPWD", ht_get(env, "PWD"));
 	ht_set(env, "PWD", newpwd);
 	chdir(newpwd);
+	free(newpwd);
 	return (0);
 }

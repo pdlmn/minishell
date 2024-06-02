@@ -1,21 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   command_table.h                                    :+:      :+:    :+:   */
+/*   ft_strcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/01 23:24:53 by omougel           #+#    #+#             */
-/*   Updated: 2024/06/02 00:06:02 by omougel          ###   ########.fr       */
+/*   Created: 2024/06/02 23:08:31 by omougel           #+#    #+#             */
+/*   Updated: 2024/06/02 23:11:39 by omougel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-t_token	*fill_line(t_token *lst, char ***cmd_tab, size_t *i);
-size_t	cmd_size(t_token *lst);
-t_token	*jump_redir(t_token *lst);
-t_token	*find_redir(t_token **lst);
-size_t	malloc_size(t_token *lst);
-int		isredir(t_token node);
-int		is_word(enum e_token type);
+char *ft_strcpy(char *dst, char *src)
+{
+	size_t	i;
+
+	i = -1;
+	if (!dst || !src)
+		return (NULL);
+	while (src[++i])
+		dst[i] = src[i];
+	dst[i] = '\0';
+	return (dst);
+}

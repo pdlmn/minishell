@@ -6,14 +6,15 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 01:50:13 by omougel           #+#    #+#             */
-/*   Updated: 2024/06/02 01:51:32 by omougel          ###   ########.fr       */
+/*   Updated: 2024/06/03 00:23:24 by omougel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/execution.h"
 
-char  **replacefront(char **cmd, char *path)
+char	**replacefront(char **cmd, char *path)
 {
+	free(cmd[0]);
 	cmd[0] = path;
 	return (cmd);
 }
@@ -34,7 +35,7 @@ char	**split_envp(t_ht_table *envp) // change with the environement function
 	return (env);
 }
 
-char	**find_command(char **cmd, t_minishell sh)
+char	**find_command(char **cmd, t_minishell *sh)
 {
 	size_t	i;
 	char	*tmp;
@@ -42,15 +43,18 @@ char	**find_command(char **cmd, t_minishell sh)
 
 	i = 0;
 	if (is_builtin(cmd[0]))
-		return (cmd);
+	{
+		sh->last_status = do_builtins(cmd, sh->env, sh);
+		return (NULL);
+	}
 	if (!ft_strncmp("./", cmd[0], 2) && !access(cmd[0], X_OK))
 		return (cmd);
-	env = split_envp(sh.env);
+	env = split_envp(sh->env);
 	while (env && env[i])
 	{
 		tmp = ft_strjoin_cmd(env[i], cmd[0]);
 		if (!tmp)
-			return (NULL); //TODO MALLOC_ERROR
+			return (NULL);
 		if (!access(tmp, X_OK))
 		{
 			ft_free_split(env);
@@ -59,9 +63,11 @@ char	**find_command(char **cmd, t_minishell sh)
 		free(tmp);
 		i++;
 	}
-	ft_free_split(env); //add some other free env in the upper code to deal with error cases 
+	ft_free_split(env);
 	errno = 127;
-	return (ft_putstr_fd(cmd[0], 2), ft_putstr_fd(": command not found\n", 2), NULL); //TODO ERROR CMD NOT FOUND
+	ft_putstr_fd(cmd[0], 2);
+	ft_putstr_fd(": command not found\n", 2);
+	return (NULL);
 }
 
 int	check_input(char **input_redir, int fd_in)
@@ -69,7 +75,7 @@ int	check_input(char **input_redir, int fd_in)
 	if (fd_in != 0)
 		close(fd_in);
 	if (!ft_strcmp(input_redir[0], "<"))
-		fd_in = redir_input(input_redir[1]); // what if wrong redir -1 or error message idk but does it crash ?
+		fd_in = redir_input(input_redir[1]);
 	else
 		fd_in = here_doc(input_redir[1], input_redir[2]);
 	return (fd_in);

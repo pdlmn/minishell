@@ -6,11 +6,12 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 09:49:14 by omougel           #+#    #+#             */
-/*   Updated: 2024/06/02 01:56:28 by omougel          ###   ########.fr       */
+/*   Updated: 2024/06/03 00:13:20 by omougel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/execution.h"
+#include <stdio.h>
 
 void	exec_cmd(char **cmd, t_minishell msh)
 {
@@ -29,7 +30,7 @@ void	exec_cmd(char **cmd, t_minishell msh)
 		errno = do_builtins(cmd, msh.env, &msh);
 	if (!access(cmd[0], X_OK))
 		execve(cmd[0], cmd, envp);
-	ft_free_split(cmd); // IN CASE OF ERROR OR COMMAND NOT FOUND THE CHILD NEED TO FREE EVERYTHING INCLUDING LEXER AND COMMAND TABLE 3 STAR AND ENV
+	ft_free_split(cmd);
 	exit(errno);
 }
 
@@ -55,63 +56,83 @@ int	go_to_next_pipe(char ***cmd_tab)
 	return (i);
 }
 
+void  check_cmd(t_minishell *msh, int *fd, int i)
+{
+	char  **cmd;
+
+	if (msh->fd_in >= 0 && msh->fd_out > 0)
+	{
+		cmd = find_command(msh->cmd_tab[i], msh);
+		if (cmd && *cmd)
+		{
+			if (fd[0] > 0)
+				close(fd[0]);
+			exec_cmd(msh->cmd_tab[i], *msh);
+			free(cmd[0]);
+		}
+	}
+	if (!is_builtin(msh->cmd_tab[i][0]))
+	{
+		secure_close(&msh->fd_out, &msh->fd_in, &fd[0], &fd[1]);
+		ft_exit(msh);
+	}
+}
+
+t_minishell	*read_cmd(t_minishell *msh, int *fd)
+{
+	int	  i;
+
+	i = 0;
+	while (msh->cmd_tab[i] && ft_strcmp(msh->cmd_tab[i][0], "|"))
+	{
+		if (is_input(msh->cmd_tab[i][0]))
+			msh->fd_in = check_input(msh->cmd_tab[i], msh->fd_in);
+		else if (is_output(msh->cmd_tab[i][0]))
+			msh->fd_out = check_output(msh->cmd_tab[i], msh->fd_out);
+		else
+			check_cmd(msh, fd, i);
+		if (msh->fd_in == -1 || msh->fd_out == -1)
+		{
+			perror(msh->cmd_tab[i][1]);
+			if (is_builtin(msh->cmd_tab[i][0]))
+				break ;
+			secure_close(&msh->fd_out, &msh->fd_in, &fd[0], &fd[1]);
+			ft_exit(msh);
+		}	
+		i++;
+	}
+	return (msh);
+}
+
 char	***fork_and_execute(t_minishell *msh, int *pid)
 {
 	int		fd[2];
-	size_t	i;
-	char	**cmd;
 
 	fd[0] = -1;
 	fd[1] = -1;
-	i = 0;
-	msh->fd_out = 1;	
+	msh->fd_out = 1;
 	*pid = -1;
 	if (is_there_pipe(msh->cmd_tab))
-		if (pipe(fd) == -1)
-			return (NULL); //TODO error
-	*pid = fork(); //TODO error case of fork check -1
-	if (*pid == 0)
 	{
-		while (msh->cmd_tab[i] && ft_strcmp(msh->cmd_tab[i][0], "|")) // modified ft_strcmp from libft
-		{
-			if (is_input(msh->cmd_tab[i][0]))
-				msh->fd_in = check_input(msh->cmd_tab[i], msh->fd_in);
-			else if (is_output(msh->cmd_tab[i][0]))
-				msh->fd_out = check_output(msh->cmd_tab[i], msh->fd_out);
-			else
-			{
-				if (msh->fd_in >= 0 && msh->fd_out > 0)
-				{
-					if (msh->fd_out == 1 && fd[1] > 0)
-						msh->fd_out = fd[1];
-					else if (fd[1] > 0)
-						close(fd[1]);
-					cmd = find_command(msh->cmd_tab[i], *msh);
-					if (cmd && *cmd)
-					{
-						if (fd[0] > 0)
-							close(fd[0]);
-						exec_cmd(msh->cmd_tab[i], *msh);
-						free(cmd[0]);
-					}
-					secure_close(&msh->fd_out, &msh->fd_in, &fd[0], &fd[1]);
-					ft_exit(msh);
-				}
-				secure_close(&msh->fd_out, &msh->fd_in, &fd[0], &fd[1]);
-				ft_exit(msh);
-			//		return (&msh->cmd_tab[i + 1]); //TODO ERROR INVALID FILE DESCRIPTOR and don't return exit
-			}
-			i++;
-		}
+		if (pipe(fd) == -1)
+			return (NULL);
+		msh->fd_out = fd[1];
 	}
-	i = go_to_next_pipe(msh->cmd_tab);
+	if (is_builtin(msh->cmd_tab[go_to_next_pipe(msh->cmd_tab) - 1][0]))
+		read_cmd(msh, fd);
+	else
+	{
+		*pid = fork();
+		if (*pid == 0)
+			read_cmd(msh, fd);
+	}
 	secure_close(&msh->fd_out, &msh->fd_in, &fd[0], &fd[1]);
-	if (!msh->cmd_tab || !msh->cmd_tab[i])
+	if (!msh->cmd_tab || !msh->cmd_tab[go_to_next_pipe(msh->cmd_tab)])
 		return (NULL);
-	return (&msh->cmd_tab[i + 1]);
+	return (&msh->cmd_tab[go_to_next_pipe(msh->cmd_tab) + 1]);
 }
 
-int  execute(t_minishell msh)
+int	execute(t_minishell msh)
 {
 	int	num_of_child;
 
@@ -123,5 +144,32 @@ int  execute(t_minishell msh)
 		waitpid(msh.pid, &msh.last_status, 0);
 	while (num_of_child-- > 0)
 		wait(NULL);
-	return (WEXITSTATUS(msh.last_status)); // put last status code with the function to the environement
+	return (WEXITSTATUS(msh.last_status));
 }
+				/*
+				if (is_input(msh->cmd_tab[i][0]))
+					msh->fd_in = check_input(msh->cmd_tab[i], msh->fd_in);
+				else if (is_output(msh->cmd_tab[i][0]))
+					msh->fd_out = check_output(msh->cmd_tab[i], msh->fd_out);
+				else
+				{
+					if (msh->fd_in >= 0 && msh->fd_out > 0)
+					{
+						if (msh->fd_out == 1 && fd[1] > 0)
+							msh->fd_out = fd[1];
+						else if (fd[1] > 0)
+							close(fd[1]);
+						cmd = find_command(msh->cmd_tab[i], *msh);
+						if (cmd && *cmd)
+						{
+							if (fd[0] > 0)
+								close(fd[0]);
+							exec_cmd(msh->cmd_tab[i], *msh);
+							free(cmd[0]);
+						}
+						secure_close(&msh->fd_out, &msh->fd_in, &fd[0], &fd[1]);
+						ft_exit(msh);
+					}
+					secure_close(&msh->fd_out, &msh->fd_in, &fd[0], &fd[1]);
+					ft_exit(msh);
+				}*/

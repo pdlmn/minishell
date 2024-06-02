@@ -6,7 +6,7 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 00:52:52 by omougel           #+#    #+#             */
-/*   Updated: 2024/06/02 00:53:50 by omougel          ###   ########.fr       */
+/*   Updated: 2024/06/02 19:30:26 by omougel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	echo_params(char **cmd, int *nl)
 {
 	int	j;
-	int i;
+	int	i;
 
 	*nl = 0;
 	i = 1;
@@ -29,22 +29,23 @@ int	echo_params(char **cmd, int *nl)
 		if (cmd[i][j] == '\0')
 			*nl = 1;
 		else
-			break;
+			break ;
 		i++;
 	}
 	return (i);
 }
 
-int	echo(char **cmd, t_ht_table *env)
+int	echo(char **cmd, int fd_out)
 {
 	int	nl;
-	int i;
+	int	i;
 
-	(void)env;
 	i = echo_params(cmd, &nl);
 	while (cmd[i])
 	{
-		printf("%s%c", cmd[i], ' ' * (cmd[i + 1] != NULL));
+		ft_putstr_fd(cmd[i], fd_out);
+		if (cmd[i + 1] != NULL)
+			ft_putchar_fd(' ', fd_out);
 		i++;
 	}
 	if (nl == 0)
@@ -52,31 +53,35 @@ int	echo(char **cmd, t_ht_table *env)
 	return (0);
 }
 
-int	pwd(char **cmd, t_ht_table *env)
+int	pwd(char **cmd, t_ht_table *env, int fd_out)
 {
 	if (cmd[1] && cmd[1][0] == '-')
 		return (ft_putstr_fd("mishell: pwd: invalid option\n", 2), 2);
-	printf("%s\n", ht_get(env, "PWD"));//if PWD has been changed need to display the right thing anyway
+	ft_putstr_fd(ht_get(env, "PWD"), fd_out);
+	ft_putchar_fd('\n', fd_out);
 	return (0);
 }
 
-int	bt_env(char **cmd, t_ht_table *env)
+int	bt_env(char **cmd, t_ht_table *env, int fd_out)
 {
-	char  **envp;
-	int	  i;
+	char	**envp;
+	int		i;
 
 	i = 0;
 	if (cmd[1] && cmd[1][0] == '-')
 		return (ft_putstr_fd("mishell: env: invalid option\n", 2), 2);
 	envp = env_ht_to_arr(env);
 	while (envp[i])
-		printf("%s\n", envp[i++]);
-	free(envp);
+	{
+		ft_putstr_fd(envp[i++], fd_out);
+		ft_putchar_fd('\n', fd_out);
+	}
+	ft_free_split(envp);
 	return (0);
 }
 
-void  bt_exit(t_minishell *msh)
+void	bt_exit(t_minishell *msh)
 {
-	ft_putstr_fd("exit", 2);
+	ft_putstr_fd("exit\n", 2);
 	ft_exit(msh);
 }

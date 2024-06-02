@@ -34,6 +34,7 @@ ft_striteri.c \
 ft_strjoin.c \
 ft_strlcat.c \
 ft_strlcpy.c \
+ft_strcpy.c \
 ft_strlen.c \
 ft_strlen_till_c.c \
 ft_strmapi.c \

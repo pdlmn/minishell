@@ -53,9 +53,9 @@ char	*join_expanded_strings(t_tlist *lst)
 	return (res);
 }
 
-char  *expend_heredoc(char *buffer)
+char	*expend_heredoc(char *buffer)
 {
-	t_minishell	  sh;
+	t_minishell	sh;
 
 	lex_heredoc_input(buffer, &sh.lst, DELIM);
 	expand_heredoc(&sh, &sh.lst, DELIM);

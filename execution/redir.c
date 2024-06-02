@@ -14,17 +14,17 @@
 
 int	here_doc(char *lim, char *quoted)
 {
-	char  *buffer;
-	int	  fd[2];
+	char	*buffer;
+	int		fd[2];
 
 	buffer = readline(">");
 	if (pipe(fd) == -1)
-		return (EXIT_FAILURE); // TODO MALLOC ERROR
+		return (EXIT_FAILURE);
 	while (buffer && ft_strcmp(buffer, lim))
 	{
 		if (!quoted)
 			buffer = expend_heredoc(buffer);
-		write(fd[1], buffer, ft_strlen(buffer)); //deal with error case maybe
+		write(fd[1], buffer, ft_strlen(buffer));
 		write(fd[1], "\n", 1);
 		free(buffer);
 		buffer = readline(">");

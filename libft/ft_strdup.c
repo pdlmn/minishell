@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 18:33:54 by emuminov          #+#    #+#             */
-/*   Updated: 2023/11/13 16:55:08 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/02 23:22:23 by omougel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ char	*ft_strdup(const char *s)
 	size_t	size;
 	char	*str;
 
+	if (!s)
+		return (NULL);
 	size = ft_strlen(s) + 1;
 	str = malloc(size);
 	if (!str)
