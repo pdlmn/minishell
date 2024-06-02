@@ -35,6 +35,7 @@ ft_strjoin.c \
 ft_strlcat.c \
 ft_strlcpy.c \
 ft_strlen.c \
+ft_strlen_till_c.c \
 ft_strmapi.c \
 ft_strcmp.c \
 ft_strncmp.c \
@@ -44,8 +45,8 @@ ft_strtrim.c \
 ft_substr.c \
 ft_tolower.c \
 ft_toupper.c \
-gnl/get_next_line.c \
-gnl/get_next_line_utils.c
+get_next_line/get_next_line.c \
+get_next_line/get_next_line_utils.c
 
 BONUS=ft_lstadd_back.c \
 ft_lstadd_front.c \

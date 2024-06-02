@@ -1,29 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   command_table.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/11 11:28:47 by omougel           #+#    #+#             */
-/*   Updated: 2024/04/08 23:00:44 by omougel          ###   ########.fr       */
+/*   Created: 2024/06/01 23:24:53 by omougel           #+#    #+#             */
+/*   Updated: 2024/06/02 00:06:02 by omougel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "minishell.h"
 
-# include <unistd.h>
-# include <stdlib.h>
-
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 42
-# endif
-
-void	ft_strncpy(char *src, char *dest, int size);
-char	*ft_strnewcat(char *src1, char *src2);
-char	*get_next_line(int fd);
-int		ft_strnchr(const char *str, int len);
-int		ft_malloc_len(char c, int i, int previous);
-
-#endif
+t_token	*fill_line(t_token *lst, char ***cmd_tab, size_t *i);
+size_t	cmd_size(t_token *lst);
+t_token	*jump_redir(t_token *lst);
+t_token	*find_redir(t_token **lst);
+size_t	malloc_size(t_token *lst);
+int	isredir(t_token node);
+int	is_word(enum e_token type);

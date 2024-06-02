@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 14:34:14 by emuminov          #+#    #+#             */
-/*   Updated: 2024/05/12 11:52:39 by omougel          ###   ########.fr       */
+/*   Updated: 2024/06/01 23:36:44 by omougel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 #define PROMPT_COLOR "\x1B[33m"
 #define ARROW_COLOR "\x1B[32m"
 #define RESET_COLOR "\x1B[0m"
-#define ARROW ARROW_COLOR"~> "RESET_COLOR
-#define PROMPT PROMPT_COLOR"mishell "RESET_COLOR ARROW
+#define ARROW ARROW_COLOR"~> " RESET_COLOR
+#define PROMPT PROMPT_COLOR"mishell " RESET_COLOR ARROW
 #define RED "\033[0;31m"
 
 enum				e_token
