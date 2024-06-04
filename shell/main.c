@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 14:45:20 by emuminov          #+#    #+#             */
-/*   Updated: 2024/06/04 19:53:09 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/04 19:59:24 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,10 @@ int	main(int argc, char **argv, char **env)
 			print_error_message(&e);
 			token_list_free(&sh.lst);
 			free(input);// free 
+			sh.last_status = set_or_get_exit_status(SET, 2);
 			continue ;
 		}
-		sh.last_status = set_or_get_exit_status(GET, -1);// why here ??
+		sh.last_status = set_or_get_exit_status(GET, -1);
 		if (!expand_tokens(&sh, &sh.lst))
 			return (free(input), token_list_free(&sh.lst), EXIT_FAILURE); // free environement
 		if (!command_table(&sh))
