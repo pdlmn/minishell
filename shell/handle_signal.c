@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 13:35:45 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/24 11:06:57 by omougel          ###   ########.fr       */
+/*   Updated: 2024/06/04 17:27:21 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ static void	handle_signal(int signal, siginfo_t *siginfo, void *context)
 	{
 		set_or_get_exit_status(SET, 130);
 		ft_putstr_fd("\n", STDOUT_FILENO);
-		//rl_on_new_line();
-		//rl_replace_line("", 0);
-		//rl_redisplay();
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
 	}
 }
 

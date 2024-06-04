@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 14:45:20 by emuminov          #+#    #+#             */
-/*   Updated: 2024/06/04 17:23:29 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/04 19:53:09 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,11 +72,11 @@ int	main(int argc, char **argv, char **env)
 		printf("\nCommand table:\n");
 		command_table_print(sh.cmd_tab);
 		if (sh.cmd_tab[0][0])
-			sh.last_status = set_or_get_exit_status(SET, execute(sh));
+		{
+			execute(sh);
+		}
 		ft_free_table(sh.cmd_tab);
 		token_list_free(&sh.lst);
 		free(input);
 	}
-	ht_free_table(sh.env);
-	rl_clear_history();
 }

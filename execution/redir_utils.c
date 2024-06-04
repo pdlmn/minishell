@@ -6,7 +6,7 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 01:01:59 by omougel           #+#    #+#             */
-/*   Updated: 2024/06/02 01:02:43 by omougel          ###   ########.fr       */
+/*   Updated: 2024/06/04 17:42:23 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ char	*expend_heredoc(char *buffer)
 {
 	t_minishell	sh;
 
+	sh.lst.head = NULL;
+	sh.lst.tail = NULL;
 	lex_heredoc_input(buffer, &sh.lst, DELIM);
 	expand_heredoc(&sh, &sh.lst, DELIM);
 	buffer = join_expanded_strings(&sh.lst);

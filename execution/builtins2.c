@@ -6,7 +6,7 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 00:52:52 by omougel           #+#    #+#             */
-/*   Updated: 2024/06/02 19:30:26 by omougel          ###   ########.fr       */
+/*   Updated: 2024/06/04 19:16:08 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,18 @@ int	echo(char **cmd, int fd_out)
 	return (0);
 }
 
-int	pwd(char **cmd, t_ht_table *env, int fd_out)
+int	pwd(char **cmd, t_minishell *sh, int fd_out)
 {
+	char	*pwd;
+
 	if (cmd[1] && cmd[1][0] == '-')
 		return (ft_putstr_fd("mishell: pwd: invalid option\n", 2), 2);
-	ft_putstr_fd(ht_get(env, "PWD"), fd_out);
+	pwd = getcwd(NULL, 0);
+	if (!pwd)
+		ft_exit(sh);
+	ft_putstr_fd(pwd, fd_out);
 	ft_putchar_fd('\n', fd_out);
+	free(pwd);
 	return (0);
 }
 

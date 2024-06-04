@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 14:34:14 by emuminov          #+#    #+#             */
-/*   Updated: 2024/06/04 17:22:53 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/04 19:51:57 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include <readline/history.h>
 #include <readline/readline.h>
 #include <signal.h>
+#include <sys/stat.h>
 #define PROMPT_COLOR "\x1B[33m"
 #define ARROW_COLOR "\x1B[32m"
 #define RESET_COLOR "\x1B[0m"
@@ -179,4 +180,4 @@ int					set_or_get_exit_status(enum e_access_flag flag,
 		int new_status);
 void				attach_signal_handlers();
 
-int  execute(t_minishell msh);
+void  execute(t_minishell msh);

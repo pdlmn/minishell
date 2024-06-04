@@ -6,7 +6,7 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 00:47:00 by omougel           #+#    #+#             */
-/*   Updated: 2024/06/03 00:23:20 by omougel          ###   ########.fr       */
+/*   Updated: 2024/06/04 19:43:40 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,15 +62,22 @@ int	next(char *path, char **newpwd)
 	return (i);
 }
 
-char	*find_newpwd(char *path, t_ht_table *env)
+char	*find_newpwd(char *path, t_minishell *sh)
 {
 	char	*newpwd;
 	int		i;
 
 	i = 0;
 	if (path[0] == '/')
-		return (path);
-	newpwd = ft_strdup(ht_get(env, "PWD"));
+		return (ft_strdup(path));
+	newpwd = ft_strdup(ht_get(sh->env, "PWD"));
+	if (!newpwd)
+	{
+		newpwd = getcwd(NULL, 0);
+		if (!newpwd)
+			ft_exit(sh);
+		ht_set(sh->env, "PWD", newpwd);
+	}
 	while (path[i])
 	{
 		if (path[i] == '/')
@@ -85,26 +92,33 @@ char	*find_newpwd(char *path, t_ht_table *env)
 	return (newpwd);
 }
 
-int	cd(char **cmd, t_ht_table *env)
+int	cd(char **cmd, t_minishell *sh)
 {
-	char	*newpwd;
+	char			*newpwd;
+	struct	stat	buf;
 
 	if (cmd[1] && cmd[1][0] == '-' && cmd[1][1] != '\0')
 		return (ft_putstr_fd("mishell: cd: invalid option\n", 2), 2);
 	if (cmd[2])
 		return (ft_putstr_fd("mishell: cd: too many arguments\n", 2), 1);
+	stat(cmd[1], &buf);
 	if (!ft_strcmp(cmd[1], "-"))
 	{
-		newpwd = ft_strdup(ht_get(env, "OLDPWD"));
+		newpwd = ht_get(sh->env, "OLDPWD");
 		if (!newpwd)
 			return (ft_putstr_fd("mishell: cd: OLDPWD not set\n", 2), 1);
+		newpwd = ft_strdup(newpwd);
 	}
+	else if (!S_ISDIR(buf.st_mode))
+		return (ft_putstr_fd("mishell: cd: not a dir\n", 2), 1);
 	else if (cmd[1] && !access(cmd[1], F_OK))
-		newpwd = find_newpwd(cmd[1], env);
+		newpwd = find_newpwd(cmd[1], sh);
 	else
 		return (ft_putstr_fd("mishell: cd: No such file or directory\n", 2), 1);
-	ht_set(env, "OLDPWD", ht_get(env, "PWD"));
-	ht_set(env, "PWD", newpwd);
+	if (!newpwd)
+		return (ft_putstr_fd("mishell: cd: OLDPWD not set\n", 2), 1);
+	ht_set(sh->env, "OLDPWD", ht_get(sh->env, "PWD"));
+	ht_set(sh->env, "PWD", newpwd);
 	chdir(newpwd);
 	free(newpwd);
 	return (0);

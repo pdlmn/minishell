@@ -6,7 +6,7 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 00:54:42 by omougel           #+#    #+#             */
-/*   Updated: 2024/06/02 22:23:53 by omougel          ###   ########.fr       */
+/*   Updated: 2024/06/04 19:21:33 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,9 +82,9 @@ int	do_builtins(char **cmd, t_ht_table *env, t_minishell *sh)
 	if (!ft_strcmp(cmd[0], "echo"))
 		return (echo(cmd, sh->fd_out));
 	if (!ft_strcmp(cmd[0], "cd"))
-		return (cd(cmd, env));
+		return (cd(cmd, sh));
 	if (!ft_strcmp(cmd[0], "pwd"))
-		return (pwd(cmd, env, sh->fd_out));
+		return (pwd(cmd, sh, sh->fd_out));
 	if (!ft_strcmp(cmd[0], "export"))
 		return (export(cmd, env));
 	if (!ft_strcmp(cmd[0], "unset"))

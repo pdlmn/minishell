@@ -6,7 +6,7 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 09:49:14 by omougel           #+#    #+#             */
-/*   Updated: 2024/06/03 00:13:20 by omougel          ###   ########.fr       */
+/*   Updated: 2024/06/04 19:52:57 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void  check_cmd(t_minishell *msh, int *fd, int i)
 	}
 }
 
-t_minishell	*read_cmd(t_minishell *msh, int *fd)
+t_minishell	*read_cmd(t_minishell *msh, int *fd, int *pid)
 {
 	int	  i;
 
@@ -89,7 +89,7 @@ t_minishell	*read_cmd(t_minishell *msh, int *fd)
 			msh->fd_in = check_input(msh->cmd_tab[i], msh->fd_in);
 		else if (is_output(msh->cmd_tab[i][0]))
 			msh->fd_out = check_output(msh->cmd_tab[i], msh->fd_out);
-		else
+		else if (msh->cmd_tab[i][0])
 			check_cmd(msh, fd, i);
 		if (msh->fd_in == -1 || msh->fd_out == -1)
 		{
@@ -98,9 +98,11 @@ t_minishell	*read_cmd(t_minishell *msh, int *fd)
 				break ;
 			secure_close(&msh->fd_out, &msh->fd_in, &fd[0], &fd[1]);
 			ft_exit(msh);
-		}	
+		}
 		i++;
 	}
+	if (*pid == 0)
+		ft_exit(msh);
 	return (msh);
 }
 
@@ -119,12 +121,12 @@ char	***fork_and_execute(t_minishell *msh, int *pid)
 		msh->fd_out = fd[1];
 	}
 	if (is_builtin(msh->cmd_tab[go_to_next_pipe(msh->cmd_tab) - 1][0]))
-		read_cmd(msh, fd);
+		read_cmd(msh, fd, pid);
 	else
 	{
 		*pid = fork();
 		if (*pid == 0)
-			read_cmd(msh, fd);
+			read_cmd(msh, fd, pid);
 	}
 	secure_close(&msh->fd_out, &msh->fd_in, &fd[0], &fd[1]);
 	if (!msh->cmd_tab || !msh->cmd_tab[go_to_next_pipe(msh->cmd_tab)])
@@ -132,7 +134,7 @@ char	***fork_and_execute(t_minishell *msh, int *pid)
 	return (&msh->cmd_tab[go_to_next_pipe(msh->cmd_tab) + 1]);
 }
 
-int	execute(t_minishell msh)
+void	execute(t_minishell msh)
 {
 	int	num_of_child;
 
@@ -144,32 +146,5 @@ int	execute(t_minishell msh)
 		waitpid(msh.pid, &msh.last_status, 0);
 	while (num_of_child-- > 0)
 		wait(NULL);
-	return (WEXITSTATUS(msh.last_status));
+	set_or_get_exit_status(SET, msh.last_status);
 }
-				/*
-				if (is_input(msh->cmd_tab[i][0]))
-					msh->fd_in = check_input(msh->cmd_tab[i], msh->fd_in);
-				else if (is_output(msh->cmd_tab[i][0]))
-					msh->fd_out = check_output(msh->cmd_tab[i], msh->fd_out);
-				else
-				{
-					if (msh->fd_in >= 0 && msh->fd_out > 0)
-					{
-						if (msh->fd_out == 1 && fd[1] > 0)
-							msh->fd_out = fd[1];
-						else if (fd[1] > 0)
-							close(fd[1]);
-						cmd = find_command(msh->cmd_tab[i], *msh);
-						if (cmd && *cmd)
-						{
-							if (fd[0] > 0)
-								close(fd[0]);
-							exec_cmd(msh->cmd_tab[i], *msh);
-							free(cmd[0]);
-						}
-						secure_close(&msh->fd_out, &msh->fd_in, &fd[0], &fd[1]);
-						ft_exit(msh);
-					}
-					secure_close(&msh->fd_out, &msh->fd_in, &fd[0], &fd[1]);
-					ft_exit(msh);
-				}*/
