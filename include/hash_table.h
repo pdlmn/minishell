@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 12:02:12 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/01 04:04:17 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/05 23:23:54 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,3 @@ int				ht_find_index(t_ht_table *ht, const char *key);
 
 #define FNV_OFFSET 2166136261u
 #define FNV_PRIME 16777619u
-#define HT_INITIAL_BASE_SIZE 113

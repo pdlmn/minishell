@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 03:55:58 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/05 17:07:58 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/05 23:24:07 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,6 @@ void	ht_resize(t_ht_table *ht, int base_size)
 	t_ht_table	*tmp_ht;
 	int			i;
 
-	if (ht->base_size < HT_INITIAL_BASE_SIZE)
-		return ;
 	tmp_ht = ht_new(base_size);
 	i = 0;
 	while (i < ht->size)
