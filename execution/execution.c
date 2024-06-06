@@ -6,7 +6,7 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 09:49:14 by omougel           #+#    #+#             */
-/*   Updated: 2024/06/04 19:52:57 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/06 15:47:20 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,8 @@ t_minishell	*read_cmd(t_minishell *msh, int *fd, int *pid)
 
 char	***fork_and_execute(t_minishell *msh, int *pid)
 {
-	int		fd[2];
+	int		            fd[2];
+//	struct sigaction    sa_sigint;
 
 	fd[0] = -1;
 	fd[1] = -1;
@@ -124,7 +125,10 @@ char	***fork_and_execute(t_minishell *msh, int *pid)
 		read_cmd(msh, fd, pid);
 	else
 	{
+//		init_signals(&sa_sigint);
+        init_exec_signals();
 		*pid = fork();
+//		set_or_get_pid(SET, *pid);
 		if (*pid == 0)
 			read_cmd(msh, fd, pid);
 	}

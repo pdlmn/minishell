@@ -43,7 +43,6 @@ SRCS=lexer.c \
 	 builtins1.c \
 	 builtins2.c \
 	 cd_builtin.c \
-	 execution_utils.c \
 	 find_command_and_redir.c \
 	 redir.c \
 	 redir_utils.c \
@@ -57,7 +56,7 @@ VPATH=lexer:token:error_handling:hash_table:expansion:env:shell:command_table:ex
 all: $(NAME)
 
 $(NAME): $(LIB) $(HEADER) $(OBJS)
-	$(CC) $(CFLAGS) $(RLFLAGS) $(OBJS) $(LIB) -o $@ #-lreadline
+	$(CC) $(CFLAGS) $(RLFLAGS) $(OBJS) $(LIB) -o $@
 
 $(OBJS_DIR)%.o: %.c $(HEADERS)
 	@mkdir -p $(OBJS_DIR)

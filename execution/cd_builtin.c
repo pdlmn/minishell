@@ -94,12 +94,13 @@ char	*find_newpwd(char *path, t_minishell *sh)
 
 int	cd(char **cmd, t_minishell *sh)
 {
-	char			*newpwd;
+	char			*newpwd = NULL;
+//	char			newpwd[PATH_MAX];
 	struct	stat	buf;
 
 	if (cmd[1] && cmd[1][0] == '-' && cmd[1][1] != '\0')
 		return (ft_putstr_fd("mishell: cd: invalid option\n", 2), 2);
-	if (cmd[2])
+	if (cmd[1] && cmd[2])
 		return (ft_putstr_fd("mishell: cd: too many arguments\n", 2), 1);
 	stat(cmd[1], &buf);
 	if (!ft_strcmp(cmd[1], "-"))
@@ -109,17 +110,21 @@ int	cd(char **cmd, t_minishell *sh)
 			return (ft_putstr_fd("mishell: cd: OLDPWD not set\n", 2), 1);
 		newpwd = ft_strdup(newpwd);
 	}
-	else if (!S_ISDIR(buf.st_mode))
-		return (ft_putstr_fd("mishell: cd: not a dir\n", 2), 1);
-	else if (cmd[1] && !access(cmd[1], F_OK))
-		newpwd = find_newpwd(cmd[1], sh);
-	else
-		return (ft_putstr_fd("mishell: cd: No such file or directory\n", 2), 1);
-	if (!newpwd)
-		return (ft_putstr_fd("mishell: cd: OLDPWD not set\n", 2), 1);
-	ht_set(sh->env, "OLDPWD", ht_get(sh->env, "PWD"));
-	ht_set(sh->env, "PWD", newpwd);
-	chdir(newpwd);
-	free(newpwd);
+//	else if (!S_ISDIR(buf.st_mode))
+//		return (ft_putstr_fd("mishell: cd: not a dir\n", 2), 1);
+	else if (cmd[1])// && !access(cmd[1], F_OK))
+	    newpwd = find_newpwd(cmd[1], sh);
+//	else
+//		return (ft_putstr_fd("mishell: cd: No such file or directory\n", 2), 1);
+//    printf("truc = %s\n", newpwd);
+	if (chdir(newpwd) != 0)
+    {
+        printf("minishell: cd: %s\n", strerror(errno));
+        free(newpwd);
+        return (1);
+    }
+    ht_set(sh->env, "OLDPWD", ht_get(sh->env, "PWD"));
+    ht_set(sh->env, "PWD", newpwd);
+    free(newpwd);
 	return (0);
 }

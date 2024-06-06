@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 14:45:20 by emuminov          #+#    #+#             */
-/*   Updated: 2024/06/05 23:24:38 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/06 15:40:11 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,15 @@ int	set_or_get_exit_status(enum e_access_flag flag, int new_status)
 	return (last_exit_status);
 }
 
+int	set_or_get_pid(enum e_access_flag flag, int new_pid)
+{
+	static int	pid;
+
+	if (flag == SET)
+		pid = new_pid;
+	return (pid);
+}
+
 int	main(int argc, char **argv, char **env)
 {
 	static t_minishell	sh;
@@ -40,10 +49,14 @@ int	main(int argc, char **argv, char **env)
 
 	(void)argc;
 	(void)argv;
-	attach_signal_handlers();
 	env_init(env, &sh);
+
+	set_or_get_pid(SET, 1);
 	while (42)
 	{
+		signal(SIGINT, parsing_handle_signal);
+		signal(SIGQUIT, SIG_IGN);
+		signal(SIGTSTP, SIG_IGN);
 		input = read_command(PROMPT);
 		if (input == NULL)
 		{
@@ -52,8 +65,8 @@ int	main(int argc, char **argv, char **env)
 		}
 		if (!lex_input(input, &sh.lst))
 			return (free(input), EXIT_FAILURE); // we also  have to free environement
-		printf("Pre-expanded tokens:\n");
-		token_list_print(&sh.lst);
+//		printf("Pre-expanded tokens:\n");
+//		token_list_print(&sh.lst);
 		e = check_errors(&sh.lst);
 		if (e.code != NO_ERRORS)
 		{
@@ -68,10 +81,10 @@ int	main(int argc, char **argv, char **env)
 			return (free(input), token_list_free(&sh.lst), EXIT_FAILURE); // free environement
 		if (!command_table(&sh))
 			return (free(input), token_list_free(&sh.lst), EXIT_FAILURE);// free environement
-		printf("Expanded tokens:\n");
-		token_list_print(&sh.lst);
-		printf("\nCommand table:\n");
-		command_table_print(sh.cmd_tab);
+//		printf("Expanded tokens:\n");
+//		token_list_print(&sh.lst);
+//		printf("\nCommand table:\n");
+//		command_table_print(sh.cmd_tab);
 		if (sh.cmd_tab[0][0])
 		{
 			execute(sh);

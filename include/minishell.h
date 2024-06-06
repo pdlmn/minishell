@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 14:34:14 by emuminov          #+#    #+#             */
-/*   Updated: 2024/06/04 19:51:57 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/06 15:46:28 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,6 +178,12 @@ size_t				count_pipe(t_token *lst);
 
 int					set_or_get_exit_status(enum e_access_flag flag,
 		int new_status);
-void				attach_signal_handlers();
 
 void  execute(t_minishell msh);
+
+
+int	set_or_get_pid(enum e_access_flag flag, int new_pid);
+void	exec_handle_signal(int signal);
+void	parsing_handle_signal(int signal);
+void	init_signals(struct sigaction	*sa_sigint);
+void init_exec_signals();

@@ -6,33 +6,46 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 13:35:45 by emuminov          #+#    #+#             */
-/*   Updated: 2024/06/05 23:53:50 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/06 15:47:40 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+#include <sys/ioctl.h>
 
-static void	handle_signal(int signal, siginfo_t *siginfo, void *context)
+void	exec_handle_signal(int signal)
 {
-	(void)context;
-	(void)siginfo;
+    (void)signal;
+}
+
+void	parsing_handle_signal(int signal)
+{
 	if (signal == SIGINT)
 	{
-		set_or_get_exit_status(SET, 130);
-		ft_putstr_fd("\n", STDOUT_FILENO);
-		rl_on_new_line();
+//		set_or_get_exit_status(SET, 130);
+		ioctl(STDIN_FILENO, TIOCSTI, "\n");
 		rl_replace_line("", 0);
-		rl_redisplay();
+		rl_on_new_line();
 	}
 }
 
-void	attach_signal_handlers()
+void	init_signals(struct sigaction	*sa_sigint)
 {
-	struct sigaction	sa_sigint;
-	struct sigaction	sa_sigquit;
+//	if (set_or_get_pid(GET, -1) == 0)
+//		return;
+	sa_sigint->sa_handler = &exec_handle_signal;
+	sa_sigint->sa_flags = SA_SIGINFO | SA_RESTART;
+	sigemptyset(&(sa_sigint)->sa_mask);
+	sigaction(SIGINT, sa_sigint, NULL);
+}
 
-	sa_sigint.sa_sigaction = handle_signal;
-	sa_sigquit.sa_handler = SIG_IGN;
-	sigaction(SIGINT, &sa_sigint, 0);
-	sigaction(SIGQUIT, &sa_sigquit, 0);
+void init_exec_signals() {
+    struct sigaction sa_sigint;
+
+    ft_bzero(&sa_sigint, sizeof(sa_sigint));
+    sigemptyset(&(sa_sigint).sa_mask);
+    sa_sigint.sa_flags = SA_SIGINFO | SA_RESTART;
+    sa_sigint.sa_handler = exec_handle_signal;
+    sigaction(SIGINT, &sa_sigint, NULL);
+    sigaction(SIGQUIT, &sa_sigint, NULL);
 }

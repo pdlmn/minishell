@@ -52,6 +52,8 @@ int	export(char **cmd, t_ht_table *env)
 	char	*value;
 
 	i = 0;
+    key = NULL;
+    value = NULL;
 	if (cmd[1] && cmd[1][0] == '-')
 		return (ft_putstr_fd("mishell: export: invalid option\n", 2), 2);
 	while (cmd[++i])
@@ -62,7 +64,9 @@ int	export(char **cmd, t_ht_table *env)
 		value = strvalue(ht_get(env, key), &cmd[i][valuelen(cmd[i])], cmd[i][keylen(cmd[i])]);
 		ht_set(env, key, value);
 	}
-	return (0);
+    free(key);
+    free(value);
+    return (0);
 }
 
 int	unset(char **cmd, t_ht_table *env)
