@@ -41,7 +41,7 @@ size_t	valuelen(char *str)
 char  *strvalue(char *envval, char *newval, char plus)
 {
 	if (!plus || !envval)
-		return (newval);
+		return (ft_strdup(newval));
 	return (ft_strjoin(envval, newval));
 }
 
