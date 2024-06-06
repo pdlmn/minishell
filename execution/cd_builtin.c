@@ -6,7 +6,7 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 00:47:00 by omougel           #+#    #+#             */
-/*   Updated: 2024/06/04 19:43:40 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/06 23:33:43 by omougel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,92 @@ int	last_occ(char *str, char c)
 	return (last);
 }
 
+char	*prev(char *newpwd)
+{
+	if (last_occ(newpwd, '/') != 1 || newpwd[1] != '\0')
+		newpwd[last_occ(newpwd, '/')] = '\0';
+	return (newpwd);
+}
+
+char  *next(char *path, char *newpwd)
+{
+	int	len;
+
+	newpwd[ft_strlen(newpwd)] = '/';
+	len = ft_strlen_till_c(path, '/') + ft_strlen(newpwd) + 1;
+	ft_strlcat(newpwd, path, len);
+	return (newpwd);
+}
+
+char	*find_newpwd(char *path, t_minishell *sh, char *newpwd)
+{
+	int		i;
+
+	i = 0;
+	if (path[0] == '/')
+		return (ft_strcpy(newpwd, path));
+	ft_strcpy(newpwd, ht_get(sh->env, "PWD"));
+	if (!newpwd)
+	{
+		newpwd = getcwd(NULL, 0);
+		if (!newpwd)
+			ft_exit(sh);
+		ht_set(sh->env, "PWD", newpwd);
+	}
+	while (path[i])
+	{
+		if (path[i] == '/')
+			i++;
+		else if (!ft_strncmp(&path[i], "..", 2))
+		{
+			prev(newpwd);
+			i += 2;
+		}
+		else if (path[i] == '.')
+			i++;
+		else
+		{
+			next(&path[i], newpwd);
+			i += ft_strlen_till_c(&path[i], '/');
+		}
+	}
+	return (newpwd);
+}
+
+int	cd(char **cmd, t_minishell *sh)
+{
+//	char			*newpwd = NULL;
+	char			newpwd[PATH_MAX];
+	struct	stat	buf;
+
+	if (cmd[1] && cmd[1][0] == '-' && cmd[1][1] != '\0')
+		return (ft_putstr_fd("mishell: cd: invalid option\n", 2), 2);
+	if (cmd[1] && cmd[2])
+		return (ft_putstr_fd("mishell: cd: too many arguments\n", 2), 1);
+	stat(cmd[1], &buf);
+	if (!ft_strcmp(cmd[1], "-"))
+	{
+		ft_strcpy(newpwd, ht_get(sh->env, "OLDPWD"));
+		if (!newpwd[0])
+			return (ft_putstr_fd("mishell: cd: OLDPWD not set\n", 2), 1);
+	}
+//	else if (!S_ISDIR(buf.st_mode))
+//		return (ft_putstr_fd("mishell: cd: not a dir\n", 2), 1);
+	else if (cmd[1])// && !access(cmd[1], F_OK))
+	    find_newpwd(cmd[1], sh, newpwd);
+//	else
+//		return (ft_putstr_fd("mishell: cd: No such file or directory\n", 2), 1);
+//    printf("truc = %s\n", newpwd);
+	if (chdir(newpwd) != 0)
+    {
+        printf("minishell: cd: %s\n", strerror(errno));
+        return (1);
+    }
+    ht_set(sh->env, "OLDPWD", ht_get(sh->env, "PWD"));
+    ht_set(sh->env, "PWD", newpwd);
+	return (0);
+}
+/*
 int	prev(char **newpwd)
 {
 	char *tmp;
@@ -91,7 +177,6 @@ char	*find_newpwd(char *path, t_minishell *sh)
 	}
 	return (newpwd);
 }
-
 int	cd(char **cmd, t_minishell *sh)
 {
 	char			*newpwd = NULL;
@@ -127,4 +212,4 @@ int	cd(char **cmd, t_minishell *sh)
     ht_set(sh->env, "PWD", newpwd);
     free(newpwd);
 	return (0);
-}
+}*/
