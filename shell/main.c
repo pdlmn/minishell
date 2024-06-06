@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 14:45:20 by emuminov          #+#    #+#             */
-/*   Updated: 2024/06/06 15:40:11 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/06 18:16:40 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,6 @@ int	set_or_get_exit_status(enum e_access_flag flag, int new_status)
 	return (last_exit_status);
 }
 
-int	set_or_get_pid(enum e_access_flag flag, int new_pid)
-{
-	static int	pid;
-
-	if (flag == SET)
-		pid = new_pid;
-	return (pid);
-}
-
 int	main(int argc, char **argv, char **env)
 {
 	static t_minishell	sh;
@@ -51,7 +42,6 @@ int	main(int argc, char **argv, char **env)
 	(void)argv;
 	env_init(env, &sh);
 
-	set_or_get_pid(SET, 1);
 	while (42)
 	{
 		signal(SIGINT, parsing_handle_signal);

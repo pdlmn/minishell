@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 13:35:45 by emuminov          #+#    #+#             */
-/*   Updated: 2024/06/06 15:47:40 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/06 18:13:02 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	parsing_handle_signal(int signal)
 {
 	if (signal == SIGINT)
 	{
-//		set_or_get_exit_status(SET, 130);
 		ioctl(STDIN_FILENO, TIOCSTI, "\n");
 		rl_replace_line("", 0);
 		rl_on_new_line();
@@ -31,8 +30,6 @@ void	parsing_handle_signal(int signal)
 
 void	init_signals(struct sigaction	*sa_sigint)
 {
-//	if (set_or_get_pid(GET, -1) == 0)
-//		return;
 	sa_sigint->sa_handler = &exec_handle_signal;
 	sa_sigint->sa_flags = SA_SIGINFO | SA_RESTART;
 	sigemptyset(&(sa_sigint)->sa_mask);
