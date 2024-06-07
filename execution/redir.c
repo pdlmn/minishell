@@ -6,7 +6,7 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 01:00:55 by omougel           #+#    #+#             */
-/*   Updated: 2024/06/07 18:27:31 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/07 18:48:03 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,15 @@ int	here_doc(char *lim, char *quoted)
 {
 	char	*old_buff;
 	char	*buff;
+	char	*new_line;
 	int		fd[2];
 
 	init_heredoc_signal_handlers();
 	write(1, "> ", 2);
 	buff = get_next_line(0);
+	new_line = ft_strchr(buff, '\n');
+	if (new_line)
+		*new_line = '\0';
 	if (pipe(fd) == -1)
 		return (EXIT_FAILURE);
 	while (buff && ft_strcmp(buff, lim))
@@ -36,6 +40,9 @@ int	here_doc(char *lim, char *quoted)
 		free(buff);
 		write(1, "> ", 2);
 		buff = get_next_line(0);
+		new_line = ft_strchr(buff, '\n');
+		if (new_line)
+			*new_line = '\0';
 		if (set_or_get_exit_status(GET, -1) == 130)
 			break;
 	}
