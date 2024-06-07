@@ -6,7 +6,7 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 09:49:14 by omougel           #+#    #+#             */
-/*   Updated: 2024/06/06 18:16:58 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/07 17:40:30 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ char	***fork_and_execute(t_minishell *msh, int *pid)
 		read_cmd(msh, fd, pid);
 	else
 	{
-        init_exec_signals();
+        init_exec_signal_handlers();
 		*pid = fork();
 		if (*pid == 0)
 			read_cmd(msh, fd, pid);

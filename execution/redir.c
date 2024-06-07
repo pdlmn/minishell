@@ -6,7 +6,7 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 01:00:55 by omougel           #+#    #+#             */
-/*   Updated: 2024/06/02 01:01:22 by omougel          ###   ########.fr       */
+/*   Updated: 2024/06/07 18:27:31 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,35 @@
 
 int	here_doc(char *lim, char *quoted)
 {
-	char	*buffer;
+	char	*old_buff;
+	char	*buff;
 	int		fd[2];
 
-	buffer = readline(">");
+	init_heredoc_signal_handlers();
+	write(1, "> ", 2);
+	buff = get_next_line(0);
 	if (pipe(fd) == -1)
 		return (EXIT_FAILURE);
-	while (buffer && ft_strcmp(buffer, lim))
+	while (buff && ft_strcmp(buff, lim))
 	{
 		if (!quoted)
-			buffer = expend_heredoc(buffer);
-		write(fd[1], buffer, ft_strlen(buffer));
+		{
+			old_buff = buff;
+			buff = expend_heredoc(buff);
+			free(old_buff);
+		}
+		write(fd[1], buff, ft_strlen(buff));
 		write(fd[1], "\n", 1);
-		free(buffer);
-		buffer = readline(">");
+		free(buff);
+		write(1, "> ", 2);
+		buff = get_next_line(0);
+		if (set_or_get_exit_status(GET, -1) == 130)
+			break;
 	}
-	free(buffer);
+	free(buff);
 	close(fd[1]);
+	if (set_or_get_exit_status(GET, -1) == 130)
+		return (get_next_line(-1), -1);
 	return (fd[0]);
 }
 

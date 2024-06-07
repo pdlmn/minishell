@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 14:34:14 by emuminov          #+#    #+#             */
-/*   Updated: 2024/06/06 15:46:28 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/07 17:50:04 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,9 +181,6 @@ int					set_or_get_exit_status(enum e_access_flag flag,
 
 void  execute(t_minishell msh);
 
-
-int	set_or_get_pid(enum e_access_flag flag, int new_pid);
-void	exec_handle_signal(int signal);
-void	parsing_handle_signal(int signal);
-void	init_signals(struct sigaction	*sa_sigint);
-void init_exec_signals();
+void 	init_exec_signal_handlers(void);
+void	init_interacrive_signal_handlers(void);
+void	init_heredoc_signal_handlers(void);

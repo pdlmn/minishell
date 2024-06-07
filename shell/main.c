@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 14:45:20 by emuminov          #+#    #+#             */
-/*   Updated: 2024/06/06 18:16:40 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/07 17:40:11 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@ char	*read_command(char *prompt)
 	command = readline(prompt);
 	if (!command) // what does that mean if readline returns NULL ??
 		return (NULL);
-	add_history(command);
-	return (command);
+	add_history(command); return (command);
 }
 
 int	set_or_get_exit_status(enum e_access_flag flag, int new_status)
@@ -44,9 +43,7 @@ int	main(int argc, char **argv, char **env)
 
 	while (42)
 	{
-		signal(SIGINT, parsing_handle_signal);
-		signal(SIGQUIT, SIG_IGN);
-		signal(SIGTSTP, SIG_IGN);
+		init_interacrive_signal_handlers();
 		input = read_command(PROMPT);
 		if (input == NULL)
 		{

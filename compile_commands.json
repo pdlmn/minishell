@@ -1,0 +1,1410 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_atoi.o",
+      "ft_atoi.c"
+    ],
+    "directory": "/home/emuminov/projects/minishell/libft",
+    "file": "/home/emuminov/projects/minishell/libft/ft_atoi.c",
+    "output": "/home/emuminov/projects/minishell/libft/ft_atoi.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_atoi_base.o",
+      "ft_atoi_base.c"
+    ],
+    "directory": "/home/emuminov/projects/minishell/libft",
+    "file": "/home/emuminov/projects/minishell/libft/ft_atoi_base.c",
+    "output": "/home/emuminov/projects/minishell/libft/ft_atoi_base.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_atol.o",
+      "ft_atol.c"
+    ],
+    "directory": "/home/emuminov/projects/minishell/libft",
+    "file": "/home/emuminov/projects/minishell/libft/ft_atol.c",
+    "output": "/home/emuminov/projects/minishell/libft/ft_atol.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_bzero.o",
+      "ft_bzero.c"
+    ],
+    "directory": "/home/emuminov/projects/minishell/libft",
+    "file": "/home/emuminov/projects/minishell/libft/ft_bzero.c",
+    "output": "/home/emuminov/projects/minishell/libft/ft_bzero.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_calloc.o",
+      "ft_calloc.c"
+    ],
+    "directory": "/home/emuminov/projects/minishell/libft",
+    "file": "/home/emuminov/projects/minishell/libft/ft_calloc.c",
+    "output": "/home/emuminov/projects/minishell/libft/ft_calloc.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_isalnum.o",
+      "ft_isalnum.c"
+    ],
+    "directory": "/home/emuminov/projects/minishell/libft",
+    "file": "/home/emuminov/projects/minishell/libft/ft_isalnum.c",
+    "output": "/home/emuminov/projects/minishell/libft/ft_isalnum.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_isalpha.o",
+      "ft_isalpha.c"
+    ],
+    "directory": "/home/emuminov/projects/minishell/libft",
+    "file": "/home/emuminov/projects/minishell/libft/ft_isalpha.c",
+    "output": "/home/emuminov/projects/minishell/libft/ft_isalpha.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_isascii.o",
+      "ft_isascii.c"
+    ],
+    "directory": "/home/emuminov/projects/minishell/libft",
+    "file": "/home/emuminov/projects/minishell/libft/ft_isascii.c",
+    "output": "/home/emuminov/projects/minishell/libft/ft_isascii.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_isdigit.o",
+      "ft_isdigit.c"
+    ],
+    "directory": "/home/emuminov/projects/minishell/libft",
+    "file": "/home/emuminov/projects/minishell/libft/ft_isdigit.c",
+    "output": "/home/emuminov/projects/minishell/libft/ft_isdigit.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_isprint.o",
+      "ft_isprint.c"
+    ],
+    "directory": "/home/emuminov/projects/minishell/libft",
+    "file": "/home/emuminov/projects/minishell/libft/ft_isprint.c",
+    "output": "/home/emuminov/projects/minishell/libft/ft_isprint.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_isspace.o",
+      "ft_isspace.c"
+    ],
+    "directory": "/home/emuminov/projects/minishell/libft",
+    "file": "/home/emuminov/projects/minishell/libft/ft_isspace.c",
+    "output": "/home/emuminov/projects/minishell/libft/ft_isspace.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_ltoa_base.o",
+      "ft_ltoa_base.c"
+    ],
+    "directory": "/home/emuminov/projects/minishell/libft",
+    "file": "/home/emuminov/projects/minishell/libft/ft_ltoa_base.c",
+    "output": "/home/emuminov/projects/minishell/libft/ft_ltoa_base.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_ultoa_base.o",
+      "ft_ultoa_base.c"
+    ],
+    "directory": "/home/emuminov/projects/minishell/libft",
+    "file": "/home/emuminov/projects/minishell/libft/ft_ultoa_base.c",
+    "output": "/home/emuminov/projects/minishell/libft/ft_ultoa_base.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_itoa.o",
+      "ft_itoa.c"
+    ],
+    "directory": "/home/emuminov/projects/minishell/libft",
+    "file": "/home/emuminov/projects/minishell/libft/ft_itoa.c",
+    "output": "/home/emuminov/projects/minishell/libft/ft_itoa.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_itoa_base.o",
+      "ft_itoa_base.c"
+    ],
+    "directory": "/home/emuminov/projects/minishell/libft",
+    "file": "/home/emuminov/projects/minishell/libft/ft_itoa_base.c",
+    "output": "/home/emuminov/projects/minishell/libft/ft_itoa_base.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_memchr.o",
+      "ft_memchr.c"
+    ],
+    "directory": "/home/emuminov/projects/minishell/libft",
+    "file": "/home/emuminov/projects/minishell/libft/ft_memchr.c",
+    "output": "/home/emuminov/projects/minishell/libft/ft_memchr.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_memcmp.o",
+      "ft_memcmp.c"
+    ],
+    "directory": "/home/emuminov/projects/minishell/libft",
+    "file": "/home/emuminov/projects/minishell/libft/ft_memcmp.c",
+    "output": "/home/emuminov/projects/minishell/libft/ft_memcmp.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_memcpy.o",
+      "ft_memcpy.c"
+    ],
+    "directory": "/home/emuminov/projects/minishell/libft",
+    "file": "/home/emuminov/projects/minishell/libft/ft_memcpy.c",
+    "output": "/home/emuminov/projects/minishell/libft/ft_memcpy.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_memmove.o",
+      "ft_memmove.c"
+    ],
+    "directory": "/home/emuminov/projects/minishell/libft",
+    "file": "/home/emuminov/projects/minishell/libft/ft_memmove.c",
+    "output": "/home/emuminov/projects/minishell/libft/ft_memmove.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_memset.o",
+      "ft_memset.c"
+    ],
+    "directory": "/home/emuminov/projects/minishell/libft",
+    "file": "/home/emuminov/projects/minishell/libft/ft_memset.c",
+    "output": "/home/emuminov/projects/minishell/libft/ft_memset.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_free_split.o",
+      "ft_free_split.c"
+    ],
+    "directory": "/home/emuminov/projects/minishell/libft",
+    "file": "/home/emuminov/projects/minishell/libft/ft_free_split.c",
+    "output": "/home/emuminov/projects/minishell/libft/ft_free_split.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_putchar_fd.o",
+      "ft_putchar_fd.c"
+    ],
+    "directory": "/home/emuminov/projects/minishell/libft",
+    "file": "/home/emuminov/projects/minishell/libft/ft_putchar_fd.c",
+    "output": "/home/emuminov/projects/minishell/libft/ft_putchar_fd.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_putendl_fd.o",
+      "ft_putendl_fd.c"
+    ],
+    "directory": "/home/emuminov/projects/minishell/libft",
+    "file": "/home/emuminov/projects/minishell/libft/ft_putendl_fd.c",
+    "output": "/home/emuminov/projects/minishell/libft/ft_putendl_fd.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_putnbr_fd.o",
+      "ft_putnbr_fd.c"
+    ],
+    "directory": "/home/emuminov/projects/minishell/libft",
+    "file": "/home/emuminov/projects/minishell/libft/ft_putnbr_fd.c",
+    "output": "/home/emuminov/projects/minishell/libft/ft_putnbr_fd.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_putstr_fd.o",
+      "ft_putstr_fd.c"
+    ],
+    "directory": "/home/emuminov/projects/minishell/libft",
+    "file": "/home/emuminov/projects/minishell/libft/ft_putstr_fd.c",
+    "output": "/home/emuminov/projects/minishell/libft/ft_putstr_fd.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_printf/ft_printf.o",
+      "ft_printf/ft_printf.c"
+    ],
+    "directory": "/home/emuminov/projects/minishell/libft",
+    "file": "/home/emuminov/projects/minishell/libft/ft_printf/ft_printf.c",
+    "output": "/home/emuminov/projects/minishell/libft/ft_printf/ft_printf.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_printf/ft_printf_funcs.o",
+      "ft_printf/ft_printf_funcs.c"
+    ],
+    "directory": "/home/emuminov/projects/minishell/libft",
+    "file": "/home/emuminov/projects/minishell/libft/ft_printf/ft_printf_funcs.c",
+    "output": "/home/emuminov/projects/minishell/libft/ft_printf/ft_printf_funcs.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_split.o",
+      "ft_split.c"
+    ],
+    "directory": "/home/emuminov/projects/minishell/libft",
+    "file": "/home/emuminov/projects/minishell/libft/ft_split.c",
+    "output": "/home/emuminov/projects/minishell/libft/ft_split.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_strchr.o",
+      "ft_strchr.c"
+    ],
+    "directory": "/home/emuminov/projects/minishell/libft",
+    "file": "/home/emuminov/projects/minishell/libft/ft_strchr.c",
+    "output": "/home/emuminov/projects/minishell/libft/ft_strchr.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_strdup.o",
+      "ft_strdup.c"
+    ],
+    "directory": "/home/emuminov/projects/minishell/libft",
+    "file": "/home/emuminov/projects/minishell/libft/ft_strdup.c",
+    "output": "/home/emuminov/projects/minishell/libft/ft_strdup.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_striteri.o",
+      "ft_striteri.c"
+    ],
+    "directory": "/home/emuminov/projects/minishell/libft",
+    "file": "/home/emuminov/projects/minishell/libft/ft_striteri.c",
+    "output": "/home/emuminov/projects/minishell/libft/ft_striteri.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_strjoin.o",
+      "ft_strjoin.c"
+    ],
+    "directory": "/home/emuminov/projects/minishell/libft",
+    "file": "/home/emuminov/projects/minishell/libft/ft_strjoin.c",
+    "output": "/home/emuminov/projects/minishell/libft/ft_strjoin.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_strlcat.o",
+      "ft_strlcat.c"
+    ],
+    "directory": "/home/emuminov/projects/minishell/libft",
+    "file": "/home/emuminov/projects/minishell/libft/ft_strlcat.c",
+    "output": "/home/emuminov/projects/minishell/libft/ft_strlcat.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_strlcpy.o",
+      "ft_strlcpy.c"
+    ],
+    "directory": "/home/emuminov/projects/minishell/libft",
+    "file": "/home/emuminov/projects/minishell/libft/ft_strlcpy.c",
+    "output": "/home/emuminov/projects/minishell/libft/ft_strlcpy.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_strcpy.o",
+      "ft_strcpy.c"
+    ],
+    "directory": "/home/emuminov/projects/minishell/libft",
+    "file": "/home/emuminov/projects/minishell/libft/ft_strcpy.c",
+    "output": "/home/emuminov/projects/minishell/libft/ft_strcpy.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_strlen.o",
+      "ft_strlen.c"
+    ],
+    "directory": "/home/emuminov/projects/minishell/libft",
+    "file": "/home/emuminov/projects/minishell/libft/ft_strlen.c",
+    "output": "/home/emuminov/projects/minishell/libft/ft_strlen.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_strlen_till_c.o",
+      "ft_strlen_till_c.c"
+    ],
+    "directory": "/home/emuminov/projects/minishell/libft",
+    "file": "/home/emuminov/projects/minishell/libft/ft_strlen_till_c.c",
+    "output": "/home/emuminov/projects/minishell/libft/ft_strlen_till_c.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_strmapi.o",
+      "ft_strmapi.c"
+    ],
+    "directory": "/home/emuminov/projects/minishell/libft",
+    "file": "/home/emuminov/projects/minishell/libft/ft_strmapi.c",
+    "output": "/home/emuminov/projects/minishell/libft/ft_strmapi.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_strcmp.o",
+      "ft_strcmp.c"
+    ],
+    "directory": "/home/emuminov/projects/minishell/libft",
+    "file": "/home/emuminov/projects/minishell/libft/ft_strcmp.c",
+    "output": "/home/emuminov/projects/minishell/libft/ft_strcmp.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_strncmp.o",
+      "ft_strncmp.c"
+    ],
+    "directory": "/home/emuminov/projects/minishell/libft",
+    "file": "/home/emuminov/projects/minishell/libft/ft_strncmp.c",
+    "output": "/home/emuminov/projects/minishell/libft/ft_strncmp.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_strnstr.o",
+      "ft_strnstr.c"
+    ],
+    "directory": "/home/emuminov/projects/minishell/libft",
+    "file": "/home/emuminov/projects/minishell/libft/ft_strnstr.c",
+    "output": "/home/emuminov/projects/minishell/libft/ft_strnstr.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_strrchr.o",
+      "ft_strrchr.c"
+    ],
+    "directory": "/home/emuminov/projects/minishell/libft",
+    "file": "/home/emuminov/projects/minishell/libft/ft_strrchr.c",
+    "output": "/home/emuminov/projects/minishell/libft/ft_strrchr.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_strtrim.o",
+      "ft_strtrim.c"
+    ],
+    "directory": "/home/emuminov/projects/minishell/libft",
+    "file": "/home/emuminov/projects/minishell/libft/ft_strtrim.c",
+    "output": "/home/emuminov/projects/minishell/libft/ft_strtrim.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_substr.o",
+      "ft_substr.c"
+    ],
+    "directory": "/home/emuminov/projects/minishell/libft",
+    "file": "/home/emuminov/projects/minishell/libft/ft_substr.c",
+    "output": "/home/emuminov/projects/minishell/libft/ft_substr.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_tolower.o",
+      "ft_tolower.c"
+    ],
+    "directory": "/home/emuminov/projects/minishell/libft",
+    "file": "/home/emuminov/projects/minishell/libft/ft_tolower.c",
+    "output": "/home/emuminov/projects/minishell/libft/ft_tolower.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "ft_toupper.o",
+      "ft_toupper.c"
+    ],
+    "directory": "/home/emuminov/projects/minishell/libft",
+    "file": "/home/emuminov/projects/minishell/libft/ft_toupper.c",
+    "output": "/home/emuminov/projects/minishell/libft/ft_toupper.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "get_next_line/get_next_line.o",
+      "get_next_line/get_next_line.c"
+    ],
+    "directory": "/home/emuminov/projects/minishell/libft",
+    "file": "/home/emuminov/projects/minishell/libft/get_next_line/get_next_line.c",
+    "output": "/home/emuminov/projects/minishell/libft/get_next_line/get_next_line.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g",
+      "-c",
+      "-I",
+      ".",
+      "-o",
+      "get_next_line/get_next_line_utils.o",
+      "get_next_line/get_next_line_utils.c"
+    ],
+    "directory": "/home/emuminov/projects/minishell/libft",
+    "file": "/home/emuminov/projects/minishell/libft/get_next_line/get_next_line_utils.c",
+    "output": "/home/emuminov/projects/minishell/libft/get_next_line/get_next_line_utils.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g3",
+      "-fsanitize=address",
+      "-c",
+      "-o",
+      "objs/lexer.o",
+      "lexer/lexer.c"
+    ],
+    "directory": "/home/emuminov/projects/minishell",
+    "file": "/home/emuminov/projects/minishell/lexer/lexer.c",
+    "output": "/home/emuminov/projects/minishell/objs/lexer.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g3",
+      "-fsanitize=address",
+      "-c",
+      "-o",
+      "objs/input_parsing.o",
+      "lexer/input_parsing.c"
+    ],
+    "directory": "/home/emuminov/projects/minishell",
+    "file": "/home/emuminov/projects/minishell/lexer/input_parsing.c",
+    "output": "/home/emuminov/projects/minishell/objs/input_parsing.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g3",
+      "-fsanitize=address",
+      "-c",
+      "-o",
+      "objs/lexer_utils.o",
+      "lexer/lexer_utils.c"
+    ],
+    "directory": "/home/emuminov/projects/minishell",
+    "file": "/home/emuminov/projects/minishell/lexer/lexer_utils.c",
+    "output": "/home/emuminov/projects/minishell/objs/lexer_utils.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g3",
+      "-fsanitize=address",
+      "-c",
+      "-o",
+      "objs/token_deletion.o",
+      "token/token_deletion.c"
+    ],
+    "directory": "/home/emuminov/projects/minishell",
+    "file": "/home/emuminov/projects/minishell/token/token_deletion.c",
+    "output": "/home/emuminov/projects/minishell/objs/token_deletion.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g3",
+      "-fsanitize=address",
+      "-c",
+      "-o",
+      "objs/token_operations.o",
+      "token/token_operations.c"
+    ],
+    "directory": "/home/emuminov/projects/minishell",
+    "file": "/home/emuminov/projects/minishell/token/token_operations.c",
+    "output": "/home/emuminov/projects/minishell/objs/token_operations.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g3",
+      "-fsanitize=address",
+      "-c",
+      "-o",
+      "objs/error_checking.o",
+      "error_handling/error_checking.c"
+    ],
+    "directory": "/home/emuminov/projects/minishell",
+    "file": "/home/emuminov/projects/minishell/error_handling/error_checking.c",
+    "output": "/home/emuminov/projects/minishell/objs/error_checking.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g3",
+      "-fsanitize=address",
+      "-c",
+      "-o",
+      "objs/ht1.o",
+      "hash_table/ht1.c"
+    ],
+    "directory": "/home/emuminov/projects/minishell",
+    "file": "/home/emuminov/projects/minishell/hash_table/ht1.c",
+    "output": "/home/emuminov/projects/minishell/objs/ht1.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g3",
+      "-fsanitize=address",
+      "-c",
+      "-o",
+      "objs/ht2.o",
+      "hash_table/ht2.c"
+    ],
+    "directory": "/home/emuminov/projects/minishell",
+    "file": "/home/emuminov/projects/minishell/hash_table/ht2.c",
+    "output": "/home/emuminov/projects/minishell/objs/ht2.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g3",
+      "-fsanitize=address",
+      "-c",
+      "-o",
+      "objs/ht3.o",
+      "hash_table/ht3.c"
+    ],
+    "directory": "/home/emuminov/projects/minishell",
+    "file": "/home/emuminov/projects/minishell/hash_table/ht3.c",
+    "output": "/home/emuminov/projects/minishell/objs/ht3.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g3",
+      "-fsanitize=address",
+      "-c",
+      "-o",
+      "objs/ht_utils.o",
+      "hash_table/ht_utils.c"
+    ],
+    "directory": "/home/emuminov/projects/minishell",
+    "file": "/home/emuminov/projects/minishell/hash_table/ht_utils.c",
+    "output": "/home/emuminov/projects/minishell/objs/ht_utils.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g3",
+      "-fsanitize=address",
+      "-c",
+      "-o",
+      "objs/expansion.o",
+      "expansion/expansion.c"
+    ],
+    "directory": "/home/emuminov/projects/minishell",
+    "file": "/home/emuminov/projects/minishell/expansion/expansion.c",
+    "output": "/home/emuminov/projects/minishell/objs/expansion.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g3",
+      "-fsanitize=address",
+      "-c",
+      "-o",
+      "objs/quotes_expansion.o",
+      "expansion/quotes_expansion.c"
+    ],
+    "directory": "/home/emuminov/projects/minishell",
+    "file": "/home/emuminov/projects/minishell/expansion/quotes_expansion.c",
+    "output": "/home/emuminov/projects/minishell/objs/quotes_expansion.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g3",
+      "-fsanitize=address",
+      "-c",
+      "-o",
+      "objs/variables_expansion.o",
+      "expansion/variables_expansion.c"
+    ],
+    "directory": "/home/emuminov/projects/minishell",
+    "file": "/home/emuminov/projects/minishell/expansion/variables_expansion.c",
+    "output": "/home/emuminov/projects/minishell/objs/variables_expansion.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g3",
+      "-fsanitize=address",
+      "-c",
+      "-o",
+      "objs/heredoc_find_delimeters.o",
+      "lexer/heredoc_find_delimeters.c"
+    ],
+    "directory": "/home/emuminov/projects/minishell",
+    "file": "/home/emuminov/projects/minishell/lexer/heredoc_find_delimeters.c",
+    "output": "/home/emuminov/projects/minishell/objs/heredoc_find_delimeters.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g3",
+      "-fsanitize=address",
+      "-c",
+      "-o",
+      "objs/expansion_utils.o",
+      "expansion/expansion_utils.c"
+    ],
+    "directory": "/home/emuminov/projects/minishell",
+    "file": "/home/emuminov/projects/minishell/expansion/expansion_utils.c",
+    "output": "/home/emuminov/projects/minishell/objs/expansion_utils.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g3",
+      "-fsanitize=address",
+      "-c",
+      "-o",
+      "objs/env.o",
+      "env/env.c"
+    ],
+    "directory": "/home/emuminov/projects/minishell",
+    "file": "/home/emuminov/projects/minishell/env/env.c",
+    "output": "/home/emuminov/projects/minishell/objs/env.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g3",
+      "-fsanitize=address",
+      "-c",
+      "-o",
+      "objs/env_utils.o",
+      "env/env_utils.c"
+    ],
+    "directory": "/home/emuminov/projects/minishell",
+    "file": "/home/emuminov/projects/minishell/env/env_utils.c",
+    "output": "/home/emuminov/projects/minishell/objs/env_utils.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g3",
+      "-fsanitize=address",
+      "-c",
+      "-o",
+      "objs/handle_signal.o",
+      "shell/handle_signal.c"
+    ],
+    "directory": "/home/emuminov/projects/minishell",
+    "file": "/home/emuminov/projects/minishell/shell/handle_signal.c",
+    "output": "/home/emuminov/projects/minishell/objs/handle_signal.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g3",
+      "-fsanitize=address",
+      "-c",
+      "-o",
+      "objs/command_table.o",
+      "command_table/command_table.c"
+    ],
+    "directory": "/home/emuminov/projects/minishell",
+    "file": "/home/emuminov/projects/minishell/command_table/command_table.c",
+    "output": "/home/emuminov/projects/minishell/objs/command_table.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g3",
+      "-fsanitize=address",
+      "-c",
+      "-o",
+      "objs/cmd_tab1.o",
+      "command_table/cmd_tab1.c"
+    ],
+    "directory": "/home/emuminov/projects/minishell",
+    "file": "/home/emuminov/projects/minishell/command_table/cmd_tab1.c",
+    "output": "/home/emuminov/projects/minishell/objs/cmd_tab1.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g3",
+      "-fsanitize=address",
+      "-c",
+      "-o",
+      "objs/cmd_tab2.o",
+      "command_table/cmd_tab2.c"
+    ],
+    "directory": "/home/emuminov/projects/minishell",
+    "file": "/home/emuminov/projects/minishell/command_table/cmd_tab2.c",
+    "output": "/home/emuminov/projects/minishell/objs/cmd_tab2.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g3",
+      "-fsanitize=address",
+      "-c",
+      "-o",
+      "objs/command_table_utils.o",
+      "command_table/command_table_utils.c"
+    ],
+    "directory": "/home/emuminov/projects/minishell",
+    "file": "/home/emuminov/projects/minishell/command_table/command_table_utils.c",
+    "output": "/home/emuminov/projects/minishell/objs/command_table_utils.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g3",
+      "-fsanitize=address",
+      "-c",
+      "-o",
+      "objs/execution.o",
+      "execution/execution.c"
+    ],
+    "directory": "/home/emuminov/projects/minishell",
+    "file": "/home/emuminov/projects/minishell/execution/execution.c",
+    "output": "/home/emuminov/projects/minishell/objs/execution.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g3",
+      "-fsanitize=address",
+      "-c",
+      "-o",
+      "objs/builtins1.o",
+      "execution/builtins1.c"
+    ],
+    "directory": "/home/emuminov/projects/minishell",
+    "file": "/home/emuminov/projects/minishell/execution/builtins1.c",
+    "output": "/home/emuminov/projects/minishell/objs/builtins1.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g3",
+      "-fsanitize=address",
+      "-c",
+      "-o",
+      "objs/builtins2.o",
+      "execution/builtins2.c"
+    ],
+    "directory": "/home/emuminov/projects/minishell",
+    "file": "/home/emuminov/projects/minishell/execution/builtins2.c",
+    "output": "/home/emuminov/projects/minishell/objs/builtins2.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g3",
+      "-fsanitize=address",
+      "-c",
+      "-o",
+      "objs/cd_builtin.o",
+      "execution/cd_builtin.c"
+    ],
+    "directory": "/home/emuminov/projects/minishell",
+    "file": "/home/emuminov/projects/minishell/execution/cd_builtin.c",
+    "output": "/home/emuminov/projects/minishell/objs/cd_builtin.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g3",
+      "-fsanitize=address",
+      "-c",
+      "-o",
+      "objs/find_command_and_redir.o",
+      "execution/find_command_and_redir.c"
+    ],
+    "directory": "/home/emuminov/projects/minishell",
+    "file": "/home/emuminov/projects/minishell/execution/find_command_and_redir.c",
+    "output": "/home/emuminov/projects/minishell/objs/find_command_and_redir.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g3",
+      "-fsanitize=address",
+      "-c",
+      "-o",
+      "objs/redir.o",
+      "execution/redir.c"
+    ],
+    "directory": "/home/emuminov/projects/minishell",
+    "file": "/home/emuminov/projects/minishell/execution/redir.c",
+    "output": "/home/emuminov/projects/minishell/objs/redir.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g3",
+      "-fsanitize=address",
+      "-c",
+      "-o",
+      "objs/redir_utils.o",
+      "execution/redir_utils.c"
+    ],
+    "directory": "/home/emuminov/projects/minishell",
+    "file": "/home/emuminov/projects/minishell/execution/redir_utils.c",
+    "output": "/home/emuminov/projects/minishell/objs/redir_utils.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g3",
+      "-fsanitize=address",
+      "-c",
+      "-o",
+      "objs/exec_utils.o",
+      "execution/exec_utils.c"
+    ],
+    "directory": "/home/emuminov/projects/minishell",
+    "file": "/home/emuminov/projects/minishell/execution/exec_utils.c",
+    "output": "/home/emuminov/projects/minishell/objs/exec_utils.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g3",
+      "-fsanitize=address",
+      "-c",
+      "-o",
+      "objs/execution_check.o",
+      "execution/execution_check.c"
+    ],
+    "directory": "/home/emuminov/projects/minishell",
+    "file": "/home/emuminov/projects/minishell/execution/execution_check.c",
+    "output": "/home/emuminov/projects/minishell/objs/execution_check.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g3",
+      "-fsanitize=address",
+      "-c",
+      "-o",
+      "objs/main.o",
+      "shell/main.c"
+    ],
+    "directory": "/home/emuminov/projects/minishell",
+    "file": "/home/emuminov/projects/minishell/shell/main.c",
+    "output": "/home/emuminov/projects/minishell/objs/main.o"
+  }
+]
