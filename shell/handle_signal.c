@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 13:35:45 by emuminov          #+#    #+#             */
-/*   Updated: 2024/06/07 18:11:30 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/07 18:37:02 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	heredoc_signal_handler(int signal)
 void	interactive_signal_handler(int signal)
 {
 	(void)signal;
+	set_or_get_exit_status(SET, 130);
 	ioctl(STDIN_FILENO, TIOCSTI, "\n");
 	rl_replace_line("", 0);
 	rl_on_new_line();
