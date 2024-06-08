@@ -6,7 +6,7 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 00:54:42 by omougel           #+#    #+#             */
-/*   Updated: 2024/06/04 19:21:33 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/09 00:17:26 by omougel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,15 +45,24 @@ char  *strvalue(char *envval, char *newval, char plus)
 	return (ft_strjoin(envval, newval));
 }
 
-int	export(char **cmd, t_ht_table *env)
+int	export(char **cmd, t_ht_table *env, int fd_out)
 {
 	int		i;
 	char	*key;
 	char	*value;
+	char	**str;
 
 	i = 0;
     key = NULL;
     value = NULL;
+	if (!cmd[1])
+	{
+		str = ft_calloc(2, sizeof(char *));
+		str[0] = "env";
+		i = bt_env(str, env, fd_out);
+		free(str);
+		return (i);
+	}
 	if (cmd[1] && cmd[1][0] == '-')
 		return (ft_putstr_fd("mishell: export: invalid option\n", 2), 2);
 	while (cmd[++i])
@@ -68,6 +77,37 @@ int	export(char **cmd, t_ht_table *env)
     free(value);
     return (0);
 }
+/*
+int	export(char **cmd, t_ht_table *env, int fd_out)
+{
+	int		i;
+	char	*key;
+	char	*value;
+	char	str[2][4];
+
+	i = 0;
+	key = NULL;
+	value = NULL;
+	if (!cmd[1])
+	{
+		ft_strcpy(str[0], "env");
+		ft_strcpy(str[1], "");
+		return (bt_env((char **)str, env, fd_out));
+	}
+	if (cmd[1] && cmd[1][0] == '-')
+		return (ft_putstr_fd("mishell: export: invalid option\n", 2), 2);
+	while (cmd[++i])
+	{
+		if (!ft_strchr(cmd[1], '='))
+			continue ;
+		key = ft_substr(cmd[i], 0, keylen(cmd[i]));
+		value = strvalue(ht_get(env, key), &cmd[i][valuelen(cmd[i])], cmd[i][keylen(cmd[i])]);
+		ht_set(env, key, value);
+	}
+    free(key);
+    free(value);
+    return (0);
+}*/
 
 int	unset(char **cmd, t_ht_table *env)
 {
@@ -90,7 +130,7 @@ int	do_builtins(char **cmd, t_ht_table *env, t_minishell *sh)
 	if (!ft_strcmp(cmd[0], "pwd"))
 		return (pwd(cmd, sh, sh->fd_out));
 	if (!ft_strcmp(cmd[0], "export"))
-		return (export(cmd, env));
+		return (export(cmd, env, sh->fd_out));
 	if (!ft_strcmp(cmd[0], "unset"))
 		return (unset(cmd, env));
 	if (!ft_strcmp(cmd[0], "env"))

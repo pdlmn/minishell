@@ -6,12 +6,40 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 01:00:55 by omougel           #+#    #+#             */
-/*   Updated: 2024/06/08 22:22:17 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/08 22:50:07 by omougel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/execution.h"
+#include <readline/readline.h>
 
+int	here_doc(char *lim, char *quoted)
+{
+	char	*buff;
+	int		fd[2];
+
+	init_heredoc_signal_handlers();
+	buff = readline(">");
+	if (pipe(fd) == -1)
+		return (EXIT_FAILURE);
+	while (buff && ft_strcmp(buff, lim))
+	{
+		if (!quoted)
+			buff = expend_heredoc(buff);
+		ft_putstr_fd(buff, fd[1]);
+		ft_putstr_fd("\n", fd[1]);
+		free(buff);
+		buff = readline(">");
+		if (set_or_get_exit_status(GET, -1) == 130)
+			break;
+	}
+	free(buff);
+	close(fd[1]);
+	if (set_or_get_exit_status(GET, -1) == 130)
+		return (get_next_line(-1), -1);
+	return (fd[0]);
+}
+/*
 int	here_doc(char *lim, char *quoted)
 {
 	char	*old_buff;
@@ -57,7 +85,7 @@ int	here_doc(char *lim, char *quoted)
 	if (set_or_get_exit_status(GET, -1) == 130)
 		return (get_next_line(-1), -1);
 	return (fd[0]);
-}
+}*/
 
 int	redir_input(char *infile)
 {

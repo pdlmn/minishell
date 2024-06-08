@@ -6,11 +6,12 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 01:01:59 by omougel           #+#    #+#             */
-/*   Updated: 2024/06/07 17:49:37 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/08 22:52:16 by omougel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/execution.h"
+#include <stdlib.h>
 
 int	calculate_token_list_len(t_tlist *lst)
 {
@@ -60,6 +61,7 @@ char	*expend_heredoc(char *buffer)
 	sh.lst.head = NULL;
 	sh.lst.tail = NULL;
 	lex_heredoc_input(buffer, &sh.lst, DELIM);
+	free(buffer);
 	expand_heredoc(&sh, &sh.lst, DELIM);
 	buffer = join_expanded_strings(&sh.lst);
 	token_list_free(&sh.lst);
