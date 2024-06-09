@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 03:55:58 by emuminov          #+#    #+#             */
-/*   Updated: 2024/06/05 23:24:07 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/09 16:40:24 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	ht_resize(t_ht_table *ht, int base_size)
 		i++;
 	}
 	ht_transfer_stats(ht, tmp_ht, base_size);
-	ht_free_table(tmp_ht);
+	ht_free_table(&tmp_ht);
 }
 
 t_ht_item	*ht_new_item(const char *k, const char *v)

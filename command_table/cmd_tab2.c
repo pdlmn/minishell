@@ -6,7 +6,7 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/01 23:46:59 by omougel           #+#    #+#             */
-/*   Updated: 2024/06/01 23:50:15 by omougel          ###   ########.fr       */
+/*   Updated: 2024/06/09 16:16:53 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,17 @@ int	is_word(enum e_token type)
 	return (type == WORD || type == DELIM || type == QDELIM);
 }
 
-void	ft_free_table(char ***tab)
+void	ft_free_table(t_minishell *sh)
 {
 	size_t	i;
+	char	***tab;
 
+	tab = sh->cmd_tab;
 	i = 0;
 	while (tab && tab[i])
 		free(tab[i++]);
 	free(tab);
+	sh->cmd_tab = NULL;
 }
 
 size_t	count_pipe(t_token *lst)

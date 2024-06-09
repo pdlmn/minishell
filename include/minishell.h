@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 14:34:14 by emuminov          #+#    #+#             */
-/*   Updated: 2024/06/07 17:50:04 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/09 16:27:12 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,10 +158,8 @@ t_tlist				*expand_tokens(t_minishell *sh, t_tlist *lst);
 t_tlist				*expand_heredoc(t_minishell *sh, t_tlist *lst,
 		enum e_token type);
 
-void				ft_free_table(char ***tab);
-
 t_ht_table			*ht_new(int base_size);
-void				ht_free_table(t_ht_table *ht);
+void				ht_free_table(t_ht_table **ht);
 t_ht_item			*ht_set(t_ht_table *ht, const char *key, const char *value);
 void				ht_delete(t_ht_table *ht, const char *key);
 char				*ht_get(t_ht_table *ht, const char *key);
@@ -173,7 +171,7 @@ char				**env_ht_to_arr(t_ht_table *ht);
 
 char				***command_table(t_minishell *sh);
 void				command_table_print(char ***cmd_tab);
-void				ft_free_table(char ***tab);
+void				ft_free_table(t_minishell *sh);
 size_t				count_pipe(t_token *lst);
 
 int					set_or_get_exit_status(enum e_access_flag flag,

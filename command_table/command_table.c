@@ -6,7 +6,7 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 10:41:59 by omougel           #+#    #+#             */
-/*   Updated: 2024/06/04 16:56:35 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/09 16:18:25 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	***command_table(t_minishell *sh)
 	{
 		curr = fill_line(curr, sh->cmd_tab, &i);
 		if (!sh->cmd_tab[i])
-			return (ft_free_table(sh->cmd_tab), NULL);
+			return (ft_free_table(sh), NULL);
 		i++;
 	}
 	sh->cmd_tab[i] = NULL;
