@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 12:23:17 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/11 17:55:55 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/09 16:59:31 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,5 @@ int	main(void)
 	printf("\nCOLORTERM is %s\n\n", ht_get(ht, "COLORTERM"));
 	printf("\nUSER is %s\n\n", ht_get(ht, "USER"));
 	printf("\nHOME is %s\n\n", ht_get(ht, "HOME"));
-	ht_free_table(ht);
+	ht_free_table(&ht);
 }
