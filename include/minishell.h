@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 14:34:14 by emuminov          #+#    #+#             */
-/*   Updated: 2024/06/09 16:53:41 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/09 17:03:06 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,6 +184,6 @@ void	init_interacrive_signal_handlers(void);
 void	init_heredoc_signal_handlers(void);
 
 int	handle_prompt_syntax_errors(t_minishell *sh, char *input);
-int	sh_cleanup(t_minishell *sh, char *input);
+int	sh_cleanup(t_minishell *sh, char *input, t_ht_table *env);
 int	launch_interacrive_mode(t_minishell *sh);
 int	launch_noninteractive_mode(t_minishell *sh, char **argv);

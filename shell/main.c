@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 14:45:20 by emuminov          #+#    #+#             */
-/*   Updated: 2024/06/09 16:52:34 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/09 17:02:52 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ int	handle_prompt_syntax_errors(t_minishell *sh, char *input)
 	return (1);
 }
 
-int	sh_cleanup(t_minishell *sh, char *input)
+int	sh_cleanup(t_minishell *sh, char *input, t_ht_table *env)
 {
-	ht_free_table(&sh->env);
+	ht_free_table(&env);
 	ft_free_table(sh);
 	token_list_free(&sh->lst);
 	free(input);
