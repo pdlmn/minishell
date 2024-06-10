@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 14:20:14 by emuminov          #+#    #+#             */
-/*   Updated: 2024/06/10 10:39:53 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/10 16:51:24 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ t_ht_item	*env_row_to_ht_item(t_ht_table *ht, char *env_row)
 	delimeter = ft_strchr(env_row_c, '=');
 	*delimeter = '\0';
 	res = ht_set(ht, env_row_c, &env_row_c[delimeter - env_row_c + 1]);
+	if (!res)
+		return (NULL);
 	free(env_row_c);
 	return (res);
 }

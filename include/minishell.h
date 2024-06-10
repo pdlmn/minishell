@@ -148,7 +148,8 @@ void				token_list_print(t_tlist *lst);
 
 t_token				*token_create(char *content, int len, int space_after,
 						enum e_quotes is_quoted);
-t_token				*token_insert_tokens(t_tlist *lst, t_token *t, t_token *first_new_token);
+t_token				*token_insert_tokens(t_tlist *lst, t_token *t,
+						t_token *first_new_token);
 void				token_free(t_token *t);
 t_token				*token_delete(t_tlist *lst, t_token *t);
 t_token				*token_delete_and_free(t_tlist *lst, t_token *t);

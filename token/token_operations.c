@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 13:36:25 by emuminov          #+#    #+#             */
-/*   Updated: 2024/06/10 15:54:43 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/10 16:43:21 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	token_list_append(t_tlist *lst, t_token *t)
 t_token	*token_insert_tokens(t_tlist *lst, t_token *t, t_token *first_new_token)
 {
 	t_token	*last_new_token;
-	
+
 	if (!first_new_token && t)
 		return (t);
 	else if (!first_new_token && !t)
