@@ -6,11 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 16:51:27 by emuminov          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2024/06/09 17:03:33 by emuminov         ###   ########.fr       */
-=======
 /*   Updated: 2024/06/10 14:03:00 by emuminov         ###   ########.fr       */
->>>>>>> 14d64cd (feat: added changes from out school repo, added valgrind rule in makefile)
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +27,9 @@ int	launch_interacrive_mode(t_minishell *sh)
 {
 	char	*input;
 
-<<<<<<< HEAD
-	init_interacrive_signal_handlers();
-	while (42)
-	{
-=======
 	while (42)
 	{
 		init_interacrive_signal_handlers();
->>>>>>> 14d64cd (feat: added changes from out school repo, added valgrind rule in makefile)
 		input = read_command(PROMPT);
 		if (input == NULL)
 			return (ft_putstr_fd("exit\n", STDOUT_FILENO), sh_cleanup(sh, NULL,

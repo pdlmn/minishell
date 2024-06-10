@@ -6,11 +6,7 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 01:48:24 by omougel           #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2024/06/09 16:28:47 by emuminov         ###   ########.fr       */
-=======
 /*   Updated: 2024/06/10 16:21:49 by emuminov         ###   ########.fr       */
->>>>>>> 14d64cd (feat: added changes from out school repo, added valgrind rule in makefile)
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +40,7 @@ char	*ft_strjoin_cmd(char const *s1, char const *s2)
 void	ft_exit(t_minishell *msh)
 {
 	token_list_free(&msh->lst);
-<<<<<<< HEAD
-=======
 	ft_free_table(msh);
->>>>>>> 14d64cd (feat: added changes from out school repo, added valgrind rule in makefile)
 	ht_free_table(&msh->env);
 	rl_clear_history();
 	exit(errno);

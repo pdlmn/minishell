@@ -6,11 +6,7 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 00:47:00 by omougel           #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2024/06/10 09:30:09 by omougel          ###   ########.fr       */
-=======
 /*   Updated: 2024/06/10 12:47:45 by emuminov         ###   ########.fr       */
->>>>>>> 14d64cd (feat: added changes from out school repo, added valgrind rule in makefile)
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,37 +29,23 @@ static int	last_occ(char *str, char c)
 	return (last);
 }
 
-<<<<<<< HEAD
-int	prev(char *newpwd)
-=======
 static int	prev(char *newpwd)
->>>>>>> 14d64cd (feat: added changes from out school repo, added valgrind rule in makefile)
 {
 	if (last_occ(newpwd, '/') != 1 || newpwd[1] != '\0')
 		newpwd[last_occ(newpwd, '/')] = '\0';
 	return (2);
 }
 
-<<<<<<< HEAD
-int	next(char *path, char *newpwd)
-=======
 static int	next(char *path, char *newpwd)
->>>>>>> 14d64cd (feat: added changes from out school repo, added valgrind rule in makefile)
 {
 	int	pathlen;
 	int	newpwdlen;
 
-<<<<<<< HEAD
-	newpwd[ft_strlen(newpwd)] = '/';
-	len = ft_strlen_till_c(path, '/') + ft_strlen(newpwd) + 1;
-	ft_strlcat(newpwd, path, len);
-=======
 	newpwdlen = ft_strlen(newpwd);
 	newpwd[newpwdlen++] = '/';
 	newpwd[newpwdlen] = '\0';
 	pathlen = ft_strlen_till_c(path, '/') + ft_strlen(newpwd) + 1;
 	ft_strlcat(newpwd, path, pathlen);
->>>>>>> 14d64cd (feat: added changes from out school repo, added valgrind rule in makefile)
 	return (ft_strlen_till_c(path, '/'));
 }
 
@@ -92,10 +74,6 @@ static char	*find_newpwd(char *path, char *newpwd)
 int	cd(char **cmd, t_minishell *sh)
 {
 	char		newpwd[PATH_MAX];
-<<<<<<< HEAD
-	struct stat	buf;
-=======
->>>>>>> 14d64cd (feat: added changes from out school repo, added valgrind rule in makefile)
 
 	if (cmd[1] && cmd[1][0] == '-' && cmd[1][1] != '\0')
 		return (ft_putstr_fd("mishell: cd: invalid option\n", 2), 2);
@@ -108,18 +86,9 @@ int	cd(char **cmd, t_minishell *sh)
 			return (ft_putstr_fd("mishell: cd: OLDPWD not set\n", 2), 1);
 	}
 	else if (cmd[1])
-<<<<<<< HEAD
-		find_newpwd(cmd[1], sh, newpwd);
-	if (chdir(newpwd) != 0)
-	{
-		printf("minishell: cd: %s\n", strerror(errno));
-		return (1);
-	}
-=======
 		find_newpwd(cmd[1], newpwd);
 	if (chdir(newpwd) != 0)
 		return (printf("minishell: cd: %s\n", strerror(errno)), 1);
->>>>>>> 14d64cd (feat: added changes from out school repo, added valgrind rule in makefile)
 	ht_set(sh->env, "OLDPWD", ht_get(sh->env, "PWD"));
 	ht_set(sh->env, "PWD", newpwd);
 	return (0);

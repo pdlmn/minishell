@@ -6,11 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 13:35:45 by emuminov          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2024/06/10 10:36:33 by emuminov         ###   ########.fr       */
-=======
 /*   Updated: 2024/06/10 13:31:32 by emuminov         ###   ########.fr       */
->>>>>>> 14d64cd (feat: added changes from out school repo, added valgrind rule in makefile)
 /*                                                                            */
 /* ************************************************************************** */
 
