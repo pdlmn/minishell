@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 03:28:10 by emuminov          #+#    #+#             */
-/*   Updated: 2024/06/09 17:01:26 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/10 10:14:21 by omougel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	ht_free_table(t_ht_table **ht_ptr)
 	t_ht_table	*ht;
 
 	if (*ht_ptr == NULL)
-		return;
+		return ;
 	i = 0;
 	ht = *ht_ptr;
 	while (i < ht->size)

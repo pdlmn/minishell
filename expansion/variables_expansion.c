@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 14:53:09 by emuminov          #+#    #+#             */
-/*   Updated: 2024/06/04 17:13:06 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/10 10:13:04 by omougel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ static t_token	*expand_tilde(t_ht_table *ht, t_token *tilde)
 	char	*cloned_home_path;
 
 	if (!tilde->space_after && tilde->next && tilde->next->content[0] != '/')
-		return token_convert_to_word(tilde);
+		return (token_convert_to_word(tilde));
 	home_path = ht_get(ht, "HOME");
 	if (!home_path)
 		return (token_convert_to_empty_word(tilde));

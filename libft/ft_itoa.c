@@ -15,7 +15,7 @@
 
 static int	ft_count_digits(int n)
 {
-	int		d;
+	int	d;
 
 	if (n < 0)
 		n = -n;

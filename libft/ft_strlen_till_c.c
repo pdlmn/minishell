@@ -17,7 +17,7 @@ size_t	ft_strlen_till_c(char *str, char c)
 	int	i;
 
 	i = 0;
-	while(str[i] && str[i] != c)
+	while (str[i] && str[i] != c)
 		i++;
 	return (i);
 }

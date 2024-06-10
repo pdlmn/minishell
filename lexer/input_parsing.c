@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 17:35:02 by emuminov          #+#    #+#             */
-/*   Updated: 2024/06/04 17:22:21 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/10 10:26:10 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,10 @@ static t_token	*create_single_char_token(t_token *last_t, char *input,
 
 	if ((type == SQUOTE || type == DQUOTE) && is_quoted == NOT_QUOTED)
 		is_quoted = START_QUOTE;
-	else if ((type == SQUOTE && is_quoted == SQUOTED)
-		|| (type == DQUOTE && is_quoted == DQUOTED))
+	else if ((type == SQUOTE && is_quoted == SQUOTED) || (type == DQUOTE
+			&& is_quoted == DQUOTED))
 		is_quoted = END_QUOTE;
-	if (is_quoted == END_QUOTE
-		&& last_t && last_t->is_quoted == START_QUOTE)
+	if (is_quoted == END_QUOTE && last_t && last_t->is_quoted == START_QUOTE)
 	{
 		s = ft_calloc(1, sizeof(char));
 		is_quoted = old_is_quoted;
@@ -68,8 +67,7 @@ static t_token	*create_word_token(t_token *last_t, char *input,
 	char	*s;
 	t_token	*t;
 
-	if (is_quoted == SQUOTED && (!last_t || (last_t
-				&& last_t->type != SIGIL)))
+	if (is_quoted == SQUOTED && (!last_t || (last_t && last_t->type != SIGIL)))
 		end_of_word = ft_strset(input, "'$") - input;
 	else if (is_quoted == SQUOTED && last_t && last_t->type == SIGIL)
 		end_of_word = find_end_of_variable_name(input);
@@ -79,7 +77,7 @@ static t_token	*create_word_token(t_token *last_t, char *input,
 	else if (is_quoted == DQUOTED && last_t && last_t->type == SIGIL)
 		end_of_word = find_end_of_variable_name(input);
 	else
-		end_of_word = ft_strset(input, "\"'$><|"SPACES) - input;
+		end_of_word = ft_strset(input, "\"'$><|" SPACES) - input;
 	s = ft_substr(input, 0, end_of_word);
 	if (!s)
 		return (NULL);
@@ -99,11 +97,10 @@ t_token	*token_create_from_input(t_token *last_t, char *input,
 		t = create_operator_token(input, is_quoted);
 	else if ((is_quoted == NOT_QUOTED && ft_strchr("\"'~$", input[0]))
 		|| (is_quoted == DQUOTED && input[0] == '"')
-		|| (is_quoted == SQUOTED && input[0] == '\'')
-		|| input[0] == '$'
-		|| ((ft_isdigit(input[0]) || input[0] == '?')
-			&& last_t && last_t->type == SIGIL)
-		|| (!is_valid_variable_char(input[0]) && input[0] != ' '))
+		|| (is_quoted == SQUOTED && input[0] == '\'') || input[0] == '$'
+		|| ((ft_isdigit(input[0]) || input[0] == '?') && last_t
+			&& last_t->type == SIGIL) || (!is_valid_variable_char(input[0])
+			&& input[0] != ' '))
 		t = create_single_char_token(last_t, input, is_quoted);
 	else
 		t = create_word_token(last_t, input, is_quoted);

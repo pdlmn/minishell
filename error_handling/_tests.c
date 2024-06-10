@@ -62,5 +62,4 @@ int	main(void)
 	test_error_checking(&sh, "'Hello", UNCLOSED_QUOTE, "'");
 	test_error_checking(&sh, "'Hello\"", UNCLOSED_QUOTE, "'");
 	test_error_checking(&sh, "\"Hello\'", UNCLOSED_QUOTE, "\"");
-
 }

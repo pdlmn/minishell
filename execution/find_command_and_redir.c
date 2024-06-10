@@ -6,7 +6,7 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 01:50:13 by omougel           #+#    #+#             */
-/*   Updated: 2024/06/03 00:23:24 by omougel          ###   ########.fr       */
+/*   Updated: 2024/06/10 10:08:20 by omougel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	**replacefront(char **cmd, char *path)
 	return (cmd);
 }
 
-char	**split_envp(t_ht_table *envp) // change with the environement function
+char	**split_envp(t_ht_table *envp)
 {
 	char	*tmp;
 	char	**env;
@@ -35,21 +35,12 @@ char	**split_envp(t_ht_table *envp) // change with the environement function
 	return (env);
 }
 
-char	**find_command(char **cmd, t_minishell *sh)
+char	**seach_path(char **env, char **cmd)
 {
 	size_t	i;
 	char	*tmp;
-	char	**env;
 
 	i = 0;
-	if (is_builtin(cmd[0]))
-	{
-		sh->last_status = do_builtins(cmd, sh->env, sh);
-		return (NULL);
-	}
-	if (!ft_strncmp("./", cmd[0], 2) && !access(cmd[0], X_OK))
-		return (cmd);
-	env = split_envp(sh->env);
 	while (env && env[i])
 	{
 		tmp = ft_strjoin_cmd(env[i], cmd[0]);
@@ -66,8 +57,22 @@ char	**find_command(char **cmd, t_minishell *sh)
 	ft_free_split(env);
 	errno = 127;
 	ft_putstr_fd(cmd[0], 2);
-	ft_putstr_fd(": command not found\n", 2);
-	return (NULL);
+	return (ft_putstr_fd(": command not found\n", 2), NULL);
+}
+
+char	**find_command(char **cmd, t_minishell *sh)
+{
+	char	**env;
+
+	if (is_builtin(cmd[0]))
+	{
+		sh->last_status = do_builtins(cmd, sh->env, sh);
+		return (NULL);
+	}
+	if (!ft_strncmp("./", cmd[0], 2) && !access(cmd[0], X_OK))
+		return (cmd);
+	env = split_envp(sh->env);
+	return (seach_path(env, cmd));
 }
 
 int	check_input(char **input_redir, int fd_in)

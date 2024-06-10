@@ -39,7 +39,8 @@ static t_token	*convert_to_delimeter(t_token *t)
 	curr = t;
 	while (curr)
 	{
-		if (curr->type != DQUOTE && curr->type != SQUOTE && curr->type != OPERATOR)
+		if (curr->type != DQUOTE && curr->type != SQUOTE
+			&& curr->type != OPERATOR)
 			curr->type = type;
 		if (curr->space_after && (curr->type != DQUOTE && curr->type != SQUOTE))
 			break ;

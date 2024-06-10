@@ -15,8 +15,8 @@
 int	main(int argc, char **argv)
 {
 	static t_minishell	sh;
-	char	***cmd_tab;
-	size_t	i;
+	char				***cmd_tab;
+	size_t				i;
 
 	i = 0;
 	if (argc != 2)

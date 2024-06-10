@@ -28,11 +28,11 @@ int	ft_atoi_base(const char *base, const char *str)
 	sign = ((str[i] == '-') * -1) + ((str[i] != '-') * 1);
 	if (str[i] == '-' || str[i] == '+')
 		i++;
-	base_digit = ft_strchr(base, (int) str[i]);
+	base_digit = ft_strchr(base, (int)str[i]);
 	while (str[i] && base_digit)
 	{
 		result = (result * base_l) + (base_digit - base);
-		base_digit = ft_strchr(base, (int) str[++i]);
+		base_digit = ft_strchr(base, (int)str[++i]);
 	}
 	return (result * sign);
 }

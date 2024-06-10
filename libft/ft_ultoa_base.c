@@ -14,7 +14,7 @@
 
 static int	ft_count_digits_base_ul(unsigned long n, size_t base_l)
 {
-	int			d;
+	int	d;
 
 	d = (n == 0);
 	while (n > 0)
@@ -27,9 +27,9 @@ static int	ft_count_digits_base_ul(unsigned long n, size_t base_l)
 
 char	*ft_ultoa_base(const char *base, unsigned long n)
 {
-	int				d;
-	size_t			base_l;
-	char			*str;
+	int		d;
+	size_t	base_l;
+	char	*str;
 
 	base_l = ft_strlen(base);
 	if (!base_l)

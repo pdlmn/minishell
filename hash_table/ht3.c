@@ -59,8 +59,7 @@ void	ht_print_buckets(t_ht_table *ht)
 		else if (ht->items[i]->is_deleted)
 			printf("\t%d DELETED\n", i);
 		else
-			printf("\t%d %s=%s\n", i, ht->items[i]->key,
-				ht->items[i]->value);
+			printf("\t%d %s=%s\n", i, ht->items[i]->key, ht->items[i]->value);
 		i++;
 	}
 	printf("}\n");

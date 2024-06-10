@@ -67,11 +67,11 @@ t_tlist	*join_unspaced_words(t_tlist *lst, int is_in_heredoc)
 	curr = lst->head;
 	while (curr)
 	{
-		if ((curr->type == WORD || curr->type == OTHER
-				|| curr->type == DELIM || curr->type == QDELIM)
-			&& (!curr->space_after || is_in_heredoc) && curr->next
-			&& (curr->next->type == WORD || curr->next->type == OTHER
-				|| curr->next->type == DELIM || curr->next->type == QDELIM))
+		if ((curr->type == WORD || curr->type == OTHER || curr->type == DELIM
+				|| curr->type == QDELIM) && (!curr->space_after
+				|| is_in_heredoc) && curr->next && (curr->next->type == WORD
+				|| curr->next->type == OTHER || curr->next->type == DELIM
+				|| curr->next->type == QDELIM))
 		{
 			curr = merge_word_tokens(curr, curr->next);
 			if (!curr)

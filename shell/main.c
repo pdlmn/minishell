@@ -23,7 +23,7 @@ int	set_or_get_exit_status(enum e_access_flag flag, int new_status)
 
 int	handle_prompt_syntax_errors(t_minishell *sh, char *input)
 {
-	t_err_src			e;
+	t_err_src	e;
 
 	e = check_errors(&sh->lst);
 	if (e.code != NO_ERRORS)

@@ -34,7 +34,8 @@ SRCS=lexer.c \
 	 expansion_utils.c \
      env.c \
      env_utils.c \
-	 handle_signal.c \
+	 signal_handlers.c \
+	 init_signal_handlers.c \
 	 command_table.c \
 	 cmd_tab1.c \
 	 cmd_tab2.c \
@@ -48,6 +49,8 @@ SRCS=lexer.c \
 	 redir_utils.c \
 	 exec_utils.c \
 	 execution_check.c \
+	 interactive_mode.c \
+	 noninteractive_mode.c \
 	 main.c
 OBJS=$(SRCS:%.c=$(OBJS_DIR)%.o)
 VPATH=lexer:token:error_handling:hash_table:expansion:env:shell:command_table:execution

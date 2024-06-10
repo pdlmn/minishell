@@ -85,7 +85,8 @@ void	test_expansion(t_minishell *sh, char *str, char *should_be)
 	free(joined_tokens);
 }
 
-void	test_heredoc_expansion(t_minishell *sh, char *str, char *should_be, enum e_token type)
+void	test_heredoc_expansion(t_minishell *sh, char *str, char *should_be,
+		enum e_token type)
 {
 	char	*joined_tokens;
 
@@ -102,8 +103,8 @@ void	test_heredoc_expansion(t_minishell *sh, char *str, char *should_be, enum e_
 	free(joined_tokens);
 }
 
-void	test_heredoc_delim(t_minishell *sh, char *str,
-		char *str_should_be, char *delim_should_be)
+void	test_heredoc_delim(t_minishell *sh, char *str, char *str_should_be,
+		char *delim_should_be)
 {
 	char	*joined_tokens;
 	t_token	*delim;
@@ -127,7 +128,7 @@ void	test_heredoc_delim(t_minishell *sh, char *str,
 
 int	main(int argc, char **argv, char **env)
 {
-	static t_minishell sh;
+	static t_minishell	sh;
 
 	(void)argc;
 	(void)argv;
@@ -177,7 +178,6 @@ int	main(int argc, char **argv, char **env)
 	test_expansion(&sh, "asd%$%%", "asd%$%%");
 	test_expansion(&sh, "~/projects", "/home/emuminov/projects");
 	test_expansion(&sh, "~a", "~a");
-
 	test_heredoc_delim(&sh, "cat << $HOME", "cat << $HOME", "$HOME");
 	test_heredoc_delim(&sh, "cat << $HOME\"\"", "cat << $HOME", "$HOME");
 	test_heredoc_delim(&sh, "cat << \"\"", "cat << ", "");
@@ -185,10 +185,10 @@ int	main(int argc, char **argv, char **env)
 	test_heredoc_delim(&sh, "<< \"\"$HOME cat", "<< $HOME cat", "$HOME");
 	test_heredoc_delim(&sh, "<< \"\"HOME cat", "<< HOME cat", "HOME");
 	test_heredoc_delim(&sh, "<< \"$HOME\" cat", "<< $HOME cat", "$HOME");
-	test_heredoc_delim(&sh, "<< \"Spaced delim\" cat", "<< Spaced delim cat", "Spaced delim");
+	test_heredoc_delim(&sh, "<< \"Spaced delim\" cat", "<< Spaced delim cat",
+		"Spaced delim");
 	test_heredoc_delim(&sh, "<< a\"\"b cat", "<< ab cat", "ab");
 	test_heredoc_delim(&sh, "<< 'a\"\"b' cat", "<< a\"\"b cat", "a\"\"b");
-
 	// input -> lex_input -> expansion -> lex_heredoc_input -> expand_heredoc
 	test_heredoc_expansion(&sh, "Hello", "Hello", DELIM);
 	test_heredoc_expansion(&sh, "$ASD", "123", DELIM);

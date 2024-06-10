@@ -6,12 +6,11 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 09:49:14 by omougel           #+#    #+#             */
-/*   Updated: 2024/06/09 15:31:56 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/10 09:32:16 by omougel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/execution.h"
-#include <stdio.h>
 
 void	exec_cmd(char **cmd, t_minishell msh)
 {
@@ -56,9 +55,9 @@ int	go_to_next_pipe(char ***cmd_tab)
 	return (i);
 }
 
-void  check_cmd(t_minishell *msh, int *fd, int i)
+void	check_cmd(t_minishell *msh, int *fd, int i)
 {
-	char  **cmd;
+	char	**cmd;
 
 	if (msh->fd_in >= 0 && msh->fd_out > 0)
 	{
@@ -80,7 +79,7 @@ void  check_cmd(t_minishell *msh, int *fd, int i)
 
 t_minishell	*read_cmd(t_minishell *msh, int *fd, int *pid)
 {
-	int	  i;
+	int	i;
 
 	i = 0;
 	while (msh->cmd_tab[i] && ft_strcmp(msh->cmd_tab[i][0], "|"))
@@ -108,7 +107,7 @@ t_minishell	*read_cmd(t_minishell *msh, int *fd, int *pid)
 
 char	***fork_and_execute(t_minishell *msh, int *pid)
 {
-	int		            fd[2];
+	int	fd[2];
 
 	fd[0] = -1;
 	fd[1] = -1;
@@ -124,7 +123,7 @@ char	***fork_and_execute(t_minishell *msh, int *pid)
 		read_cmd(msh, fd, pid);
 	else
 	{
-        init_exec_signal_handlers();
+		init_exec_signal_handlers();
 		*pid = fork();
 		if (*pid == 0)
 			read_cmd(msh, fd, pid);

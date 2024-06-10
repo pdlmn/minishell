@@ -32,8 +32,8 @@ int	launch_interacrive_mode(t_minishell *sh)
 	{
 		input = read_command(PROMPT);
 		if (input == NULL)
-			return (ft_putstr_fd("exit\n", STDOUT_FILENO),
-					sh_cleanup(sh, NULL, sh->env));
+			return (ft_putstr_fd("exit\n", STDOUT_FILENO), sh_cleanup(sh, NULL,
+					sh->env));
 		if (!lex_input(input, &sh->lst))
 			return (sh_cleanup(sh, input, sh->env));
 		if (!handle_prompt_syntax_errors(sh, input))

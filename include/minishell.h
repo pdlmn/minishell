@@ -6,24 +6,23 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 14:34:14 by emuminov          #+#    #+#             */
-/*   Updated: 2024/06/09 17:03:06 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/10 10:38:08 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft/libft.h"
-#include <sys/wait.h>
 #include <errno.h>
 #include <fcntl.h>
-#include <stdio.h>
 #include <readline/history.h>
 #include <readline/readline.h>
 #include <signal.h>
+#include <stdio.h>
 #include <sys/stat.h>
+#include <sys/wait.h>
 #define PROMPT_COLOR "\x1B[33m"
 #define ARROW_COLOR "\x1B[32m"
 #define RESET_COLOR "\x1B[0m"
-#define ARROW ARROW_COLOR "~> " RESET_COLOR
-#define PROMPT PROMPT_COLOR "mishell " RESET_COLOR ARROW
+#define PROMPT "\x1B[33mmishell\x1B[0m\x1B[32m ~> \x1B[0m" 
 #define RED "\033[0;31m"
 #define SPACES " \t\r\v\n\f"
 
@@ -68,7 +67,7 @@ enum				e_quotes
 	END_QUOTE,
 };
 
-enum e_err_code
+enum				e_err_code
 {
 	NO_ERRORS,
 	NO_OPERAND,
@@ -76,7 +75,7 @@ enum e_err_code
 	UNCLOSED_QUOTE,
 };
 
-enum e_access_flag
+enum				e_access_flag
 {
 	SET,
 	GET,
@@ -96,15 +95,15 @@ typedef struct s_token
 
 typedef struct s_tlist
 {
-	t_token		*head;
-	t_token		*tail;
-}				t_tlist;
+	t_token			*head;
+	t_token			*tail;
+}					t_tlist;
 
-typedef struct	s_err_src
+typedef struct s_err_src
 {
 	t_token			*t;
 	enum e_err_code	code;
-}				t_err_src;
+}					t_err_src;
 
 typedef struct s_ht_item
 {
@@ -121,21 +120,21 @@ typedef struct s_ht_table
 	t_ht_item		**items;
 }					t_ht_table;
 
-typedef struct	s_minishell
+typedef struct s_minishell
 {
-	t_tlist		lst;
-	t_ht_table	*env;
-	char		***cmd_tab;
-	int			last_status;
-	int			fd_in;
-	int			fd_out;
-	int			pid;
-	int			is_delimiter_quoted;
-}				t_minishell;
+	t_tlist			lst;
+	t_ht_table		*env;
+	char			***cmd_tab;
+	int				last_status;
+	int				fd_in;
+	int				fd_out;
+	int				pid;
+	int				is_delimiter_quoted;
+}					t_minishell;
 
 t_tlist				*lex_input(char *input, t_tlist *lst);
 t_tlist				*lex_heredoc_input(char *input, t_tlist *lst,
-		enum e_token delim_type);
+						enum e_token delim_type);
 
 enum e_operator		get_operator(char *s, enum e_quotes is_quoted);
 enum e_token		get_type(char *s, enum e_quotes is_quoted,
@@ -146,7 +145,7 @@ void				token_list_free(t_tlist *lst);
 void				token_list_print(t_tlist *lst);
 
 t_token				*token_create(char *content, int len, int space_after,
-		enum e_quotes is_quoted);
+						enum e_quotes is_quoted);
 void				token_free(t_token *t);
 t_token				*token_delete(t_tlist *lst, t_token *t);
 t_token				*token_delete_and_free(t_tlist *lst, t_token *t);
@@ -156,7 +155,7 @@ t_err_src			check_errors(t_tlist *lst);
 
 t_tlist				*expand_tokens(t_minishell *sh, t_tlist *lst);
 t_tlist				*expand_heredoc(t_minishell *sh, t_tlist *lst,
-		enum e_token type);
+						enum e_token type);
 
 t_ht_table			*ht_new(int base_size);
 void				ht_free_table(t_ht_table **ht);
@@ -175,15 +174,18 @@ void				ft_free_table(t_minishell *sh);
 size_t				count_pipe(t_token *lst);
 
 int					set_or_get_exit_status(enum e_access_flag flag,
-		int new_status);
+						int new_status);
 
-void  execute(t_minishell msh);
+void				execute(t_minishell msh);
 
-void 	init_exec_signal_handlers(void);
-void	init_interacrive_signal_handlers(void);
-void	init_heredoc_signal_handlers(void);
+void				exec_signal_handler(int signal);
+void				heredoc_signal_handler(int signal);
+void				interactive_signal_handler(int signal);
+void				init_exec_signal_handlers(void);
+void				init_interacrive_signal_handlers(void);
+void				init_heredoc_signal_handlers(void);
 
-int	handle_prompt_syntax_errors(t_minishell *sh, char *input);
-int	sh_cleanup(t_minishell *sh, char *input, t_ht_table *env);
-int	launch_interacrive_mode(t_minishell *sh);
-int	launch_noninteractive_mode(t_minishell *sh, char **argv);
+int					handle_prompt_syntax_errors(t_minishell *sh, char *input);
+int					sh_cleanup(t_minishell *sh, char *input, t_ht_table *env);
+int					launch_interacrive_mode(t_minishell *sh);
+int					launch_noninteractive_mode(t_minishell *sh, char **argv);
