@@ -6,11 +6,13 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 00:14:46 by omougel           #+#    #+#             */
-/*   Updated: 2024/06/07 17:49:41 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/10 10:55:48 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef EXECUTION_H
+# define EXECUTION_H
+# include "minishell.h"
 
 void	ft_exit(t_minishell *msh);
 int		do_builtins(char **cmd, t_ht_table *env, t_minishell *sh);
@@ -33,3 +35,9 @@ int		is_output(char *redir);
 int		is_builtin(char *cmd);
 int		is_there_pipe(char ***cmd_tab);
 int		is_lim(char *buffer, char *lim);
+void	exec_cmd(char **cmd, t_minishell msh);
+void	secure_close(int *fd_out, int *fd_in, int *pipe_out, int *pipe_in);
+size_t	keylen(char const *str);
+size_t	valuelen(char *str);
+char	**replacefront(char **cmd, char *path);
+#endif

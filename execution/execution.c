@@ -6,11 +6,16 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 09:49:14 by omougel           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2024/06/10 09:32:16 by omougel          ###   ########.fr       */
+=======
+/*   Updated: 2024/06/10 10:48:14 by omougel          ###   ########.fr       */
+>>>>>>> 14d64cd (feat: added changes from out school repo, added valgrind rule in makefile)
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/execution.h"
+<<<<<<< HEAD
 
 void	exec_cmd(char **cmd, t_minishell msh)
 {
@@ -44,6 +49,8 @@ void	secure_close(int *fd_out, int *fd_in, int *pipe_out, int *pipe_in)
 	if (*pipe_out > 0)
 		*fd_in = *pipe_out;
 }
+=======
+>>>>>>> 14d64cd (feat: added changes from out school repo, added valgrind rule in makefile)
 
 int	go_to_next_pipe(char ***cmd_tab)
 {

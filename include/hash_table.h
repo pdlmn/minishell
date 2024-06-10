@@ -6,11 +6,13 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 12:02:12 by emuminov          #+#    #+#             */
-/*   Updated: 2024/06/05 23:23:54 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/10 10:55:12 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef HASH_TABLE_H
+# define HASH_TABLE_H
+# include "minishell.h"
 
 int				next_prime(int n);
 
@@ -23,5 +25,6 @@ void			ht_item_free(t_ht_item *i);
 unsigned long	ht_hash(const char *key);
 int				ht_find_index(t_ht_table *ht, const char *key);
 
-#define FNV_OFFSET 2166136261u
-#define FNV_PRIME 16777619u
+# define FNV_OFFSET 2166136261u
+# define FNV_PRIME 16777619u
+#endif

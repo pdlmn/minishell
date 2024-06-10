@@ -6,12 +6,17 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 01:50:13 by omougel           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2024/06/10 10:08:20 by omougel          ###   ########.fr       */
+=======
+/*   Updated: 2024/06/10 10:49:41 by omougel          ###   ########.fr       */
+>>>>>>> 14d64cd (feat: added changes from out school repo, added valgrind rule in makefile)
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/execution.h"
 
+<<<<<<< HEAD
 char	**replacefront(char **cmd, char *path)
 {
 	free(cmd[0]);
@@ -19,6 +24,8 @@ char	**replacefront(char **cmd, char *path)
 	return (cmd);
 }
 
+=======
+>>>>>>> 14d64cd (feat: added changes from out school repo, added valgrind rule in makefile)
 char	**split_envp(t_ht_table *envp)
 {
 	char	*tmp;

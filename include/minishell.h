@@ -6,6 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 14:34:14 by emuminov          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2024/06/10 10:38:08 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -25,6 +26,29 @@
 #define PROMPT "\x1B[33mmishell\x1B[0m\x1B[32m ~> \x1B[0m" 
 #define RED "\033[0;31m"
 #define SPACES " \t\r\v\n\f"
+=======
+/*   Updated: 2024/06/10 15:15:39 by emuminov         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef MINISHELL_H
+# define MINISHELL_H
+# include "../libft/libft.h"
+# include <errno.h>
+# include <fcntl.h>
+# include <readline/history.h>
+# include <readline/readline.h>
+# include <signal.h>
+# include <stdio.h>
+# include <sys/stat.h>
+# include <sys/wait.h>
+# define PROMPT_COLOR "\x1B[33m"
+# define ARROW_COLOR "\x1B[32m"
+# define RESET_COLOR "\x1B[0m"
+# define PROMPT "\x1B[33mmishell\x1B[0m\x1B[32m ~> \x1B[0m"
+# define RED "\033[0;31m"
+# define SPACES " \t\r\v\n\f"
+>>>>>>> 14d64cd (feat: added changes from out school repo, added valgrind rule in makefile)
 
 enum				e_token
 {
@@ -146,6 +170,10 @@ void				token_list_print(t_tlist *lst);
 
 t_token				*token_create(char *content, int len, int space_after,
 						enum e_quotes is_quoted);
+<<<<<<< HEAD
+=======
+t_token				*token_insert_tokens(t_tlist *lst, t_token *t, t_token *first_new_token);
+>>>>>>> 14d64cd (feat: added changes from out school repo, added valgrind rule in makefile)
 void				token_free(t_token *t);
 t_token				*token_delete(t_tlist *lst, t_token *t);
 t_token				*token_delete_and_free(t_tlist *lst, t_token *t);
@@ -189,3 +217,7 @@ int					handle_prompt_syntax_errors(t_minishell *sh, char *input);
 int					sh_cleanup(t_minishell *sh, char *input, t_ht_table *env);
 int					launch_interacrive_mode(t_minishell *sh);
 int					launch_noninteractive_mode(t_minishell *sh, char **argv);
+<<<<<<< HEAD
+=======
+#endif
+>>>>>>> 14d64cd (feat: added changes from out school repo, added valgrind rule in makefile)

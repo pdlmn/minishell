@@ -1162,12 +1162,29 @@
       "-fsanitize=address",
       "-c",
       "-o",
-      "objs/handle_signal.o",
-      "shell/handle_signal.c"
+      "objs/signal_handlers.o",
+      "shell/signal_handlers.c"
     ],
     "directory": "/home/emuminov/projects/minishell",
-    "file": "/home/emuminov/projects/minishell/shell/handle_signal.c",
-    "output": "/home/emuminov/projects/minishell/objs/handle_signal.o"
+    "file": "/home/emuminov/projects/minishell/shell/signal_handlers.c",
+    "output": "/home/emuminov/projects/minishell/objs/signal_handlers.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g3",
+      "-fsanitize=address",
+      "-c",
+      "-o",
+      "objs/init_signal_handlers.o",
+      "shell/init_signal_handlers.c"
+    ],
+    "directory": "/home/emuminov/projects/minishell",
+    "file": "/home/emuminov/projects/minishell/shell/init_signal_handlers.c",
+    "output": "/home/emuminov/projects/minishell/objs/init_signal_handlers.o"
   },
   {
     "arguments": [
@@ -1383,12 +1400,63 @@
       "-fsanitize=address",
       "-c",
       "-o",
+      "objs/execution_utils.o",
+      "execution/execution_utils.c"
+    ],
+    "directory": "/home/emuminov/projects/minishell",
+    "file": "/home/emuminov/projects/minishell/execution/execution_utils.c",
+    "output": "/home/emuminov/projects/minishell/objs/execution_utils.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g3",
+      "-fsanitize=address",
+      "-c",
+      "-o",
       "objs/execution_check.o",
       "execution/execution_check.c"
     ],
     "directory": "/home/emuminov/projects/minishell",
     "file": "/home/emuminov/projects/minishell/execution/execution_check.c",
     "output": "/home/emuminov/projects/minishell/objs/execution_check.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g3",
+      "-fsanitize=address",
+      "-c",
+      "-o",
+      "objs/interactive_mode.o",
+      "shell/interactive_mode.c"
+    ],
+    "directory": "/home/emuminov/projects/minishell",
+    "file": "/home/emuminov/projects/minishell/shell/interactive_mode.c",
+    "output": "/home/emuminov/projects/minishell/objs/interactive_mode.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g3",
+      "-fsanitize=address",
+      "-c",
+      "-o",
+      "objs/noninteractive_mode.o",
+      "shell/noninteractive_mode.c"
+    ],
+    "directory": "/home/emuminov/projects/minishell",
+    "file": "/home/emuminov/projects/minishell/shell/noninteractive_mode.c",
+    "output": "/home/emuminov/projects/minishell/objs/noninteractive_mode.o"
   },
   {
     "arguments": [

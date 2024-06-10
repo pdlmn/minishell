@@ -1,6 +1,6 @@
 #comilation vars-----------------------------------
 CC=cc
-CFLAGS=-Wall -Wextra -Werror -g3 -fsanitize=address
+CFLAGS=-Wall -Wextra -Werror -g3
 RLFLAGS=-lreadline
 
 #subject declarations------------------------------
@@ -48,6 +48,7 @@ SRCS=lexer.c \
 	 redir.c \
 	 redir_utils.c \
 	 exec_utils.c \
+	 execution_utils.c \
 	 execution_check.c \
 	 interactive_mode.c \
 	 noninteractive_mode.c \
@@ -69,6 +70,9 @@ $(LIB): libft
 
 libft:
 	$(MAKE) -C $(LIB_DIR)
+
+valgrind: $(NAME)
+	valgrind --suppressions=valgrind_ignore_leaks --track-fds=yes --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose --show-mismatched-frees=yes --read-var-info=yes ./$(NAME)
 
 clean:
 	$(MAKE) -C $(LIB_DIR) $@

@@ -6,16 +6,21 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 00:54:42 by omougel           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2024/06/10 09:23:53 by omougel          ###   ########.fr       */
+=======
+/*   Updated: 2024/06/10 13:13:44 by emuminov         ###   ########.fr       */
+>>>>>>> 14d64cd (feat: added changes from out school repo, added valgrind rule in makefile)
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/execution.h"
 
-size_t	keylen(char const *str)
+char	*strvalue(char *envval, char *cmd)
 {
-	size_t	i;
+	char	*newval;
 
+<<<<<<< HEAD
 	i = 0;
 	if (!str)
 		return (0);
@@ -44,6 +49,10 @@ char	*strvalue(char *envval, char *cmd)
 
 	newval = &cmd[valuelen(cmd)];
 	if (!cmd[keylen(cmd)] || !newval)
+=======
+	newval = &cmd[valuelen(cmd)];
+	if (cmd[keylen(cmd)] != '+' || !envval)
+>>>>>>> 14d64cd (feat: added changes from out school repo, added valgrind rule in makefile)
 		return (ft_strdup(newval));
 	return (ft_strjoin(envval, newval));
 }
@@ -79,10 +88,20 @@ int	export(char **cmd, t_ht_table *env, int fd_out)
 			continue ;
 		key = ft_substr(cmd[i], 0, keylen(cmd[i]));
 		value = strvalue(ht_get(env, key), cmd[i]);
+<<<<<<< HEAD
+=======
+		if (!value || !key)
+			return (free(key), free(value), -1);
+>>>>>>> 14d64cd (feat: added changes from out school repo, added valgrind rule in makefile)
 		ht_set(env, key, value);
+		free(key);
+		free(value);
 	}
+<<<<<<< HEAD
 	free(key);
 	free(value);
+=======
+>>>>>>> 14d64cd (feat: added changes from out school repo, added valgrind rule in makefile)
 	return (0);
 }
 
