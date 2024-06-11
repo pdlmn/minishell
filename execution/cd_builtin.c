@@ -6,7 +6,7 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 00:47:00 by omougel           #+#    #+#             */
-/*   Updated: 2024/06/11 16:00:30 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/11 16:47:24 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,8 @@ void	cd(char **cmd, t_minishell *sh)
 		printf("minishell: cd: %s\n", strerror(errno));
 		return;
 	}
-	if (ht_set(sh->env, "OLDPWD", ht_get(sh->env, "PWD")) || ht_set(sh->env, "PWD", newpwd))
+	if (ht_set(sh->env, "OLDPWD", ht_get(sh->env, "PWD")) ||
+			ht_set(sh->env, "PWD", newpwd))
 	{
 		set_or_get_exit_status(SET, -1);
 		return;

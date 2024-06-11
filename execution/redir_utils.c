@@ -6,7 +6,7 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 01:01:59 by omougel           #+#    #+#             */
-/*   Updated: 2024/06/08 22:52:16 by omougel          ###   ########.fr       */
+/*   Updated: 2024/06/11 16:21:57 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ char	*join_expanded_strings(t_tlist *lst)
 	curr = lst->head;
 	len = calculate_token_list_len(lst);
 	res = malloc(sizeof(char) * (len + 1));
+	if (!res)
+		return (NULL);
 	i = 0;
 	while (curr)
 	{
@@ -60,9 +62,11 @@ char	*expend_heredoc(char *buffer)
 
 	sh.lst.head = NULL;
 	sh.lst.tail = NULL;
-	lex_heredoc_input(buffer, &sh.lst, DELIM);
+	if (!lex_heredoc_input(buffer, &sh.lst, DELIM))
+		return (free(buffer), NULL);
+	if (!expand_heredoc(&sh, &sh.lst, DELIM))
+		return (free(buffer), token_list_free(&sh.lst), NULL);
 	free(buffer);
-	expand_heredoc(&sh, &sh.lst, DELIM);
 	buffer = join_expanded_strings(&sh.lst);
 	token_list_free(&sh.lst);
 	return (buffer);

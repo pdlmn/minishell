@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 10:34:47 by emuminov          #+#    #+#             */
-/*   Updated: 2024/06/10 10:35:09 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/11 16:46:47 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,6 @@ void	init_heredoc_signal_handlers(void)
 	sa_sigint.sa_flags = SA_SIGINFO | SA_RESTART;
 	sa_sigint.sa_handler = heredoc_signal_handler;
 	sigaction(SIGINT, &sa_sigint, NULL);
+	signal(SIGQUIT, SIG_IGN);
+	signal(SIGTSTP, SIG_IGN);
 }
