@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 16:51:27 by emuminov          #+#    #+#             */
-/*   Updated: 2024/06/10 14:03:00 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/11 17:00:01 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	launch_interacrive_mode(t_minishell *sh)
 			return (sh_cleanup(sh, input, sh->env));
 		if (!command_table(sh))
 			return (sh_cleanup(sh, input, sh->env));
-		if (sh->cmd_tab[0][0])
+		if (sh->cmd_tab[0] && sh->cmd_tab[0][0])
 			execute(*sh);
 		sh_cleanup(sh, input, NULL);
 	}
