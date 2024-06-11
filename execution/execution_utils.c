@@ -6,7 +6,7 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 10:46:09 by omougel           #+#    #+#             */
-/*   Updated: 2024/06/10 10:50:39 by omougel          ###   ########.fr       */
+/*   Updated: 2024/06/11 16:06:48 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,10 @@ void	exec_cmd(char **cmd, t_minishell msh)
 		close(msh.fd_out);
 	envp = env_ht_to_arr(msh.env);
 	if (is_builtin(cmd[0]))
-		errno = do_builtins(cmd, msh.env, &msh);
+	{
+		do_builtins(cmd, msh.env, &msh);
+		errno = set_or_get_exit_status(GET, -1);
+	}
 	if (!access(cmd[0], X_OK))
 		execve(cmd[0], cmd, envp);
 	ft_free_split(cmd);

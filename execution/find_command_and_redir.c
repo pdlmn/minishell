@@ -6,7 +6,7 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 01:50:13 by omougel           #+#    #+#             */
-/*   Updated: 2024/06/10 10:49:41 by omougel          ###   ########.fr       */
+/*   Updated: 2024/06/11 15:36:22 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,7 @@ char	**find_command(char **cmd, t_minishell *sh)
 	char	**env;
 
 	if (is_builtin(cmd[0]))
-	{
-		sh->last_status = do_builtins(cmd, sh->env, sh);
-		return (NULL);
-	}
+		return (do_builtins(cmd, sh->env, sh), NULL);
 	if (!ft_strncmp("./", cmd[0], 2) && !access(cmd[0], X_OK))
 		return (cmd);
 	env = split_envp(sh->env);

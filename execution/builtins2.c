@@ -6,7 +6,7 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 00:52:52 by omougel           #+#    #+#             */
-/*   Updated: 2024/06/11 10:39:24 by omougel          ###   ########.fr       */
+/*   Updated: 2024/06/11 15:48:28 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	echo_params(char **cmd, int *nl)
 	return (i);
 }
 
-int	echo(char **cmd, int fd_out)
+void	echo(char **cmd, int fd_out)
 {
 	int	nl;
 	int	i;
@@ -51,32 +51,34 @@ int	echo(char **cmd, int fd_out)
 	}
 	if (nl == 0)
 		printf("\n");
-	return (0);
+	set_or_get_exit_status(SET, 0);
 }
 
-int	pwd(char **cmd, t_minishell *sh, int fd_out)
+void	pwd(char **cmd, t_minishell *sh, int fd_out)
 {
 	char	*pwd;
 
 	if (cmd[1] && cmd[1][0] == '-')
-		return (ft_putstr_fd("mishell: pwd: invalid option\n", 2), 2);
+		return (set_or_get_exit_status(SET, 2),
+			ft_putstr_fd("mishell: pwd: invalid option\n", 2));
 	pwd = getcwd(NULL, 0);
 	if (!pwd)
 		ft_exit(sh);
 	ft_putstr_fd(pwd, fd_out);
 	ft_putchar_fd('\n', fd_out);
 	free(pwd);
-	return (0);
+	set_or_get_exit_status(SET, 0);
 }
 
-int	bt_env(char **cmd, t_ht_table *env, int fd_out)
+void	bt_env(char **cmd, t_ht_table *env, int fd_out)
 {
 	char	**envp;
 	int		i;
 
 	i = 0;
 	if (cmd[1] && cmd[1][0] == '-')
-		return (ft_putstr_fd("mishell: env: invalid option\n", 2), 2);
+		return (set_or_get_exit_status(SET, 2),
+			ft_putstr_fd("mishell: env: invalid option\n", 2));
 	envp = env_ht_to_arr(env);
 	while (envp[i])
 	{
@@ -84,18 +86,18 @@ int	bt_env(char **cmd, t_ht_table *env, int fd_out)
 		ft_putchar_fd('\n', fd_out);
 	}
 	ft_free_split(envp);
-	return (0);
+	set_or_get_exit_status(SET, 0);
 }
 
-int	bt_exit(char **cmd, t_minishell *msh)
+void	bt_exit(char **cmd, t_minishell *msh)
 {
   int i;
 
   i = -1;
   if (!cmd[1])
   {
-  	ft_putstr_fd("exit\n", 2);
-	  ft_exit(msh);
+		ft_putstr_fd("exit\n", 2);
+		ft_exit(msh);
   }
   while (cmd[1][++i])
       if (!ft_isdigit(cmd[1][i]))
@@ -113,5 +115,5 @@ int	bt_exit(char **cmd, t_minishell *msh)
 	  ft_exit(msh);
   }
   ft_putstr_fd("mishell: exit: too many arguments\n", 2);
-  return (1);
+  set_or_get_exit_status(SET, 1);
 }

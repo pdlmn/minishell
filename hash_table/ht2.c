@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 03:55:58 by emuminov          #+#    #+#             */
-/*   Updated: 2024/06/09 16:40:24 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/11 16:02:14 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ t_ht_item	*ht_new_item(const char *k, const char *v)
 	item = malloc(sizeof(t_ht_item));
 	if (!item)
 		return (NULL);
+	if (!k || !v)
+		return (free(item), NULL);
 	item->key = ft_strdup(k);
 	item->value = ft_strdup(v);
 	if (!item->key || !item->value)

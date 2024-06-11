@@ -6,7 +6,7 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 09:49:14 by omougel           #+#    #+#             */
-/*   Updated: 2024/06/10 10:48:14 by omougel          ###   ########.fr       */
+/*   Updated: 2024/06/11 15:30:59 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,16 @@ void	execute(t_minishell msh)
 		waitpid(msh.pid, &msh.last_status, 0);
 	while (num_of_child-- > 0)
 		wait(NULL);
+	if (msh.pid == -1)
+		return;
+	if (WIFSIGNALED(msh.last_status))
+	{
+		if (msh.last_status == 2)
+			set_or_get_exit_status(SET, 130);
+		else if (msh.last_status == 131)
+			set_or_get_exit_status(SET, 131);
+		return;
+	}
 	msh.last_status = WEXITSTATUS(msh.last_status);
 	set_or_get_exit_status(SET, msh.last_status);
 }

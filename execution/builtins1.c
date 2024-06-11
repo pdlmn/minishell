@@ -6,13 +6,13 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 00:54:42 by omougel           #+#    #+#             */
-/*   Updated: 2024/06/11 10:39:41 by omougel          ###   ########.fr       */
+/*   Updated: 2024/06/11 15:43:20 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/execution.h"
 
-char	*strvalue(char *envval, char *cmd)
+static char	*strvalue(char *envval, char *cmd)
 {
 	char	*newval;
 
@@ -22,31 +22,28 @@ char	*strvalue(char *envval, char *cmd)
 	return (ft_strjoin(envval, newval));
 }
 
-int	call_env(t_ht_table *env, int fd_out)
+static void	call_env(t_ht_table *env, int fd_out)
 {
 	char	**str;
-	int		i;
 
 	str = ft_calloc(2, sizeof(char *));
 	str[0] = "env";
-	i = bt_env(str, env, fd_out);
+	bt_env(str, env, fd_out);
 	free(str);
-	return (i);
 }
 
-int	export(char **cmd, t_ht_table *env, int fd_out)
+static void	export(char **cmd, t_ht_table *env, int fd_out)
 {
 	int		i;
 	char	*key;
 	char	*value;
 
 	i = 0;
-	key = NULL;
-	value = NULL;
 	if (!cmd[1])
 		call_env(env, fd_out);
 	if (cmd[1] && cmd[1][0] == '-')
-		return (ft_putstr_fd("mishell: export: invalid option\n", 2), 2);
+		return (set_or_get_exit_status(SET, 2),
+				ft_putstr_fd("mishell: export: invalid option\n", 2));
 	while (cmd[++i])
 	{
 		if (!ft_strchr(cmd[1], '='))
@@ -54,27 +51,29 @@ int	export(char **cmd, t_ht_table *env, int fd_out)
 		key = ft_substr(cmd[i], 0, keylen(cmd[i]));
 		value = strvalue(ht_get(env, key), cmd[i]);
 		if (!value || !key)
-			return (free(key), free(value), -1);
-		ht_set(env, key, value);
+			return (set_or_get_exit_status(SET, -1), free(key), free(value));
+		if (!ht_set(env, key, value))
+			return (set_or_get_exit_status(SET, -1), free(key), free(value));
 		free(key);
 		free(value);
 	}
-	return (0);
+	set_or_get_exit_status(SET, 0);
 }
 
-int	unset(char **cmd, t_ht_table *env)
+static void	unset(char **cmd, t_ht_table *env)
 {
 	int	i;
 
 	i = 1;
 	if (cmd[1] && cmd[1][0] == '-')
-		return (ft_putstr_fd("mishell: unset: invalid option\n", 2), 2);
+		return (set_or_get_exit_status(SET, 2),
+			ft_putstr_fd("mishell: unset: invalid option\n", 2));
 	while (cmd[i])
 		ht_delete(env, cmd[i++]);
-	return (0);
+	set_or_get_exit_status(SET, 0);
 }
 
-int	do_builtins(char **cmd, t_ht_table *env, t_minishell *sh)
+void	do_builtins(char **cmd, t_ht_table *env, t_minishell *sh)
 {
 	if (!ft_strcmp(cmd[0], "echo"))
 		return (echo(cmd, sh->fd_out));
@@ -90,5 +89,4 @@ int	do_builtins(char **cmd, t_ht_table *env, t_minishell *sh)
 		return (bt_env(cmd, env, sh->fd_out));
 	if (!ft_strcmp(cmd[0], "exit"))
 		return (bt_exit(cmd, sh));
-	return (1);
 }
