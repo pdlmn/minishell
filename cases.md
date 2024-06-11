@@ -99,6 +99,9 @@ asd<Ctrl-D>        -> {nothing}
 
 ## Operators
 ### Heredoc
+Reopening stdin after closing it:
+`https://stackoverflow.com/a/9084190`
+
 Rules for the heredoc expansion are here:
 `https://pubs.opengroup.org/onlinepubs/009695399/utilities/xcu_chap02.html#tag_02_07_04`
 
