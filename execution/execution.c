@@ -6,11 +6,12 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 09:49:14 by omougel           #+#    #+#             */
-/*   Updated: 2024/06/11 21:25:50 by omougel          ###   ########.fr       */
+/*   Updated: 2024/06/11 22:26:22 by omougel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/execution.h"
+#include <errno.h>
 #include <stdio.h>
 
 int	go_to_next_pipe(char ***cmd_tab)
@@ -41,6 +42,7 @@ void	check_cmd(t_minishell *msh, int *fd, int i)
 	if (!is_builtin(msh->cmd_tab[i][0]))
 	{
 		secure_close(&msh->fd_out, &msh->fd_in, &fd[0], &fd[1]);
+		errno = set_or_get_exit_status(GET, -1);
 		ft_exit(msh);
 	}
 }

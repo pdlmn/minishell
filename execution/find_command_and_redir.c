@@ -6,7 +6,7 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 01:50:13 by omougel           #+#    #+#             */
-/*   Updated: 2024/06/11 15:36:22 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/11 22:27:20 by omougel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ char	**seach_path(char **env, char **cmd)
 		i++;
 	}
 	ft_free_split(env);
-	errno = 127;
+	set_or_get_exit_status(SET, 127);
 	ft_putstr_fd(cmd[0], 2);
 	return (ft_putstr_fd(": command not found\n", 2), NULL);
 }
