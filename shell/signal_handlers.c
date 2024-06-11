@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 13:35:45 by emuminov          #+#    #+#             */
-/*   Updated: 2024/06/10 13:31:32 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/11 10:56:01 by omougel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	exec_signal_handler(int signal)
 void	heredoc_signal_handler(int signal)
 {
 	(void)signal;
-	set_or_get_exit_status(SET, 130);
+	set_or_get_exit_status(SET, 131);
 	write(1, "\n", 1);
 	rl_replace_line("", 0);
 	rl_on_new_line();
