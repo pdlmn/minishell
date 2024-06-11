@@ -6,7 +6,7 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 01:00:55 by omougel           #+#    #+#             */
-/*   Updated: 2024/06/11 16:15:00 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/11 17:38:21 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	here_doc(char *lim, char *quoted)
 	free(buff);
 	close(fd[1]);
 	if (set_or_get_exit_status(GET, -1) == 130)
-		return (get_next_line(-1), -1);
+		return (close(fd[0]), -2);
 	return (fd[0]);
 }
 
