@@ -6,7 +6,7 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 00:54:42 by omougel           #+#    #+#             */
-/*   Updated: 2024/06/10 13:13:44 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/11 10:39:41 by omougel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,6 @@ int	do_builtins(char **cmd, t_ht_table *env, t_minishell *sh)
 	if (!ft_strcmp(cmd[0], "env"))
 		return (bt_env(cmd, env, sh->fd_out));
 	if (!ft_strcmp(cmd[0], "exit"))
-		bt_exit(sh);
+		return (bt_exit(cmd, sh));
 	return (1);
 }

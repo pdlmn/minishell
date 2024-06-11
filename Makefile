@@ -28,6 +28,7 @@ SRCS=lexer.c \
 	 ht3.c \
 	 ht_utils.c \
 	 expansion.c \
+	 split_unspaced.c \
 	 quotes_expansion.c \
 	 variables_expansion.c \
 	 heredoc_find_delimeters.c \
@@ -60,7 +61,7 @@ VPATH=lexer:token:error_handling:hash_table:expansion:env:shell:command_table:ex
 all: $(NAME)
 
 $(NAME): $(LIB) $(HEADER) $(OBJS)
-	$(CC) $(CFLAGS) $(RLFLAGS) $(OBJS) $(LIB) -o $@
+	$(CC) $(CFLAGS) $(RLFLAGS) $(OBJS) $(LIB) -o $@ -lreadline
 
 $(OBJS_DIR)%.o: %.c $(HEADERS)
 	@mkdir -p $(OBJS_DIR)
