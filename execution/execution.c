@@ -6,11 +6,12 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 09:49:14 by omougel           #+#    #+#             */
-/*   Updated: 2024/06/11 18:18:33 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/11 21:25:50 by omougel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/execution.h"
+#include <stdio.h>
 
 int	go_to_next_pipe(char ***cmd_tab)
 {
@@ -56,27 +57,27 @@ t_minishell	*read_cmd(t_minishell *msh, int *fd, int *pid)
 		else if (is_output(msh->cmd_tab[i][0]))
 			msh->fd_out = check_output(msh->cmd_tab[i], msh->fd_out);
 		else if (msh->cmd_tab[i][0])
-			check_cmd(msh, fd, i);
-		if (msh->fd_in == -1 || msh->fd_out == -1)
 		{
-			perror(msh->cmd_tab[i][1]);
-			secure_close(&msh->fd_out, &msh->fd_in, &fd[0], &fd[1]);
-			if (*pid != 0)
-				return (msh);
-			ft_exit(msh);
+			if (is_builtin(msh->cmd_tab[i][0]))
+				check_cmd(msh, fd, i);
+			else
+			{
+				init_exec_signal_handlers();
+				*pid = fork();
+				if (*pid == 0)
+					check_cmd(msh, fd, i);
+			}
 		}
-		if (msh->fd_in == -2)
+		if (msh->fd_in < 0 || msh->fd_out == -1)
 		{
 			secure_close(&msh->fd_out, &msh->fd_in, &fd[0], &fd[1]);
-			if (*pid != 0)
+			if (msh->fd_in == -2)
 				return (NULL);
-			errno = set_or_get_exit_status(GET, -1);
-			ft_exit(msh);
+			perror(msh->cmd_tab[i][1]);
+			return (msh);
 		}
 		i++;
 	}
-	if (*pid == 0)
-		ft_exit(msh);
 	return (msh);
 }
 
@@ -94,19 +95,8 @@ char	***fork_and_execute(t_minishell *msh, int *pid)
 			return (NULL);
 		msh->fd_out = fd[1];
 	}
-	if (is_builtin(msh->cmd_tab[go_to_next_pipe(msh->cmd_tab) - 1][0]))
-	{
-		if (!read_cmd(msh, fd, pid))
-			return (NULL);
-	}
-	else
-	{
-		init_exec_signal_handlers();
-		*pid = fork();
-		if (*pid == 0)
-			if (!read_cmd(msh, fd, pid))
-				return (NULL);
-	}
+	if (!read_cmd(msh, fd, pid))
+		return (NULL);
 	secure_close(&msh->fd_out, &msh->fd_in, &fd[0], &fd[1]);
 	if (!msh->cmd_tab || !msh->cmd_tab[go_to_next_pipe(msh->cmd_tab)])
 		return (NULL);

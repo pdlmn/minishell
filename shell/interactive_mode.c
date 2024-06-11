@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 16:51:27 by emuminov          #+#    #+#             */
-/*   Updated: 2024/06/11 17:57:56 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/11 21:32:20 by omougel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	launch_interacrive_mode(t_minishell *sh)
 		input = read_command(PROMPT);
 		if (input == NULL)
 			return (ft_putstr_fd("exit\n", STDOUT_FILENO), sh_cleanup(sh, NULL,
-					sh->env));
+					sh->env), 0);
 		if (!lex_input(input, &sh->lst))
 			return (sh_cleanup(sh, input, sh->env));
 		if (!handle_prompt_syntax_errors(sh, input))
