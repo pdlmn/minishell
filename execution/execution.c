@@ -6,7 +6,7 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 09:49:14 by omougel           #+#    #+#             */
-/*   Updated: 2024/06/11 18:08:42 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/11 18:18:33 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,16 +60,16 @@ t_minishell	*read_cmd(t_minishell *msh, int *fd, int *pid)
 		if (msh->fd_in == -1 || msh->fd_out == -1)
 		{
 			perror(msh->cmd_tab[i][1]);
-			if (*pid != 0)
-				return (NULL);
 			secure_close(&msh->fd_out, &msh->fd_in, &fd[0], &fd[1]);
+			if (*pid != 0)
+				return (msh);
 			ft_exit(msh);
 		}
 		if (msh->fd_in == -2)
 		{
+			secure_close(&msh->fd_out, &msh->fd_in, &fd[0], &fd[1]);
 			if (*pid != 0)
 				return (NULL);
-			secure_close(&msh->fd_out, &msh->fd_in, &fd[0], &fd[1]);
 			errno = set_or_get_exit_status(GET, -1);
 			ft_exit(msh);
 		}
@@ -95,13 +95,17 @@ char	***fork_and_execute(t_minishell *msh, int *pid)
 		msh->fd_out = fd[1];
 	}
 	if (is_builtin(msh->cmd_tab[go_to_next_pipe(msh->cmd_tab) - 1][0]))
-		read_cmd(msh, fd, pid);
+	{
+		if (!read_cmd(msh, fd, pid))
+			return (NULL);
+	}
 	else
 	{
 		init_exec_signal_handlers();
 		*pid = fork();
 		if (*pid == 0)
-			read_cmd(msh, fd, pid);
+			if (!read_cmd(msh, fd, pid))
+				return (NULL);
 	}
 	secure_close(&msh->fd_out, &msh->fd_in, &fd[0], &fd[1]);
 	if (!msh->cmd_tab || !msh->cmd_tab[go_to_next_pipe(msh->cmd_tab)])
