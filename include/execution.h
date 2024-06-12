@@ -6,7 +6,7 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 00:14:46 by omougel           #+#    #+#             */
-/*   Updated: 2024/06/11 15:35:25 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/12 13:58:08 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,5 @@ void	secure_close(int *fd_out, int *fd_in, int *pipe_out, int *pipe_in);
 size_t	keylen(char const *str);
 size_t	valuelen(char *str);
 char	**replacefront(char **cmd, char *path);
+int		go_to_next_pipe(char ***cmd_tab);
 #endif
