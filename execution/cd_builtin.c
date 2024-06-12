@@ -6,7 +6,7 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 00:47:00 by omougel           #+#    #+#             */
-/*   Updated: 2024/06/11 16:47:24 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/12 13:47:27 by omougel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,32 +75,26 @@ void	cd(char **cmd, t_minishell *sh)
 {
 	char		newpwd[PATH_MAX];
 
+	set_or_get_exit_status(SET, 2);
 	if (cmd[1] && cmd[1][0] == '-' && cmd[1][1] != '\0')
-		return (set_or_get_exit_status(SET, 2),
-			ft_putstr_fd("mishell: cd: invalid option\n", 2));
+		return (ft_putstr_fd("mishell: cd: invalid option\n", 2));
 	if (cmd[1] && cmd[2])
-		return (set_or_get_exit_status(SET, 2),
-			ft_putstr_fd("mishell: cd: too many arguments\n", 2));
+		return (ft_putstr_fd("mishell: cd: too many arguments\n", 2));
 	if (ft_strcmp(cmd[1], "-") == 0)
 	{
 		ft_strcpy(newpwd, ht_get(sh->env, "OLDPWD"));
 		if (!newpwd[0])
-			return (set_or_get_exit_status(SET, 2),
-				ft_putstr_fd("mishell: cd: OLDPWD not set\n", 2));
+			return (ft_putstr_fd("mishell: cd: OLDPWD not set\n", 2));
 	}
 	else if (cmd[1])
 		find_newpwd(cmd[1], newpwd);
 	if (chdir(newpwd) != 0)
-	{
-		set_or_get_exit_status(SET, 1);
-		printf("minishell: cd: %s\n", strerror(errno));
-		return;
-	}
-	if (ht_set(sh->env, "OLDPWD", ht_get(sh->env, "PWD")) ||
-			ht_set(sh->env, "PWD", newpwd))
+		return (set_or_get_exit_status(SET, 1), perror("minishell: cd :"));
+	if (ht_set(sh->env, "OLDPWD", ht_get(sh->env, "PWD"))
+		|| ht_set(sh->env, "PWD", newpwd))
 	{
 		set_or_get_exit_status(SET, -1);
-		return;
+		return ;
 	}
 	set_or_get_exit_status(SET, 0);
 }

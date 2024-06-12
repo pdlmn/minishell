@@ -6,7 +6,7 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 00:54:42 by omougel           #+#    #+#             */
-/*   Updated: 2024/06/11 15:43:20 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/12 13:48:29 by omougel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	export(char **cmd, t_ht_table *env, int fd_out)
 		call_env(env, fd_out);
 	if (cmd[1] && cmd[1][0] == '-')
 		return (set_or_get_exit_status(SET, 2),
-				ft_putstr_fd("mishell: export: invalid option\n", 2));
+			ft_putstr_fd("mishell: export: invalid option\n", 2));
 	while (cmd[++i])
 	{
 		if (!ft_strchr(cmd[1], '='))

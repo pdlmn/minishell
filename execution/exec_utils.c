@@ -6,11 +6,21 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 01:48:24 by omougel           #+#    #+#             */
-/*   Updated: 2024/06/11 17:25:57 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/12 13:50:37 by omougel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/execution.h"
+
+int	go_to_next_pipe(char ***cmd_tab)
+{
+	int	i;
+
+	i = 0;
+	while (cmd_tab[i] && ft_strcmp(cmd_tab[i][0], "|"))
+		i++;
+	return (i);
+}
 
 char	*ft_strjoin_cmd(char const *s1, char const *s2)
 {

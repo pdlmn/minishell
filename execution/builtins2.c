@@ -6,12 +6,11 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 00:52:52 by omougel           #+#    #+#             */
-/*   Updated: 2024/06/11 15:48:28 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/12 13:49:10 by omougel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/execution.h"
-#include <errno.h>
 
 int	echo_params(char **cmd, int *nl)
 {
@@ -91,29 +90,29 @@ void	bt_env(char **cmd, t_ht_table *env, int fd_out)
 
 void	bt_exit(char **cmd, t_minishell *msh)
 {
-  int i;
+	int	i;
 
-  i = -1;
-  if (!cmd[1])
-  {
+	i = -1;
+	if (!cmd[1])
+	{
 		ft_putstr_fd("exit\n", 2);
 		ft_exit(msh);
-  }
-  while (cmd[1][++i])
-      if (!ft_isdigit(cmd[1][i]))
-          break ;
-  if (cmd[1][i] != '\0')
-  {
-  	  ft_putstr_fd("mishell: exit: numeric argument required\n", 2);
-      errno = 2;
-      ft_exit(msh);
-  }
-  if (!cmd[2])
-  {
-  	ft_putstr_fd("exit\n", 2);
-    errno = ft_atoi(cmd[1]) % 256;
-	  ft_exit(msh);
-  }
-  ft_putstr_fd("mishell: exit: too many arguments\n", 2);
-  set_or_get_exit_status(SET, 1);
+	}
+	while (cmd[1][++i])
+		if (!ft_isdigit(cmd[1][i]))
+			break ;
+	if (cmd[1][i] != '\0')
+	{
+		ft_putstr_fd("mishell: exit: numeric argument required\n", 2);
+		errno = 2;
+		ft_exit(msh);
+	}
+	if (!cmd[2])
+	{
+		ft_putstr_fd("exit\n", 2);
+		errno = ft_atoi(cmd[1]) % 256;
+		ft_exit(msh);
+	}
+	ft_putstr_fd("mishell: exit: too many arguments\n", 2);
+	set_or_get_exit_status(SET, 1);
 }

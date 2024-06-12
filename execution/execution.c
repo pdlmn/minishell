@@ -6,23 +6,11 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 09:49:14 by omougel           #+#    #+#             */
-/*   Updated: 2024/06/11 22:26:22 by omougel          ###   ########.fr       */
+/*   Updated: 2024/06/12 13:50:45 by omougel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/execution.h"
-#include <errno.h>
-#include <stdio.h>
-
-int	go_to_next_pipe(char ***cmd_tab)
-{
-	int	i;
-
-	i = 0;
-	while (cmd_tab[i] && ft_strcmp(cmd_tab[i][0], "|"))
-		i++;
-	return (i);
-}
 
 void	check_cmd(t_minishell *msh, int *fd, int i)
 {
@@ -47,6 +35,19 @@ void	check_cmd(t_minishell *msh, int *fd, int i)
 	}
 }
 
+void	fork_if_needed(t_minishell *msh, int i, int *pid, int *fd)
+{
+	if (is_builtin(msh->cmd_tab[i][0]))
+		check_cmd(msh, fd, i);
+	else
+	{
+		init_exec_signal_handlers();
+		*pid = fork();
+		if (*pid == 0)
+			check_cmd(msh, fd, i);
+	}
+}
+
 t_minishell	*read_cmd(t_minishell *msh, int *fd, int *pid)
 {
 	int	i;
@@ -59,17 +60,7 @@ t_minishell	*read_cmd(t_minishell *msh, int *fd, int *pid)
 		else if (is_output(msh->cmd_tab[i][0]))
 			msh->fd_out = check_output(msh->cmd_tab[i], msh->fd_out);
 		else if (msh->cmd_tab[i][0])
-		{
-			if (is_builtin(msh->cmd_tab[i][0]))
-				check_cmd(msh, fd, i);
-			else
-			{
-				init_exec_signal_handlers();
-				*pid = fork();
-				if (*pid == 0)
-					check_cmd(msh, fd, i);
-			}
-		}
+			fork_if_needed(msh, i, pid, fd);
 		if (msh->fd_in < 0 || msh->fd_out == -1)
 		{
 			secure_close(&msh->fd_out, &msh->fd_in, &fd[0], &fd[1]);
@@ -118,14 +109,14 @@ void	execute(t_minishell msh)
 	while (num_of_child-- > 0)
 		wait(NULL);
 	if (msh.pid == -1)
-		return;
+		return ;
 	if (WIFSIGNALED(msh.last_status))
 	{
 		if (msh.last_status == 2)
 			set_or_get_exit_status(SET, 130);
 		else if (msh.last_status == 131)
 			set_or_get_exit_status(SET, 131);
-		return;
+		return ;
 	}
 	msh.last_status = WEXITSTATUS(msh.last_status);
 	set_or_get_exit_status(SET, msh.last_status);
