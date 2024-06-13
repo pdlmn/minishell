@@ -6,7 +6,7 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/01 23:39:35 by omougel           #+#    #+#             */
-/*   Updated: 2024/06/01 23:40:28 by omougel          ###   ########.fr       */
+/*   Updated: 2024/06/13 14:53:50 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ size_t	malloc_size(t_token *lst)
 {
 	size_t	size;
 
-	size = count_pipe(lst) * 2 + count_redir(lst) + 1;
+	size = count_pipes(lst) * 2 + count_redir(lst) + 1;
 	return (size);
 }
 

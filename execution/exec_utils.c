@@ -6,7 +6,7 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 01:48:24 by omougel           #+#    #+#             */
-/*   Updated: 2024/06/12 13:50:37 by omougel          ###   ########.fr       */
+/*   Updated: 2024/06/13 15:20:17 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,13 @@ char	*ft_strjoin_cmd(char const *s1, char const *s2)
 		i++;
 	}
 	return (dest);
+}
+
+void	execute_correct_exit(t_minishell *msh)
+{
+	ft_putstr_fd("exit\n", 2);
+	errno = set_or_get_exit_status(GET, -1);
+	ft_exit(msh);
 }
 
 void	ft_exit(t_minishell *msh)

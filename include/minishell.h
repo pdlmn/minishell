@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 14:34:14 by emuminov          #+#    #+#             */
-/*   Updated: 2024/06/10 15:15:39 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/13 14:53:53 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,7 +175,7 @@ char				**env_ht_to_arr(t_ht_table *ht);
 char				***command_table(t_minishell *sh);
 void				command_table_print(char ***cmd_tab);
 void				ft_free_table(t_minishell *sh);
-size_t				count_pipe(t_token *lst);
+size_t				count_pipes(t_token *lst);
 
 int					set_or_get_exit_status(enum e_access_flag flag,
 						int new_status);

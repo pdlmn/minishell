@@ -1,6 +1,6 @@
 #comilation vars-----------------------------------
 CC=cc
-CFLAGS=-Wall -Wextra -Werror -g3 -fsanitize=address
+CFLAGS=-Wall -Wextra -Werror -g3
 RLFLAGS=-lreadline
 
 #subject declarations------------------------------

@@ -14,7 +14,7 @@
 
 int	set_or_get_exit_status(enum e_access_flag flag, int new_status)
 {
-	static int	last_exit_status;
+	static unsigned char	last_exit_status;
 
 	if (flag == SET)
 		last_exit_status = new_status;

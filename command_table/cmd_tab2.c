@@ -6,7 +6,7 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/01 23:46:59 by omougel           #+#    #+#             */
-/*   Updated: 2024/06/09 16:46:52 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/13 14:53:47 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	ft_free_table(t_minishell *sh)
 	sh->cmd_tab = NULL;
 }
 
-size_t	count_pipe(t_token *lst)
+size_t	count_pipes(t_token *lst)
 {
 	size_t	count;
 

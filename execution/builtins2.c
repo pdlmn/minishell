@@ -6,7 +6,7 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 00:52:52 by omougel           #+#    #+#             */
-/*   Updated: 2024/06/12 13:49:10 by omougel          ###   ########.fr       */
+/*   Updated: 2024/06/13 15:20:32 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,10 +94,7 @@ void	bt_exit(char **cmd, t_minishell *msh)
 
 	i = -1;
 	if (!cmd[1])
-	{
-		ft_putstr_fd("exit\n", 2);
-		ft_exit(msh);
-	}
+		execute_correct_exit(msh);
 	while (cmd[1][++i])
 		if (!ft_isdigit(cmd[1][i]))
 			break ;

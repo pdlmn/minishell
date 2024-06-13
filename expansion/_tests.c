@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 12:23:17 by emuminov          #+#    #+#             */
-/*   Updated: 2024/06/04 17:20:12 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/13 15:32:46 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,6 +157,7 @@ int	main(int argc, char **argv, char **env)
 	test_expansion(&sh, "\"$>\"", "$>");
 	test_expansion(&sh, "\"$a>\"", ">");
 	test_expansion(&sh, "\"$asd123$%     $  >\"", "$%     $  >");
+	test_expansion(&sh, "\"$asd123#     $  >\"", "#     $  >");
 	test_expansion(&sh, "\"$__>\"", "heh>");
 	test_expansion(&sh, "\"$a1>\"", ">");
 	test_expansion(&sh, "\"$'$a'1>\"", "$''1>");
@@ -197,5 +198,6 @@ int	main(int argc, char **argv, char **env)
 	test_heredoc_expansion(&sh, "'$$'", "'$$'", DELIM);
 	test_heredoc_expansion(&sh, "'$ASD'", "'$ASD'", QDELIM);
 	test_heredoc_expansion(&sh, "'$ASD'\"hoho\"   ", "'123'\"hoho\"   ", DELIM);
-	ht_free_table(sh.env);
+	test_expansion(&sh, "$ASD#", "123#");
+	ht_free_table(&sh.env);
 }

@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 17:35:02 by emuminov          #+#    #+#             */
-/*   Updated: 2024/06/10 10:26:10 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/13 15:40:40 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,13 +69,11 @@ static t_token	*create_word_token(t_token *last_t, char *input,
 
 	if (is_quoted == SQUOTED && (!last_t || (last_t && last_t->type != SIGIL)))
 		end_of_word = ft_strset(input, "'$") - input;
-	else if (is_quoted == SQUOTED && last_t && last_t->type == SIGIL)
+	else if (last_t && last_t->type == SIGIL)
 		end_of_word = find_end_of_variable_name(input);
 	else if (is_quoted == DQUOTED && (!last_t || (last_t
 				&& last_t->type != SIGIL)))
 		end_of_word = ft_strset(input, "\"$") - input;
-	else if (is_quoted == DQUOTED && last_t && last_t->type == SIGIL)
-		end_of_word = find_end_of_variable_name(input);
 	else
 		end_of_word = ft_strset(input, "\"'$><|" SPACES) - input;
 	s = ft_substr(input, 0, end_of_word);

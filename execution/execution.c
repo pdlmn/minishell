@@ -6,7 +6,7 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 09:49:14 by omougel           #+#    #+#             */
-/*   Updated: 2024/06/12 13:50:45 by omougel          ###   ########.fr       */
+/*   Updated: 2024/06/13 15:01:02 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	fork_if_needed(t_minishell *msh, int i, int *pid, int *fd)
 	}
 }
 
-t_minishell	*read_cmd(t_minishell *msh, int *fd, int *pid)
+t_minishell	*read_cmd_tab(t_minishell *msh, int *fd, int *pid)
 {
 	int	i;
 
@@ -76,21 +76,21 @@ t_minishell	*read_cmd(t_minishell *msh, int *fd, int *pid)
 
 char	***fork_and_execute(t_minishell *msh, int *pid)
 {
-	int	fd[2];
+	int	fds[2];
 
-	fd[0] = -1;
-	fd[1] = -1;
+	fds[0] = -1;
+	fds[1] = -1;
 	msh->fd_out = 1;
 	*pid = -1;
 	if (is_there_pipe(msh->cmd_tab))
 	{
-		if (pipe(fd) == -1)
+		if (pipe(fds) == -1)
 			return (NULL);
-		msh->fd_out = fd[1];
+		msh->fd_out = fds[1];
 	}
-	if (!read_cmd(msh, fd, pid))
+	if (!read_cmd_tab(msh, fds, pid))
 		return (NULL);
-	secure_close(&msh->fd_out, &msh->fd_in, &fd[0], &fd[1]);
+	secure_close(&msh->fd_out, &msh->fd_in, &fds[0], &fds[1]);
 	if (!msh->cmd_tab || !msh->cmd_tab[go_to_next_pipe(msh->cmd_tab)])
 		return (NULL);
 	return (&msh->cmd_tab[go_to_next_pipe(msh->cmd_tab) + 1]);
@@ -101,7 +101,7 @@ void	execute(t_minishell msh)
 	int	num_of_child;
 
 	msh.fd_in = 0;
-	num_of_child = count_pipe(msh.lst.head);
+	num_of_child = count_pipes(msh.lst.head);
 	while (msh.cmd_tab && msh.cmd_tab[0])
 		msh.cmd_tab = fork_and_execute(&msh, &msh.pid);
 	if (msh.pid > 0)
