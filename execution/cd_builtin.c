@@ -6,7 +6,7 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 00:47:00 by omougel           #+#    #+#             */
-/*   Updated: 2024/06/12 13:47:27 by omougel          ###   ########.fr       */
+/*   Updated: 2024/06/13 17:18:50 by omougel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ static char	*find_newpwd(char *path, char *newpwd)
 	getcwd(newpwd, PATH_MAX);
 	while (path[i])
 	{
+		if (!ft_strncmp(&path[i], "...", 3))
+			return (NULL);
 		if (path[i] == '/')
 			i++;
 		else if (!ft_strncmp(&path[i], "..", 2))
