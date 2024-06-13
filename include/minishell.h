@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 14:34:14 by emuminov          #+#    #+#             */
-/*   Updated: 2024/06/13 14:53:53 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/13 18:03:30 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,8 +189,12 @@ void				init_exec_signal_handlers(void);
 void				init_interacrive_signal_handlers(void);
 void				init_heredoc_signal_handlers(void);
 
+
 int					handle_prompt_syntax_errors(t_minishell *sh, char *input);
 int					sh_cleanup(t_minishell *sh, char *input, t_ht_table *env);
+int					check_if_the_first_arg_is_a_pathname(t_tlist *lst);
+int					handle_pathname_as_a_first_arg(t_minishell *sh,
+		char *input);
 int					launch_interacrive_mode(t_minishell *sh);
 int					launch_noninteractive_mode(t_minishell *sh, char **argv);
 #endif
