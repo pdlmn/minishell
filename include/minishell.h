@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 14:34:14 by emuminov          #+#    #+#             */
-/*   Updated: 2024/06/13 18:03:30 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/15 16:58:03 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 # include "../libft/libft.h"
 # include <errno.h>
 # include <fcntl.h>
-# include <readline/history.h>
-# include <readline/readline.h>
 # include <signal.h>
 # include <stdio.h>
 # include <sys/stat.h>
 # include <sys/wait.h>
+# include <readline/history.h>
+# include <readline/readline.h>
 # define PROMPT_COLOR "\x1B[33m"
 # define ARROW_COLOR "\x1B[32m"
 # define RESET_COLOR "\x1B[0m"
