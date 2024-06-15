@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 14:45:20 by emuminov          #+#    #+#             */
-/*   Updated: 2024/06/15 17:22:32 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/15 17:38:17 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ int	handle_prompt_syntax_errors(t_minishell *sh, char *input)
 	{
 		print_error_message(&e);
 		token_list_free(&sh->lst);
-		free(input);
 		sh->last_status = set_or_get_exit_status(SET, 2);
 		sh_cleanup(sh, input, NULL);
 		return (0);

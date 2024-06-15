@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 16:52:00 by emuminov          #+#    #+#             */
-/*   Updated: 2024/06/13 18:04:35 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/15 17:39:01 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	launch_noninteractive_mode(t_minishell *sh, char **argv)
 	}
 	if (!lex_input(argv[2], &sh->lst))
 		return (sh_cleanup(sh, NULL, sh->env));
-	if (!handle_prompt_syntax_errors(sh, argv[2]))
+	if (!handle_prompt_syntax_errors(sh, NULL))
 		return (sh_cleanup(sh, NULL, sh->env));
 	sh->last_status = set_or_get_exit_status(GET, -1);
 	if (!expand_tokens(sh, &sh->lst))
