@@ -11,3 +11,4 @@ hash_table_test
 expansion_test
 env_test
 error_checking_test
+.direnv
