@@ -6,7 +6,7 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 00:47:00 by omougel           #+#    #+#             */
-/*   Updated: 2024/06/13 18:12:09 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/17 00:11:17 by omougel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ static char	*find_newpwd(char *path, char *newpwd)
 	return (newpwd);
 }
 
-void	cd(char **cmd, t_minishell *sh)
+void	cd(char **cmd, t_ht_table *env)
 {
 	char		newpwd[PATH_MAX];
 
@@ -84,7 +84,7 @@ void	cd(char **cmd, t_minishell *sh)
 		return (ft_putstr_fd("mishell: cd: too many arguments\n", 2));
 	if (ft_strcmp(cmd[1], "-") == 0)
 	{
-		ft_strcpy(newpwd, ht_get(sh->env, "OLDPWD"));
+		ft_strcpy(newpwd, ht_get(env, "OLDPWD"));
 		if (!newpwd[0])
 			return (ft_putstr_fd("mishell: cd: OLDPWD not set\n", 2));
 	}
@@ -92,8 +92,8 @@ void	cd(char **cmd, t_minishell *sh)
 		find_newpwd(cmd[1], newpwd);
 	if (chdir(newpwd) != 0)
 		return (set_or_get_exit_status(SET, 1), perror("minishell: cd :"));
-	if (ht_set(sh->env, "OLDPWD", ht_get(sh->env, "PWD"))
-		|| ht_set(sh->env, "PWD", newpwd))
+	if (!ht_set(env, "OLDPWD", ht_get(env, "PWD"))
+		|| !ht_set(env, "PWD", newpwd))
 	{
 		set_or_get_exit_status(SET, -1);
 		return ;

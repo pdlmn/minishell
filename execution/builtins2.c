@@ -6,7 +6,7 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 00:52:52 by omougel           #+#    #+#             */
-/*   Updated: 2024/06/13 15:20:32 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/16 23:51:35 by omougel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ void	pwd(char **cmd, t_minishell *sh, int fd_out)
 		return (set_or_get_exit_status(SET, 2),
 			ft_putstr_fd("mishell: pwd: invalid option\n", 2));
 	pwd = getcwd(NULL, 0);
+	if (!pwd)
+		pwd = ft_strdup(ht_get(sh->env, "PWD"));
 	if (!pwd)
 		ft_exit(sh);
 	ft_putstr_fd(pwd, fd_out);

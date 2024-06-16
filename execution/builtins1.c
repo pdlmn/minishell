@@ -6,7 +6,7 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 00:54:42 by omougel           #+#    #+#             */
-/*   Updated: 2024/06/13 16:38:17 by omougel          ###   ########.fr       */
+/*   Updated: 2024/06/16 23:56:39 by omougel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,11 @@ static char	*strvalue(char *envval, char *cmd)
 	char	*newval;
 
 	newval = &cmd[valuelen(cmd)];
+	if (cmd[keylen(cmd)] == '+' && cmd[keylen(cmd) + 1] != '=')
+	{
+		ft_putstr_fd("mishell: export: not a valid indentifier\n", 2);
+		return (set_or_get_exit_status(SET, 1), NULL);
+	}
 	if (cmd[keylen(cmd)] != '+' || !envval)
 		return (ft_strdup(newval));
 	return (ft_strjoin(envval, newval));
@@ -90,7 +95,7 @@ void	do_builtins(char **cmd, t_ht_table *env, t_minishell *sh)
 	if (!ft_strcmp(cmd[0], "echo"))
 		return (echo(cmd, sh->fd_out));
 	if (!ft_strcmp(cmd[0], "cd"))
-		return (cd(cmd, sh));
+		return (cd(cmd, env));
 	if (!ft_strcmp(cmd[0], "pwd"))
 		return (pwd(cmd, sh, sh->fd_out));
 	if (!ft_strcmp(cmd[0], "export"))
