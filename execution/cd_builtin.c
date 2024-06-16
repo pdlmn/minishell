@@ -6,7 +6,7 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 00:47:00 by omougel           #+#    #+#             */
-/*   Updated: 2024/06/17 00:11:17 by omougel          ###   ########.fr       */
+/*   Updated: 2024/06/17 00:52:23 by omougel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static int	next(char *path, char *newpwd)
 	return (ft_strlen_till_c(path, '/'));
 }
 
-static char	*find_newpwd(char *path, char *newpwd)
+static char	*find_newpwd(char *path, char *newpwd, t_ht_table *env)
 {
 	int	i;
 
@@ -57,6 +57,8 @@ static char	*find_newpwd(char *path, char *newpwd)
 	if (path[0] == '/')
 		return (ft_strcpy(newpwd, path));
 	getcwd(newpwd, PATH_MAX);
+	if (!newpwd[0])
+		ft_strcpy(newpwd, ht_get(env, "PWD"));
 	while (path[i])
 	{
 		if (!ft_strncmp(&path[i], "...", 3))
@@ -89,9 +91,10 @@ void	cd(char **cmd, t_ht_table *env)
 			return (ft_putstr_fd("mishell: cd: OLDPWD not set\n", 2));
 	}
 	else if (cmd[1])
-		find_newpwd(cmd[1], newpwd);
+		find_newpwd(cmd[1], newpwd, env);
+	printf("%s\n", newpwd);
 	if (chdir(newpwd) != 0)
-		return (set_or_get_exit_status(SET, 1), perror("minishell: cd :"));
+		return (set_or_get_exit_status(SET, 1), perror("minishell: cd "));
 	if (!ht_set(env, "OLDPWD", ht_get(env, "PWD"))
 		|| !ht_set(env, "PWD", newpwd))
 	{
