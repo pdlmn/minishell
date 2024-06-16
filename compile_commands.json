@@ -1,10 +1,7 @@
 [
   {
     "arguments": [
-      "/usr/bin/cc",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
+      "/nix/store/mzhqknx2mc94jdz4n320hn1lml86398y-clang-wrapper-17.0.6/bin/cc",
       "-g",
       "-c",
       "-I",
@@ -13,16 +10,13 @@
       "ft_atoi.o",
       "ft_atoi.c"
     ],
-    "directory": "/home/emuminov/projects/minishell_my_repo/libft",
-    "file": "/home/emuminov/projects/minishell_my_repo/libft/ft_atoi.c",
-    "output": "/home/emuminov/projects/minishell_my_repo/libft/ft_atoi.o"
+    "directory": "/home/pdlmn/Personal/programming/42/minishell/libft",
+    "file": "/home/pdlmn/Personal/programming/42/minishell/libft/ft_atoi.c",
+    "output": "/home/pdlmn/Personal/programming/42/minishell/libft/ft_atoi.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
+      "/nix/store/mzhqknx2mc94jdz4n320hn1lml86398y-clang-wrapper-17.0.6/bin/cc",
       "-g",
       "-c",
       "-I",
@@ -31,16 +25,13 @@
       "ft_atoi_base.o",
       "ft_atoi_base.c"
     ],
-    "directory": "/home/emuminov/projects/minishell_my_repo/libft",
-    "file": "/home/emuminov/projects/minishell_my_repo/libft/ft_atoi_base.c",
-    "output": "/home/emuminov/projects/minishell_my_repo/libft/ft_atoi_base.o"
+    "directory": "/home/pdlmn/Personal/programming/42/minishell/libft",
+    "file": "/home/pdlmn/Personal/programming/42/minishell/libft/ft_atoi_base.c",
+    "output": "/home/pdlmn/Personal/programming/42/minishell/libft/ft_atoi_base.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
+      "/nix/store/mzhqknx2mc94jdz4n320hn1lml86398y-clang-wrapper-17.0.6/bin/cc",
       "-g",
       "-c",
       "-I",
@@ -49,16 +40,13 @@
       "ft_atol.o",
       "ft_atol.c"
     ],
-    "directory": "/home/emuminov/projects/minishell_my_repo/libft",
-    "file": "/home/emuminov/projects/minishell_my_repo/libft/ft_atol.c",
-    "output": "/home/emuminov/projects/minishell_my_repo/libft/ft_atol.o"
+    "directory": "/home/pdlmn/Personal/programming/42/minishell/libft",
+    "file": "/home/pdlmn/Personal/programming/42/minishell/libft/ft_atol.c",
+    "output": "/home/pdlmn/Personal/programming/42/minishell/libft/ft_atol.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
+      "/nix/store/mzhqknx2mc94jdz4n320hn1lml86398y-clang-wrapper-17.0.6/bin/cc",
       "-g",
       "-c",
       "-I",
@@ -67,16 +55,13 @@
       "ft_bzero.o",
       "ft_bzero.c"
     ],
-    "directory": "/home/emuminov/projects/minishell_my_repo/libft",
-    "file": "/home/emuminov/projects/minishell_my_repo/libft/ft_bzero.c",
-    "output": "/home/emuminov/projects/minishell_my_repo/libft/ft_bzero.o"
+    "directory": "/home/pdlmn/Personal/programming/42/minishell/libft",
+    "file": "/home/pdlmn/Personal/programming/42/minishell/libft/ft_bzero.c",
+    "output": "/home/pdlmn/Personal/programming/42/minishell/libft/ft_bzero.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
+      "/nix/store/mzhqknx2mc94jdz4n320hn1lml86398y-clang-wrapper-17.0.6/bin/cc",
       "-g",
       "-c",
       "-I",
@@ -85,16 +70,13 @@
       "ft_calloc.o",
       "ft_calloc.c"
     ],
-    "directory": "/home/emuminov/projects/minishell_my_repo/libft",
-    "file": "/home/emuminov/projects/minishell_my_repo/libft/ft_calloc.c",
-    "output": "/home/emuminov/projects/minishell_my_repo/libft/ft_calloc.o"
+    "directory": "/home/pdlmn/Personal/programming/42/minishell/libft",
+    "file": "/home/pdlmn/Personal/programming/42/minishell/libft/ft_calloc.c",
+    "output": "/home/pdlmn/Personal/programming/42/minishell/libft/ft_calloc.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
+      "/nix/store/mzhqknx2mc94jdz4n320hn1lml86398y-clang-wrapper-17.0.6/bin/cc",
       "-g",
       "-c",
       "-I",
@@ -103,16 +85,13 @@
       "ft_isalnum.o",
       "ft_isalnum.c"
     ],
-    "directory": "/home/emuminov/projects/minishell_my_repo/libft",
-    "file": "/home/emuminov/projects/minishell_my_repo/libft/ft_isalnum.c",
-    "output": "/home/emuminov/projects/minishell_my_repo/libft/ft_isalnum.o"
+    "directory": "/home/pdlmn/Personal/programming/42/minishell/libft",
+    "file": "/home/pdlmn/Personal/programming/42/minishell/libft/ft_isalnum.c",
+    "output": "/home/pdlmn/Personal/programming/42/minishell/libft/ft_isalnum.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
+      "/nix/store/mzhqknx2mc94jdz4n320hn1lml86398y-clang-wrapper-17.0.6/bin/cc",
       "-g",
       "-c",
       "-I",
@@ -121,16 +100,13 @@
       "ft_isalpha.o",
       "ft_isalpha.c"
     ],
-    "directory": "/home/emuminov/projects/minishell_my_repo/libft",
-    "file": "/home/emuminov/projects/minishell_my_repo/libft/ft_isalpha.c",
-    "output": "/home/emuminov/projects/minishell_my_repo/libft/ft_isalpha.o"
+    "directory": "/home/pdlmn/Personal/programming/42/minishell/libft",
+    "file": "/home/pdlmn/Personal/programming/42/minishell/libft/ft_isalpha.c",
+    "output": "/home/pdlmn/Personal/programming/42/minishell/libft/ft_isalpha.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
+      "/nix/store/mzhqknx2mc94jdz4n320hn1lml86398y-clang-wrapper-17.0.6/bin/cc",
       "-g",
       "-c",
       "-I",
@@ -139,16 +115,13 @@
       "ft_isascii.o",
       "ft_isascii.c"
     ],
-    "directory": "/home/emuminov/projects/minishell_my_repo/libft",
-    "file": "/home/emuminov/projects/minishell_my_repo/libft/ft_isascii.c",
-    "output": "/home/emuminov/projects/minishell_my_repo/libft/ft_isascii.o"
+    "directory": "/home/pdlmn/Personal/programming/42/minishell/libft",
+    "file": "/home/pdlmn/Personal/programming/42/minishell/libft/ft_isascii.c",
+    "output": "/home/pdlmn/Personal/programming/42/minishell/libft/ft_isascii.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
+      "/nix/store/mzhqknx2mc94jdz4n320hn1lml86398y-clang-wrapper-17.0.6/bin/cc",
       "-g",
       "-c",
       "-I",
@@ -157,16 +130,13 @@
       "ft_isdigit.o",
       "ft_isdigit.c"
     ],
-    "directory": "/home/emuminov/projects/minishell_my_repo/libft",
-    "file": "/home/emuminov/projects/minishell_my_repo/libft/ft_isdigit.c",
-    "output": "/home/emuminov/projects/minishell_my_repo/libft/ft_isdigit.o"
+    "directory": "/home/pdlmn/Personal/programming/42/minishell/libft",
+    "file": "/home/pdlmn/Personal/programming/42/minishell/libft/ft_isdigit.c",
+    "output": "/home/pdlmn/Personal/programming/42/minishell/libft/ft_isdigit.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
+      "/nix/store/mzhqknx2mc94jdz4n320hn1lml86398y-clang-wrapper-17.0.6/bin/cc",
       "-g",
       "-c",
       "-I",
@@ -175,16 +145,13 @@
       "ft_isprint.o",
       "ft_isprint.c"
     ],
-    "directory": "/home/emuminov/projects/minishell_my_repo/libft",
-    "file": "/home/emuminov/projects/minishell_my_repo/libft/ft_isprint.c",
-    "output": "/home/emuminov/projects/minishell_my_repo/libft/ft_isprint.o"
+    "directory": "/home/pdlmn/Personal/programming/42/minishell/libft",
+    "file": "/home/pdlmn/Personal/programming/42/minishell/libft/ft_isprint.c",
+    "output": "/home/pdlmn/Personal/programming/42/minishell/libft/ft_isprint.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
+      "/nix/store/mzhqknx2mc94jdz4n320hn1lml86398y-clang-wrapper-17.0.6/bin/cc",
       "-g",
       "-c",
       "-I",
@@ -193,16 +160,13 @@
       "ft_isspace.o",
       "ft_isspace.c"
     ],
-    "directory": "/home/emuminov/projects/minishell_my_repo/libft",
-    "file": "/home/emuminov/projects/minishell_my_repo/libft/ft_isspace.c",
-    "output": "/home/emuminov/projects/minishell_my_repo/libft/ft_isspace.o"
+    "directory": "/home/pdlmn/Personal/programming/42/minishell/libft",
+    "file": "/home/pdlmn/Personal/programming/42/minishell/libft/ft_isspace.c",
+    "output": "/home/pdlmn/Personal/programming/42/minishell/libft/ft_isspace.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
+      "/nix/store/mzhqknx2mc94jdz4n320hn1lml86398y-clang-wrapper-17.0.6/bin/cc",
       "-g",
       "-c",
       "-I",
@@ -211,16 +175,13 @@
       "ft_ltoa_base.o",
       "ft_ltoa_base.c"
     ],
-    "directory": "/home/emuminov/projects/minishell_my_repo/libft",
-    "file": "/home/emuminov/projects/minishell_my_repo/libft/ft_ltoa_base.c",
-    "output": "/home/emuminov/projects/minishell_my_repo/libft/ft_ltoa_base.o"
+    "directory": "/home/pdlmn/Personal/programming/42/minishell/libft",
+    "file": "/home/pdlmn/Personal/programming/42/minishell/libft/ft_ltoa_base.c",
+    "output": "/home/pdlmn/Personal/programming/42/minishell/libft/ft_ltoa_base.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
+      "/nix/store/mzhqknx2mc94jdz4n320hn1lml86398y-clang-wrapper-17.0.6/bin/cc",
       "-g",
       "-c",
       "-I",
@@ -229,16 +190,13 @@
       "ft_ultoa_base.o",
       "ft_ultoa_base.c"
     ],
-    "directory": "/home/emuminov/projects/minishell_my_repo/libft",
-    "file": "/home/emuminov/projects/minishell_my_repo/libft/ft_ultoa_base.c",
-    "output": "/home/emuminov/projects/minishell_my_repo/libft/ft_ultoa_base.o"
+    "directory": "/home/pdlmn/Personal/programming/42/minishell/libft",
+    "file": "/home/pdlmn/Personal/programming/42/minishell/libft/ft_ultoa_base.c",
+    "output": "/home/pdlmn/Personal/programming/42/minishell/libft/ft_ultoa_base.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
+      "/nix/store/mzhqknx2mc94jdz4n320hn1lml86398y-clang-wrapper-17.0.6/bin/cc",
       "-g",
       "-c",
       "-I",
@@ -247,16 +205,13 @@
       "ft_itoa.o",
       "ft_itoa.c"
     ],
-    "directory": "/home/emuminov/projects/minishell_my_repo/libft",
-    "file": "/home/emuminov/projects/minishell_my_repo/libft/ft_itoa.c",
-    "output": "/home/emuminov/projects/minishell_my_repo/libft/ft_itoa.o"
+    "directory": "/home/pdlmn/Personal/programming/42/minishell/libft",
+    "file": "/home/pdlmn/Personal/programming/42/minishell/libft/ft_itoa.c",
+    "output": "/home/pdlmn/Personal/programming/42/minishell/libft/ft_itoa.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
+      "/nix/store/mzhqknx2mc94jdz4n320hn1lml86398y-clang-wrapper-17.0.6/bin/cc",
       "-g",
       "-c",
       "-I",
@@ -265,16 +220,13 @@
       "ft_itoa_base.o",
       "ft_itoa_base.c"
     ],
-    "directory": "/home/emuminov/projects/minishell_my_repo/libft",
-    "file": "/home/emuminov/projects/minishell_my_repo/libft/ft_itoa_base.c",
-    "output": "/home/emuminov/projects/minishell_my_repo/libft/ft_itoa_base.o"
+    "directory": "/home/pdlmn/Personal/programming/42/minishell/libft",
+    "file": "/home/pdlmn/Personal/programming/42/minishell/libft/ft_itoa_base.c",
+    "output": "/home/pdlmn/Personal/programming/42/minishell/libft/ft_itoa_base.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
+      "/nix/store/mzhqknx2mc94jdz4n320hn1lml86398y-clang-wrapper-17.0.6/bin/cc",
       "-g",
       "-c",
       "-I",
@@ -283,16 +235,13 @@
       "ft_memchr.o",
       "ft_memchr.c"
     ],
-    "directory": "/home/emuminov/projects/minishell_my_repo/libft",
-    "file": "/home/emuminov/projects/minishell_my_repo/libft/ft_memchr.c",
-    "output": "/home/emuminov/projects/minishell_my_repo/libft/ft_memchr.o"
+    "directory": "/home/pdlmn/Personal/programming/42/minishell/libft",
+    "file": "/home/pdlmn/Personal/programming/42/minishell/libft/ft_memchr.c",
+    "output": "/home/pdlmn/Personal/programming/42/minishell/libft/ft_memchr.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
+      "/nix/store/mzhqknx2mc94jdz4n320hn1lml86398y-clang-wrapper-17.0.6/bin/cc",
       "-g",
       "-c",
       "-I",
@@ -301,16 +250,13 @@
       "ft_memcmp.o",
       "ft_memcmp.c"
     ],
-    "directory": "/home/emuminov/projects/minishell_my_repo/libft",
-    "file": "/home/emuminov/projects/minishell_my_repo/libft/ft_memcmp.c",
-    "output": "/home/emuminov/projects/minishell_my_repo/libft/ft_memcmp.o"
+    "directory": "/home/pdlmn/Personal/programming/42/minishell/libft",
+    "file": "/home/pdlmn/Personal/programming/42/minishell/libft/ft_memcmp.c",
+    "output": "/home/pdlmn/Personal/programming/42/minishell/libft/ft_memcmp.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
+      "/nix/store/mzhqknx2mc94jdz4n320hn1lml86398y-clang-wrapper-17.0.6/bin/cc",
       "-g",
       "-c",
       "-I",
@@ -319,16 +265,13 @@
       "ft_memcpy.o",
       "ft_memcpy.c"
     ],
-    "directory": "/home/emuminov/projects/minishell_my_repo/libft",
-    "file": "/home/emuminov/projects/minishell_my_repo/libft/ft_memcpy.c",
-    "output": "/home/emuminov/projects/minishell_my_repo/libft/ft_memcpy.o"
+    "directory": "/home/pdlmn/Personal/programming/42/minishell/libft",
+    "file": "/home/pdlmn/Personal/programming/42/minishell/libft/ft_memcpy.c",
+    "output": "/home/pdlmn/Personal/programming/42/minishell/libft/ft_memcpy.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
+      "/nix/store/mzhqknx2mc94jdz4n320hn1lml86398y-clang-wrapper-17.0.6/bin/cc",
       "-g",
       "-c",
       "-I",
@@ -337,16 +280,13 @@
       "ft_memmove.o",
       "ft_memmove.c"
     ],
-    "directory": "/home/emuminov/projects/minishell_my_repo/libft",
-    "file": "/home/emuminov/projects/minishell_my_repo/libft/ft_memmove.c",
-    "output": "/home/emuminov/projects/minishell_my_repo/libft/ft_memmove.o"
+    "directory": "/home/pdlmn/Personal/programming/42/minishell/libft",
+    "file": "/home/pdlmn/Personal/programming/42/minishell/libft/ft_memmove.c",
+    "output": "/home/pdlmn/Personal/programming/42/minishell/libft/ft_memmove.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
+      "/nix/store/mzhqknx2mc94jdz4n320hn1lml86398y-clang-wrapper-17.0.6/bin/cc",
       "-g",
       "-c",
       "-I",
@@ -355,16 +295,13 @@
       "ft_memset.o",
       "ft_memset.c"
     ],
-    "directory": "/home/emuminov/projects/minishell_my_repo/libft",
-    "file": "/home/emuminov/projects/minishell_my_repo/libft/ft_memset.c",
-    "output": "/home/emuminov/projects/minishell_my_repo/libft/ft_memset.o"
+    "directory": "/home/pdlmn/Personal/programming/42/minishell/libft",
+    "file": "/home/pdlmn/Personal/programming/42/minishell/libft/ft_memset.c",
+    "output": "/home/pdlmn/Personal/programming/42/minishell/libft/ft_memset.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
+      "/nix/store/mzhqknx2mc94jdz4n320hn1lml86398y-clang-wrapper-17.0.6/bin/cc",
       "-g",
       "-c",
       "-I",
@@ -373,16 +310,13 @@
       "ft_free_split.o",
       "ft_free_split.c"
     ],
-    "directory": "/home/emuminov/projects/minishell_my_repo/libft",
-    "file": "/home/emuminov/projects/minishell_my_repo/libft/ft_free_split.c",
-    "output": "/home/emuminov/projects/minishell_my_repo/libft/ft_free_split.o"
+    "directory": "/home/pdlmn/Personal/programming/42/minishell/libft",
+    "file": "/home/pdlmn/Personal/programming/42/minishell/libft/ft_free_split.c",
+    "output": "/home/pdlmn/Personal/programming/42/minishell/libft/ft_free_split.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
+      "/nix/store/mzhqknx2mc94jdz4n320hn1lml86398y-clang-wrapper-17.0.6/bin/cc",
       "-g",
       "-c",
       "-I",
@@ -391,16 +325,13 @@
       "ft_putchar_fd.o",
       "ft_putchar_fd.c"
     ],
-    "directory": "/home/emuminov/projects/minishell_my_repo/libft",
-    "file": "/home/emuminov/projects/minishell_my_repo/libft/ft_putchar_fd.c",
-    "output": "/home/emuminov/projects/minishell_my_repo/libft/ft_putchar_fd.o"
+    "directory": "/home/pdlmn/Personal/programming/42/minishell/libft",
+    "file": "/home/pdlmn/Personal/programming/42/minishell/libft/ft_putchar_fd.c",
+    "output": "/home/pdlmn/Personal/programming/42/minishell/libft/ft_putchar_fd.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
+      "/nix/store/mzhqknx2mc94jdz4n320hn1lml86398y-clang-wrapper-17.0.6/bin/cc",
       "-g",
       "-c",
       "-I",
@@ -409,16 +340,13 @@
       "ft_putendl_fd.o",
       "ft_putendl_fd.c"
     ],
-    "directory": "/home/emuminov/projects/minishell_my_repo/libft",
-    "file": "/home/emuminov/projects/minishell_my_repo/libft/ft_putendl_fd.c",
-    "output": "/home/emuminov/projects/minishell_my_repo/libft/ft_putendl_fd.o"
+    "directory": "/home/pdlmn/Personal/programming/42/minishell/libft",
+    "file": "/home/pdlmn/Personal/programming/42/minishell/libft/ft_putendl_fd.c",
+    "output": "/home/pdlmn/Personal/programming/42/minishell/libft/ft_putendl_fd.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
+      "/nix/store/mzhqknx2mc94jdz4n320hn1lml86398y-clang-wrapper-17.0.6/bin/cc",
       "-g",
       "-c",
       "-I",
@@ -427,16 +355,13 @@
       "ft_putnbr_fd.o",
       "ft_putnbr_fd.c"
     ],
-    "directory": "/home/emuminov/projects/minishell_my_repo/libft",
-    "file": "/home/emuminov/projects/minishell_my_repo/libft/ft_putnbr_fd.c",
-    "output": "/home/emuminov/projects/minishell_my_repo/libft/ft_putnbr_fd.o"
+    "directory": "/home/pdlmn/Personal/programming/42/minishell/libft",
+    "file": "/home/pdlmn/Personal/programming/42/minishell/libft/ft_putnbr_fd.c",
+    "output": "/home/pdlmn/Personal/programming/42/minishell/libft/ft_putnbr_fd.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
+      "/nix/store/mzhqknx2mc94jdz4n320hn1lml86398y-clang-wrapper-17.0.6/bin/cc",
       "-g",
       "-c",
       "-I",
@@ -445,16 +370,13 @@
       "ft_putstr_fd.o",
       "ft_putstr_fd.c"
     ],
-    "directory": "/home/emuminov/projects/minishell_my_repo/libft",
-    "file": "/home/emuminov/projects/minishell_my_repo/libft/ft_putstr_fd.c",
-    "output": "/home/emuminov/projects/minishell_my_repo/libft/ft_putstr_fd.o"
+    "directory": "/home/pdlmn/Personal/programming/42/minishell/libft",
+    "file": "/home/pdlmn/Personal/programming/42/minishell/libft/ft_putstr_fd.c",
+    "output": "/home/pdlmn/Personal/programming/42/minishell/libft/ft_putstr_fd.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
+      "/nix/store/mzhqknx2mc94jdz4n320hn1lml86398y-clang-wrapper-17.0.6/bin/cc",
       "-g",
       "-c",
       "-I",
@@ -463,16 +385,13 @@
       "ft_printf/ft_printf.o",
       "ft_printf/ft_printf.c"
     ],
-    "directory": "/home/emuminov/projects/minishell_my_repo/libft",
-    "file": "/home/emuminov/projects/minishell_my_repo/libft/ft_printf/ft_printf.c",
-    "output": "/home/emuminov/projects/minishell_my_repo/libft/ft_printf/ft_printf.o"
+    "directory": "/home/pdlmn/Personal/programming/42/minishell/libft",
+    "file": "/home/pdlmn/Personal/programming/42/minishell/libft/ft_printf/ft_printf.c",
+    "output": "/home/pdlmn/Personal/programming/42/minishell/libft/ft_printf/ft_printf.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
+      "/nix/store/mzhqknx2mc94jdz4n320hn1lml86398y-clang-wrapper-17.0.6/bin/cc",
       "-g",
       "-c",
       "-I",
@@ -481,16 +400,13 @@
       "ft_printf/ft_printf_funcs.o",
       "ft_printf/ft_printf_funcs.c"
     ],
-    "directory": "/home/emuminov/projects/minishell_my_repo/libft",
-    "file": "/home/emuminov/projects/minishell_my_repo/libft/ft_printf/ft_printf_funcs.c",
-    "output": "/home/emuminov/projects/minishell_my_repo/libft/ft_printf/ft_printf_funcs.o"
+    "directory": "/home/pdlmn/Personal/programming/42/minishell/libft",
+    "file": "/home/pdlmn/Personal/programming/42/minishell/libft/ft_printf/ft_printf_funcs.c",
+    "output": "/home/pdlmn/Personal/programming/42/minishell/libft/ft_printf/ft_printf_funcs.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
+      "/nix/store/mzhqknx2mc94jdz4n320hn1lml86398y-clang-wrapper-17.0.6/bin/cc",
       "-g",
       "-c",
       "-I",
@@ -499,16 +415,13 @@
       "ft_split.o",
       "ft_split.c"
     ],
-    "directory": "/home/emuminov/projects/minishell_my_repo/libft",
-    "file": "/home/emuminov/projects/minishell_my_repo/libft/ft_split.c",
-    "output": "/home/emuminov/projects/minishell_my_repo/libft/ft_split.o"
+    "directory": "/home/pdlmn/Personal/programming/42/minishell/libft",
+    "file": "/home/pdlmn/Personal/programming/42/minishell/libft/ft_split.c",
+    "output": "/home/pdlmn/Personal/programming/42/minishell/libft/ft_split.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
+      "/nix/store/mzhqknx2mc94jdz4n320hn1lml86398y-clang-wrapper-17.0.6/bin/cc",
       "-g",
       "-c",
       "-I",
@@ -517,16 +430,13 @@
       "ft_strchr.o",
       "ft_strchr.c"
     ],
-    "directory": "/home/emuminov/projects/minishell_my_repo/libft",
-    "file": "/home/emuminov/projects/minishell_my_repo/libft/ft_strchr.c",
-    "output": "/home/emuminov/projects/minishell_my_repo/libft/ft_strchr.o"
+    "directory": "/home/pdlmn/Personal/programming/42/minishell/libft",
+    "file": "/home/pdlmn/Personal/programming/42/minishell/libft/ft_strchr.c",
+    "output": "/home/pdlmn/Personal/programming/42/minishell/libft/ft_strchr.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
+      "/nix/store/mzhqknx2mc94jdz4n320hn1lml86398y-clang-wrapper-17.0.6/bin/cc",
       "-g",
       "-c",
       "-I",
@@ -535,16 +445,13 @@
       "ft_strdup.o",
       "ft_strdup.c"
     ],
-    "directory": "/home/emuminov/projects/minishell_my_repo/libft",
-    "file": "/home/emuminov/projects/minishell_my_repo/libft/ft_strdup.c",
-    "output": "/home/emuminov/projects/minishell_my_repo/libft/ft_strdup.o"
+    "directory": "/home/pdlmn/Personal/programming/42/minishell/libft",
+    "file": "/home/pdlmn/Personal/programming/42/minishell/libft/ft_strdup.c",
+    "output": "/home/pdlmn/Personal/programming/42/minishell/libft/ft_strdup.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
+      "/nix/store/mzhqknx2mc94jdz4n320hn1lml86398y-clang-wrapper-17.0.6/bin/cc",
       "-g",
       "-c",
       "-I",
@@ -553,16 +460,13 @@
       "ft_striteri.o",
       "ft_striteri.c"
     ],
-    "directory": "/home/emuminov/projects/minishell_my_repo/libft",
-    "file": "/home/emuminov/projects/minishell_my_repo/libft/ft_striteri.c",
-    "output": "/home/emuminov/projects/minishell_my_repo/libft/ft_striteri.o"
+    "directory": "/home/pdlmn/Personal/programming/42/minishell/libft",
+    "file": "/home/pdlmn/Personal/programming/42/minishell/libft/ft_striteri.c",
+    "output": "/home/pdlmn/Personal/programming/42/minishell/libft/ft_striteri.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
+      "/nix/store/mzhqknx2mc94jdz4n320hn1lml86398y-clang-wrapper-17.0.6/bin/cc",
       "-g",
       "-c",
       "-I",
@@ -571,16 +475,13 @@
       "ft_strjoin.o",
       "ft_strjoin.c"
     ],
-    "directory": "/home/emuminov/projects/minishell_my_repo/libft",
-    "file": "/home/emuminov/projects/minishell_my_repo/libft/ft_strjoin.c",
-    "output": "/home/emuminov/projects/minishell_my_repo/libft/ft_strjoin.o"
+    "directory": "/home/pdlmn/Personal/programming/42/minishell/libft",
+    "file": "/home/pdlmn/Personal/programming/42/minishell/libft/ft_strjoin.c",
+    "output": "/home/pdlmn/Personal/programming/42/minishell/libft/ft_strjoin.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
+      "/nix/store/mzhqknx2mc94jdz4n320hn1lml86398y-clang-wrapper-17.0.6/bin/cc",
       "-g",
       "-c",
       "-I",
@@ -589,16 +490,13 @@
       "ft_strlcat.o",
       "ft_strlcat.c"
     ],
-    "directory": "/home/emuminov/projects/minishell_my_repo/libft",
-    "file": "/home/emuminov/projects/minishell_my_repo/libft/ft_strlcat.c",
-    "output": "/home/emuminov/projects/minishell_my_repo/libft/ft_strlcat.o"
+    "directory": "/home/pdlmn/Personal/programming/42/minishell/libft",
+    "file": "/home/pdlmn/Personal/programming/42/minishell/libft/ft_strlcat.c",
+    "output": "/home/pdlmn/Personal/programming/42/minishell/libft/ft_strlcat.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
+      "/nix/store/mzhqknx2mc94jdz4n320hn1lml86398y-clang-wrapper-17.0.6/bin/cc",
       "-g",
       "-c",
       "-I",
@@ -607,16 +505,13 @@
       "ft_strlcpy.o",
       "ft_strlcpy.c"
     ],
-    "directory": "/home/emuminov/projects/minishell_my_repo/libft",
-    "file": "/home/emuminov/projects/minishell_my_repo/libft/ft_strlcpy.c",
-    "output": "/home/emuminov/projects/minishell_my_repo/libft/ft_strlcpy.o"
+    "directory": "/home/pdlmn/Personal/programming/42/minishell/libft",
+    "file": "/home/pdlmn/Personal/programming/42/minishell/libft/ft_strlcpy.c",
+    "output": "/home/pdlmn/Personal/programming/42/minishell/libft/ft_strlcpy.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
+      "/nix/store/mzhqknx2mc94jdz4n320hn1lml86398y-clang-wrapper-17.0.6/bin/cc",
       "-g",
       "-c",
       "-I",
@@ -625,16 +520,13 @@
       "ft_strcpy.o",
       "ft_strcpy.c"
     ],
-    "directory": "/home/emuminov/projects/minishell_my_repo/libft",
-    "file": "/home/emuminov/projects/minishell_my_repo/libft/ft_strcpy.c",
-    "output": "/home/emuminov/projects/minishell_my_repo/libft/ft_strcpy.o"
+    "directory": "/home/pdlmn/Personal/programming/42/minishell/libft",
+    "file": "/home/pdlmn/Personal/programming/42/minishell/libft/ft_strcpy.c",
+    "output": "/home/pdlmn/Personal/programming/42/minishell/libft/ft_strcpy.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
+      "/nix/store/mzhqknx2mc94jdz4n320hn1lml86398y-clang-wrapper-17.0.6/bin/cc",
       "-g",
       "-c",
       "-I",
@@ -643,16 +535,13 @@
       "ft_strlen.o",
       "ft_strlen.c"
     ],
-    "directory": "/home/emuminov/projects/minishell_my_repo/libft",
-    "file": "/home/emuminov/projects/minishell_my_repo/libft/ft_strlen.c",
-    "output": "/home/emuminov/projects/minishell_my_repo/libft/ft_strlen.o"
+    "directory": "/home/pdlmn/Personal/programming/42/minishell/libft",
+    "file": "/home/pdlmn/Personal/programming/42/minishell/libft/ft_strlen.c",
+    "output": "/home/pdlmn/Personal/programming/42/minishell/libft/ft_strlen.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
+      "/nix/store/mzhqknx2mc94jdz4n320hn1lml86398y-clang-wrapper-17.0.6/bin/cc",
       "-g",
       "-c",
       "-I",
@@ -661,16 +550,13 @@
       "ft_strlen_till_c.o",
       "ft_strlen_till_c.c"
     ],
-    "directory": "/home/emuminov/projects/minishell_my_repo/libft",
-    "file": "/home/emuminov/projects/minishell_my_repo/libft/ft_strlen_till_c.c",
-    "output": "/home/emuminov/projects/minishell_my_repo/libft/ft_strlen_till_c.o"
+    "directory": "/home/pdlmn/Personal/programming/42/minishell/libft",
+    "file": "/home/pdlmn/Personal/programming/42/minishell/libft/ft_strlen_till_c.c",
+    "output": "/home/pdlmn/Personal/programming/42/minishell/libft/ft_strlen_till_c.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
+      "/nix/store/mzhqknx2mc94jdz4n320hn1lml86398y-clang-wrapper-17.0.6/bin/cc",
       "-g",
       "-c",
       "-I",
@@ -679,16 +565,13 @@
       "ft_strmapi.o",
       "ft_strmapi.c"
     ],
-    "directory": "/home/emuminov/projects/minishell_my_repo/libft",
-    "file": "/home/emuminov/projects/minishell_my_repo/libft/ft_strmapi.c",
-    "output": "/home/emuminov/projects/minishell_my_repo/libft/ft_strmapi.o"
+    "directory": "/home/pdlmn/Personal/programming/42/minishell/libft",
+    "file": "/home/pdlmn/Personal/programming/42/minishell/libft/ft_strmapi.c",
+    "output": "/home/pdlmn/Personal/programming/42/minishell/libft/ft_strmapi.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
+      "/nix/store/mzhqknx2mc94jdz4n320hn1lml86398y-clang-wrapper-17.0.6/bin/cc",
       "-g",
       "-c",
       "-I",
@@ -697,16 +580,13 @@
       "ft_strcmp.o",
       "ft_strcmp.c"
     ],
-    "directory": "/home/emuminov/projects/minishell_my_repo/libft",
-    "file": "/home/emuminov/projects/minishell_my_repo/libft/ft_strcmp.c",
-    "output": "/home/emuminov/projects/minishell_my_repo/libft/ft_strcmp.o"
+    "directory": "/home/pdlmn/Personal/programming/42/minishell/libft",
+    "file": "/home/pdlmn/Personal/programming/42/minishell/libft/ft_strcmp.c",
+    "output": "/home/pdlmn/Personal/programming/42/minishell/libft/ft_strcmp.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
+      "/nix/store/mzhqknx2mc94jdz4n320hn1lml86398y-clang-wrapper-17.0.6/bin/cc",
       "-g",
       "-c",
       "-I",
@@ -715,16 +595,13 @@
       "ft_strncmp.o",
       "ft_strncmp.c"
     ],
-    "directory": "/home/emuminov/projects/minishell_my_repo/libft",
-    "file": "/home/emuminov/projects/minishell_my_repo/libft/ft_strncmp.c",
-    "output": "/home/emuminov/projects/minishell_my_repo/libft/ft_strncmp.o"
+    "directory": "/home/pdlmn/Personal/programming/42/minishell/libft",
+    "file": "/home/pdlmn/Personal/programming/42/minishell/libft/ft_strncmp.c",
+    "output": "/home/pdlmn/Personal/programming/42/minishell/libft/ft_strncmp.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
+      "/nix/store/mzhqknx2mc94jdz4n320hn1lml86398y-clang-wrapper-17.0.6/bin/cc",
       "-g",
       "-c",
       "-I",
@@ -733,16 +610,13 @@
       "ft_strnstr.o",
       "ft_strnstr.c"
     ],
-    "directory": "/home/emuminov/projects/minishell_my_repo/libft",
-    "file": "/home/emuminov/projects/minishell_my_repo/libft/ft_strnstr.c",
-    "output": "/home/emuminov/projects/minishell_my_repo/libft/ft_strnstr.o"
+    "directory": "/home/pdlmn/Personal/programming/42/minishell/libft",
+    "file": "/home/pdlmn/Personal/programming/42/minishell/libft/ft_strnstr.c",
+    "output": "/home/pdlmn/Personal/programming/42/minishell/libft/ft_strnstr.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
+      "/nix/store/mzhqknx2mc94jdz4n320hn1lml86398y-clang-wrapper-17.0.6/bin/cc",
       "-g",
       "-c",
       "-I",
@@ -751,16 +625,13 @@
       "ft_strrchr.o",
       "ft_strrchr.c"
     ],
-    "directory": "/home/emuminov/projects/minishell_my_repo/libft",
-    "file": "/home/emuminov/projects/minishell_my_repo/libft/ft_strrchr.c",
-    "output": "/home/emuminov/projects/minishell_my_repo/libft/ft_strrchr.o"
+    "directory": "/home/pdlmn/Personal/programming/42/minishell/libft",
+    "file": "/home/pdlmn/Personal/programming/42/minishell/libft/ft_strrchr.c",
+    "output": "/home/pdlmn/Personal/programming/42/minishell/libft/ft_strrchr.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
+      "/nix/store/mzhqknx2mc94jdz4n320hn1lml86398y-clang-wrapper-17.0.6/bin/cc",
       "-g",
       "-c",
       "-I",
@@ -769,16 +640,13 @@
       "ft_strtrim.o",
       "ft_strtrim.c"
     ],
-    "directory": "/home/emuminov/projects/minishell_my_repo/libft",
-    "file": "/home/emuminov/projects/minishell_my_repo/libft/ft_strtrim.c",
-    "output": "/home/emuminov/projects/minishell_my_repo/libft/ft_strtrim.o"
+    "directory": "/home/pdlmn/Personal/programming/42/minishell/libft",
+    "file": "/home/pdlmn/Personal/programming/42/minishell/libft/ft_strtrim.c",
+    "output": "/home/pdlmn/Personal/programming/42/minishell/libft/ft_strtrim.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
+      "/nix/store/mzhqknx2mc94jdz4n320hn1lml86398y-clang-wrapper-17.0.6/bin/cc",
       "-g",
       "-c",
       "-I",
@@ -787,16 +655,13 @@
       "ft_substr.o",
       "ft_substr.c"
     ],
-    "directory": "/home/emuminov/projects/minishell_my_repo/libft",
-    "file": "/home/emuminov/projects/minishell_my_repo/libft/ft_substr.c",
-    "output": "/home/emuminov/projects/minishell_my_repo/libft/ft_substr.o"
+    "directory": "/home/pdlmn/Personal/programming/42/minishell/libft",
+    "file": "/home/pdlmn/Personal/programming/42/minishell/libft/ft_substr.c",
+    "output": "/home/pdlmn/Personal/programming/42/minishell/libft/ft_substr.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
+      "/nix/store/mzhqknx2mc94jdz4n320hn1lml86398y-clang-wrapper-17.0.6/bin/cc",
       "-g",
       "-c",
       "-I",
@@ -805,16 +670,13 @@
       "ft_tolower.o",
       "ft_tolower.c"
     ],
-    "directory": "/home/emuminov/projects/minishell_my_repo/libft",
-    "file": "/home/emuminov/projects/minishell_my_repo/libft/ft_tolower.c",
-    "output": "/home/emuminov/projects/minishell_my_repo/libft/ft_tolower.o"
+    "directory": "/home/pdlmn/Personal/programming/42/minishell/libft",
+    "file": "/home/pdlmn/Personal/programming/42/minishell/libft/ft_tolower.c",
+    "output": "/home/pdlmn/Personal/programming/42/minishell/libft/ft_tolower.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
+      "/nix/store/mzhqknx2mc94jdz4n320hn1lml86398y-clang-wrapper-17.0.6/bin/cc",
       "-g",
       "-c",
       "-I",
@@ -823,16 +685,13 @@
       "ft_toupper.o",
       "ft_toupper.c"
     ],
-    "directory": "/home/emuminov/projects/minishell_my_repo/libft",
-    "file": "/home/emuminov/projects/minishell_my_repo/libft/ft_toupper.c",
-    "output": "/home/emuminov/projects/minishell_my_repo/libft/ft_toupper.o"
+    "directory": "/home/pdlmn/Personal/programming/42/minishell/libft",
+    "file": "/home/pdlmn/Personal/programming/42/minishell/libft/ft_toupper.c",
+    "output": "/home/pdlmn/Personal/programming/42/minishell/libft/ft_toupper.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
+      "/nix/store/mzhqknx2mc94jdz4n320hn1lml86398y-clang-wrapper-17.0.6/bin/cc",
       "-g",
       "-c",
       "-I",
@@ -841,16 +700,13 @@
       "get_next_line/get_next_line.o",
       "get_next_line/get_next_line.c"
     ],
-    "directory": "/home/emuminov/projects/minishell_my_repo/libft",
-    "file": "/home/emuminov/projects/minishell_my_repo/libft/get_next_line/get_next_line.c",
-    "output": "/home/emuminov/projects/minishell_my_repo/libft/get_next_line/get_next_line.o"
+    "directory": "/home/pdlmn/Personal/programming/42/minishell/libft",
+    "file": "/home/pdlmn/Personal/programming/42/minishell/libft/get_next_line/get_next_line.c",
+    "output": "/home/pdlmn/Personal/programming/42/minishell/libft/get_next_line/get_next_line.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
+      "/nix/store/mzhqknx2mc94jdz4n320hn1lml86398y-clang-wrapper-17.0.6/bin/cc",
       "-g",
       "-c",
       "-I",
@@ -859,600 +715,526 @@
       "get_next_line/get_next_line_utils.o",
       "get_next_line/get_next_line_utils.c"
     ],
-    "directory": "/home/emuminov/projects/minishell_my_repo/libft",
-    "file": "/home/emuminov/projects/minishell_my_repo/libft/get_next_line/get_next_line_utils.c",
-    "output": "/home/emuminov/projects/minishell_my_repo/libft/get_next_line/get_next_line_utils.o"
+    "directory": "/home/pdlmn/Personal/programming/42/minishell/libft",
+    "file": "/home/pdlmn/Personal/programming/42/minishell/libft/get_next_line/get_next_line_utils.c",
+    "output": "/home/pdlmn/Personal/programming/42/minishell/libft/get_next_line/get_next_line_utils.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
+      "/nix/store/mzhqknx2mc94jdz4n320hn1lml86398y-clang-wrapper-17.0.6/bin/cc",
       "-g3",
+      "-fsanitize=address",
       "-c",
       "-o",
       "objs/lexer.o",
       "lexer/lexer.c"
     ],
-    "directory": "/home/emuminov/projects/minishell_my_repo",
-    "file": "/home/emuminov/projects/minishell_my_repo/lexer/lexer.c",
-    "output": "/home/emuminov/projects/minishell_my_repo/objs/lexer.o"
+    "directory": "/home/pdlmn/Personal/programming/42/minishell",
+    "file": "/home/pdlmn/Personal/programming/42/minishell/lexer/lexer.c",
+    "output": "/home/pdlmn/Personal/programming/42/minishell/objs/lexer.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
+      "/nix/store/mzhqknx2mc94jdz4n320hn1lml86398y-clang-wrapper-17.0.6/bin/cc",
       "-g3",
+      "-fsanitize=address",
       "-c",
       "-o",
       "objs/input_parsing.o",
       "lexer/input_parsing.c"
     ],
-    "directory": "/home/emuminov/projects/minishell_my_repo",
-    "file": "/home/emuminov/projects/minishell_my_repo/lexer/input_parsing.c",
-    "output": "/home/emuminov/projects/minishell_my_repo/objs/input_parsing.o"
+    "directory": "/home/pdlmn/Personal/programming/42/minishell",
+    "file": "/home/pdlmn/Personal/programming/42/minishell/lexer/input_parsing.c",
+    "output": "/home/pdlmn/Personal/programming/42/minishell/objs/input_parsing.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
+      "/nix/store/mzhqknx2mc94jdz4n320hn1lml86398y-clang-wrapper-17.0.6/bin/cc",
       "-g3",
+      "-fsanitize=address",
       "-c",
       "-o",
       "objs/lexer_utils.o",
       "lexer/lexer_utils.c"
     ],
-    "directory": "/home/emuminov/projects/minishell_my_repo",
-    "file": "/home/emuminov/projects/minishell_my_repo/lexer/lexer_utils.c",
-    "output": "/home/emuminov/projects/minishell_my_repo/objs/lexer_utils.o"
+    "directory": "/home/pdlmn/Personal/programming/42/minishell",
+    "file": "/home/pdlmn/Personal/programming/42/minishell/lexer/lexer_utils.c",
+    "output": "/home/pdlmn/Personal/programming/42/minishell/objs/lexer_utils.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
+      "/nix/store/mzhqknx2mc94jdz4n320hn1lml86398y-clang-wrapper-17.0.6/bin/cc",
       "-g3",
+      "-fsanitize=address",
       "-c",
       "-o",
       "objs/token_deletion.o",
       "token/token_deletion.c"
     ],
-    "directory": "/home/emuminov/projects/minishell_my_repo",
-    "file": "/home/emuminov/projects/minishell_my_repo/token/token_deletion.c",
-    "output": "/home/emuminov/projects/minishell_my_repo/objs/token_deletion.o"
+    "directory": "/home/pdlmn/Personal/programming/42/minishell",
+    "file": "/home/pdlmn/Personal/programming/42/minishell/token/token_deletion.c",
+    "output": "/home/pdlmn/Personal/programming/42/minishell/objs/token_deletion.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
+      "/nix/store/mzhqknx2mc94jdz4n320hn1lml86398y-clang-wrapper-17.0.6/bin/cc",
       "-g3",
+      "-fsanitize=address",
       "-c",
       "-o",
       "objs/token_operations.o",
       "token/token_operations.c"
     ],
-    "directory": "/home/emuminov/projects/minishell_my_repo",
-    "file": "/home/emuminov/projects/minishell_my_repo/token/token_operations.c",
-    "output": "/home/emuminov/projects/minishell_my_repo/objs/token_operations.o"
+    "directory": "/home/pdlmn/Personal/programming/42/minishell",
+    "file": "/home/pdlmn/Personal/programming/42/minishell/token/token_operations.c",
+    "output": "/home/pdlmn/Personal/programming/42/minishell/objs/token_operations.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
+      "/nix/store/mzhqknx2mc94jdz4n320hn1lml86398y-clang-wrapper-17.0.6/bin/cc",
       "-g3",
+      "-fsanitize=address",
       "-c",
       "-o",
       "objs/error_checking.o",
       "error_handling/error_checking.c"
     ],
-    "directory": "/home/emuminov/projects/minishell_my_repo",
-    "file": "/home/emuminov/projects/minishell_my_repo/error_handling/error_checking.c",
-    "output": "/home/emuminov/projects/minishell_my_repo/objs/error_checking.o"
+    "directory": "/home/pdlmn/Personal/programming/42/minishell",
+    "file": "/home/pdlmn/Personal/programming/42/minishell/error_handling/error_checking.c",
+    "output": "/home/pdlmn/Personal/programming/42/minishell/objs/error_checking.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
+      "/nix/store/mzhqknx2mc94jdz4n320hn1lml86398y-clang-wrapper-17.0.6/bin/cc",
       "-g3",
+      "-fsanitize=address",
       "-c",
       "-o",
       "objs/ht1.o",
       "hash_table/ht1.c"
     ],
-    "directory": "/home/emuminov/projects/minishell_my_repo",
-    "file": "/home/emuminov/projects/minishell_my_repo/hash_table/ht1.c",
-    "output": "/home/emuminov/projects/minishell_my_repo/objs/ht1.o"
+    "directory": "/home/pdlmn/Personal/programming/42/minishell",
+    "file": "/home/pdlmn/Personal/programming/42/minishell/hash_table/ht1.c",
+    "output": "/home/pdlmn/Personal/programming/42/minishell/objs/ht1.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
+      "/nix/store/mzhqknx2mc94jdz4n320hn1lml86398y-clang-wrapper-17.0.6/bin/cc",
       "-g3",
+      "-fsanitize=address",
       "-c",
       "-o",
       "objs/ht2.o",
       "hash_table/ht2.c"
     ],
-    "directory": "/home/emuminov/projects/minishell_my_repo",
-    "file": "/home/emuminov/projects/minishell_my_repo/hash_table/ht2.c",
-    "output": "/home/emuminov/projects/minishell_my_repo/objs/ht2.o"
+    "directory": "/home/pdlmn/Personal/programming/42/minishell",
+    "file": "/home/pdlmn/Personal/programming/42/minishell/hash_table/ht2.c",
+    "output": "/home/pdlmn/Personal/programming/42/minishell/objs/ht2.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
+      "/nix/store/mzhqknx2mc94jdz4n320hn1lml86398y-clang-wrapper-17.0.6/bin/cc",
       "-g3",
+      "-fsanitize=address",
       "-c",
       "-o",
       "objs/ht3.o",
       "hash_table/ht3.c"
     ],
-    "directory": "/home/emuminov/projects/minishell_my_repo",
-    "file": "/home/emuminov/projects/minishell_my_repo/hash_table/ht3.c",
-    "output": "/home/emuminov/projects/minishell_my_repo/objs/ht3.o"
+    "directory": "/home/pdlmn/Personal/programming/42/minishell",
+    "file": "/home/pdlmn/Personal/programming/42/minishell/hash_table/ht3.c",
+    "output": "/home/pdlmn/Personal/programming/42/minishell/objs/ht3.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
+      "/nix/store/mzhqknx2mc94jdz4n320hn1lml86398y-clang-wrapper-17.0.6/bin/cc",
       "-g3",
+      "-fsanitize=address",
       "-c",
       "-o",
       "objs/ht_utils.o",
       "hash_table/ht_utils.c"
     ],
-    "directory": "/home/emuminov/projects/minishell_my_repo",
-    "file": "/home/emuminov/projects/minishell_my_repo/hash_table/ht_utils.c",
-    "output": "/home/emuminov/projects/minishell_my_repo/objs/ht_utils.o"
+    "directory": "/home/pdlmn/Personal/programming/42/minishell",
+    "file": "/home/pdlmn/Personal/programming/42/minishell/hash_table/ht_utils.c",
+    "output": "/home/pdlmn/Personal/programming/42/minishell/objs/ht_utils.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
+      "/nix/store/mzhqknx2mc94jdz4n320hn1lml86398y-clang-wrapper-17.0.6/bin/cc",
       "-g3",
+      "-fsanitize=address",
       "-c",
       "-o",
       "objs/expansion.o",
       "expansion/expansion.c"
     ],
-    "directory": "/home/emuminov/projects/minishell_my_repo",
-    "file": "/home/emuminov/projects/minishell_my_repo/expansion/expansion.c",
-    "output": "/home/emuminov/projects/minishell_my_repo/objs/expansion.o"
+    "directory": "/home/pdlmn/Personal/programming/42/minishell",
+    "file": "/home/pdlmn/Personal/programming/42/minishell/expansion/expansion.c",
+    "output": "/home/pdlmn/Personal/programming/42/minishell/objs/expansion.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
+      "/nix/store/mzhqknx2mc94jdz4n320hn1lml86398y-clang-wrapper-17.0.6/bin/cc",
       "-g3",
+      "-fsanitize=address",
       "-c",
       "-o",
       "objs/split_unspaced.o",
       "expansion/split_unspaced.c"
     ],
-    "directory": "/home/emuminov/projects/minishell_my_repo",
-    "file": "/home/emuminov/projects/minishell_my_repo/expansion/split_unspaced.c",
-    "output": "/home/emuminov/projects/minishell_my_repo/objs/split_unspaced.o"
+    "directory": "/home/pdlmn/Personal/programming/42/minishell",
+    "file": "/home/pdlmn/Personal/programming/42/minishell/expansion/split_unspaced.c",
+    "output": "/home/pdlmn/Personal/programming/42/minishell/objs/split_unspaced.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
+      "/nix/store/mzhqknx2mc94jdz4n320hn1lml86398y-clang-wrapper-17.0.6/bin/cc",
       "-g3",
+      "-fsanitize=address",
       "-c",
       "-o",
       "objs/quotes_expansion.o",
       "expansion/quotes_expansion.c"
     ],
-    "directory": "/home/emuminov/projects/minishell_my_repo",
-    "file": "/home/emuminov/projects/minishell_my_repo/expansion/quotes_expansion.c",
-    "output": "/home/emuminov/projects/minishell_my_repo/objs/quotes_expansion.o"
+    "directory": "/home/pdlmn/Personal/programming/42/minishell",
+    "file": "/home/pdlmn/Personal/programming/42/minishell/expansion/quotes_expansion.c",
+    "output": "/home/pdlmn/Personal/programming/42/minishell/objs/quotes_expansion.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
+      "/nix/store/mzhqknx2mc94jdz4n320hn1lml86398y-clang-wrapper-17.0.6/bin/cc",
       "-g3",
+      "-fsanitize=address",
       "-c",
       "-o",
       "objs/variables_expansion.o",
       "expansion/variables_expansion.c"
     ],
-    "directory": "/home/emuminov/projects/minishell_my_repo",
-    "file": "/home/emuminov/projects/minishell_my_repo/expansion/variables_expansion.c",
-    "output": "/home/emuminov/projects/minishell_my_repo/objs/variables_expansion.o"
+    "directory": "/home/pdlmn/Personal/programming/42/minishell",
+    "file": "/home/pdlmn/Personal/programming/42/minishell/expansion/variables_expansion.c",
+    "output": "/home/pdlmn/Personal/programming/42/minishell/objs/variables_expansion.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
+      "/nix/store/mzhqknx2mc94jdz4n320hn1lml86398y-clang-wrapper-17.0.6/bin/cc",
       "-g3",
+      "-fsanitize=address",
       "-c",
       "-o",
       "objs/heredoc_find_delimeters.o",
       "lexer/heredoc_find_delimeters.c"
     ],
-    "directory": "/home/emuminov/projects/minishell_my_repo",
-    "file": "/home/emuminov/projects/minishell_my_repo/lexer/heredoc_find_delimeters.c",
-    "output": "/home/emuminov/projects/minishell_my_repo/objs/heredoc_find_delimeters.o"
+    "directory": "/home/pdlmn/Personal/programming/42/minishell",
+    "file": "/home/pdlmn/Personal/programming/42/minishell/lexer/heredoc_find_delimeters.c",
+    "output": "/home/pdlmn/Personal/programming/42/minishell/objs/heredoc_find_delimeters.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
+      "/nix/store/mzhqknx2mc94jdz4n320hn1lml86398y-clang-wrapper-17.0.6/bin/cc",
       "-g3",
+      "-fsanitize=address",
       "-c",
       "-o",
       "objs/expansion_utils.o",
       "expansion/expansion_utils.c"
     ],
-    "directory": "/home/emuminov/projects/minishell_my_repo",
-    "file": "/home/emuminov/projects/minishell_my_repo/expansion/expansion_utils.c",
-    "output": "/home/emuminov/projects/minishell_my_repo/objs/expansion_utils.o"
+    "directory": "/home/pdlmn/Personal/programming/42/minishell",
+    "file": "/home/pdlmn/Personal/programming/42/minishell/expansion/expansion_utils.c",
+    "output": "/home/pdlmn/Personal/programming/42/minishell/objs/expansion_utils.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
+      "/nix/store/mzhqknx2mc94jdz4n320hn1lml86398y-clang-wrapper-17.0.6/bin/cc",
       "-g3",
+      "-fsanitize=address",
       "-c",
       "-o",
       "objs/env.o",
       "env/env.c"
     ],
-    "directory": "/home/emuminov/projects/minishell_my_repo",
-    "file": "/home/emuminov/projects/minishell_my_repo/env/env.c",
-    "output": "/home/emuminov/projects/minishell_my_repo/objs/env.o"
+    "directory": "/home/pdlmn/Personal/programming/42/minishell",
+    "file": "/home/pdlmn/Personal/programming/42/minishell/env/env.c",
+    "output": "/home/pdlmn/Personal/programming/42/minishell/objs/env.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
+      "/nix/store/mzhqknx2mc94jdz4n320hn1lml86398y-clang-wrapper-17.0.6/bin/cc",
       "-g3",
+      "-fsanitize=address",
       "-c",
       "-o",
       "objs/env_utils.o",
       "env/env_utils.c"
     ],
-    "directory": "/home/emuminov/projects/minishell_my_repo",
-    "file": "/home/emuminov/projects/minishell_my_repo/env/env_utils.c",
-    "output": "/home/emuminov/projects/minishell_my_repo/objs/env_utils.o"
+    "directory": "/home/pdlmn/Personal/programming/42/minishell",
+    "file": "/home/pdlmn/Personal/programming/42/minishell/env/env_utils.c",
+    "output": "/home/pdlmn/Personal/programming/42/minishell/objs/env_utils.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
+      "/nix/store/mzhqknx2mc94jdz4n320hn1lml86398y-clang-wrapper-17.0.6/bin/cc",
       "-g3",
+      "-fsanitize=address",
       "-c",
       "-o",
       "objs/signal_handlers.o",
       "shell/signal_handlers.c"
     ],
-    "directory": "/home/emuminov/projects/minishell_my_repo",
-    "file": "/home/emuminov/projects/minishell_my_repo/shell/signal_handlers.c",
-    "output": "/home/emuminov/projects/minishell_my_repo/objs/signal_handlers.o"
+    "directory": "/home/pdlmn/Personal/programming/42/minishell",
+    "file": "/home/pdlmn/Personal/programming/42/minishell/shell/signal_handlers.c",
+    "output": "/home/pdlmn/Personal/programming/42/minishell/objs/signal_handlers.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
+      "/nix/store/mzhqknx2mc94jdz4n320hn1lml86398y-clang-wrapper-17.0.6/bin/cc",
       "-g3",
+      "-fsanitize=address",
       "-c",
       "-o",
       "objs/init_signal_handlers.o",
       "shell/init_signal_handlers.c"
     ],
-    "directory": "/home/emuminov/projects/minishell_my_repo",
-    "file": "/home/emuminov/projects/minishell_my_repo/shell/init_signal_handlers.c",
-    "output": "/home/emuminov/projects/minishell_my_repo/objs/init_signal_handlers.o"
+    "directory": "/home/pdlmn/Personal/programming/42/minishell",
+    "file": "/home/pdlmn/Personal/programming/42/minishell/shell/init_signal_handlers.c",
+    "output": "/home/pdlmn/Personal/programming/42/minishell/objs/init_signal_handlers.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
+      "/nix/store/mzhqknx2mc94jdz4n320hn1lml86398y-clang-wrapper-17.0.6/bin/cc",
       "-g3",
+      "-fsanitize=address",
       "-c",
       "-o",
       "objs/command_table.o",
       "command_table/command_table.c"
     ],
-    "directory": "/home/emuminov/projects/minishell_my_repo",
-    "file": "/home/emuminov/projects/minishell_my_repo/command_table/command_table.c",
-    "output": "/home/emuminov/projects/minishell_my_repo/objs/command_table.o"
+    "directory": "/home/pdlmn/Personal/programming/42/minishell",
+    "file": "/home/pdlmn/Personal/programming/42/minishell/command_table/command_table.c",
+    "output": "/home/pdlmn/Personal/programming/42/minishell/objs/command_table.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
+      "/nix/store/mzhqknx2mc94jdz4n320hn1lml86398y-clang-wrapper-17.0.6/bin/cc",
       "-g3",
+      "-fsanitize=address",
       "-c",
       "-o",
       "objs/cmd_tab1.o",
       "command_table/cmd_tab1.c"
     ],
-    "directory": "/home/emuminov/projects/minishell_my_repo",
-    "file": "/home/emuminov/projects/minishell_my_repo/command_table/cmd_tab1.c",
-    "output": "/home/emuminov/projects/minishell_my_repo/objs/cmd_tab1.o"
+    "directory": "/home/pdlmn/Personal/programming/42/minishell",
+    "file": "/home/pdlmn/Personal/programming/42/minishell/command_table/cmd_tab1.c",
+    "output": "/home/pdlmn/Personal/programming/42/minishell/objs/cmd_tab1.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
+      "/nix/store/mzhqknx2mc94jdz4n320hn1lml86398y-clang-wrapper-17.0.6/bin/cc",
       "-g3",
+      "-fsanitize=address",
       "-c",
       "-o",
       "objs/cmd_tab2.o",
       "command_table/cmd_tab2.c"
     ],
-    "directory": "/home/emuminov/projects/minishell_my_repo",
-    "file": "/home/emuminov/projects/minishell_my_repo/command_table/cmd_tab2.c",
-    "output": "/home/emuminov/projects/minishell_my_repo/objs/cmd_tab2.o"
+    "directory": "/home/pdlmn/Personal/programming/42/minishell",
+    "file": "/home/pdlmn/Personal/programming/42/minishell/command_table/cmd_tab2.c",
+    "output": "/home/pdlmn/Personal/programming/42/minishell/objs/cmd_tab2.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
+      "/nix/store/mzhqknx2mc94jdz4n320hn1lml86398y-clang-wrapper-17.0.6/bin/cc",
       "-g3",
+      "-fsanitize=address",
       "-c",
       "-o",
       "objs/command_table_utils.o",
       "command_table/command_table_utils.c"
     ],
-    "directory": "/home/emuminov/projects/minishell_my_repo",
-    "file": "/home/emuminov/projects/minishell_my_repo/command_table/command_table_utils.c",
-    "output": "/home/emuminov/projects/minishell_my_repo/objs/command_table_utils.o"
+    "directory": "/home/pdlmn/Personal/programming/42/minishell",
+    "file": "/home/pdlmn/Personal/programming/42/minishell/command_table/command_table_utils.c",
+    "output": "/home/pdlmn/Personal/programming/42/minishell/objs/command_table_utils.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
+      "/nix/store/mzhqknx2mc94jdz4n320hn1lml86398y-clang-wrapper-17.0.6/bin/cc",
       "-g3",
+      "-fsanitize=address",
       "-c",
       "-o",
       "objs/execution.o",
       "execution/execution.c"
     ],
-    "directory": "/home/emuminov/projects/minishell_my_repo",
-    "file": "/home/emuminov/projects/minishell_my_repo/execution/execution.c",
-    "output": "/home/emuminov/projects/minishell_my_repo/objs/execution.o"
+    "directory": "/home/pdlmn/Personal/programming/42/minishell",
+    "file": "/home/pdlmn/Personal/programming/42/minishell/execution/execution.c",
+    "output": "/home/pdlmn/Personal/programming/42/minishell/objs/execution.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
+      "/nix/store/mzhqknx2mc94jdz4n320hn1lml86398y-clang-wrapper-17.0.6/bin/cc",
       "-g3",
+      "-fsanitize=address",
       "-c",
       "-o",
       "objs/builtins1.o",
       "execution/builtins1.c"
     ],
-    "directory": "/home/emuminov/projects/minishell_my_repo",
-    "file": "/home/emuminov/projects/minishell_my_repo/execution/builtins1.c",
-    "output": "/home/emuminov/projects/minishell_my_repo/objs/builtins1.o"
+    "directory": "/home/pdlmn/Personal/programming/42/minishell",
+    "file": "/home/pdlmn/Personal/programming/42/minishell/execution/builtins1.c",
+    "output": "/home/pdlmn/Personal/programming/42/minishell/objs/builtins1.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
+      "/nix/store/mzhqknx2mc94jdz4n320hn1lml86398y-clang-wrapper-17.0.6/bin/cc",
       "-g3",
+      "-fsanitize=address",
       "-c",
       "-o",
       "objs/builtins2.o",
       "execution/builtins2.c"
     ],
-    "directory": "/home/emuminov/projects/minishell_my_repo",
-    "file": "/home/emuminov/projects/minishell_my_repo/execution/builtins2.c",
-    "output": "/home/emuminov/projects/minishell_my_repo/objs/builtins2.o"
+    "directory": "/home/pdlmn/Personal/programming/42/minishell",
+    "file": "/home/pdlmn/Personal/programming/42/minishell/execution/builtins2.c",
+    "output": "/home/pdlmn/Personal/programming/42/minishell/objs/builtins2.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
+      "/nix/store/mzhqknx2mc94jdz4n320hn1lml86398y-clang-wrapper-17.0.6/bin/cc",
       "-g3",
+      "-fsanitize=address",
       "-c",
       "-o",
       "objs/cd_builtin.o",
       "execution/cd_builtin.c"
     ],
-    "directory": "/home/emuminov/projects/minishell_my_repo",
-    "file": "/home/emuminov/projects/minishell_my_repo/execution/cd_builtin.c",
-    "output": "/home/emuminov/projects/minishell_my_repo/objs/cd_builtin.o"
+    "directory": "/home/pdlmn/Personal/programming/42/minishell",
+    "file": "/home/pdlmn/Personal/programming/42/minishell/execution/cd_builtin.c",
+    "output": "/home/pdlmn/Personal/programming/42/minishell/objs/cd_builtin.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
+      "/nix/store/mzhqknx2mc94jdz4n320hn1lml86398y-clang-wrapper-17.0.6/bin/cc",
       "-g3",
+      "-fsanitize=address",
       "-c",
       "-o",
       "objs/find_command_and_redir.o",
       "execution/find_command_and_redir.c"
     ],
-    "directory": "/home/emuminov/projects/minishell_my_repo",
-    "file": "/home/emuminov/projects/minishell_my_repo/execution/find_command_and_redir.c",
-    "output": "/home/emuminov/projects/minishell_my_repo/objs/find_command_and_redir.o"
+    "directory": "/home/pdlmn/Personal/programming/42/minishell",
+    "file": "/home/pdlmn/Personal/programming/42/minishell/execution/find_command_and_redir.c",
+    "output": "/home/pdlmn/Personal/programming/42/minishell/objs/find_command_and_redir.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
+      "/nix/store/mzhqknx2mc94jdz4n320hn1lml86398y-clang-wrapper-17.0.6/bin/cc",
       "-g3",
+      "-fsanitize=address",
       "-c",
       "-o",
       "objs/redir.o",
       "execution/redir.c"
     ],
-    "directory": "/home/emuminov/projects/minishell_my_repo",
-    "file": "/home/emuminov/projects/minishell_my_repo/execution/redir.c",
-    "output": "/home/emuminov/projects/minishell_my_repo/objs/redir.o"
+    "directory": "/home/pdlmn/Personal/programming/42/minishell",
+    "file": "/home/pdlmn/Personal/programming/42/minishell/execution/redir.c",
+    "output": "/home/pdlmn/Personal/programming/42/minishell/objs/redir.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
+      "/nix/store/mzhqknx2mc94jdz4n320hn1lml86398y-clang-wrapper-17.0.6/bin/cc",
       "-g3",
+      "-fsanitize=address",
       "-c",
       "-o",
       "objs/redir_utils.o",
       "execution/redir_utils.c"
     ],
-    "directory": "/home/emuminov/projects/minishell_my_repo",
-    "file": "/home/emuminov/projects/minishell_my_repo/execution/redir_utils.c",
-    "output": "/home/emuminov/projects/minishell_my_repo/objs/redir_utils.o"
+    "directory": "/home/pdlmn/Personal/programming/42/minishell",
+    "file": "/home/pdlmn/Personal/programming/42/minishell/execution/redir_utils.c",
+    "output": "/home/pdlmn/Personal/programming/42/minishell/objs/redir_utils.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
+      "/nix/store/mzhqknx2mc94jdz4n320hn1lml86398y-clang-wrapper-17.0.6/bin/cc",
       "-g3",
+      "-fsanitize=address",
       "-c",
       "-o",
       "objs/exec_utils.o",
       "execution/exec_utils.c"
     ],
-    "directory": "/home/emuminov/projects/minishell_my_repo",
-    "file": "/home/emuminov/projects/minishell_my_repo/execution/exec_utils.c",
-    "output": "/home/emuminov/projects/minishell_my_repo/objs/exec_utils.o"
+    "directory": "/home/pdlmn/Personal/programming/42/minishell",
+    "file": "/home/pdlmn/Personal/programming/42/minishell/execution/exec_utils.c",
+    "output": "/home/pdlmn/Personal/programming/42/minishell/objs/exec_utils.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
+      "/nix/store/mzhqknx2mc94jdz4n320hn1lml86398y-clang-wrapper-17.0.6/bin/cc",
       "-g3",
+      "-fsanitize=address",
       "-c",
       "-o",
       "objs/execution_utils.o",
       "execution/execution_utils.c"
     ],
-    "directory": "/home/emuminov/projects/minishell_my_repo",
-    "file": "/home/emuminov/projects/minishell_my_repo/execution/execution_utils.c",
-    "output": "/home/emuminov/projects/minishell_my_repo/objs/execution_utils.o"
+    "directory": "/home/pdlmn/Personal/programming/42/minishell",
+    "file": "/home/pdlmn/Personal/programming/42/minishell/execution/execution_utils.c",
+    "output": "/home/pdlmn/Personal/programming/42/minishell/objs/execution_utils.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
+      "/nix/store/mzhqknx2mc94jdz4n320hn1lml86398y-clang-wrapper-17.0.6/bin/cc",
       "-g3",
+      "-fsanitize=address",
       "-c",
       "-o",
       "objs/execution_check.o",
       "execution/execution_check.c"
     ],
-    "directory": "/home/emuminov/projects/minishell_my_repo",
-    "file": "/home/emuminov/projects/minishell_my_repo/execution/execution_check.c",
-    "output": "/home/emuminov/projects/minishell_my_repo/objs/execution_check.o"
+    "directory": "/home/pdlmn/Personal/programming/42/minishell",
+    "file": "/home/pdlmn/Personal/programming/42/minishell/execution/execution_check.c",
+    "output": "/home/pdlmn/Personal/programming/42/minishell/objs/execution_check.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
+      "/nix/store/mzhqknx2mc94jdz4n320hn1lml86398y-clang-wrapper-17.0.6/bin/cc",
       "-g3",
+      "-fsanitize=address",
       "-c",
       "-o",
       "objs/interactive_mode.o",
       "shell/interactive_mode.c"
     ],
-    "directory": "/home/emuminov/projects/minishell_my_repo",
-    "file": "/home/emuminov/projects/minishell_my_repo/shell/interactive_mode.c",
-    "output": "/home/emuminov/projects/minishell_my_repo/objs/interactive_mode.o"
+    "directory": "/home/pdlmn/Personal/programming/42/minishell",
+    "file": "/home/pdlmn/Personal/programming/42/minishell/shell/interactive_mode.c",
+    "output": "/home/pdlmn/Personal/programming/42/minishell/objs/interactive_mode.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
+      "/nix/store/mzhqknx2mc94jdz4n320hn1lml86398y-clang-wrapper-17.0.6/bin/cc",
       "-g3",
+      "-fsanitize=address",
       "-c",
       "-o",
       "objs/noninteractive_mode.o",
       "shell/noninteractive_mode.c"
     ],
-    "directory": "/home/emuminov/projects/minishell_my_repo",
-    "file": "/home/emuminov/projects/minishell_my_repo/shell/noninteractive_mode.c",
-    "output": "/home/emuminov/projects/minishell_my_repo/objs/noninteractive_mode.o"
+    "directory": "/home/pdlmn/Personal/programming/42/minishell",
+    "file": "/home/pdlmn/Personal/programming/42/minishell/shell/noninteractive_mode.c",
+    "output": "/home/pdlmn/Personal/programming/42/minishell/objs/noninteractive_mode.o"
   },
   {
     "arguments": [
-      "/usr/bin/cc",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
+      "/nix/store/mzhqknx2mc94jdz4n320hn1lml86398y-clang-wrapper-17.0.6/bin/cc",
       "-g3",
+      "-fsanitize=address",
       "-c",
       "-o",
       "objs/main.o",
       "shell/main.c"
     ],
-    "directory": "/home/emuminov/projects/minishell_my_repo",
-    "file": "/home/emuminov/projects/minishell_my_repo/shell/main.c",
-    "output": "/home/emuminov/projects/minishell_my_repo/objs/main.o"
+    "directory": "/home/pdlmn/Personal/programming/42/minishell",
+    "file": "/home/pdlmn/Personal/programming/42/minishell/shell/main.c",
+    "output": "/home/pdlmn/Personal/programming/42/minishell/objs/main.o"
   }
 ]

@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 16:51:27 by emuminov          #+#    #+#             */
-/*   Updated: 2024/06/13 18:03:10 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/15 17:39:18 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	check_if_the_first_arg_is_a_pathname(t_tlist *lst)
 	int	i;
 
 	i = 0;
-	while (lst->head->content[i])
+	while (lst->head && lst->head->content[i])
 	{
 		if (lst->head->content[i] == '/')
 			return (1);
