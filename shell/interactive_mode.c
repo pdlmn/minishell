@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 16:51:27 by emuminov          #+#    #+#             */
-/*   Updated: 2024/06/15 17:39:18 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/17 20:10:30 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,21 +40,26 @@ int	check_if_the_first_arg_is_a_pathname(t_tlist *lst)
 int	handle_pathname_as_a_first_arg(t_minishell *sh, char *input)
 {
 	struct stat	path_stat;
+	int			res;
 
-	stat(sh->lst.head->content, &path_stat);
-	if (S_ISDIR(path_stat.st_mode))
+	res = stat(sh->lst.head->content, &path_stat);
+	if (res == -1)
+	{
+		ft_putstr_fd("mishell: no such file or directory\n", STDERR_FILENO);
+		set_or_get_exit_status(SET, 127);
+		return (sh_cleanup(sh, input, NULL), 1);
+	}
+	else if (S_ISDIR(path_stat.st_mode))
 	{
 		ft_putstr_fd("mishell: is a directory\n", STDERR_FILENO);
 		set_or_get_exit_status(SET, 126);
-		sh_cleanup(sh, input, NULL);
-		return (1);
+		return (sh_cleanup(sh, input, NULL), 1);
 	}
-	if (!(path_stat.st_mode & X_OK))
+	else if (!(path_stat.st_mode & X_OK))
 	{
 		ft_putstr_fd("mishell: permission denied\n", STDERR_FILENO);
 		set_or_get_exit_status(SET, 126);
-		sh_cleanup(sh, input, NULL);
-		return (1);
+		return (sh_cleanup(sh, input, NULL), 1);
 	}
 	return (0);
 }
