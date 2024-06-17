@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 12:23:17 by emuminov          #+#    #+#             */
-/*   Updated: 2024/06/09 16:59:31 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/17 14:28:08 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,9 @@ int	main(void)
 	ht_delete(ht, "DISPLAY");
 	ht_set(ht, "COLORTERM", "truecolor");
 	ht_delete(ht, "COLORTERM");
+	ht_set(ht, "PWD", NULL);
+	ht_set(ht, "PWD", NULL);
+	ht_delete(ht, "PWD");
 	ht_print_table(ht);
 	ht_print_buckets(ht);
 	printf("\nLANG is %s\n\n", ht_get(ht, "LANG"));
