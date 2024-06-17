@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 12:23:17 by emuminov          #+#    #+#             */
-/*   Updated: 2024/06/13 15:32:46 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/17 20:19:02 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ void	test_expansion(t_minishell *sh, char *str, char *should_be)
 	printf("Result:    %s\n", joined_tokens);
 	token_list_print(&sh->lst);
 	printf("\n");
+	token_list_print(&sh->lst);
 	assert(ft_strcmp(joined_tokens, should_be) == 0);
 	token_list_free(&sh->lst);
 	free(joined_tokens);
@@ -198,6 +199,7 @@ int	main(int argc, char **argv, char **env)
 	test_heredoc_expansion(&sh, "'$$'", "'$$'", DELIM);
 	test_heredoc_expansion(&sh, "'$ASD'", "'$ASD'", QDELIM);
 	test_heredoc_expansion(&sh, "'$ASD'\"hoho\"   ", "'123'\"hoho\"   ", DELIM);
+	test_expansion(&sh, "'exit_code ->$? user ->$USER home -> $HOME'", "exit_code ->$? user ->$USER home -> $HOME");
 	test_expansion(&sh, "$ASD#", "123#");
 	ht_free_table(&sh.env);
 }
