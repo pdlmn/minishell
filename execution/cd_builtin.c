@@ -6,7 +6,7 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 00:47:00 by omougel           #+#    #+#             */
-/*   Updated: 2024/06/17 00:52:23 by omougel          ###   ########.fr       */
+/*   Updated: 2024/06/17 13:57:54 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void	cd(char **cmd, t_ht_table *env)
 		find_newpwd(cmd[1], newpwd, env);
 	printf("%s\n", newpwd);
 	if (chdir(newpwd) != 0)
-		return (set_or_get_exit_status(SET, 1), perror("minishell: cd "));
+		return (set_or_get_exit_status(SET, 1), perror("minishell: cd"));
 	if (!ht_set(env, "OLDPWD", ht_get(env, "PWD"))
 		|| !ht_set(env, "PWD", newpwd))
 	{
