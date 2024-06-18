@@ -6,7 +6,7 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 00:14:46 by omougel           #+#    #+#             */
-/*   Updated: 2024/06/18 12:58:10 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/18 14:06:22 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int		is_there_pipe(char ***cmd_tab);
 int		is_lim(char *buffer, char *lim);
 void	exec_cmd(char **cmd, t_minishell msh);
 void	secure_close(int *fd_out, int *fd_in, int *pipe_out, int *pipe_in);
-size_t	keylen(char const *str);
+size_t	keylen(char *str);
 size_t	valuelen(char *str);
 char	**replacefront(char **cmd, char *path);
 int		go_to_next_pipe(char ***cmd_tab);

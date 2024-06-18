@@ -6,7 +6,7 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 00:47:00 by omougel           #+#    #+#             */
-/*   Updated: 2024/06/18 13:12:10 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/18 13:38:06 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,19 @@ static int	next(char *path, char *newpwd)
 
 static char	*find_newpwd(char *path, char *newpwd, t_ht_table *env)
 {
-	int	i;
+	int		i;
 
 	i = 0;
 	if (path[0] == '/')
 		return (ft_strcpy(newpwd, path));
 	getcwd(newpwd, PATH_MAX);
-	if (!newpwd[0])
+	if (!newpwd[0] && ht_get(env, "PWD"))
 		ft_strcpy(newpwd, ht_get(env, "PWD"));
+	else if (!newpwd[0] && !ht_get(env, "PWD"))
+		return (ft_putstr_fd("mishell: pwd: no such file or directory\n", 2),
+				set_or_get_exit_status(SET, 1), NULL);
+	if (!ht_set(env, "PWD", newpwd))
+		return (set_or_get_exit_status(SET, -1), NULL);
 	while (path[i])
 	{
 		if (!ft_strncmp(&path[i], "...", 3))
@@ -91,8 +96,8 @@ void	cd(char **cmd, t_ht_table *env)
 			return (ft_putstr_fd("mishell: cd: OLDPWD not set\n", 2));
 	}
 	else if (cmd[1])
-		find_newpwd(cmd[1], newpwd, env);
-	printf("%s\n", newpwd);
+		if (!find_newpwd(cmd[1], newpwd, env))
+			return ;
 	if (chdir(newpwd) != 0)
 		return (set_or_get_exit_status(SET, 1), perror("minishell: cd"));
 	if (!ht_set(env, "OLDPWD", ht_get(env, "PWD"))

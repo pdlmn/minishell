@@ -6,7 +6,7 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 00:54:42 by omougel           #+#    #+#             */
-/*   Updated: 2024/06/18 13:01:41 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/18 14:14:28 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,12 @@ static char	*strvalue(char *envval, char *cmd)
 	char	*newval;
 
 	newval = &cmd[valuelen(cmd)];
-	if (cmd[keylen(cmd)] == '+' && cmd[keylen(cmd) + 1] != '=')
-	{
-		ft_putstr_fd("mishell: export: not a valid indentifier\n", 2);
-		return (set_or_get_exit_status(SET, 1), NULL);
-	}
 	if (cmd[keylen(cmd)] != '+' || !envval)
 		return (ft_strdup(newval));
 	return (ft_strjoin(envval, newval));
 }
 
-static int is_correct_variable_name(char *str)
+static int is_incorrect_variable_name(char *str)
 {
 	int	i;
 
@@ -63,13 +58,17 @@ static void	export(char **cmd, t_ht_table *env)
 	if (cmd[1] && cmd[1][0] == '-')
 		return (set_or_get_exit_status(SET, 2),
 			ft_putstr_fd("mishell: export: invalid option\n", 2));
+	set_or_get_exit_status(SET, 0);
 	while (cmd[++i])
 	{
 		key = ft_substr(cmd[i], 0, keylen(cmd[i]));
-		if (is_correct_variable_name(key))
-			return ;
-		if (!ft_strchr(cmd[1], '='))
+		if (is_incorrect_variable_name(key))
 			continue ;
+		if (!ft_strchr(cmd[i], '='))
+		{
+			free(key);
+			continue ;
+		}
 		value = strvalue(ht_get(env, key), cmd[i]);
 		if (!value)
 			return (set_or_get_exit_status(SET, -1), free(key));
@@ -78,7 +77,6 @@ static void	export(char **cmd, t_ht_table *env)
 		free(key);
 		free(value);
 	}
-	set_or_get_exit_status(SET, 0);
 }
 
 static void	unset(char **cmd, t_ht_table *env)

@@ -6,7 +6,7 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 10:46:09 by omougel           #+#    #+#             */
-/*   Updated: 2024/06/11 16:06:48 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/18 14:09:19 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,16 +48,19 @@ void	secure_close(int *fd_out, int *fd_in, int *pipe_out, int *pipe_in)
 		*fd_in = *pipe_out;
 }
 
-size_t	keylen(char const *str)
+size_t	keylen(char *str)
 {
-	size_t	i;
+	char			*occ;
+	const size_t	len = ft_strlen(str);
 
-	i = 0;
 	if (!str)
 		return (0);
-	while (str[i] != '=' && str[i] != '+' && str[i])
-		i++;
-	return (i);
+	occ = ft_strnstr(str, "+=", len);
+	if (!occ)
+		occ = ft_strchr(str, '=');
+	if (!occ)
+		return (len);
+	return (occ - str);
 }
 
 size_t	valuelen(char *str)
