@@ -22,7 +22,7 @@ static char	*strvalue(char *envval, char *cmd)
 	return (ft_strjoin(envval, newval));
 }
 
-static int is_incorrect_variable_name(char *str)
+static int	is_incorrect_variable_name(char *str)
 {
 	int	i;
 
@@ -66,8 +66,8 @@ static void	export(char **cmd, t_ht_table *env)
 			continue ;
 		if (!ft_strchr(cmd[i], '='))
 		{
-			free(key);
-			continue ;
+			//free(key);
+			continue (free(key));
 		}
 		value = strvalue(ht_get(env, key), cmd[i]);
 		if (!value)
