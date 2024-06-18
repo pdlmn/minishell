@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 17:35:02 by emuminov          #+#    #+#             */
-/*   Updated: 2024/06/18 16:26:46 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/18 16:50:55 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,8 @@ static t_token	*create_word_token(t_token *last_t, char *input,
 	s = ft_substr(input, 0, end_of_word);
 	if (!s)
 		return (NULL);
-	t = token_create(s, end_of_word, (ft_isspace(input[end_of_word]) && (is_quoted != SQUOTED)), is_quoted);
+	t = token_create(s, end_of_word, (ft_isspace(input[end_of_word])
+				&& (is_quoted != SQUOTED)), is_quoted);
 	if (!t)
 		return (free(s), NULL);
 	t->type = WORD;

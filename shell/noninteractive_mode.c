@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 16:52:00 by emuminov          #+#    #+#             */
-/*   Updated: 2024/06/15 17:39:01 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/18 16:50:10 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	launch_noninteractive_mode(t_minishell *sh, char **argv)
 	if (!expand_tokens(sh, &sh->lst))
 		return (sh_cleanup(sh, NULL, sh->env));
 	if (check_if_the_first_arg_is_a_pathname(&sh->lst)
-			&& handle_pathname_as_a_first_arg(sh, NULL))
+		&& handle_pathname_as_a_first_arg(sh, NULL))
 		return (set_or_get_exit_status(GET, -1));
 	if (!command_table(sh))
 		return (sh_cleanup(sh, NULL, sh->env));

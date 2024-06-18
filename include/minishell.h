@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 14:34:14 by emuminov          #+#    #+#             */
-/*   Updated: 2024/06/18 12:48:22 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/18 16:48:48 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,7 +194,7 @@ int					handle_prompt_syntax_errors(t_minishell *sh, char *input);
 int					sh_cleanup(t_minishell *sh, char *input, t_ht_table *env);
 int					check_if_the_first_arg_is_a_pathname(t_tlist *lst);
 int					handle_pathname_as_a_first_arg(t_minishell *sh,
-		char *input);
+						char *input);
 int					launch_interacrive_mode(t_minishell *sh);
 int					launch_noninteractive_mode(t_minishell *sh, char **argv);
 #endif
