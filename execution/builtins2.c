@@ -6,7 +6,7 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 00:52:52 by omougel           #+#    #+#             */
-/*   Updated: 2024/06/17 14:17:50 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/18 12:57:15 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	echo(char **cmd, int fd_out)
 		i++;
 	}
 	if (nl == 0)
-		printf("\n");
+		ft_putstr_fd("\n", fd_out);
 	set_or_get_exit_status(SET, 0);
 }
 
@@ -76,7 +76,7 @@ void	pwd(char **cmd, t_minishell *sh, int fd_out)
 	set_or_get_exit_status(SET, 0);
 }
 
-void	bt_env(char **cmd, t_ht_table *env, int fd_out)
+void	bt_env(char **cmd, t_ht_table *env, int fd_out, t_minishell *sh)
 {
 	char	**envp;
 	int		i;
@@ -86,6 +86,8 @@ void	bt_env(char **cmd, t_ht_table *env, int fd_out)
 		return (set_or_get_exit_status(SET, 2),
 			ft_putstr_fd("mishell: env: invalid option\n", 2));
 	envp = env_ht_to_arr(env);
+	if (!envp)
+		ft_exit(sh);
 	while (envp[i])
 	{
 		ft_putstr_fd(envp[i++], fd_out);

@@ -6,7 +6,7 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 00:54:42 by omougel           #+#    #+#             */
-/*   Updated: 2024/06/18 11:21:11 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/18 13:01:41 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ static int is_correct_variable_name(char *str)
 	int	i;
 
 	i = 1;
+	if (!str)
+		return (set_or_get_exit_status(SET, -1), 1);
 	if (!ft_isalpha(str[0]) && str[0] != '_')
 	{
 		ft_putstr_fd("mishell: export: not a valid indentifier\n", 2);
@@ -69,8 +71,8 @@ static void	export(char **cmd, t_ht_table *env)
 		if (!ft_strchr(cmd[1], '='))
 			continue ;
 		value = strvalue(ht_get(env, key), cmd[i]);
-		if (!value || !key)
-			return (set_or_get_exit_status(SET, -1), free(key), free(value));
+		if (!value)
+			return (set_or_get_exit_status(SET, -1), free(key));
 		if (!ht_set(env, key, value))
 			return (set_or_get_exit_status(SET, -1), free(key), free(value));
 		free(key);
@@ -105,7 +107,7 @@ void	do_builtins(char **cmd, t_ht_table *env, t_minishell *sh)
 	if (!ft_strcmp(cmd[0], "unset"))
 		return (unset(cmd, env));
 	if (!ft_strcmp(cmd[0], "env"))
-		return (bt_env(cmd, env, sh->fd_out));
+		return (bt_env(cmd, env, sh->fd_out, sh));
 	if (!ft_strcmp(cmd[0], "exit"))
 		return (bt_exit(cmd, sh));
 }

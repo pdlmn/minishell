@@ -9,16 +9,16 @@ Problems to fix:
 		|| !ht_set(env, "OLDPWD", ht_get(env, "PWD")))
   ```
 - [ ] `cat | cat | cat | l` gives bad free error.
-- [ ] `export 1asd` just passes without errors.
-- [ ] `export A-` just passes without errors.
-- [ ] `export` leaks on incorrect identifiers.
+- [x] `export 1asd` just passes without errors.
+- [x] `export A-` just passes without errors.
+- [x] `export` leaks on incorrect identifiers.
 
 Minor problems:
 - [ ] `echo hello > example` doesn't add a new line character to the end of the file (5 bytes vs 6 bytes in bash).
 - [ ] Inside of `bt_env` malloced variable `envp` is unprotected
 - [ ] In `export` function `key` variable isn't malloc protected.
 - [ ] `export a+sd=123` gives exit status 255.
-- [ ] `export 123` just works.
+- [x] `export 123` just works.
 - [ ] On redirection to the file with no permissions status code is 0.
 - [x] Wrong status on execution of non-existant file.
 - [ ] Wrong status on redirection from non-existant file (like `cat < not_exists`, should be `1`).

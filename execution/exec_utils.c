@@ -6,7 +6,7 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 01:48:24 by omougel           #+#    #+#             */
-/*   Updated: 2024/06/13 15:20:17 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/18 12:49:30 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	execute_correct_exit(t_minishell *msh)
 void	ft_exit(t_minishell *msh)
 {
 	token_list_free(&msh->lst);
-	ft_free_table(msh);
+	ft_free_table_in_child(msh);
 	ht_free_table(&msh->env);
 	rl_clear_history();
 	exit(errno);

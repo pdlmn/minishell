@@ -6,7 +6,7 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 00:14:46 by omougel           #+#    #+#             */
-/*   Updated: 2024/06/16 23:54:20 by omougel          ###   ########.fr       */
+/*   Updated: 2024/06/18 12:58:10 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int		check_output(char **output_redir, int fd_out);
 char	**find_command(char **cmd, t_minishell *sh);
 void	echo(char **cmd, int fd_out);
 void	pwd(char **cmd, t_minishell *sh, int fd_out);
-void	bt_env(char **cmd, t_ht_table *env, int fd_out);
+void	bt_env(char **cmd, t_ht_table *env, int fd_out, t_minishell *sh);
 void	bt_exit(char **cmd, t_minishell *msh);
 void	execute_correct_exit(t_minishell *msh);
 void	cd(char **cmd, t_ht_table *env);
