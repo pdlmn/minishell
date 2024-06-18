@@ -6,7 +6,7 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 00:52:52 by omougel           #+#    #+#             */
-/*   Updated: 2024/06/18 15:29:09 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/18 17:26:26 by omougel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	pwd(char **cmd, t_minishell *sh, int fd_out)
 
 	if (cmd[1] && cmd[1][0] == '-')
 		return (set_or_get_exit_status(SET, 2),
-				ft_putstr_fd("mishell: pwd: invalid option\n", 2));
+			ft_putstr_fd("mishell: pwd: invalid option\n", 2));
 	pwd = getcwd(NULL, 0);
 	if (!pwd && ht_get(sh->env, "PWD"))
 	{
@@ -104,10 +104,35 @@ void	bt_exit(char **cmd, t_minishell *msh)
 	i = -1;
 	if (!cmd[1])
 		execute_correct_exit(msh);
+	while (ft_isspace(cmd[1][i]))
+		i++;
+	if ((cmd[1][i] != '\0' && cmd[1][i] != '-' && cmd[1][i] != '+' &&
+		!ft_isdigit(cmd[1][i])))
+		err_msg(msh);
+	while (cmd[1][++i])
+		if (!ft_isdigit(cmd[1][i]))
+			err_msg(msh);
+	if (!cmd[2])
+	{
+		ft_putstr_fd("exit\n", 1);
+		errno = (unsigned char)(ft_atoi(cmd[1])) % 256;
+		ft_exit(msh);
+	}
+	ft_putstr_fd("mishell: exit: too many arguments\n", 2);
+	set_or_get_exit_status(SET, 1);
+}
+/*
+void	bt_exit(char **cmd, t_minishell *msh)
+{
+	int	i;
+
+	i = -1;
+	if (!cmd[1])
+		execute_correct_exit(msh);
 	while (cmd[1][++i])
 	{
 		if (!ft_isspace(cmd[1][i]))
-			break;
+			break ;
 	}
 	if ((cmd[1][i] != '\0' && cmd[1][i] != '-' && cmd[1][i] != '+' &&
 		!ft_isdigit(cmd[1][i])))
@@ -127,10 +152,10 @@ void	bt_exit(char **cmd, t_minishell *msh)
 	}
 	if (!cmd[2])
 	{
-		ft_putstr_fd("exit\n", 2);
+		ft_putstr_fd("exit\n", 1);
 		errno = (unsigned char)(ft_atoi(cmd[1])) % 256;
 		ft_exit(msh);
 	}
 	ft_putstr_fd("mishell: exit: too many arguments\n", 2);
 	set_or_get_exit_status(SET, 1);
-}
+}*/

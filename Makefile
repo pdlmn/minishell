@@ -51,6 +51,7 @@ SRCS=lexer.c \
 	 exec_utils.c \
 	 execution_utils.c \
 	 execution_check.c \
+	 utils.c \
 	 interactive_mode.c \
 	 noninteractive_mode.c \
 	 main.c

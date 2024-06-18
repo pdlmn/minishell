@@ -6,7 +6,7 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 00:47:00 by omougel           #+#    #+#             */
-/*   Updated: 2024/06/18 15:35:24 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/18 17:41:50 by omougel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,14 @@ static int	last_occ(char *str, char c)
 	return (last);
 }
 
-static int	prev(char *newpwd)
+int	prev(char *newpwd)
 {
 	if (last_occ(newpwd, '/') != 1 || newpwd[1] != '\0')
 		newpwd[last_occ(newpwd, '/')] = '\0';
 	return (2);
 }
 
-static int	next(char *path, char *newpwd)
+int	next(char *path, char *newpwd)
 {
 	int	pathlen;
 	int	newpwdlen;
@@ -61,21 +61,14 @@ static char	*find_newpwd(char *path, char *newpwd, t_ht_table *env)
 		ft_strcpy(newpwd, ht_get(env, "PWD"));
 	else if (!newpwd[0] && !ht_get(env, "PWD"))
 		return (ft_putstr_fd("mishell: pwd: no such file or directory\n", 2),
-				set_or_get_exit_status(SET, 1), NULL);
+			set_or_get_exit_status(SET, 1), NULL);
 	if (!ht_set(env, "PWD", newpwd))
 		return (set_or_get_exit_status(SET, -1), NULL);
 	while (path[i])
 	{
 		if (!ft_strncmp(&path[i], "...", 3))
 			return (NULL);
-		if (path[i] == '/')
-			i++;
-		else if (!ft_strncmp(&path[i], "..", 2))
-			i += prev(newpwd);
-		else if (path[i] == '.')
-			i++;
-		else
-			i += next(&path[i], newpwd);
+		i = read_path(i, path, newpwd);
 	}
 	return (newpwd);
 }
@@ -92,12 +85,10 @@ void	cd(char **cmd, t_ht_table *env)
 			ft_putstr_fd("mishell: cd: too many arguments\n", 2));
 	if (ft_strcmp(cmd[1], "-") == 0)
 	{
-		ft_strcpy(newpwd, ht_get(env, "OLDPWD"));
-		if (!newpwd[0])
-			return (ft_putstr_fd("mishell: cd: OLDPWD not set\n", 2));
-		printf("%s\n", newpwd);
+		if (set_oldpwd(newpwd, env) == 2)
+			return ;
 	}
-	else if (cmd[1])
+	else
 		if (!find_newpwd(cmd[1], newpwd, env))
 			return ;
 	if (chdir(newpwd) != 0)

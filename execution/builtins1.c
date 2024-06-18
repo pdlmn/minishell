@@ -6,7 +6,7 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 00:54:42 by omougel           #+#    #+#             */
-/*   Updated: 2024/06/18 14:14:28 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/18 17:15:48 by omougel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,14 +66,12 @@ static void	export(char **cmd, t_ht_table *env)
 			continue ;
 		if (!ft_strchr(cmd[i], '='))
 		{
-			//free(key);
-			continue (free(key));
+			free(key);
+			continue ;
 		}
 		value = strvalue(ht_get(env, key), cmd[i]);
-		if (!value)
-			return (set_or_get_exit_status(SET, -1), free(key));
-		if (!ht_set(env, key, value))
-			return (set_or_get_exit_status(SET, -1), free(key), free(value));
+		if (export_error(key, value, env) < 0)
+			return ;
 		free(key);
 		free(value);
 	}

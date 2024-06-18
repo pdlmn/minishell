@@ -49,7 +49,7 @@ char	*ft_strjoin_cmd(char const *s1, char const *s2)
 
 void	execute_correct_exit(t_minishell *msh)
 {
-	ft_putstr_fd("exit\n", 2);
+	ft_putstr_fd("exit\n", 1);
 	errno = set_or_get_exit_status(GET, -1);
 	ft_exit(msh);
 }
