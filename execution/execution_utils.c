@@ -6,7 +6,7 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 10:46:09 by omougel           #+#    #+#             */
-/*   Updated: 2024/06/18 14:09:19 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/18 15:06:47 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,15 @@ void	exec_cmd(char **cmd, t_minishell msh)
 	char	**envp;
 
 	if (dup2(msh.fd_in, STDIN_FILENO) < 0)
+	{
+		printf("fd_in is %d cmd[0] is %s errno is%d\n", msh.fd_in, cmd[0], errno);
 		ft_exit(&msh);
+	}
 	if (dup2(msh.fd_out, STDOUT_FILENO) < 0)
+	{
+		printf("fd_out %d\n", errno);
 		ft_exit(&msh);
+	}
 	if (msh.fd_in != 0)
 		close(msh.fd_in);
 	if (msh.fd_out != 1)
@@ -79,7 +85,6 @@ size_t	valuelen(char *str)
 
 char	**replacefront(char **cmd, char *path)
 {
-	free(cmd[0]);
 	cmd[0] = path;
 	return (cmd);
 }

@@ -6,13 +6,13 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 01:50:13 by omougel           #+#    #+#             */
-/*   Updated: 2024/06/11 22:27:20 by omougel          ###   ########.fr       */
+/*   Updated: 2024/06/18 14:43:53 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/execution.h"
 
-char	**split_envp(t_ht_table *envp)
+static char	**split_envp(t_ht_table *envp)
 {
 	char	*tmp;
 	char	**env;
@@ -28,7 +28,7 @@ char	**split_envp(t_ht_table *envp)
 	return (env);
 }
 
-char	**seach_path(char **env, char **cmd)
+static char	**search_path(char **env, char **cmd)
 {
 	size_t	i;
 	char	*tmp;
@@ -39,7 +39,7 @@ char	**seach_path(char **env, char **cmd)
 		tmp = ft_strjoin_cmd(env[i], cmd[0]);
 		if (!tmp)
 			return (NULL);
-		if (!access(tmp, X_OK))
+		if (access(tmp, X_OK) == 0)
 		{
 			ft_free_split(env);
 			return (replacefront(cmd, tmp));
@@ -62,7 +62,7 @@ char	**find_command(char **cmd, t_minishell *sh)
 	if (!ft_strncmp("./", cmd[0], 2) && !access(cmd[0], X_OK))
 		return (cmd);
 	env = split_envp(sh->env);
-	return (seach_path(env, cmd));
+	return (search_path(env, cmd));
 }
 
 int	check_input(char **input_redir, int fd_in)
