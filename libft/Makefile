@@ -67,7 +67,7 @@ HEADER=libft.h
 
 CC=cc
 
-CFLAGS=-g
+CFLAGS=-g -Wall -Wextra -Werror
 
 $(NAME): $(OBJ)
 	ar cr $(NAME) $^

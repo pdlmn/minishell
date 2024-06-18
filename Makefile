@@ -1,6 +1,6 @@
 #comilation vars-----------------------------------
 CC=cc
-CFLAGS=-g3 -fsanitize=address
+CFLAGS=-g3 -fsanitize=address -Wall -Wextra -Werror
 RLFLAGS=-lreadline
 
 #subject declarations------------------------------
@@ -15,7 +15,9 @@ HEADERS=$(HEAD_DIR)minishell.h \
 		$(HEAD_DIR)lexer.h \
 		$(HEAD_DIR)hash_table.h \
 		$(HEAD_DIR)expansion.h \
-		$(HEAD_DIR)env.h
+		$(HEAD_DIR)env.h \
+		$(HEAD_DIR)execution.h \
+		$(HEAD_DIR)command_table.h
 
 SRCS=lexer.c \
 	 input_parsing.c \
@@ -61,7 +63,7 @@ VPATH=lexer:token:error_handling:hash_table:expansion:env:shell:command_table:ex
 #rules---------------------------------------------
 all: $(NAME)
 
-$(NAME): $(LIB) $(HEADER) $(OBJS)
+$(NAME): $(LIB) $(HEADERS) $(OBJS)
 	$(CC) $(CFLAGS) $(RLFLAGS) $(OBJS) $(LIB) -o $@ -lreadline
 
 $(OBJS_DIR)%.o: %.c $(HEADERS)
@@ -72,9 +74,6 @@ $(LIB): libft
 
 libft:
 	$(MAKE) -C $(LIB_DIR)
-
-valgrind: $(NAME)
-	valgrind --suppressions=valgrind_ignore_leaks --track-fds=yes --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose --show-mismatched-frees=yes --read-var-info=yes ./$(NAME)
 
 clean:
 	$(MAKE) -C $(LIB_DIR) $@
