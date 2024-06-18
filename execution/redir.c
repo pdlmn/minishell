@@ -6,7 +6,7 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 01:00:55 by omougel           #+#    #+#             */
-/*   Updated: 2024/06/11 18:08:07 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/18 18:33:10 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ int	here_doc(char *lim, char *quoted)
 {
 	char	*buff;
 	int		fd[2];
-	int		saved_in;
+	int		sav_in;
 
 	init_heredoc_signal_handlers();
-	saved_in = dup(STDIN_FILENO);
+	sav_in = dup(STDIN_FILENO);
 	buff = readline(">");
 	if (pipe(fd) == -1)
 		return (EXIT_FAILURE);
@@ -38,8 +38,8 @@ int	here_doc(char *lim, char *quoted)
 	free(buff);
 	close(fd[1]);
 	if (set_or_get_exit_status(GET, -1) == 130)
-		return (close(fd[0]), dup2(saved_in, STDIN_FILENO), -2);
-	return (fd[0]);
+		return (close(fd[0]), dup2(sav_in, STDIN_FILENO), close(sav_in), -2);
+	return (close(sav_in), fd[0]);
 }
 
 int	redir_input(char *infile)
