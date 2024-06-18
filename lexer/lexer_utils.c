@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 13:34:37 by emuminov          #+#    #+#             */
-/*   Updated: 2024/04/17 14:01:12 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/18 16:31:09 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ enum e_token	get_type(char *str, enum e_quotes is_quoted, enum e_operator op)
 		return (OPERATOR);
 	else if (ft_isdigit(str[0]))
 		return (DIGIT);
-	else if (str[0] == '?')
+	else if (str[0] == '?' && is_quoted != SQUOTED)
 		return (QMARK);
 	else if (!is_valid_variable_char(str[0]))
 		return (OTHER);

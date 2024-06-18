@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 17:35:02 by emuminov          #+#    #+#             */
-/*   Updated: 2024/06/13 15:40:40 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/18 16:26:46 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ static t_token	*create_word_token(t_token *last_t, char *input,
 	s = ft_substr(input, 0, end_of_word);
 	if (!s)
 		return (NULL);
-	t = token_create(s, end_of_word, ft_isspace(input[end_of_word]), is_quoted);
+	t = token_create(s, end_of_word, (ft_isspace(input[end_of_word]) && (is_quoted != SQUOTED)), is_quoted);
 	if (!t)
 		return (free(s), NULL);
 	t->type = WORD;
@@ -97,7 +97,8 @@ t_token	*token_create_from_input(t_token *last_t, char *input,
 		|| (is_quoted == DQUOTED && input[0] == '"')
 		|| (is_quoted == SQUOTED && input[0] == '\'') || input[0] == '$'
 		|| ((ft_isdigit(input[0]) || input[0] == '?') && last_t
-			&& last_t->type == SIGIL) || (!is_valid_variable_char(input[0])
+			&& last_t->type == SIGIL)
+		|| (!is_valid_variable_char(input[0])
 			&& input[0] != ' '))
 		t = create_single_char_token(last_t, input, is_quoted);
 	else
