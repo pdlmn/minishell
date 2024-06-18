@@ -6,7 +6,7 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 00:52:52 by omougel           #+#    #+#             */
-/*   Updated: 2024/06/18 12:57:15 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/18 15:29:09 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,18 +105,30 @@ void	bt_exit(char **cmd, t_minishell *msh)
 	if (!cmd[1])
 		execute_correct_exit(msh);
 	while (cmd[1][++i])
-		if (!ft_isdigit(cmd[1][i]))
-			break ;
-	if (cmd[1][i] != '\0')
+	{
+		if (!ft_isspace(cmd[1][i]))
+			break;
+	}
+	if ((cmd[1][i] != '\0' && cmd[1][i] != '-' && cmd[1][i] != '+' &&
+		!ft_isdigit(cmd[1][i])))
 	{
 		ft_putstr_fd("mishell: exit: numeric argument required\n", 2);
 		errno = 2;
 		ft_exit(msh);
 	}
+	while (cmd[1][++i])
+	{
+		if (!ft_isdigit(cmd[1][i]))
+		{
+			ft_putstr_fd("mishell: exit: numeric argument required\n", 2);
+			errno = 2;
+			ft_exit(msh);
+		}
+	}
 	if (!cmd[2])
 	{
 		ft_putstr_fd("exit\n", 2);
-		errno = ft_atoi(cmd[1]) % 256;
+		errno = (unsigned char)(ft_atoi(cmd[1])) % 256;
 		ft_exit(msh);
 	}
 	ft_putstr_fd("mishell: exit: too many arguments\n", 2);

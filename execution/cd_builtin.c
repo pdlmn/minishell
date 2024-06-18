@@ -6,7 +6,7 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 00:47:00 by omougel           #+#    #+#             */
-/*   Updated: 2024/06/18 13:38:06 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/18 15:35:24 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,12 +88,14 @@ void	cd(char **cmd, t_ht_table *env)
 	if (cmd[1] && cmd[1][0] == '-' && cmd[1][1] != '\0')
 		return (ft_putstr_fd("mishell: cd: invalid option\n", 2));
 	if (cmd[1] && cmd[2])
-		return (ft_putstr_fd("mishell: cd: too many arguments\n", 2));
+		return (set_or_get_exit_status(SET, 1),
+			ft_putstr_fd("mishell: cd: too many arguments\n", 2));
 	if (ft_strcmp(cmd[1], "-") == 0)
 	{
 		ft_strcpy(newpwd, ht_get(env, "OLDPWD"));
 		if (!newpwd[0])
 			return (ft_putstr_fd("mishell: cd: OLDPWD not set\n", 2));
+		printf("%s\n", newpwd);
 	}
 	else if (cmd[1])
 		if (!find_newpwd(cmd[1], newpwd, env))

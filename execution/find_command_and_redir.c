@@ -6,7 +6,7 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 01:50:13 by omougel           #+#    #+#             */
-/*   Updated: 2024/06/18 14:43:53 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/18 16:00:27 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static char	**search_path(char **env, char **cmd)
 	{
 		tmp = ft_strjoin_cmd(env[i], cmd[0]);
 		if (!tmp)
-			return (NULL);
+			return (ft_free_split(env), NULL);
 		if (access(tmp, X_OK) == 0)
 		{
 			ft_free_split(env);
