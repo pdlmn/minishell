@@ -6,7 +6,7 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 01:50:13 by omougel           #+#    #+#             */
-/*   Updated: 2024/06/18 16:00:27 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/19 16:38:24 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,11 @@ static char	**search_path(char **env, char **cmd)
 		i++;
 	}
 	ft_free_split(env);
-	set_or_get_exit_status(SET, 127);
-	ft_putstr_fd(cmd[0], 2);
-	return (ft_putstr_fd(": command not found\n", 2), NULL);
+	if (errno == 13)
+		set_or_get_exit_status(SET, 126);
+	else if (errno == 2)
+		set_or_get_exit_status(SET, 127);
+	return (perror(cmd[0]), NULL);
 }
 
 char	**find_command(char **cmd, t_minishell *sh)
@@ -59,7 +61,7 @@ char	**find_command(char **cmd, t_minishell *sh)
 
 	if (is_builtin(cmd[0]))
 		return (do_builtins(cmd, sh->env, sh), NULL);
-	if (!ft_strncmp("./", cmd[0], 2) && !access(cmd[0], X_OK))
+	if (ft_strchr(cmd[0], '/') && !access(cmd[0], X_OK))
 		return (cmd);
 	env = split_envp(sh->env);
 	return (search_path(env, cmd));
