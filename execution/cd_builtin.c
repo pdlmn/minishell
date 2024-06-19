@@ -6,7 +6,7 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 00:47:00 by omougel           #+#    #+#             */
-/*   Updated: 2024/06/18 17:41:50 by omougel          ###   ########.fr       */
+/*   Updated: 2024/06/19 16:25:30 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ void	cd(char **cmd, t_ht_table *env)
 {
 	char		newpwd[PATH_MAX];
 
+	ft_bzero(newpwd, PATH_MAX);
 	set_or_get_exit_status(SET, 2);
 	if (cmd[1] && cmd[1][0] == '-' && cmd[1][1] != '\0')
 		return (ft_putstr_fd("mishell: cd: invalid option\n", 2));
@@ -85,12 +86,11 @@ void	cd(char **cmd, t_ht_table *env)
 			ft_putstr_fd("mishell: cd: too many arguments\n", 2));
 	if (ft_strcmp(cmd[1], "-") == 0)
 	{
-		if (set_oldpwd(newpwd, env) == 2)
+		if (set_oldpwd(newpwd, env))
 			return ;
 	}
-	else
-		if (!find_newpwd(cmd[1], newpwd, env))
-			return ;
+	else if (!find_newpwd(cmd[1], newpwd, env))
+		return ;
 	if (chdir(newpwd) != 0)
 		return (set_or_get_exit_status(SET, 1), perror("minishell: cd"));
 	if (!ht_set(env, "OLDPWD", ht_get(env, "PWD"))
