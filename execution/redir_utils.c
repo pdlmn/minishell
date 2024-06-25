@@ -6,7 +6,7 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 01:01:59 by omougel           #+#    #+#             */
-/*   Updated: 2024/06/11 16:21:57 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/25 16:37:00 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,18 +56,19 @@ char	*join_expanded_strings(t_tlist *lst)
 	return (res);
 }
 
-char	*expend_heredoc(char *buffer)
+char	*expend_heredoc(t_minishell *msh, char *buffer)
 {
-	t_minishell	sh;
+	t_minishell	tmp_msh;
 
-	sh.lst.head = NULL;
-	sh.lst.tail = NULL;
-	if (!lex_heredoc_input(buffer, &sh.lst, DELIM))
+	tmp_msh.lst.head = NULL;
+	tmp_msh.lst.tail = NULL;
+	tmp_msh.env = msh->env;
+	if (!lex_heredoc_input(buffer, &tmp_msh.lst, DELIM))
 		return (free(buffer), NULL);
-	if (!expand_heredoc(&sh, &sh.lst, DELIM))
-		return (free(buffer), token_list_free(&sh.lst), NULL);
+	if (!expand_heredoc(&tmp_msh, &tmp_msh.lst, DELIM))
+		return (free(buffer), token_list_free(&tmp_msh.lst), NULL);
 	free(buffer);
-	buffer = join_expanded_strings(&sh.lst);
-	token_list_free(&sh.lst);
+	buffer = join_expanded_strings(&tmp_msh.lst);
+	token_list_free(&tmp_msh.lst);
 	return (buffer);
 }

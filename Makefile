@@ -1,6 +1,6 @@
 #comilation vars-----------------------------------
 CC=cc
-CFLAGS=-g3 -fsanitize=address -Wall -Wextra -Werror
+CFLAGS=-g3 -Wall -Wextra -Werror
 RLFLAGS=-lreadline
 
 #subject declarations------------------------------
@@ -88,4 +88,8 @@ re: fclean
 	$(MAKE) -C $(LIB_DIR) $@
 	$(MAKE) all --no-print-directory
 
-.PHONY: all clean fclean re libft
+valgrind:
+	$(MAKE) all
+	valgrind --suppressions=valgrind_ignore_leaks --track-fds=yes --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose --show-mismatched-frees=yes --read-var-info=yes ./$(NAME)
+
+.PHONY: all clean fclean re libft valgrind

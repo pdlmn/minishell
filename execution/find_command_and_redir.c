@@ -6,7 +6,7 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 01:50:13 by omougel           #+#    #+#             */
-/*   Updated: 2024/06/19 16:38:24 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/25 16:26:59 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,14 +67,14 @@ char	**find_command(char **cmd, t_minishell *sh)
 	return (search_path(env, cmd));
 }
 
-int	check_input(char **input_redir, int fd_in)
+int	check_input(t_minishell *msh, char **input_redir, int fd_in)
 {
 	if (fd_in != 0)
 		close(fd_in);
 	if (!ft_strcmp(input_redir[0], "<"))
 		fd_in = redir_input(input_redir[1]);
 	else
-		fd_in = here_doc(input_redir[1], input_redir[2]);
+		fd_in = here_doc(msh, input_redir[1], input_redir[2]);
 	return (fd_in);
 }
 

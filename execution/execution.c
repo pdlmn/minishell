@@ -6,13 +6,13 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 09:49:14 by omougel           #+#    #+#             */
-/*   Updated: 2024/06/19 16:32:28 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/25 16:55:01 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/execution.h"
 
-void	check_cmd(t_minishell *msh, int *fd, int i)
+static void	check_cmd(t_minishell *msh, int *fd, int i, int *pid)
 {
 	char	**cmd;
 
@@ -21,30 +21,19 @@ void	check_cmd(t_minishell *msh, int *fd, int i)
 		cmd = find_command(msh->cmd_tab[i], msh);
 		if (cmd && *cmd)
 		{
-			if (fd[0] > 0)
-				close(fd[0]);
-			exec_cmd(msh->cmd_tab[i], *msh);
-			free(cmd[0]);
+			init_exec_signal_handlers();
+			*pid = fork();
+			if (*pid == 0)
+			{
+				if (fd[0] > 0)
+					close(fd[0]);
+				exec_cmd(msh->cmd_tab[i], *msh);
+				free(cmd[0]);
+				secure_close(&msh->fd_out, &msh->fd_in, &fd[0], &fd[1]);
+				errno = set_or_get_exit_status(GET, -1);
+				ft_exit(msh);
+			}
 		}
-	}
-	if (!is_builtin(msh->cmd_tab[i][0]))
-	{
-		secure_close(&msh->fd_out, &msh->fd_in, &fd[0], &fd[1]);
-		errno = set_or_get_exit_status(GET, -1);
-		ft_exit(msh);
-	}
-}
-
-void	fork_if_needed(t_minishell *msh, int i, int *pid, int *fd)
-{
-	if (is_builtin(msh->cmd_tab[i][0]))
-		check_cmd(msh, fd, i);
-	else
-	{
-		init_exec_signal_handlers();
-		*pid = fork();
-		if (*pid == 0)
-			check_cmd(msh, fd, i);
 	}
 }
 
@@ -56,11 +45,11 @@ t_minishell	*read_cmd_tab(t_minishell *msh, int *fd, int *pid)
 	while (msh->cmd_tab[i] && ft_strcmp(msh->cmd_tab[i][0], "|"))
 	{
 		if (is_input(msh->cmd_tab[i][0]))
-			msh->fd_in = check_input(msh->cmd_tab[i], msh->fd_in);
+			msh->fd_in = check_input(msh, msh->cmd_tab[i], msh->fd_in);
 		else if (is_output(msh->cmd_tab[i][0]))
 			msh->fd_out = check_output(msh->cmd_tab[i], msh->fd_out);
 		else if (msh->cmd_tab[i][0])
-			fork_if_needed(msh, i, pid, fd);
+			check_cmd(msh, fd, i, pid);
 		if (msh->fd_in < 0 || msh->fd_out == -1)
 		{
 			if (msh->fd_in == -2)

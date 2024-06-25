@@ -6,7 +6,7 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/01 23:46:59 by omougel           #+#    #+#             */
-/*   Updated: 2024/06/18 12:47:04 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/25 16:43:19 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	ft_free_table_in_child(t_minishell *sh)
 	i = 0;
 	while (tab && tab[i])
 		free(tab[i++]);
+	free(tab);
 	sh->cmd_tab = NULL;
 }
 

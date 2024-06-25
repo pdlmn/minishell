@@ -6,7 +6,7 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 00:14:46 by omougel           #+#    #+#             */
-/*   Updated: 2024/06/18 17:42:11 by omougel          ###   ########.fr       */
+/*   Updated: 2024/06/25 16:26:39 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 void	ft_exit(t_minishell *msh);
 void	do_builtins(char **cmd, t_ht_table *env, t_minishell *sh);
-int		check_input(char **input_redir, int fd_in);
+int		check_input(t_minishell *msh, char **input_redir, int fd_in);
 int		check_output(char **output_redir, int fd_out);
 char	**find_command(char **cmd, t_minishell *sh);
 void	echo(char **cmd, int fd_out);
@@ -26,8 +26,8 @@ void	bt_exit(char **cmd, t_minishell *msh);
 void	execute_correct_exit(t_minishell *msh);
 void	cd(char **cmd, t_ht_table *env);
 char	*ft_strjoin_cmd(char const *s1, char const *s2);
-char	*expend_heredoc(char *buffer);
-int		here_doc(char *lim, char *quoted);
+char	*expend_heredoc(t_minishell *msh, char *buffer);
+int		here_doc(t_minishell *msh, char *lim, char *quoted);
 int		redir_input(char *infile);
 int		redir_output(char *outfile);
 int		append_output(char *outfile);
