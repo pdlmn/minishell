@@ -6,7 +6,7 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 00:52:52 by omougel           #+#    #+#             */
-/*   Updated: 2024/06/18 18:17:02 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/26 23:22:42 by omougel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,8 @@ void	bt_exit(char **cmd, t_minishell *msh)
 	int	i;
 
 	i = 0;
+	if (msh->cmd_nbr != 1)
+		return ;
 	if (!cmd[1])
 		execute_correct_exit(msh);
 	while (ft_isspace(cmd[1][i]))

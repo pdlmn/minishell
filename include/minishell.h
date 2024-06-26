@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 14:34:14 by emuminov          #+#    #+#             */
-/*   Updated: 2024/06/18 16:48:48 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/26 23:18:14 by omougel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ typedef struct s_minishell
 	int				fd_in;
 	int				fd_out;
 	int				pid;
-	int				is_delimiter_quoted;
+	int				cmd_nbr;
 }					t_minishell;
 
 t_tlist				*lex_input(char *input, t_tlist *lst);

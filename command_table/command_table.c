@@ -6,7 +6,7 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 10:41:59 by omougel           #+#    #+#             */
-/*   Updated: 2024/06/18 12:50:51 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/26 23:21:55 by omougel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ char	***command_table(t_minishell *sh)
 		i++;
 	}
 	sh->cmd_tab[i] = NULL;
+	sh->cmd_nbr = count_pipes(sh->lst.head) + 1;
 	return (sh->cmd_tab);
 }
 

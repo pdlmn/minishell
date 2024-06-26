@@ -6,7 +6,7 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 00:14:46 by omougel           #+#    #+#             */
-/*   Updated: 2024/06/25 16:26:39 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/26 23:53:57 by omougel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_exit(t_minishell *msh);
 void	do_builtins(char **cmd, t_ht_table *env, t_minishell *sh);
 int		check_input(t_minishell *msh, char **input_redir, int fd_in);
 int		check_output(char **output_redir, int fd_out);
-char	**find_command(char **cmd, t_minishell *sh);
+char	**find_command(char **cmd, t_minishell *sh, int in_child);
 void	echo(char **cmd, int fd_out);
 void	pwd(char **cmd, t_minishell *sh, int fd_out);
 void	bt_env(char **cmd, t_ht_table *env, int fd_out, t_minishell *sh);

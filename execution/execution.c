@@ -6,7 +6,7 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 09:49:14 by omougel           #+#    #+#             */
-/*   Updated: 2024/06/25 16:55:01 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/26 23:52:32 by omougel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	check_cmd(t_minishell *msh, int *fd, int i, int *pid)
 
 	if (msh->fd_in >= 0 && msh->fd_out > 0)
 	{
-		cmd = find_command(msh->cmd_tab[i], msh);
+		cmd = find_command(msh->cmd_tab[i], msh, 0);
 		if (cmd && *cmd)
 		{
 			init_exec_signal_handlers();
@@ -27,6 +27,7 @@ static void	check_cmd(t_minishell *msh, int *fd, int i, int *pid)
 			{
 				if (fd[0] > 0)
 					close(fd[0]);
+				cmd = find_command(msh->cmd_tab[i], msh, 1);
 				exec_cmd(msh->cmd_tab[i], *msh);
 				free(cmd[0]);
 				secure_close(&msh->fd_out, &msh->fd_in, &fd[0], &fd[1]);
