@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 18:04:44 by emuminov          #+#    #+#             */
-/*   Updated: 2024/06/04 17:15:52 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/27 22:21:19 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	type_delim(t_token *t)
 	type = DELIM;
 	while (curr && (!curr->space_after || curr->is_quoted != START_QUOTE))
 	{
-		if (curr->type == DQUOTE)
+		if (curr->type == DQUOTE || curr->type == SQUOTE)
 		{
 			type = QDELIM;
 			break ;

@@ -6,7 +6,7 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 01:01:59 by omougel           #+#    #+#             */
-/*   Updated: 2024/06/25 16:37:00 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/27 22:30:50 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ char	*join_expanded_strings(t_tlist *lst)
 	return (res);
 }
 
-char	*expend_heredoc(t_minishell *msh, char *buffer)
+char	*parse_unquoted_heredoc_input(t_minishell *msh, char *buffer)
 {
 	t_minishell	tmp_msh;
 

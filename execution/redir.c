@@ -6,7 +6,7 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 01:00:55 by omougel           #+#    #+#             */
-/*   Updated: 2024/06/25 16:23:40 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/27 22:30:49 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	here_doc(t_minishell *msh, char *lim, char *quoted)
 	while (buff && ft_strcmp(buff, lim))
 	{
 		if (!quoted)
-			buff = expend_heredoc(msh, buff);
+			buff = parse_unquoted_heredoc_input(msh, buff);
 		ft_putstr_fd(buff, fd[1]);
 		ft_putstr_fd("\n", fd[1]);
 		free(buff);
