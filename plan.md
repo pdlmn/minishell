@@ -1,6 +1,6 @@
 # Plan
-- [ ] `ls | cat '    '`                             -- leaks
-- [ ] `exit | cat`                                  -- exits but should't
+- [x] `ls | cat '    '`                             -- leaks
+- [x] `exit | cat`                                  -- exits but should't
 
 ## Major problems
 - [x] `cd` with no arguments just crushes
@@ -13,9 +13,8 @@
 - [x] `exit 1 | exit 1`                             -- does not set any status
 - [x] `exit 1 2 | exit 1 2`                         -- does not print any error message
 - [x] empty commands should not go to history
-- [ ] `""`                                          -- is ignored, but it should be `"": command not found`
+- [x] `""`                                          -- is ignored, but it should be `"": command not found`
 - [ ] `mkdir a/b -p; cd a/b; rm -rf ../../a; cd ..` -- does not work properly, does not cd back
-- [ ] `cat not_exist | ls`                          -- closes file descriptor twice
 
 ## My changes
 - Fixed heredoc lexing
