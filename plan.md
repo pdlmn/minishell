@@ -10,8 +10,8 @@
   - it leaks atm
 
 ## Minor problems
-- [ ] `exit 1 | exit 1`                             -- does not set any status
-- [ ] `exit 1 2 | exit 1 2`                         -- does not print any error message
+- [x] `exit 1 | exit 1`                             -- does not set any status
+- [x] `exit 1 2 | exit 1 2`                         -- does not print any error message
 - [x] empty commands should not go to history
 - [ ] `""`                                          -- is ignored, but it should be `"": command not found`
 - [ ] `mkdir a/b -p; cd a/b; rm -rf ../../a; cd ..` -- does not work properly, does not cd back

@@ -6,7 +6,7 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 01:00:55 by omougel           #+#    #+#             */
-/*   Updated: 2024/06/27 22:30:49 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/28 17:20:59 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	here_doc(t_minishell *msh, char *lim, char *quoted)
 	int		fd[2];
 	int		sav_in;
 
+	set_or_get_exit_status(SET, 0);
 	init_heredoc_signal_handlers();
 	sav_in = dup(STDIN_FILENO);
 	buff = readline(">");

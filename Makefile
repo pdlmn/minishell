@@ -51,6 +51,7 @@ SRCS=lexer.c \
 	 redir.c \
 	 redir_utils.c \
 	 exec_utils.c \
+	 utils_exec.c \
 	 execution_utils.c \
 	 execution_check.c \
 	 utils.c \
