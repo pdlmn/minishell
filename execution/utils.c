@@ -6,7 +6,7 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 17:06:42 by omougel           #+#    #+#             */
-/*   Updated: 2024/06/19 16:23:47 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/28 16:37:55 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,21 @@ int	set_oldpwd(char *newpwd, t_ht_table *env)
 		return (ft_putstr_fd("mishell: cd: OLDPWD not set\n", 2), 2);
 	printf("%s\n", newpwd);
 	return (0);
+}
+
+void  go_to_home(t_ht_table *env, char *newpwd)
+{
+	ft_strcpy(newpwd, ht_get(env, "HOME"));
+	if (!newpwd[0])
+		return (set_or_get_exit_status(SET, 1),
+			ft_putstr_fd("mishell: cd: HOME not set\n", 2));
+	if (chdir(newpwd) != 0)
+		return (set_or_get_exit_status(SET, 1), perror("minishell: cd"));
+	if (!ht_set(env, "OLDPWD", ht_get(env, "PWD"))
+		|| !ht_set(env, "PWD", newpwd))
+	{
+		set_or_get_exit_status(SET, -1);
+		return ;
+	}
+	set_or_get_exit_status(SET, 0);
 }

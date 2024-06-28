@@ -6,7 +6,7 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 00:47:00 by omougel           #+#    #+#             */
-/*   Updated: 2024/06/28 15:19:21 by omougel          ###   ########.fr       */
+/*   Updated: 2024/06/28 16:37:44 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,22 +71,6 @@ static char	*find_newpwd(char *path, char *newpwd, t_ht_table *env)
 		i = read_path(i, path, newpwd);
 	}
 	return (newpwd);
-}
-
-void  go_to_home(t_ht_table *env, char *newpwd)
-{
-	ft_strcpy(newpwd, ht_get(env, "HOME"));
-	if (!newpwd[0])
-		ft_putstr_fd("mishell: cd: HOME not set\n", 2);
-	if (chdir(newpwd) != 0)
-		return (set_or_get_exit_status(SET, 1), perror("minishell: cd"));
-	if (!ht_set(env, "OLDPWD", ht_get(env, "PWD"))
-		|| !ht_set(env, "PWD", newpwd))
-	{
-		set_or_get_exit_status(SET, -1);
-		return ;
-	}
-	set_or_get_exit_status(SET, 0);
 }
 
 void	cd(char **cmd, t_ht_table *env)
