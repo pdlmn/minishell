@@ -6,7 +6,7 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 00:52:52 by omougel           #+#    #+#             */
-/*   Updated: 2024/06/26 23:22:42 by omougel          ###   ########.fr       */
+/*   Updated: 2024/06/28 16:57:26 by omougel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,8 +102,6 @@ void	bt_exit(char **cmd, t_minishell *msh)
 	int	i;
 
 	i = 0;
-	if (msh->cmd_nbr != 1)
-		return ;
 	if (!cmd[1])
 		execute_correct_exit(msh);
 	while (ft_isspace(cmd[1][i]))
@@ -114,12 +112,17 @@ void	bt_exit(char **cmd, t_minishell *msh)
 	while (cmd[1][++i])
 		if (!ft_isdigit(cmd[1][i]))
 			err_msg(msh);
-	if (!cmd[2])
+	errno = (unsigned char)(ft_atoi(cmd[1])) % 256;
+	if (cmd[2] != NULL)
+	{
+		ft_putstr_fd("mishell: exit: too many arguments\n", 2);
+		errno = set_or_get_exit_status(SET, 1);
+	}
+	if (msh->cmd_nbr != 1)
+		set_or_get_exit_status(SET, errno);
+	else
 	{
 		ft_putstr_fd("exit\n", 1);
-		errno = (unsigned char)(ft_atoi(cmd[1])) % 256;
 		ft_exit(msh);
 	}
-	ft_putstr_fd("mishell: exit: too many arguments\n", 2);
-	set_or_get_exit_status(SET, 1);
 }
