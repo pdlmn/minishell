@@ -6,7 +6,7 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 00:14:46 by omougel           #+#    #+#             */
-/*   Updated: 2024/06/27 22:30:52 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/28 16:46:05 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ int		export_error(char *key, char *value, t_ht_table *env);
 void	err_msg(t_minishell *msh);
 int		read_path(int i, char *path, char *newpwd);
 int		set_oldpwd(char *newpwd, t_ht_table *env);
+void	go_to_home(t_ht_table *env, char *newpwd);
+int		check_cd_arguments(char **cmd);
 int		prev(char *newpwd);
 int		next(char *path, char *newpwd);
 #endif
