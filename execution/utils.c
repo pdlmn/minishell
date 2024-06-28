@@ -6,7 +6,7 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 17:06:42 by omougel           #+#    #+#             */
-/*   Updated: 2024/06/28 16:37:55 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/28 16:41:19 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	set_oldpwd(char *newpwd, t_ht_table *env)
 	return (0);
 }
 
-void  go_to_home(t_ht_table *env, char *newpwd)
+void	go_to_home(t_ht_table *env, char *newpwd)
 {
 	ft_strcpy(newpwd, ht_get(env, "HOME"));
 	if (!newpwd[0])
