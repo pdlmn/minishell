@@ -6,12 +6,18 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 01:00:55 by omougel           #+#    #+#             */
-/*   Updated: 2024/06/28 17:20:59 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/28 17:48:46 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/execution.h"
 #include <readline/readline.h>
+
+void	init_heredoc(void)
+{
+	set_or_get_exit_status(SET, 0);
+	init_heredoc_signal_handlers();
+}
 
 int	here_doc(t_minishell *msh, char *lim, char *quoted)
 {
@@ -19,8 +25,7 @@ int	here_doc(t_minishell *msh, char *lim, char *quoted)
 	int		fd[2];
 	int		sav_in;
 
-	set_or_get_exit_status(SET, 0);
-	init_heredoc_signal_handlers();
+	init_heredoc();
 	sav_in = dup(STDIN_FILENO);
 	buff = readline(">");
 	if (pipe(fd) == -1)

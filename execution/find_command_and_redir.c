@@ -6,7 +6,7 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 01:50:13 by omougel           #+#    #+#             */
-/*   Updated: 2024/06/28 17:33:23 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/28 17:44:00 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,8 @@ static char	**split_envp(t_ht_table *envp)
 
 static char	**search_path(char **env, char **cmd, int in_child)
 {
-	struct stat	path_stat;
 	size_t		i;
 	char		*tmp;
-	int			res;
 
 	i = 0;
 	while (env && env[i])
@@ -41,9 +39,7 @@ static char	**search_path(char **env, char **cmd, int in_child)
 		tmp = ft_strjoin_cmd(env[i], cmd[0]);
 		if (!tmp)
 			return (ft_free_split(env), NULL);
-		res = stat(tmp, &path_stat);
-		if (res != -1 && (path_stat.st_mode & X_OK)
-				&& !(S_ISDIR(path_stat.st_mode)))
+		if (check_executable_validity(tmp))
 		{
 			ft_free_split(env);
 			if (in_child)

@@ -6,7 +6,7 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 00:52:52 by omougel           #+#    #+#             */
-/*   Updated: 2024/06/28 16:57:26 by omougel          ###   ########.fr       */
+/*   Updated: 2024/06/28 17:45:27 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,8 +121,5 @@ void	bt_exit(char **cmd, t_minishell *msh)
 	if (msh->cmd_nbr != 1)
 		set_or_get_exit_status(SET, errno);
 	else
-	{
-		ft_putstr_fd("exit\n", 1);
-		ft_exit(msh);
-	}
+		return (ft_putstr_fd("exit\n", 1), ft_exit(msh));
 }
