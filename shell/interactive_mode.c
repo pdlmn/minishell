@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 16:51:27 by emuminov          #+#    #+#             */
-/*   Updated: 2024/06/18 15:47:04 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/28 16:33:37 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ static char	*read_command(char *prompt)
 	command = readline(prompt);
 	if (!command)
 		return (NULL);
-	add_history(command);
+	if (command && ft_strlen(command) > 1)
+		add_history(command);
 	return (command);
 }
 
