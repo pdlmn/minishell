@@ -6,7 +6,7 @@
 /*   By: omougel <omougel@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 00:47:00 by omougel           #+#    #+#             */
-/*   Updated: 2024/06/19 16:25:30 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/06/28 15:19:21 by omougel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,11 +73,29 @@ static char	*find_newpwd(char *path, char *newpwd, t_ht_table *env)
 	return (newpwd);
 }
 
+void  go_to_home(t_ht_table *env, char *newpwd)
+{
+	ft_strcpy(newpwd, ht_get(env, "HOME"));
+	if (!newpwd[0])
+		ft_putstr_fd("mishell: cd: HOME not set\n", 2);
+	if (chdir(newpwd) != 0)
+		return (set_or_get_exit_status(SET, 1), perror("minishell: cd"));
+	if (!ht_set(env, "OLDPWD", ht_get(env, "PWD"))
+		|| !ht_set(env, "PWD", newpwd))
+	{
+		set_or_get_exit_status(SET, -1);
+		return ;
+	}
+	set_or_get_exit_status(SET, 0);
+}
+
 void	cd(char **cmd, t_ht_table *env)
 {
 	char		newpwd[PATH_MAX];
 
 	ft_bzero(newpwd, PATH_MAX);
+	if (!cmd[1])
+		return (go_to_home(env, newpwd));
 	set_or_get_exit_status(SET, 2);
 	if (cmd[1] && cmd[1][0] == '-' && cmd[1][1] != '\0')
 		return (ft_putstr_fd("mishell: cd: invalid option\n", 2));
