@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 14:56:44 by emuminov          #+#    #+#             */
-/*   Updated: 2024/06/18 16:30:03 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/07/10 16:23:33 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,10 @@ t_tlist	*remove_quotes(t_tlist *lst)
 		if ((curr->type == SQUOTE || curr->type == DQUOTE) && (curr->next
 				|| curr->prev))
 		{
-			if (curr->is_quoted == END_QUOTE && curr->prev)
+			if (curr->is_quoted == END_QUOTE
+				&& curr->prev
+				&& (curr->prev->is_quoted == DQUOTED
+					|| curr->prev->is_quoted == SQUOTED))
 				curr->prev->space_after = curr->space_after;
 			curr = token_delete_and_free(lst, curr);
 			continue ;

@@ -6,7 +6,7 @@
 /*   By: emuminov <emuminov@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 12:23:17 by emuminov          #+#    #+#             */
-/*   Updated: 2024/06/18 16:29:24 by emuminov         ###   ########.fr       */
+/*   Updated: 2024/07/10 16:22:26 by emuminov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,5 +202,6 @@ int	main(int argc, char **argv, char **env)
 	test_heredoc_expansion(&sh, "'$ASD'\"hoho\"   ", "'123'\"hoho\"   ", DELIM);
 	test_expansion(&sh, "$ASD#", "123#");
 	test_expansion(&sh, "'$? user'", "$? user");
+	test_expansion(&sh, "echo \"$PAT\"H", "echo H");
 	ht_free_table(&sh.env);
 }
